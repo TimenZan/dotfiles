@@ -25,10 +25,6 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
-" Plug 'LukeSmithxyz/vimling'
-" Plug 'dylanaraps/wal.vim'
-" Plug 'terryma/vim-multiple-cursors'
-" Plug '/dixonary/vimty'
 " Languages
 Plug 'dart-lang/dart-vim-plugin', { 'for': 'dart' }
 Plug 'thosakwe/vim-flutter', { 'for': 'dart' }
@@ -56,12 +52,14 @@ Plug 'sirver/ultisnips' " snippets work fast
 Plug 'mbbill/undotree'
 Plug 'junegunn/goyo.vim' " nice prose writing
 Plug 'RRethy/vim-hexokinase' " Adds colored boxes to hex codes
+	let g:Hexokinase_highlighters = ['sign_column']
 Plug 'rhysd/git-messenger.vim' " Read the last Git commit message
 " Plug 'segeljakt/vim-isotope'
 " Colorschemes
 Plug 'axvr/photon.vim' " adds multiple color schemes
+" Plug 'dylanaraps/wal.vim'
 " Plug 'anned20/vimsence' "Adds discord rich presence
-Plug 'ananagame/vimsence'
+Plug 'ananagame/vimsence' " Improved version
 call plug#end()
 
 " Some basics:
@@ -70,6 +68,9 @@ call plug#end()
 	syntax on
 	set encoding=utf-8
 	set number relativenumber
+	if (has("termguicolors"))
+		set termguicolors
+	endif
 
 " toggle absolute/relative number
 augroup numbertoggle

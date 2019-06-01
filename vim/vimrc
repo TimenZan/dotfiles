@@ -9,15 +9,9 @@
 " properly set to work with the Vim-related packages.
 runtime! archlinux.vim
 
-" If you prefer the old-style vim functionalty, add 'runtime! vimrc_example.vim'
-" Or better yet, read /usr/share/vim/vim80/vimrc_example.vim or the vim manual
-" and configure vim to your own liking!
-
-" do not load defaults if ~/.vimrc is missing
-"let skip_defaults_vim=1
-
 let mapleader =" "
 
+" automatically install vim-plug
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -28,7 +22,7 @@ call plug#begin('~/.vim/plugged')
 " Languages
 Plug 'dart-lang/dart-vim-plugin', { 'for': 'dart' }
 Plug 'thosakwe/vim-flutter', { 'for': 'dart' }
-Plug 'PotatoesMaster/i3-vim-syntax'
+Plug 'PotatoesMaster/i3-vim-syntax', { 'for': 'config' }
 Plug 'lervag/vimtex', { 'for': 'tex' } " adds tex functionality
 	let g:tex_flavor='latex'
 	let g:vimtex_view_method='zathura'

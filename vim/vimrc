@@ -71,6 +71,7 @@ call plug#end()
 	if (has("termguicolors"))
 		set termguicolors
 	endif
+	autocmd VimEnter * HexokinaseToggle
 
 " toggle absolute/relative number
 augroup numbertoggle

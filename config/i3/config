@@ -12,8 +12,6 @@
 
 # Sets the correct monitor setup
 exec xrandr --output DP-0 --primary --mode 2560x1440 --pos 1080x0 --rotate normal --output DVI-D-0 --off --output DVI-D-1 --off --output DP-1 --off --output HDMI-0 --mode 1920x1080 --pos 0x0 --rotate right
-# Run xcape for Ctrl -> Esc if pressed alone
-exec --no-startup-id xcape
 # Monitors
 set $monitor1 DP-0
 set $monitor2 HDMI-0
@@ -31,8 +29,7 @@ set $right l
 # workspace_layout tabbed <stacking|tabbed>
 
 # Configure border style <normal|1pixel|pixel xx|none|pixel>
-new_window pixel 1
-new_float normal
+default_border none
 
 # Hide borders
 hide_edge_borders none
@@ -469,7 +466,7 @@ mode "$mode_gaps_outer"
 gaps inner 14
 gaps outer 20
 workspace $wsme gaps inner 16
-workspace $wsme gaps outer -4
+workspace $wsme gaps outer -16
 workspace $ws1 gaps inner 14
 workspace $ws1 gaps outer -2
 workspace $ws2 gaps inner 14
@@ -499,19 +496,17 @@ workspace $ws8 gaps outer -2
 # Autostart applications
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id nitrogen --restore; sleep 1; compton -b
-#exec --no-startup-id manjaro-hello
 exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-power-manager
 exec --no-startup-id pamac-tray
 exec --no-startup-id clipit
-# exec --no-startup-id blueman-applet
 # exec_always --no-startup-id sbxkb
-exec --no-startup-id start_conky_maia
-# exec --no-startup-id start_conky_green
+# exec --no-startup-id start_conky_maia
 exec --no-startup-id xautolock -time 10 -locker -corners blurlock
 exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
 exec --no-startup-id redshift
+exec --no-startup-id xcape
 
 # Messaging
 exec --no-startup-id discord

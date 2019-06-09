@@ -283,6 +283,12 @@ mode "$mode_system"
 }
 
 # Resize window (you can also use the mouse for that)
+
+bindsym $mod+Control+Shift+$left resize shrink width 5 px or 5 ppt
+bindsym $mod+Control+Shift+$down resize grow height 5 px or 5 ppt
+bindsym $mod+Control+Shift+$up resize shrink height 5 px or 5 ppt
+bindsym $mod+Control+Shift+$right resize grow width 5 px or 5 ppt
+
 bindsym $mod+r mode "resize"
 mode "resize"
 {

@@ -32,12 +32,12 @@ Plug   'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
 	let g:tex_conceal="abdgm"
 " Snippets
 Plug 'valloric/youcompleteme' "{ 'do': './python3 install.py --clang-completer --cs-completer --go-completer --ts-completer --rust-completer --java-completer'}
-	let g:ycm_key_list_selsect_completion = ['<C-n>', '<Down>']
+	let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 	let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 	let g:SuperTabDefaultCompletionType = '<C-n>'
 Plug 'sirver/ultisnips' " snippets work fast
-	let g:UltiSnipsExpandTrigger = '<tab>'
-	let g:UltiSnipsJumpForwardTrigger = '<tab>'
+	let g:UltiSnipsExpandTrigger = '<c-j>'
+	let g:UltiSnipsJumpForwardTrigger = '<c-j>'
 	let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
 	let g:UltiSnipsEditSplit="vertical"
 	let g:UltiSnipsSnippetsDir="~/.vim/UltiSnips"

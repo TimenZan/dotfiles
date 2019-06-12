@@ -35,7 +35,7 @@ colors() {
 
 # Change the window title of X terminals
 case ${TERM} in
-	xterm*|rxvt*|Eterm*|aterm|kterm|gnome*|interix|konsole*)
+	xterm*|kitty|rxvt*|Eterm*|aterm|kterm|gnome*|interix|konsole*)
 		PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME%%.*}:${PWD/#$HOME/\~}\007"'
 		;;
 	screen*)
@@ -74,7 +74,8 @@ if ${use_color} ; then
 	fi
 
 	if [[ ${EUID} == 0 ]] ; then
-		PS1='\[\033[01;31m\][\h\[\033[01;36m\] \W\[\032[01;36m\]$(parse_git_branch)\033[01;31m\]]\$\[\033[00m\] '
+	#	PS1='\[\033[01;31m\][\h\[\033[01;36m\] \W\[\032[01;36m\]$(parse_git_branch)\033[01;31m\]]\$\[\033[00m\] '
+		PS1='\[\033[01;31m\][\h\[\033[01;36m\] \W\[\033[01;31m\]]\$\[\033[00m\] '
 	else
 		PS1='\[\033[00;36m\][\u@\h\[\033[01;37m\] \W\[\033[01;32m\]$(parse_git_branch)\033[00;36m\]]\$\[\033[00m\] '
 	fi
@@ -146,4 +147,4 @@ ex ()
 
 # better yaourt colors
 export YAOURT_COLORS="nb=1:pkg=1:ver=1;32:lver=1;45:installed=1;42:grp=1;34:od=1;41;5:votes=1;44:dsc=0:other=1;35"
-set -x EDITOR vim
+export EDITOR="/usr/bin/vim"

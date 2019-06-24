@@ -1,0 +1,12 @@
+[global_config]
+focus = system
+
+[profiles]
+[[default]]
+use_system_font = False
+font = Source Code Pro 12
+show_titlebar = False
+scrollbar_position = "disabled"
+cursor_blink = False
+background_type = "transparent"
+background_darkness = 0.0

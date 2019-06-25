@@ -29,6 +29,7 @@ Plug   'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
 	set conceallevel=2
 	let g:tex_conceal="abdgm"
 Plug 'editorconfig/editorconfig-vim' " allows multiple style settings based on filetype
+	let g:EditorConfig_exclude_patterns = ['scp://.\*']
 " Snippets
 "Plug 'valloric/youcompleteme' ", { 'do': './install.py --all'}
 "	let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
@@ -49,6 +50,7 @@ Plug 'RRethy/vim-hexokinase' " Adds colored boxes to hex codes
 "	let g:Hexokinase_highlighters = ['sign_column']
 Plug 'rhysd/git-messenger.vim' " Read the last Git commit message
 Plug 'airblade/vim-gitgutter'
+" Plug 'eslint/eslint' " javascript linter
 " Plug 'segeljakt/vim-isotope'
 " Colorschemes
 Plug 'axvr/photon.vim' " adds multiple color schemes

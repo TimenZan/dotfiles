@@ -15,6 +15,7 @@ if ! filereadable(expand('~/.config/nvim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.config/nvim/plugged')
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'dart-lang/dart-vim-plugin', { 'for': 'dart' }
 Plug 'thosakwe/vim-flutter', { 'for': 'dart' }
 Plug 'PotatoesMaster/i3-vim-syntax', { 'for': 'config' }
@@ -27,6 +28,8 @@ Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
 	let g:tex_conceal="abdgm"
 Plug 'editorconfig/editorconfig-vim' " allows multiple style settings based on filetype
 	let g:EditorConfig_exclude_patterns = ['scp://.\*']
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'liuchengxu/vista.vim'
 Plug 'mbbill/undotree'
 Plug 'junegunn/goyo.vim' " nice prose writing
 Plug 'RRethy/vim-hexokinase' " Adds colored boxes to hex codes
@@ -40,7 +43,7 @@ Plug 'airblade/vim-gitgutter'
 " Plug 'segeljakt/vim-isotope'
 Plug 'axvr/photon.vim' " adds multiple color schemes
 Plug 'joshdick/onedark.vim'
-Plug 'ananagame/vimsence' " Improved version
+Plug 'ananagame/vimsence' " Discord rich presence
 call plug#end()
 
 " Some basics:
@@ -49,6 +52,7 @@ call plug#end()
 	syntax on
 	set number relativenumber
 	set encoding=utf-8
+	set updatetime=100
 	if (has("termguicolors"))
 		set termguicolors
 	endif

@@ -65,6 +65,14 @@ augroup numbertoggle
 	autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
 	autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
 augroup END
+
+" <tab> triggers coc completion
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
 " Interpret .md files, etc. as .markdown
 	let g:vimwiki_ext2syntax = {'.Rmd': 'markdown', '.rmd': 'markdown','.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
 

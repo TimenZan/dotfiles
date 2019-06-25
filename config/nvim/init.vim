@@ -19,6 +19,8 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'vim-airline/vim-airline'
 	let g:airline_powerline_fonts = 1
 Plug 'tpope/vim-fugitive'
+Plug 'rhysd/git-messenger.vim' " Read the last Git commit message
+Plug 'airblade/vim-gitgutter'
 Plug 'dart-lang/dart-vim-plugin', { 'for': 'dart' }
 Plug 'thosakwe/vim-flutter', { 'for': 'dart' }
 Plug 'PotatoesMaster/i3-vim-syntax', { 'for': 'config' }
@@ -40,8 +42,6 @@ Plug 'RRethy/vim-hexokinase' " Adds colored boxes to hex codes
 	let g:Hexokinase_optInPatterns = ['full_hex', 'triple_hex', 'rgb', 'rgba', 'colour_names']
 	let g:Hexokinase_refreshEvents = ['BufWritePost']
 	let g:Hexokinase_ftAutoload = ['*']
-Plug 'rhysd/git-messenger.vim' " Read the last Git commit message
-Plug 'airblade/vim-gitgutter'
 " Plug 'eslint/eslint' " javascript linter
 " Plug 'segeljakt/vim-isotope'
 Plug 'axvr/photon.vim' " adds multiple color schemes

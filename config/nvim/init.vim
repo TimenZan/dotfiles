@@ -4,8 +4,6 @@
 "██║██║╚██╗██║██║   ██║   ╚██╗ ██╔╝██║██║╚██╔╝██║
 "██║██║ ╚████║██║   ██║██╗ ╚████╔╝ ██║██║ ╚═╝ ██║
 "╚═╝╚═╝  ╚═══╝╚═╝   ╚═╝╚═╝  ╚═══╝  ╚═╝╚═╝     ╚═╝
-" This line should not be removed as it ensures that various options are
-" properly set to work with the Vim-related packages.
 runtime! archlinux.vim
 
 let mapleader =" "
@@ -42,7 +40,6 @@ Plug 'airblade/vim-gitgutter'
 " Plug 'segeljakt/vim-isotope'
 Plug 'axvr/photon.vim' " adds multiple color schemes
 Plug 'joshdick/onedark.vim'
-" Plug 'anned20/vimsence' "Adds discord rich presence
 Plug 'ananagame/vimsence' " Improved version
 call plug#end()
 
@@ -51,7 +48,6 @@ call plug#end()
 	filetype plugin on
 	syntax on
 	set encoding=utf-8
-	set number relativenumber
 	if (has("termguicolors"))
 		set termguicolors
 	endif

@@ -109,6 +109,3 @@ augroup END
 " 	autocmd BufRead,BufNewFile /tmp/neomutt* let g:goyo_width=80
 " 	autocmd BufRead,BufNewFile /tmp/neomutt* :Goyo
 
-" Automatically deletes all tralling whitespace on save.
-	autocmd BufWritePre * %s/\s\+$//e
-

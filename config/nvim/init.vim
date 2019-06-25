@@ -47,6 +47,7 @@ call plug#end()
 	set nocompatible
 	filetype plugin on
 	syntax on
+	set number relativenumber
 	set encoding=utf-8
 	if (has("termguicolors"))
 		set termguicolors

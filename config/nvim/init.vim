@@ -50,7 +50,6 @@ Plug 'ananagame/vimsence' " Discord rich presence
 call plug#end()
 
 " Some basics:
-	set nocompatible
 	filetype plugin on
 	syntax on
 	set number relativenumber

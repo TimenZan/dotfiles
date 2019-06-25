@@ -16,6 +16,8 @@ endif
 
 call plug#begin('~/.config/nvim/plugged')
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'vim-airline/vim-airline'
+	let g:airline_powerline_fonts = 1
 Plug 'dart-lang/dart-vim-plugin', { 'for': 'dart' }
 Plug 'thosakwe/vim-flutter', { 'for': 'dart' }
 Plug 'PotatoesMaster/i3-vim-syntax', { 'for': 'config' }

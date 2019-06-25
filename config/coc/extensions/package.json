@@ -1,0 +1,14 @@
+{
+  "dependencies": {
+    "coc-git": "^1.5.3",
+    "coc-java": "^1.4.2",
+    "coc-json": "^1.2.2",
+    "coc-marketplace": "^1.1.0",
+    "coc-snippets": "^2.1.2",
+    "coc-ultisnips": "^1.2.3",
+    "coc-vimlsp": "^0.1.11",
+    "coc-vimtex": "^1.0.2",
+    "coc-xml": "^1.2.0",
+    "coc-yaml": "^1.0.2"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "marketplace": {
+    "%2Fhome%2Ftimen%2F": {
+      "dotfiles%2Fconfig%2Fnvim": [
+        "bash"
+      ]
+    }
+  }
+}

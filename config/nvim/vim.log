@@ -1,0 +1,117 @@
+
+
+times in msec
+ clock   self+sourced   self:  sourced script
+ clock   elapsed:              other lines
+
+000.009  000.009: --- NVIM STARTING ---
+000.297  000.288: locale set
+000.779  000.482: inits 1
+000.790  000.012: window checked
+000.996  000.206: parsing arguments
+001.063  000.067: expanding arguments
+001.139  000.076: inits 2
+002.311  001.172: init highlight
+002.520  000.025  000.025: sourcing $VIM/sysinit.vim
+002.877  000.213  000.213: sourcing /usr/share/vim/vimfiles/archlinux.vim
+005.723  002.753  002.753: sourcing /home/timen/.config/nvim/autoload/plug.vim
+010.907  000.026  000.026: sourcing /home/timen/.config/nvim/plugged/dart-vim-plugin/ftdetect/dart.vim
+026.445  000.027  000.027: sourcing /home/timen/.config/nvim/plugged/vim-fugitive/ftdetect/fugitive.vim
+026.681  000.121  000.121: sourcing /home/timen/.config/nvim/plugged/i3-vim-syntax/ftdetect/i3.vim
+027.069  000.027  000.027: sourcing /usr/share/vim/vimfiles/ftdetect/PKGBUILD.vim
+027.117  000.019  000.019: sourcing /usr/share/vim/vimfiles/ftdetect/augeas.vim
+027.177  000.037  000.037: sourcing /usr/share/vim/vimfiles/ftdetect/conkyrc.vim
+027.239  000.036  000.036: sourcing /usr/share/vim/vimfiles/ftdetect/meson.vim
+027.341  012.842  012.574: sourcing /usr/share/nvim/runtime/filetype.vim
+027.638  000.073  000.073: sourcing /usr/share/nvim/runtime/ftplugin.vim
+027.934  000.066  000.066: sourcing /usr/share/nvim/runtime/indent.vim
+029.068  000.535  000.535: sourcing /usr/share/nvim/runtime/syntax/syncolor.vim
+029.206  000.901  000.365: sourcing /usr/share/nvim/runtime/syntax/synload.vim
+029.240  001.165  000.265: sourcing /usr/share/nvim/runtime/syntax/syntax.vim
+029.358  000.011  000.011: sourcing /usr/share/nvim/runtime/filetype.vim
+029.473  000.009  000.009: sourcing /usr/share/nvim/runtime/ftplugin.vim
+029.716  000.174  000.174: sourcing /usr/share/nvim/runtime/syntax/nosyntax.vim
+030.133  000.192  000.192: sourcing /usr/share/nvim/runtime/syntax/syncolor.vim
+030.240  000.416  000.224: sourcing /usr/share/nvim/runtime/syntax/synload.vim
+030.268  000.754  000.164: sourcing /usr/share/nvim/runtime/syntax/syntax.vim
+030.404  027.848  009.936: sourcing /home/timen/.config/nvim/init.vim
+030.408  000.225: sourcing vimrc file(s)
+030.703  000.083  000.083: sourcing /home/timen/.config/nvim/plugged/coc.nvim/autoload/coc/rpc.vim
+031.362  000.608  000.608: sourcing /home/timen/.config/nvim/plugged/coc.nvim/autoload/coc/util.vim
+031.662  000.187  000.187: sourcing /home/timen/.config/nvim/plugged/coc.nvim/autoload/coc/client.vim
+033.512  002.963  002.085: sourcing /home/timen/.config/nvim/plugged/coc.nvim/plugin/coc.vim
+033.950  000.098  000.098: sourcing /home/timen/.config/nvim/plugged/vim-airline/autoload/airline/init.vim
+034.401  000.089  000.089: sourcing /home/timen/.config/nvim/plugged/vim-airline/autoload/airline/parts.vim
+035.651  000.120  000.120: sourcing /home/timen/.config/nvim/plugged/vim-airline/autoload/airline/util.vim
+035.707  002.103  001.796: sourcing /home/timen/.config/nvim/plugged/vim-airline/plugin/airline.vim
+036.092  000.304  000.304: sourcing /home/timen/.config/nvim/plugged/vim-fugitive/plugin/fugitive.vim
+036.331  000.136  000.136: sourcing /home/timen/.config/nvim/plugged/git-messenger.vim/plugin/gitmessenger.vim
+036.829  000.149  000.149: sourcing /home/timen/.config/nvim/plugged/vim-gitgutter/autoload/gitgutter/utility.vim
+037.289  000.099  000.099: sourcing /home/timen/.config/nvim/plugged/vim-gitgutter/autoload/gitgutter/highlight.vim
+038.048  001.640  001.393: sourcing /home/timen/.config/nvim/plugged/vim-gitgutter/plugin/gitgutter.vim
+038.512  000.336  000.336: sourcing /home/timen/.config/nvim/plugged/editorconfig-vim/plugin/editorconfig.vim
+038.876  000.263  000.263: sourcing /home/timen/.config/nvim/plugged/vim-gutentags/plugin/gutentags.vim
+038.977  000.020  000.020: sourcing /home/timen/.config/nvim/plugged/vista.vim/plugin/vista.vim
+039.198  000.154  000.154: sourcing /home/timen/.config/nvim/plugged/undotree/plugin/undotree.vim
+039.287  000.021  000.021: sourcing /home/timen/.config/nvim/plugged/goyo.vim/plugin/goyo.vim
+039.540  000.045  000.045: sourcing /home/timen/.config/nvim/plugged/vim-hexokinase/autoload/hexokinase/v1.vim
+039.736  000.016  000.016: sourcing /home/timen/.config/nvim/plugged/vim-hexokinase/autoload/hexokinase/patterns/full_hex.vim
+039.920  000.018  000.018: sourcing /home/timen/.config/nvim/plugged/vim-hexokinase/autoload/hexokinase/patterns/triple_hex.vim
+040.106  000.038  000.038: sourcing /home/timen/.config/nvim/plugged/vim-hexokinase/autoload/hexokinase/patterns/rgb.vim
+040.268  000.025  000.025: sourcing /home/timen/.config/nvim/plugged/vim-hexokinase/autoload/hexokinase/patterns/rgba.vim
+040.578  000.149  000.149: sourcing /home/timen/.config/nvim/plugged/vim-hexokinase/autoload/hexokinase/patterns/colour_names.vim
+040.976  001.621  001.329: sourcing /home/timen/.config/nvim/plugged/vim-hexokinase/plugin/hexokinase.vim
+041.543  000.256  000.256: sourcing /usr/share/nvim/runtime/plugin/gzip.vim
+041.589  000.014  000.014: sourcing /usr/share/nvim/runtime/plugin/health.vim
+041.680  000.067  000.067: sourcing /usr/share/nvim/runtime/plugin/man.vim
+042.168  000.466  000.466: sourcing /usr/share/nvim/runtime/plugin/matchit.vim
+042.385  000.174  000.174: sourcing /usr/share/nvim/runtime/plugin/matchparen.vim
+042.958  000.541  000.541: sourcing /usr/share/nvim/runtime/plugin/netrwPlugin.vim
+043.167  000.168  000.168: sourcing /usr/share/nvim/runtime/plugin/rplugin.vim
+043.337  000.124  000.124: sourcing /usr/share/nvim/runtime/plugin/shada.vim
+043.403  000.028  000.028: sourcing /usr/share/nvim/runtime/plugin/spellfile.vim
+043.585  000.153  000.153: sourcing /usr/share/nvim/runtime/plugin/tarPlugin.vim
+043.705  000.089  000.089: sourcing /usr/share/nvim/runtime/plugin/tohtml.vim
+043.761  000.024  000.024: sourcing /usr/share/nvim/runtime/plugin/tutor.vim
+043.984  000.194  000.194: sourcing /usr/share/nvim/runtime/plugin/zipPlugin.vim
+044.642  000.554  000.554: sourcing /usr/share/vim/vimfiles/plugin/fzf.vim
+044.650  001.832: loading plugins
+044.753  000.102: loading packages
+044.843  000.090: loading after plugins
+044.854  000.012: inits 3
+046.356  001.502: reading ShaDa
+047.260  000.904: clearing screen
+048.002  000.322  000.322: sourcing /home/timen/.config/nvim/plugged/vim-airline/autoload/airline/extensions.vim
+048.151  000.058  000.058: sourcing /home/timen/.config/nvim/plugged/vim-airline/autoload/airline/extensions/quickfix.vim
+048.387  000.173  000.173: sourcing /home/timen/.config/nvim/plugged/vim-airline/autoload/airline.vim
+048.549  000.038  000.038: sourcing /home/timen/.config/nvim/plugged/vim-airline/autoload/airline/extensions/netrw.vim
+048.683  000.038  000.038: sourcing /home/timen/.config/nvim/plugged/vim-airline/autoload/airline/extensions/term.vim
+048.859  000.041  000.041: sourcing /home/timen/.config/nvim/plugged/vim-airline/autoload/airline/extensions/undotree.vim
+049.027  000.078  000.078: sourcing /home/timen/.config/nvim/plugged/vim-airline/autoload/airline/extensions/hunks.vim
+049.369  000.200  000.200: sourcing /home/timen/.config/nvim/plugged/vim-airline/autoload/airline/extensions/branch.vim
+049.561  000.047  000.047: sourcing /home/timen/.config/nvim/plugged/vim-airline/autoload/airline/extensions/fugitiveline.vim
+049.746  000.048  000.048: sourcing /home/timen/.config/nvim/plugged/vim-airline/autoload/airline/extensions/coc.vim
+050.006  000.126  000.126: sourcing /home/timen/.config/nvim/plugged/vim-airline/autoload/airline/extensions/whitespace.vim
+050.419  000.057  000.057: sourcing /home/timen/.config/nvim/plugged/vim-airline/autoload/airline/extensions/po.vim
+050.609  000.094  000.094: sourcing /home/timen/.config/nvim/plugged/vim-airline/autoload/airline/extensions/wordcount.vim
+050.782  000.028  000.028: sourcing /home/timen/.config/nvim/plugged/vim-airline/autoload/airline/extensions/gutentags.vim
+050.931  000.027  000.027: sourcing /home/timen/.config/nvim/plugged/vim-airline/autoload/airline/extensions/keymap.vim
+051.736  000.670  000.670: sourcing /home/timen/.config/nvim/plugged/vimtex/autoload/vimtex.vim
+051.978  000.175  000.175: sourcing /home/timen/.config/nvim/plugged/vim-airline/autoload/airline/extensions/vimtex.vim
+054.922  000.072  000.072: sourcing /home/timen/.config/nvim/plugged/vim-airline/autoload/airline/section.vim
+055.271  000.192  000.192: sourcing /home/timen/.config/nvim/plugged/vim-airline/autoload/airline/highlighter.vim
+059.015  000.055  000.055: sourcing /home/timen/.config/nvim/plugged/vim-airline/autoload/airline/themes.vim
+059.406  000.557  000.502: sourcing /home/timen/.config/nvim/plugged/vim-airline/autoload/airline/themes/dark.vim
+079.050  000.113  000.113: sourcing /home/timen/.config/nvim/plugged/vim-airline/autoload/airline/builder.vim
+079.389  000.057  000.057: sourcing /home/timen/.config/nvim/plugged/vim-airline/autoload/airline/extensions/default.vim
+089.752  039.282: opening buffers
+089.915  000.085  000.085: sourcing /home/timen/.config/nvim/plugged/vim-gitgutter/autoload/gitgutter.vim
+090.003  000.165: BufEnter autocommands
+090.005  000.002: editing files in windows
+094.534  004.179  004.179: sourcing /home/timen/.config/nvim/plugged/vim-fugitive/autoload/fugitive.vim
+095.677  000.275  000.275: sourcing /home/timen/.config/nvim/plugged/vim-gutentags/autoload/gutentags.vim
+095.744  001.285: VimEnter autocommands
+095.746  000.002: before starting main loop
+104.962  000.149  000.149: sourcing /home/timen/.config/nvim/plugged/vim-gitgutter/autoload/gitgutter/hunk.vim
+106.076  010.182: first screen update
+106.079  000.002: --- NVIM STARTED ---

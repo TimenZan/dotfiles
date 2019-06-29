@@ -46,8 +46,17 @@ Plug 'RRethy/vim-hexokinase' " Adds colored boxes to hex codes
 " Plug 'segeljakt/vim-isotope'
 Plug 'axvr/photon.vim' " adds multiple color schemes
 Plug 'joshdick/onedark.vim'
-Plug 'ananagame/vimsence' " Discord rich presence
+Plug 'ananagame/vimsence' , { 'on': []} " Discord rich presence
 call plug#end()
+
+" augroup load_us_ycm
+"   autocmd!
+"   autocmd InsertEnter * call plug#load('vimsence')
+" augroup END
+augroup load_us_ycm
+  autocmd!
+  autocmd VimEnter * call plug#load('vimsence')
+augroup END
 
 " Some basics:
 	filetype plugin on

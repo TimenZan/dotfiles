@@ -1,4 +1,5 @@
-"languageserver": {
+{
+  "languageserver": {
     "dart": {
       "command": "dart_language_server", 
       "args": [],
@@ -18,3 +19,5 @@
           "ignoredRootPaths": ["~"]
     }
   }
+}
+

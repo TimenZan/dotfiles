@@ -1,12 +1,22 @@
 [global_config]
-focus = system
-
+  focus = system
+[keybindings]
+[layouts]
+  [[default]]
+    [[[child1]]]
+      parent = window0
+      type = Terminal
+    [[[window0]]]
+      parent = ""
+      type = Window
+[plugins]
 [profiles]
-[[default]]
-use_system_font = False
-font = Source Code Pro 11
-show_titlebar = False
-scrollbar_position = "disabled"
-cursor_blink = False
-background_type = "transparent"
-background_darkness = 0.0
+  [[default]]
+    background_darkness = 0.0
+    background_type = transparent
+    cursor_blink = False
+    cursor_color = "#aaaaaa"
+    font = Source Code Pro 11
+    scrollbar_position = hidden
+    show_titlebar = False
+    use_system_font = False

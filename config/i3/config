@@ -81,9 +81,10 @@ bindsym $mod+F5 exec terminal -e 'mocp'
 bindsym $mod+t exec --no-startup-id pkill compton
 bindsym $mod+Ctrl+t exec --no-startup-id compton -b
 bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
-bindsym Print exec --no-startup-id 'flameshot gui'
-bindsym $mod+Print --release exec --no-startup-id scrot
-bindsym $mod+Shift+Print --release exec --no-startup-id scrot -s
+bindsym Print --release exec --no-startup-id "flameshot gui"
+bindsym $mod+Print --release exec --no-startup-id scrot -e 'mv $f ~/Pictures'
+bindsym $mod+Shift+Print --release exec --no-startup-id scrot -s -e 'mv $f ~/Pictures'
+bindsym $mod+Ctrl+Print --release exec --no-startup-id scrot -ub -e 'mv $f ~/Pictures'
 # bindsym $mod+Shift+h exec xdg-open /usr/share/doc/manjaro/i3_help.pdf
 bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
 

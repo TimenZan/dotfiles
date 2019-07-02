@@ -4,6 +4,7 @@
 "██║██║╚██╗██║██║   ██║   ╚██╗ ██╔╝██║██║╚██╔╝██║
 "██║██║ ╚████║██║   ██║██╗ ╚████╔╝ ██║██║ ╚═╝ ██║
 "╚═╝╚═╝  ╚═══╝╚═╝   ╚═╝╚═╝  ╚═══╝  ╚═╝╚═╝     ╚═╝
+" Housekeeping {{{
 runtime! archlinux.vim
 
 let mapleader =" "
@@ -13,7 +14,9 @@ if ! filereadable(expand('~/.config/nvim/autoload/plug.vim'))
 	silent !mkdir -p ~/.config/nvim/autoload/
 	silent !curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" > ~/.config/nvim/autoload/plug.vim
 endif
+" }}}
 
+" Plugins {{{
 call plug#begin('~/.config/nvim/plugged')
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'vim-airline/vim-airline'
@@ -23,6 +26,9 @@ Plug 'airblade/vim-gitgutter'
 Plug 'dart-lang/dart-vim-plugin', { 'for': 'dart' }
 Plug 'thosakwe/vim-flutter', { 'for': 'dart' }
 Plug 'PotatoesMaster/i3-vim-syntax', { 'for': 'config' }
+Plug 'donRaphaco/neotex', { 'for': 'tex' }
+	let g:neotex_enabled=2
+	let g:neotex_latexdiff=1
 Plug 'lervag/vimtex', { 'for': 'tex' } " adds tex functionality
 	let g:tex_flavor='latex'
 	let g:vimtex_view_method='zathura'
@@ -53,6 +59,7 @@ augroup load_vimsence
   autocmd CursorHold * UpdatePresence
 augroup END
 
+" }}}
 " Some basics:
 	filetype plugin on
 	syntax on
@@ -102,4 +109,6 @@ inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 " 	" Goyo's width will be the line limit in mutt.
 " 	autocmd BufRead,BufNewFile /tmp/neomutt* let g:goyo_width=80
 " 	autocmd BufRead,BufNewFile /tmp/neomutt* :Goyo
-
+"
+set modelines=1
+" vim:foldmethod=marker:foldlevel=0

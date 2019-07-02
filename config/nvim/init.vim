@@ -19,7 +19,6 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'vim-airline/vim-airline'
 	let g:airline_powerline_fonts = 1
 Plug 'tpope/vim-fugitive'
-Plug 'rhysd/git-messenger.vim' " Read the last Git commit message
 Plug 'airblade/vim-gitgutter'
 Plug 'dart-lang/dart-vim-plugin', { 'for': 'dart' }
 Plug 'thosakwe/vim-flutter', { 'for': 'dart' }
@@ -36,7 +35,7 @@ Plug 'editorconfig/editorconfig-vim' " allows multiple style settings based on f
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'liuchengxu/vista.vim'
 Plug 'mbbill/undotree'
-Plug 'junegunn/goyo.vim' " nice prose writing
+Plug 'junegunn/goyo.vim', { 'on': 'Goyo'} " nice prose writing
 Plug 'RRethy/vim-hexokinase' " Adds colored boxes to hex codes
 	let g:Hexokinase_highlighters = ['foregroundfull']
 	let g:Hexokinase_optInPatterns = ['full_hex', 'triple_hex', 'rgb', 'rgba', 'colour_names']
@@ -44,18 +43,14 @@ Plug 'RRethy/vim-hexokinase' " Adds colored boxes to hex codes
 	let g:Hexokinase_ftAutoload = ['*']
 " Plug 'eslint/eslint' " javascript linter
 " Plug 'segeljakt/vim-isotope'
-Plug 'axvr/photon.vim' " adds multiple color schemes
 Plug 'joshdick/onedark.vim'
 Plug 'ananagame/vimsence' , { 'on': []} " Discord rich presence
 call plug#end()
 
-" augroup load_us_ycm
-"   autocmd!
-"   autocmd InsertEnter * call plug#load('vimsence')
-" augroup END
-augroup load_us_ycm
+augroup load_vimsence
   autocmd!
-  autocmd VimEnter * call plug#load('vimsence')
+  autocmd CursorHold * call plug#load('vimsence')
+  autocmd CursorHold * UpdatePresence
 augroup END
 
 " Some basics:
@@ -64,6 +59,7 @@ augroup END
 	set number relativenumber
 	set encoding=utf-8
 	set updatetime=100
+	set complete=.,w,b,u,t,i,kspell
 	if (has("termguicolors"))
 		set termguicolors
 	endif

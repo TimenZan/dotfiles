@@ -60,16 +60,17 @@ augroup load_vimsence
 augroup END
 
 " }}}
-" Some basics:
-	filetype plugin on
-	syntax on
-	set number relativenumber
-	set encoding=utf-8
-	set updatetime=100
-	set complete=.,w,b,u,t,i,kspell
-	if (has("termguicolors"))
-		set termguicolors
-	endif
+
+" Basics {{{
+filetype plugin on
+syntax on
+set number relativenumber
+set encoding=utf-8
+set updatetime=100
+set complete=.,w,b,u,t,i,kspell
+if (has("termguicolors"))
+	set termguicolors
+endif
 
 " toggle absolute/relative number
 augroup numbertoggle
@@ -93,7 +94,9 @@ inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 " Readmes autowrap text:
 	autocmd BufRead,BufNewFile *.md set tw=79
+" }}}
 
+" Bindings {{{
 " Get line, word and character counts with F3:
 	map <F3> :!wc %<CR>
 
@@ -104,11 +107,7 @@ inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 	map <F10> :Goyo<CR>
 	map <leader>f :Goyo \| set linebreak<CR>
 	inoremap <F10> <esc>:Goyo<CR>a
+" }}}
 
-" " Enable Goyo by default for mutt writting
-" 	" Goyo's width will be the line limit in mutt.
-" 	autocmd BufRead,BufNewFile /tmp/neomutt* let g:goyo_width=80
-" 	autocmd BufRead,BufNewFile /tmp/neomutt* :Goyo
-"
 set modelines=1
 " vim:foldmethod=marker:foldlevel=0

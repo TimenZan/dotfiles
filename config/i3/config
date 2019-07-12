@@ -519,7 +519,7 @@ exec kdeconnect-indicator
 
 # Messaging
 exec --no-startup-id discord
-exec --no-startup-id whatsie
+exec --no-startup-id whatsapp-nativefier
 exec --no-startup-id caprine
 
 # Background

@@ -213,7 +213,7 @@ assign [class="Thunderbird"] $ws8
 # assign [class="Pcmanfm"] $ws3
 # assign [class="Skype"] $ws5
 assign [class="Caprine"] $wsme
-assign [class="whatsapp-nativefier"] $wsme
+assign [class="whats-app-nativefier"] $wsme
 assign [class="discord"] $wsme
 
 # Open specific applications in floating mode
@@ -521,6 +521,7 @@ exec kdeconnect-indicator
 exec --no-startup-id discord
 exec --no-startup-id whatsapp-nativefier
 exec --no-startup-id caprine
+exec --no-startup-id thunderbird
 
 # Background
 exec "nice -9 qbittorrent"

@@ -11,10 +11,11 @@
 # ASCII art made with http://patorjk.com/software/taag#p=display&c=bash&f=Larry 3D&t=i3 config
 
 # Sets the correct monitor setup
-exec xrandr --output DP-0 --primary --mode 2560x1440 --pos 1080x0 --rotate normal --output DVI-D-0 --off --output DVI-D-1 --off --output DP-1 --off --output HDMI-0 --mode 1920x1080 --pos 0x0 --rotate right
+exec xrandr --output DVI-D-0 --mode 1920x1080 --pos 3640x840 --rotate normal --output HDMI-0 --mode 1920x1080 --pos 0x0 --rotate right --output DP-0 --primary --mode 2560x1440 --pos 1080x0 --rotate normal --output DP-1 --off --output DVI-D-1 --off
 # Monitors
 set $monitor1 DP-0
 set $monitor2 HDMI-0
+set $monitor3 DVI-D-0
 
 # Set mod key (Mod1=<Alt>, Mod4=<Super>)
 set $mod Mod4
@@ -209,6 +210,7 @@ bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 
 # Open applications on specific workspaces
 assign [class="Thunderbird"] $ws8
+assign [class="Qbittorrent"] $ws1
 assign [class="Firefox"] $ws2
 # assign [class="Pale moon"] $ws2
 # assign [class="Pcmanfm"] $ws3
@@ -216,6 +218,13 @@ assign [class="Firefox"] $ws2
 assign [class="Caprine"] $wsme
 assign [class="whats-app-nativefier"] $wsme
 assign [class="discord"] $wsme
+
+# Open specific workspaces on specific monitors
+workspace $ws1 output $monitor1
+workspace $ws2 output $monitor1
+workspace $ws8 output $monitor1
+workspace $wsme output $monitor2
+workspace $ws3 output $monitor3
 
 # Open specific applications in floating mode
 for_window [title="alsamixer"] floating enable border pixel 1

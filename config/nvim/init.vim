@@ -19,6 +19,7 @@ endif
 " Plugins {{{
 call plug#begin('~/.config/nvim/plugged')
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+	let g:coc_global_extensions = ['coc-snippets', 'coc-git', 'coc-vimtex', 'coc-java', 'coc-marketplace', 'coc-pairs']
 Plug 'vim-airline/vim-airline'
 	let g:airline_powerline_fonts = 1
 Plug 'tpope/vim-fugitive'
@@ -26,6 +27,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'dart-lang/dart-vim-plugin', { 'for': 'dart' }
 Plug 'thosakwe/vim-flutter', { 'for': 'dart' }
 Plug 'PotatoesMaster/i3-vim-syntax', { 'for': 'config' }
+Plug 'shirk/vim-gas'
 Plug 'donRaphaco/neotex', { 'for': 'tex' }
 	let g:neotex_enabled=2
 	let g:neotex_latexdiff=1
@@ -52,11 +54,11 @@ Plug 'RRethy/vim-hexokinase' " Adds colored boxes to hex codes
 Plug 'joshdick/onedark.vim'
 Plug 'ananagame/vimsence' , { 'on': []} " Discord rich presence
 call plug#end()
-
+colorscheme onedark
 augroup load_vimsence
-  autocmd!
-  autocmd CursorHold * call plug#load('vimsence')
-  autocmd CursorHold * UpdatePresence
+	autocmd!
+	autocmd CursorHold * call plug#load('vimsence')
+	autocmd CursorHold * UpdatePresence
 augroup END
 
 " }}}
@@ -79,24 +81,41 @@ augroup numbertoggle
 	autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
 augroup END
 
-" <tab> triggers coc completion
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
 " Interpret .md files, etc. as .markdown
 	let g:vimwiki_ext2syntax = {'.Rmd': 'markdown', '.rmd': 'markdown','.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
 
 " .tex files automatically detected
 	autocmd BufRead,BufNewFile *.tex set filetype=tex
+	autocmd BufRead,BufNewFile *.s set filetype=gas
 
 " Readmes autowrap text:
 	autocmd BufRead,BufNewFile *.md set tw=79
 " }}}
 
 " Bindings {{{
+
+" <tab> triggers coc completion
+" How it works: on <TAB> it checks if pum (Pop-Up Menu) is active, iff not it
+" refreshes. then it checks if whitespace should be inserted, if it should:
+" tab is inserted, if not, it fulfills the completion. 
+" I should try to get this to also complete a snippet if it is completelly
+" typed, mayby, if the ergodox doesn't provide a better solution
+"inoremap <silent><expr> <TAB>
+"	\ pumvisible() ? "\<C-n>" :
+"	\ <SID>check_back_space() ? "\<TAB>" :
+"	\ coc#refresh()
+"
+"inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+"
+"imap <C-l> <Plug>(coc-snippets-expand)
+"
+"function! s:check_back_space() abort
+"	let col = col('.') - 1
+"	return !col || getline('.')[col - 1]  =~# '\s'
+"endfunction
+
+cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
+
 " Get line, word and character counts with F3:
 	map <F3> :!wc %<CR>
 

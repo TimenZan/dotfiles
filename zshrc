@@ -26,7 +26,7 @@ WORDCHARS=${WORDCHARS//\/[&.;]}                                 # Don't consider
 
 
 ## Keybindings section
-bindkey -e
+bindkey -v
 bindkey '^[[7~' beginning-of-line                               # Home key
 bindkey '^[[H' beginning-of-line                                # Home key
 if [[ "${terminfo[khome]}" != "" ]]; then

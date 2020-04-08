@@ -51,10 +51,10 @@
 [profiles]
   [[default]]
     background_darkness = 0.0
-    background_type = transparent
+    ;background_type = transparent
     cursor_blink = False
     cursor_color = "#aaaaaa"
-    font = Source Code Pro 11
+    font = JetBrains Mono 11
     scrollbar_position = hidden
     show_titlebar = False
     use_system_font = False

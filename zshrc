@@ -21,6 +21,7 @@ HISTFILE=~/.zhistory
 HISTSIZE=1000
 SAVEHIST=500
 export EDITOR=/usr/bin/nvim
+export JAVA_HOME=/usr/lib/jvm/default
 #export VISUAL=/usr/bin/nvim
 WORDCHARS=${WORDCHARS//\/[&.;]}                                 # Don't consider certain characters part of the word
 
@@ -202,3 +203,4 @@ case $(basename "$(cat "/proc/$PPID/comm")") in
     ;;
 esac
 export PATH="$PATH":"$HOME/.pub-cache/bin"
+export PATH="$PATH":"$HOME/scripts"

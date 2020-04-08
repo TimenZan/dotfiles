@@ -23,6 +23,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'vim-airline/vim-airline'
 	let g:airline_powerline_fonts = 1
 Plug 'tpope/vim-fugitive'
+Plug 'rbong/vim-flog'
 Plug 'airblade/vim-gitgutter'
 Plug 'dart-lang/dart-vim-plugin', { 'for': 'dart' }
 Plug 'thosakwe/vim-flutter', { 'for': 'dart' }
@@ -44,16 +45,12 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'liuchengxu/vista.vim'
 Plug 'mbbill/undotree'
 Plug 'junegunn/goyo.vim', { 'on': 'Goyo'} " nice prose writing
-Plug 'RRethy/vim-hexokinase' " Adds colored boxes to hex codes
-	let g:Hexokinase_highlighters = ['foregroundfull']
-	let g:Hexokinase_optInPatterns = ['full_hex', 'triple_hex', 'rgb', 'rgba', 'colour_names']
-	let g:Hexokinase_refreshEvents = ['BufWritePost']
-	let g:Hexokinase_ftAutoload = ['*']
-" Plug 'eslint/eslint' " javascript linter
+Plug 'norcalli/nvim-colorizer.lua'
 " Plug 'segeljakt/vim-isotope'
 Plug 'joshdick/onedark.vim'
 Plug 'ananagame/vimsence' , { 'on': []} " Discord rich presence
 call plug#end()
+
 colorscheme onedark
 augroup load_vimsence
 	autocmd!
@@ -128,5 +125,6 @@ cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 	inoremap <F10> <esc>:Goyo<CR>a
 " }}}
 
+lua require'colorizer'.setup()
 set modelines=1
 " vim:foldmethod=marker:foldlevel=0

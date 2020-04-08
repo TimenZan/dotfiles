@@ -1,3 +1,5 @@
+template
+item
 public_static_method
 public_method
 sysout
@@ -5,14 +7,12 @@ sympysympy
 NN
 sympy
 .
-template
 bar
 \
 beg
 *
 SI
 diso
-item
 figure
 frac
 int

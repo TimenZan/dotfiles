@@ -4,5 +4,5 @@ endif
 
 augroup filetypedetect
 	au! BufRead,BufNewFile *.tex    setfiletype tex
-	au! BufRead,BufNewFile *.md     setfiletype markdown
+	au! BufRead,BufNewFile *.s     setfiletype gas
 augroup END

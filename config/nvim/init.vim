@@ -29,6 +29,7 @@ Plug 'dart-lang/dart-vim-plugin', { 'for': 'dart' }
 Plug 'thosakwe/vim-flutter', { 'for': 'dart' }
 Plug 'PotatoesMaster/i3-vim-syntax', { 'for': 'config' }
 Plug 'shirk/vim-gas'
+Plug 'gillescastel/latex-snippets'
 Plug 'donRaphaco/neotex', { 'for': 'tex' }
 	let g:neotex_enabled=2
 	let g:neotex_latexdiff=1
@@ -39,9 +40,11 @@ Plug 'lervag/vimtex', { 'for': 'tex' } " adds tex functionality
 Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
 	set conceallevel=2
 	let g:tex_conceal="abdgm"
+Plug 'rust-lang/rust.vim'
+	let g:rustfmt_autosave=1
 Plug 'editorconfig/editorconfig-vim' " allows multiple style settings based on filetype
 	let g:EditorConfig_exclude_patterns = ['scp://.\*']
-Plug 'ludovicchabant/vim-gutentags'
+" Plug 'ludovicchabant/vim-gutentags'
 Plug 'liuchengxu/vista.vim'
 Plug 'mbbill/undotree'
 Plug 'junegunn/goyo.vim', { 'on': 'Goyo'} " nice prose writing
@@ -67,7 +70,6 @@ set encoding=utf-8
 set updatetime=100
 set smartcase
 set smartindent
-
 set complete=.,w,b,u,t,i,kspell
 if (has("termguicolors"))
 	set termguicolors
@@ -81,15 +83,10 @@ augroup numbertoggle
 	autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
 augroup END
 
-" Interpret .md files, etc. as .markdown
-	let g:vimwiki_ext2syntax = {'.Rmd': 'markdown', '.rmd': 'markdown','.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
+let g:tex_flavor = "latex"
 
-" .tex files automatically detected
-	autocmd BufRead,BufNewFile *.tex set filetype=tex
-	autocmd BufRead,BufNewFile *.s set filetype=gas
-
-" Readmes autowrap text:
-	autocmd BufRead,BufNewFile *.md set tw=79
+let g:vimwiki_ext2syntax = {'.Rmd': 'markdown', '.rmd': 'markdown','.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
+autocmd BufRead,BufNewFile markdown set textwidth=79
 " }}}
 
 " Bindings {{{
@@ -97,7 +94,7 @@ augroup END
 " <tab> triggers coc completion
 " How it works: on <TAB> it checks if pum (Pop-Up Menu) is active, iff not it
 " refreshes. then it checks if whitespace should be inserted, if it should:
-" tab is inserted, if not, it fulfills the completion. 
+" tab is inserted, if not, it fulfills the completion.
 " I should try to get this to also complete a snippet if it is completelly
 " typed, mayby, if the ergodox doesn't provide a better solution
 "inoremap <silent><expr> <TAB>

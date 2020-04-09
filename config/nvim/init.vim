@@ -61,16 +61,19 @@ augroup END
 " }}}
 
 " Basics {{{
-filetype plugin on
+filetype plugin indent on
 syntax on
-set number relativenumber
 set encoding=utf-8
 set updatetime=100
+set smartcase
+set smartindent
+
 set complete=.,w,b,u,t,i,kspell
 if (has("termguicolors"))
 	set termguicolors
 endif
 
+set number relativenumber
 " toggle absolute/relative number
 augroup numbertoggle
 	autocmd!

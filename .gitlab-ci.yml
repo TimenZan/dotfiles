@@ -2,7 +2,10 @@ stages:
   - test
 
 test:
-  image: koalaman/shellcheck-alpine:latest
-  stage: test
-  script:
-    - shellcheck scripts/*.sh
+    image: koalaman/shellcheck-alpine:latest
+    stage: test
+    before_script:
+    - apk update
+    - apk add git
+    script:
+    - git ls-files --exclude='*.sh' --ignored | xargs shellcheck

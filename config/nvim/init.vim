@@ -10,6 +10,7 @@ runtime! archlinux.vim
 let mapleader =" "
 
 set mouse=a
+set encoding=utf-8
 if ! filereadable(expand('~/.config/nvim/autoload/plug.vim'))
 	echo "Downloading junegunn/vim-plug to manage plugins..."
 	silent !mkdir -p ~/.config/nvim/autoload/
@@ -28,20 +29,23 @@ Plug 'neovim/nvim-lsp'
 Plug 'Shougo/echodoc.vim'
 	set shortmess+=c
 	set noshowmode
-	let g:echodoc_enable_at_startup = 1
+	let g:echodoc_enable_at_startup=1
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins'}
-	let g:deoplete#enable_at_startup = 1
+	let g:deoplete#enable_at_startup=1
 Plug 'Shougo/deoplete-lsp'
 Plug 'vim-airline/vim-airline'
-	let g:airline_powerline_fonts = 1
+	let g:airline_powerline_fonts=1
+	let g:airline#extensions#whitespace#mised_indent_algo=2
 Plug 'tpope/vim-fugitive'
 Plug 'rbong/vim-flog'
 Plug 'airblade/vim-gitgutter'
 Plug 'dart-lang/dart-vim-plugin', { 'for': 'dart' }
+	let dart_format_on_save=1
 Plug 'thosakwe/vim-flutter', { 'for': 'dart' }
 Plug 'PotatoesMaster/i3-vim-syntax', { 'for': 'config' }
 Plug 'shirk/vim-gas'
 Plug 'gillescastel/latex-snippets'
+Plug 'kovetskiy/sxdkd-vim'
 Plug 'donRaphaco/neotex', { 'for': 'tex' }
 	let g:neotex_enabled=2
 	let g:neotex_latexdiff=1
@@ -56,6 +60,15 @@ Plug 'rust-lang/rust.vim'
 	let g:rustfmt_autosave=1
 Plug 'editorconfig/editorconfig-vim' " allows multiple style settings based on filetype
 	let g:EditorConfig_exclude_patterns=['scp://.\*']
+Plug 'sbdchd/neoformat'
+Plug 'junegunn/vim-easy-align'
+Plug 'vim-syntastic/syntastic'
+"	let g:syntastic_java_checkers=['checkstyle']
+	let g:syntastic_tex_checkers=['lacheck', 'text/language_check']
+	let g:syntastic_aggregate_errors=1
+	let g:syntastic_auto_loc_list=1
+	let g:syntastic_check_on_open=1
+	let g:syntastic_check_on_wq=0
 " Plug 'ludovicchabant/vim-gutentags'
 Plug 'liuchengxu/vista.vim'
 Plug 'mbbill/undotree'
@@ -63,7 +76,13 @@ Plug 'junegunn/goyo.vim', { 'on': 'Goyo' } " nice prose writing
 Plug 'norcalli/nvim-colorizer.lua'
 " Plug 'segeljakt/vim-isotope'
 Plug 'joshdick/onedark.vim'
+Plug 'ayu-theme/ayu-vim'
+Plug 'aseathkk/DarkScene.vim'
+Plug 'crusoexia/vim-monokai'
+Plug 'lifepillar/vim-solarized'
+Plug 'morhetz/gruvbox'
 Plug 'ananagame/vimsence' , { 'on': [] } " Discord rich presence
+Plug 'DougBeney/vim-reddit'
 call plug#end()
 
 colorscheme onedark
@@ -124,25 +143,41 @@ autocmd BufRead,BufNewFile markdown set textwidth=79
 "	return !col || getline('.')[col - 1]  =~# '\s'
 "endfunction
 
+" nmap <leader>rn rename
+" nmap <silent> gd gotodefinition
+" nmap <silent> gy coc-type-definition
+" nmap <silent> gi coc-implementation
+" nmap <silent> gr coc-reference
+" nmap <silent> qf quickfix
+"
+" nmap <silent> <leader>a listdiagnostics
+" nmap <silent> <leader>o coclist outline
+" nmap <silent> <leader>j default action for next item
+" nmap <silent> <leader>k default action for previous item
+"
+" nmap <silent> [g diagnosticsprev
+" nmap <silent> ]g diagnosticsnext
+
+
 cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 
 " Get line, word and character counts with F3:
-	map <F3> :!wc %<CR>
+map <F3> :!wc %<CR>
 
 " Spell-check set to F6:
-	map <F6> :setlocal spell! spelllang=en_us<CR>
+map <F6> :setlocal spell! spelllang=en_us<CR>
 
 " Goyo plugin makes text more readable when writing prose:
-	map <F10> :Goyo<CR>
-	map <leader>f :Goyo \| set linebreak<CR>
-	inoremap <F10> <esc>:Goyo<CR>a
+map <F10> :Goyo<CR>
+map <leader>f :Goyo \| set linebreak<CR>
+inoremap <F10> <esc>:Goyo<CR>a
 " }}}
 
 " {{{ Functions
 " {{{ Pretty Indent Line
-" set list lcs=tab:\▏\ 
+" set list lcs=tab:\▏<20>
 " let g:pretty_indent_namespace = nvim_create_namespace('pretty_indent')
-" 
+"
 " function! PrettyIndent()
 " 	let l:view=winsaveview()
 " 	call cursor(1, 1)
@@ -165,13 +200,23 @@ cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 " 	endwhile
 " 	call winrestview(l:view)
 " endfunction
-" 
+"
 " augroup PrettyIndent
 " 	autocmd!
 " 	autocmd TextChanged * call PrettyIndent()
 " 	autocmd BufEnter * call PrettyIndent()
 " 	autocmd InsertLeave * call PrettyIndent()
 " augroup END
+" }}}
+" {{{ Syntastic
+function! FindConfig(prefix, what, where)
+	let cfg = findfile(a:what, escape(a:where, ' ') . ';')
+	return cfg !=# '' ? ' ' . a:prefix . ' ' . shellescape(cfg) : ''
+endfunction
+
+" autocmd FileType java let b:syntastic_java_checkstyle_config_file=
+"     \ get(g:, 'syntastic_java_checkstyle_args', '') .
+"     \ FindConfig('-c', 'checkstyle.xml', expand('<afile>:p:h', 1))
 " }}}
 
 lua require'colorizer'.setup()

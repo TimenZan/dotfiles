@@ -15,6 +15,7 @@ if ! filereadable(expand('~/.config/nvim/autoload/plug.vim'))
 	silent !mkdir -p ~/.config/nvim/autoload/
 	silent !curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" > ~/.config/nvim/autoload/plug.vim
 endif
+
 " }}}
 
 " Plugins {{{
@@ -48,21 +49,21 @@ Plug 'lervag/vimtex', { 'for': 'tex' } " adds tex functionality
 	let g:tex_flavor='latex'
 	let g:vimtex_view_method='zathura'
 	let g:vimtex_quickfix_mode=0
-Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
+Plug 'KeitaNakamura/tex-conceal.vim', { 'for': 'tex' }
 	set conceallevel=2
 	let g:tex_conceal="abdgm"
 Plug 'rust-lang/rust.vim'
 	let g:rustfmt_autosave=1
 Plug 'editorconfig/editorconfig-vim' " allows multiple style settings based on filetype
-	let g:EditorConfig_exclude_patterns = ['scp://.\*']
+	let g:EditorConfig_exclude_patterns=['scp://.\*']
 " Plug 'ludovicchabant/vim-gutentags'
 Plug 'liuchengxu/vista.vim'
 Plug 'mbbill/undotree'
-Plug 'junegunn/goyo.vim', { 'on': 'Goyo'} " nice prose writing
+Plug 'junegunn/goyo.vim', { 'on': 'Goyo' } " nice prose writing
 Plug 'norcalli/nvim-colorizer.lua'
 " Plug 'segeljakt/vim-isotope'
 Plug 'joshdick/onedark.vim'
-Plug 'ananagame/vimsence' , { 'on': []} " Discord rich presence
+Plug 'ananagame/vimsence' , { 'on': [] } " Discord rich presence
 call plug#end()
 
 colorscheme onedark
@@ -137,10 +138,49 @@ cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 	inoremap <F10> <esc>:Goyo<CR>a
 " }}}
 
+" {{{ Functions
+" {{{ Pretty Indent Line
+" set list lcs=tab:\▏\ 
+" let g:pretty_indent_namespace = nvim_create_namespace('pretty_indent')
+" 
+" function! PrettyIndent()
+" 	let l:view=winsaveview()
+" 	call cursor(1, 1)
+" 	call nvim_buf_clear_namespace(0, g:pretty_indent_namespace, 1, -1)
+" 	while 1
+" 		let l:match = search('^$', 'W')
+" 		if l:match ==# 0
+" 			break
+" 		endif
+" 		let l:indent = cindent(l:match)
+" 		if l:indent > 0
+" 			call nvim_buf_set_virtual_text(
+" 						\   0,
+" 						\   g:pretty_indent_namespace,
+" 						\   l:match - 1,
+" 						\   [[repeat(repeat(' ', &shiftwidth - 1) . '▏', l:indent / &shiftwidth), 'IndentGuide']],
+" 						\   {}
+" 						\)
+" 		endif
+" 	endwhile
+" 	call winrestview(l:view)
+" endfunction
+" 
+" augroup PrettyIndent
+" 	autocmd!
+" 	autocmd TextChanged * call PrettyIndent()
+" 	autocmd BufEnter * call PrettyIndent()
+" 	autocmd InsertLeave * call PrettyIndent()
+" augroup END
+" }}}
+
 lua require'colorizer'.setup()
 lua << EOF
 require'nvim_lsp'.rls.setup{}
 require'nvim_lsp'.vimls.setup({})
 EOF
+
+" }}}
+
 set modelines=1
 " vim:foldmethod=marker:foldlevel=0

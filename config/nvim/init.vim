@@ -231,6 +231,7 @@ lua << EOF
 require'nvim_lsp'.rls.setup{}
 require'nvim_lsp'.vimls.setup({})
 require'nvim_lsp'.yamlls.setup({})
+require'nvim_lsp'.bashls.setup({})
 EOF
 
 " }}}

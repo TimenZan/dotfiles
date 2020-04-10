@@ -9,6 +9,7 @@ runtime! archlinux.vim
 
 let mapleader =" "
 
+set mouse=a
 if ! filereadable(expand('~/.config/nvim/autoload/plug.vim'))
 	echo "Downloading junegunn/vim-plug to manage plugins..."
 	silent !mkdir -p ~/.config/nvim/autoload/
@@ -18,8 +19,18 @@ endif
 
 " Plugins {{{
 call plug#begin('~/.config/nvim/plugged')
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-	let g:coc_global_extensions = ['coc-snippets', 'coc-git', 'coc-vimtex', 'coc-java', 'coc-marketplace', 'coc-pairs']
+Plug 'roxma/nvim-yarp'
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"	let g:coc_global_extensions = ['coc-snippets', 'coc-git', 'coc-vimtex', 'coc-java', 'coc-marketplace', 'coc-pairs']
+Plug 'neovim/nvim-lsp'
+	set omnifunc="v:lua.vim.lsp.omnifunc"
+Plug 'Shougo/echodoc.vim'
+	set shortmess+=c
+	set noshowmode
+	let g:echodoc_enable_at_startup = 1
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins'}
+	let g:deoplete#enable_at_startup = 1
+Plug 'Shougo/deoplete-lsp'
 Plug 'vim-airline/vim-airline'
 	let g:airline_powerline_fonts = 1
 Plug 'tpope/vim-fugitive'
@@ -85,7 +96,8 @@ augroup END
 
 let g:tex_flavor = "latex"
 
-let g:vimwiki_ext2syntax = {'.Rmd': 'markdown', '.rmd': 'markdown','.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
+
+" let g:vimwiki_ext2syntax = {'.Rmd': 'markdown', '.rmd': 'markdown','.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
 autocmd BufRead,BufNewFile markdown set textwidth=79
 " }}}
 
@@ -126,5 +138,9 @@ cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 " }}}
 
 lua require'colorizer'.setup()
+lua << EOF
+require'nvim_lsp'.rls.setup{}
+require'nvim_lsp'.vimls.setup({})
+EOF
 set modelines=1
 " vim:foldmethod=marker:foldlevel=0

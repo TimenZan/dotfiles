@@ -22,8 +22,8 @@ do
 			pacmd set-default-sink "$headphones"
 
 			#Moving existing streams
-			pactl list short sink-inputs|while read stream; do
-				streamId=$(echo $stream|cut '-d ' -f1)
+			pactl list short sink-inputs|while read -r stream; do
+				streamId=$(echo "$stream"|cut '-d ' -f1)
 				pactl move-sink-input "$streamId" "$headphones" &> /dev/null
 			done
 		fi
@@ -35,8 +35,8 @@ do
 			pacmd set-default-sink "$speakers"
 
 			#Moving existing streams
-			pactl list short sink-inputs|while read stream; do
-				streamId=$(echo $stream|cut '-d ' -f1)
+			pactl list short sink-inputs|while read -r stream; do
+				streamId=$(echo "$stream"|cut '-d ' -f1)
 				pactl move-sink-input "$streamId" "$speakers" &> /dev/null
 			done
 		fi

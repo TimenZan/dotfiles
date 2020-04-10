@@ -11,16 +11,17 @@ let mapleader =" "
 
 set mouse=a
 set encoding=utf-8
-if ! filereadable(expand('~/.config/nvim/autoload/plug.vim'))
-	echo "Downloading junegunn/vim-plug to manage plugins..."
-	silent !mkdir -p ~/.config/nvim/autoload/
-	silent !curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" > ~/.config/nvim/autoload/plug.vim
+
+if ! filereadable(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/plug.vim"'))
+	silent !mkdir -p ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/
+	silent !curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" > ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/plug.vim
+	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
 " }}}
 
 " Plugins {{{
-call plug#begin('~/.config/nvim/plugged')
+call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"'))
 Plug 'roxma/nvim-yarp'
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "	let g:coc_global_extensions = ['coc-snippets', 'coc-git', 'coc-vimtex', 'coc-java', 'coc-marketplace', 'coc-pairs']
@@ -45,7 +46,7 @@ Plug 'thosakwe/vim-flutter', { 'for': 'dart' }
 Plug 'PotatoesMaster/i3-vim-syntax', { 'for': 'config' }
 Plug 'shirk/vim-gas'
 Plug 'gillescastel/latex-snippets'
-Plug 'kovetskiy/sxdkd-vim'
+Plug 'kovetskiy/sxhkd-vim'
 Plug 'donRaphaco/neotex', { 'for': 'tex' }
 	let g:neotex_enabled=2
 	let g:neotex_latexdiff=1
@@ -58,17 +59,18 @@ Plug 'KeitaNakamura/tex-conceal.vim', { 'for': 'tex' }
 	let g:tex_conceal="abdgm"
 Plug 'rust-lang/rust.vim'
 	let g:rustfmt_autosave=1
+Plug 'uiiaoo/java-syntax.vim'
 Plug 'editorconfig/editorconfig-vim' " allows multiple style settings based on filetype
 	let g:EditorConfig_exclude_patterns=['scp://.\*']
-Plug 'sbdchd/neoformat'
+Plug 'sbdchd/neoformat' " TODO: setup for languages
 Plug 'junegunn/vim-easy-align'
-Plug 'vim-syntastic/syntastic'
-"	let g:syntastic_java_checkers=['checkstyle']
-	let g:syntastic_tex_checkers=['lacheck', 'text/language_check']
-	let g:syntastic_aggregate_errors=1
-	let g:syntastic_auto_loc_list=1
-	let g:syntastic_check_on_open=1
-	let g:syntastic_check_on_wq=0
+" Plug 'vim-syntastic/syntastic'
+" "	let g:syntastic_java_checkers=['checkstyle']
+" 	let g:syntastic_tex_checkers=['lacheck', 'text/language_check']
+" 	let g:syntastic_aggregate_errors=1
+" 	let g:syntastic_auto_loc_list=1
+" 	let g:syntastic_check_on_open=1
+" 	let g:syntastic_check_on_wq=0
 " Plug 'ludovicchabant/vim-gutentags'
 Plug 'liuchengxu/vista.vim'
 Plug 'mbbill/undotree'
@@ -77,15 +79,15 @@ Plug 'norcalli/nvim-colorizer.lua'
 " Plug 'segeljakt/vim-isotope'
 Plug 'joshdick/onedark.vim'
 Plug 'ayu-theme/ayu-vim'
-Plug 'aseathkk/DarkScene.vim'
 Plug 'crusoexia/vim-monokai'
-Plug 'lifepillar/vim-solarized'
+Plug 'lifepillar/vim-solarized8'
 Plug 'morhetz/gruvbox'
-Plug 'ananagame/vimsence' , { 'on': [] } " Discord rich presence
-Plug 'DougBeney/vim-reddit'
+Plug 'ananagame/vimsence', { 'on': [] } " Discord rich presence
+Plug 'DougBeney/vim-reddit', { 'on': 'Reddit' }
+Plug 'tweekmonster/startuptime.vim'
 call plug#end()
 
-colorscheme onedark
+" colorscheme onedark
 augroup load_vimsence
 	autocmd!
 	autocmd CursorHold * call plug#load('vimsence')
@@ -101,6 +103,10 @@ set encoding=utf-8
 set updatetime=100
 set smartcase
 set smartindent
+set linebreak
+set hidden
+set scrolloff=5
+set sidescrolloff=5
 set complete=.,w,b,u,t,i,kspell
 if (has("termguicolors"))
 	set termguicolors
@@ -119,6 +125,7 @@ let g:tex_flavor = "latex"
 
 " let g:vimwiki_ext2syntax = {'.Rmd': 'markdown', '.rmd': 'markdown','.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
 autocmd BufRead,BufNewFile markdown set textwidth=79
+
 " }}}
 
 " Bindings {{{
@@ -161,16 +168,12 @@ autocmd BufRead,BufNewFile markdown set textwidth=79
 
 cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 
-" Get line, word and character counts with F3:
 map <F3> :!wc %<CR>
-
-" Spell-check set to F6:
 map <F6> :setlocal spell! spelllang=en_us<CR>
-
-" Goyo plugin makes text more readable when writing prose:
 map <F10> :Goyo<CR>
 map <leader>f :Goyo \| set linebreak<CR>
 inoremap <F10> <esc>:Goyo<CR>a
+
 " }}}
 
 " {{{ Functions

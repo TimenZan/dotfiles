@@ -38,6 +38,8 @@ Plug 'vim-airline/vim-airline'
 	let g:airline_powerline_fonts=1
 	let g:airline#extensions#whitespace#mised_indent_algo=2
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
+Plug 'shumphrey/fugitive-gitlab.vim'
 Plug 'rbong/vim-flog'
 Plug 'airblade/vim-gitgutter'
 Plug 'dart-lang/dart-vim-plugin', { 'for': 'dart' }
@@ -85,9 +87,10 @@ Plug 'morhetz/gruvbox'
 Plug 'ananagame/vimsence', { 'on': [] } " Discord rich presence
 Plug 'DougBeney/vim-reddit', { 'on': 'Reddit' }
 Plug 'tweekmonster/startuptime.vim'
+Plug '~/secrets/vim_credentials' 
 call plug#end()
 
-" colorscheme onedark
+colorscheme onedark
 augroup load_vimsence
 	autocmd!
 	autocmd CursorHold * call plug#load('vimsence')

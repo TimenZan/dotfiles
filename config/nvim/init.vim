@@ -60,6 +60,7 @@ Plug 'KeitaNakamura/tex-conceal.vim', { 'for': 'tex' }
 	set conceallevel=2
 	let g:tex_conceal="abdgm"
 Plug 'rust-lang/rust.vim'
+Plug 'mrk21/yaml-vim'
 	let g:rustfmt_autosave=1
 Plug 'uiiaoo/java-syntax.vim'
 Plug 'editorconfig/editorconfig-vim' " allows multiple style settings based on filetype
@@ -229,6 +230,7 @@ lua require'colorizer'.setup()
 lua << EOF
 require'nvim_lsp'.rls.setup{}
 require'nvim_lsp'.vimls.setup({})
+require'nvim_lsp'.yamlls.setup({})
 EOF
 
 " }}}

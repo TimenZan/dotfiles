@@ -6,7 +6,7 @@ Timen Zandbergen's dotfiles
 
 ## Usage
 Pull the repository into your home folder and then create the symbolic links
-with [Gnu stow](https://www.gnu.org/software/stow/)
+with [GNU Stow](https://www.gnu.org/software/stow/)
 
 ```sh
 $ git clone git@gitlab.com:TimenZan/dotfiles.git ~/.dotfiles

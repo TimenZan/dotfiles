@@ -3,3 +3,17 @@
 # dotfiles
 
 Timen Zandbergen's dotfiles
+
+## Usage
+Pull the repository into your home folder and then create the symbolic links
+with [Gnu stow](https://www.gnu.org/software/stow/)
+
+```sh
+$ git clone git@gitlab.com:TimenZan/dotfiles.git ~/.dotfiles
+$ ~/install.sh
+```
+Or you can only use the configs that you want to use
+```sh
+$ cd ~/.dotfiles
+$ stow neovim zsh # and any other programs
+```

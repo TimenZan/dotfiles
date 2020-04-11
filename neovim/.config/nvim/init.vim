@@ -59,7 +59,8 @@ Plug 'donRaphaco/neotex', { 'for': 'tex' } " autobuilds the tex pdfs
 Plug 'lervag/vimtex', { 'for': 'tex' } " adds tex functionality
 	let g:tex_flavor='latex'
 	let g:vimtex_view_method='zathura'
-	let g:vimtex_quickfix_mode=0
+	let g:vimtex_compiler_progname='nvr'
+	let g:vimtex_quickfix_mode=1
 Plug 'KeitaNakamura/tex-conceal.vim', { 'for': 'tex' }
 	set conceallevel=2
 	let g:tex_conceal="abdgm"

@@ -34,6 +34,10 @@ Plug 'Shougo/echodoc.vim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins'}
 	let g:deoplete#enable_at_startup=1
 Plug 'Shougo/deoplete-lsp'
+Plug 'SirVer/ultisnips'
+	" let g:UltisnipsExpandTrigger="<tab>"
+	let g:UltisnipsJumpForwardTrigger="<c-b>"
+	let g:UltisnipsJumpBackwardTrigger="<c-z>"
 Plug 'vim-airline/vim-airline'
 	let g:airline_powerline_fonts=1
 	let g:airline#extensions#whitespace#mised_indent_algo=2
@@ -49,7 +53,7 @@ Plug 'PotatoesMaster/i3-vim-syntax', { 'for': 'config' }
 Plug 'shirk/vim-gas'
 Plug 'gillescastel/latex-snippets'
 Plug 'kovetskiy/sxhkd-vim'
-Plug 'donRaphaco/neotex', { 'for': 'tex' }
+Plug 'donRaphaco/neotex', { 'for': 'tex' } " autobuilds the tex pdfs
 	let g:neotex_enabled=2
 	let g:neotex_latexdiff=1
 Plug 'lervag/vimtex', { 'for': 'tex' } " adds tex functionality

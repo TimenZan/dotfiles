@@ -88,7 +88,7 @@ Plug 'morhetz/gruvbox'
 Plug 'ananagame/vimsence', { 'on': [] } " Discord rich presence
 Plug 'DougBeney/vim-reddit', { 'on': 'Reddit' }
 Plug 'tweekmonster/startuptime.vim'
-Plug '~/secrets/vim_credentials' 
+Plug '~/secrets/vim_credentials'
 call plug#end()
 
 colorscheme onedark
@@ -232,6 +232,7 @@ require'nvim_lsp'.rls.setup{}
 require'nvim_lsp'.vimls.setup({})
 require'nvim_lsp'.yamlls.setup({})
 require'nvim_lsp'.bashls.setup({})
+require'nvim_lsp'.texlab.setup({})
 EOF
 
 " }}}

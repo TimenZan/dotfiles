@@ -90,13 +90,14 @@ Plug 'ayu-theme/ayu-vim'
 Plug 'crusoexia/vim-monokai'
 Plug 'lifepillar/vim-solarized8'
 Plug 'morhetz/gruvbox'
+Plug 'romainl/Apprentice'
 Plug 'ananagame/vimsence', { 'on': [] } " Discord rich presence
 Plug 'DougBeney/vim-reddit', { 'on': 'Reddit' }
 Plug 'tweekmonster/startuptime.vim'
 Plug '~/secrets/vim_credentials'
 call plug#end()
 
-colorscheme onedark
+colorscheme apprentice
 augroup load_vimsence
 	autocmd!
 	autocmd CursorHold * call plug#load('vimsence')

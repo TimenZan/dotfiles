@@ -90,7 +90,8 @@ Plug 'ayu-theme/ayu-vim'
 Plug 'crusoexia/vim-monokai'
 Plug 'lifepillar/vim-solarized8'
 Plug 'morhetz/gruvbox'
-Plug 'romainl/Apprentice'
+" Plug 'romainl/Apprentice', { 'branch': 'fancylines-and-neovim' }
+Plug '~/Documents/development/Apprentice'
 Plug 'ananagame/vimsence', { 'on': [] } " Discord rich presence
 Plug 'DougBeney/vim-reddit', { 'on': 'Reddit' }
 Plug 'tweekmonster/startuptime.vim'

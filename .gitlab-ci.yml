@@ -16,7 +16,7 @@ vint:
   before_script:
   - pip install vim-vint
   script:
-  - git ls-files --exclude='*.vim' --ignored | xargs vint
+  - git ls-files --exclude='*.vim' --ignored | xargs /home/ubuntu/.local/bin/vint
 
 image_check:
   image: python:latest
@@ -24,5 +24,5 @@ image_check:
   script:
   - pip install vim-vint --user
   - xargs --version
-  - vint --version
+  - /home/ubuntu/.local/bin/vint --version
 

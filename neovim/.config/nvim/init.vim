@@ -7,15 +7,14 @@
 " Housekeeping {{{
 runtime! archlinux.vim
 
-let mapleader =" "
+let mapleader =' '
 
 set mouse=a
-set encoding=utf-8
 
 if ! filereadable(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/plug.vim"'))
 	silent !mkdir -p ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/
 	silent !curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" > ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/plug.vim
-	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+	autocmd once VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
 " }}}
@@ -23,35 +22,41 @@ endif
 " Plugins {{{
 call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"'))
 Plug 'roxma/nvim-yarp'
+" completion {{{
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "	let g:coc_global_extensions = ['coc-snippets', 'coc-git', 'coc-vimtex', 'coc-java', 'coc-marketplace', 'coc-pairs']
 Plug 'neovim/nvim-lsp'
-	set omnifunc="v:lua.vim.lsp.omnifunc"
-Plug 'Shougo/echodoc.vim'
-	set shortmess+=c
-	set noshowmode
-	let g:echodoc_enable_at_startup=1
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins'}
-	let g:deoplete#enable_at_startup=1
-Plug 'Shougo/deoplete-lsp'
+" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins'}
+" 	let g:deoplete#enable_at_startup=1
+" Plug 'Shougo/deoplete-lsp'
+Plug 'haorenW1025/completion-nvim'
+	let g:completion_enable_snippet = 'UltiSnips'
+	let g:completion_enable_auto_hover = 1
+	let g:completion_confirm_key = "\<C-y>"
+	let g:completion_trigger_character = ['.', '::']
+" Plug 'ncm2/float-preview.nvim' " general purpose, not just for ncm2, not
+" needed for completion-nvim
+"	let g:float_preview#docked=0
+" }}}
 Plug 'SirVer/ultisnips'
 	" let g:UltisnipsExpandTrigger="<tab>"
-	let g:UltisnipsJumpForwardTrigger="<c-b>"
-	let g:UltisnipsJumpBackwardTrigger="<c-z>"
-Plug 'vim-airline/vim-airline'
-	let g:airline_powerline_fonts=1
-	let g:airline#extensions#whitespace#mised_indent_algo=2
+	let g:UltisnipsJumpForwardTrigger='<c-b>'
+	let g:UltisnipsJumpBackwardTrigger='<c-z>'
+Plug 'gillescastel/latex-snippets'
+" vcs {{{
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'shumphrey/fugitive-gitlab.vim'
 Plug 'rbong/vim-flog'
+Plug 'junegunn/gv.vim'
 Plug 'airblade/vim-gitgutter'
+" }}}
+" languages {{{
 Plug 'dart-lang/dart-vim-plugin', { 'for': 'dart' }
 	let dart_format_on_save=1
 Plug 'thosakwe/vim-flutter', { 'for': 'dart' }
 Plug 'PotatoesMaster/i3-vim-syntax', { 'for': 'config' }
 Plug 'shirk/vim-gas'
-Plug 'gillescastel/latex-snippets'
 Plug 'kovetskiy/sxhkd-vim'
 Plug 'donRaphaco/neotex', { 'for': 'tex' } " autobuilds the tex pdfs
 	let g:neotex_enabled=2
@@ -63,15 +68,14 @@ Plug 'lervag/vimtex', { 'for': 'tex' } " adds tex functionality
 	let g:vimtex_quickfix_mode=1
 Plug 'KeitaNakamura/tex-conceal.vim', { 'for': 'tex' }
 	set conceallevel=2
-	let g:tex_conceal="abdgm"
+	let g:tex_conceal='abdgm'
 Plug 'rust-lang/rust.vim'
-Plug 'mrk21/yaml-vim'
 	let g:rustfmt_autosave=1
+Plug 'mrk21/yaml-vim'
 Plug 'uiiaoo/java-syntax.vim'
-Plug 'editorconfig/editorconfig-vim' " allows multiple style settings based on filetype
-	let g:EditorConfig_exclude_patterns=['scp://.\*']
+" }}}
 Plug 'sbdchd/neoformat' " TODO: setup for languages
-Plug 'junegunn/vim-easy-align'
+Plug 'dense-analysis/ale'
 " Plug 'vim-syntastic/syntastic'
 " "	let g:syntastic_java_checkers=['checkstyle']
 " 	let g:syntastic_tex_checkers=['lacheck', 'text/language_check']
@@ -81,36 +85,60 @@ Plug 'junegunn/vim-easy-align'
 " 	let g:syntastic_check_on_wq=0
 " Plug 'ludovicchabant/vim-gutentags'
 Plug 'liuchengxu/vista.vim'
+Plug 'Shougo/echodoc.vim'
+	set shortmess+=c
+	set noshowmode
+	let g:echodoc_enable_at_startup=1
+" editing tools {{{
 Plug 'mbbill/undotree'
+Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/goyo.vim', { 'on': 'Goyo' } " nice prose writing
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-commentary'
+	map  gc <Plug>Commentary
+	nmap gcc <Plug>CommentairyLine
 Plug 'norcalli/nvim-colorizer.lua'
+Plug 'editorconfig/editorconfig-vim' " allows multiple style settings based on filetype
+	let g:EditorConfig_exclude_patterns=['scp://.\*']
+" }}}
+Plug 'vim-airline/vim-airline'
+	let g:airline_powerline_fonts=1
+	let g:airline#extensions#whitespace#mised_indent_algo=2
 " Plug 'segeljakt/vim-isotope'
+" colorschemes {{{
 Plug 'joshdick/onedark.vim'
 Plug 'ayu-theme/ayu-vim'
 Plug 'crusoexia/vim-monokai'
 Plug 'lifepillar/vim-solarized8'
 Plug 'morhetz/gruvbox'
-" Plug 'romainl/Apprentice', { 'branch': 'fancylines-and-neovim' }
-Plug '~/Documents/development/Apprentice'
-Plug 'ananagame/vimsence', { 'on': [] } " Discord rich presence
+Plug 'romainl/Apprentice', { 'branch': 'fancylines-and-neovim' }
+" }}}
+" fun {{{
+" Plug 'ananagame/vimsence', { 'on': [] } " Discord rich presence
 Plug 'DougBeney/vim-reddit', { 'on': 'Reddit' }
 Plug 'tweekmonster/startuptime.vim'
+" }}}
 Plug '~/secrets/vim_credentials'
+" Plug 'mcchrish/info-window.nvim'
+" 	nnoremap <silent> <c-g> :InfoWindowToggle<cr>
 call plug#end()
 
 colorscheme apprentice
-augroup load_vimsence
-	autocmd!
-	autocmd CursorHold * call plug#load('vimsence')
-	autocmd CursorHold * UpdatePresence
-augroup END
+" augroup load_vimsence
+" 	autocmd!
+" 	autocmd CursorHold * call plug#load('vimsence')
+" 	autocmd CursorHold * UpdatePresence
+" augroup END
 
 " }}}
 
-" Basics {{{
+" Options {{{
 filetype plugin indent on
 syntax on
 set encoding=utf-8
+scriptencoding=utf-8
 set updatetime=100
 set smartcase
 set smartindent
@@ -118,8 +146,9 @@ set linebreak
 set hidden
 set scrolloff=5
 set sidescrolloff=5
-set complete=.,w,b,u,t,i,kspell
-if (has("termguicolors"))
+" set complete=.,w,b,u,t,i,kspell
+set completeopt=menuone,noinsert,noselect
+if (has('termguicolors'))
 	set termguicolors
 endif
 
@@ -131,35 +160,16 @@ augroup numbertoggle
 	autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
 augroup END
 
-let g:tex_flavor = "latex"
-
-
-" let g:vimwiki_ext2syntax = {'.Rmd': 'markdown', '.rmd': 'markdown','.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
-autocmd BufRead,BufNewFile markdown set textwidth=79
+augroup completer
+	autocmd BufEnter * lua require'completion'.on_attach()
+augroup END
 
 " }}}
 
 " Bindings {{{
 
-" <tab> triggers coc completion
-" How it works: on <TAB> it checks if pum (Pop-Up Menu) is active, iff not it
-" refreshes. then it checks if whitespace should be inserted, if it should:
-" tab is inserted, if not, it fulfills the completion.
-" I should try to get this to also complete a snippet if it is completelly
-" typed, mayby, if the ergodox doesn't provide a better solution
-"inoremap <silent><expr> <TAB>
-"	\ pumvisible() ? "\<C-n>" :
-"	\ <SID>check_back_space() ? "\<TAB>" :
-"	\ coc#refresh()
-"
-"inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-"
-"imap <C-l> <Plug>(coc-snippets-expand)
-"
-"function! s:check_back_space() abort
-"	let col = col('.') - 1
-"	return !col || getline('.')[col - 1]  =~# '\s'
-"endfunction
+" Make Y behave like other capitals
+nnoremap Y y$
 
 " nmap <leader>rn rename
 " nmap <silent> gd gotodefinition
@@ -176,6 +186,16 @@ autocmd BufRead,BufNewFile markdown set textwidth=79
 " nmap <silent> [g diagnosticsprev
 " nmap <silent> ]g diagnosticsnext
 
+" :h vim.lsp.buf
+nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
+"set tagfunc=
+nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
+" nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
+nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
+nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
+nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
+nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
 
 cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 

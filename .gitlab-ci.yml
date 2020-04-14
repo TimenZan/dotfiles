@@ -11,7 +11,7 @@ shellcheck:
   - git ls-files --exclude='*.sh' --ignored | xargs shellcheck
 
 vint:
-  image: quay.io/python-devs/ci-image:master
+  image: renovate/pip
   stage: validate
   before_script:
   - pip install vint

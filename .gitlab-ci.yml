@@ -17,3 +17,12 @@ vint:
   - pip install vint
   script:
   - git ls-files --exclude='*.vim' --ignored | xargs vint
+
+image_check:
+  image: renovate/pip
+  stage: validate
+  before_script:
+  - pip install vint
+  script:
+  - vint
+

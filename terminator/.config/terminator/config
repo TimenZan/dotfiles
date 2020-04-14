@@ -1,5 +1,9 @@
 [global_config]
   focus = system
+  title_transmit_fg_color = "#bcbcbc"
+  title_transmit_bg_color = "#1c1c1c"
+  title_inactive_fg_color = "#bcbcbc"
+  title_inactive_bg_color = "#444444"
 [keybindings]
   close_term = None
   close_window = None
@@ -44,13 +48,14 @@
     [[[child1]]]
       parent = window0
       type = Terminal
+      profile = apprentice
     [[[window0]]]
       parent = ""
       type = Window
 [plugins]
 [profiles]
   [[default]]
-    background_darkness = 0.0
+    ;background_darkness = 0.0
     ;background_type = transparent
     cursor_blink = False
     cursor_color = "#aaaaaa"
@@ -58,3 +63,15 @@
     scrollbar_position = hidden
     show_titlebar = False
     use_system_font = False
+    background_color = "#262626"
+  [[apprentice]]
+    palette = "#1c1c1c:#af5f5f:#5f875f:#87875f:#5f87af:#5f5f87:#5f8787:#6c6c6c:#444444:#ff8700:#87af87:#ffffaf:#8fafd7:#8787af:#5fafaf:#ffffff"
+    foreground_color = "#bcbcbc"
+    background_color = "#262626"
+    cursor_color = "#bcbcbc"
+    scrollbar_position = hidden
+    use_system_font = False
+    font = JetBrains Mono 11
+    show_titlebar = False
+
+

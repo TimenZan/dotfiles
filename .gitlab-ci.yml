@@ -14,7 +14,7 @@ vint:
   image: renovate/pip
   stage: validate
   before_script:
-  - pip install vint
+  - pip install vim-vint
   script:
   - git ls-files --exclude='*.vim' --ignored | xargs vint
 
@@ -22,7 +22,7 @@ image_check:
   image: python:latest
   stage: validate
   script:
-  - pip install vint --user
+  - pip install vim-vint --user
   - xargs --version
   - vint --version
 

@@ -14,15 +14,14 @@ vint:
   image: renovate/pip
   stage: validate
   before_script:
-  - pip install vim-vint
+  - pip install vim-vint --user
   script:
-  - git ls-files --exclude='*.vim' --ignored | xargs /home/ubuntu/.local/bin/vint
+  - git ls-files --exclude='*.vim' --ignored | xargs /home/ubuntu/.local/bin/vint -V
 
 image_check:
   image: python:latest
   stage: validate
   script:
-  - pip install vim-vint --user
-  - xargs --version
-  - /home/ubuntu/.local/bin/vint --version
+  - pip install vim-vint
+  - git ls-files --exclude='*.vim' --ignored | xargs /root/.local/bin/vint -V
 

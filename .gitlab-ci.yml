@@ -21,9 +21,8 @@ vint:
 image_check:
   image: renovate/pip
   stage: validate
-  before_script:
-  - pip install vint
   script:
+  - pip install vint --user
   - xargs --version
   - vint --version
 

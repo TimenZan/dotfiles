@@ -19,10 +19,10 @@ vint:
   - git ls-files --exclude='*.vim' --ignored | xargs vint
 
 image_check:
-  image: renovate/pip
+  image: python:latest
   stage: validate
   script:
   - pip install vint --user
   - xargs --version
-  - /home/ubuntu/.local/bin/vint --version
+  - vint --version
 

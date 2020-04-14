@@ -24,5 +24,6 @@ image_check:
   before_script:
   - pip install vint
   script:
-  - vint
+  - xargs --version
+  - vint --version
 

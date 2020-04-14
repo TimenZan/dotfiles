@@ -18,10 +18,3 @@ vint:
   script:
   - git ls-files --exclude='*.vim' --ignored | xargs /home/ubuntu/.local/bin/vint -V
 
-image_check:
-  image: python:latest
-  stage: validate
-  script:
-  - pip install vim-vint
-  - git ls-files --exclude='*.vim' --ignored | xargs vint -V
-

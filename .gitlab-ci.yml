@@ -1,11 +1,19 @@
 stages:
-  - test
+  - validate
 
-test:
-    image: koalaman/shellcheck-alpine:latest
-    stage: test
-    before_script:
-    - apk update
-    - apk add git
-    script:
-    - git ls-files --exclude='*.sh' --ignored | xargs shellcheck
+shellcheck:
+  image: koalaman/shellcheck-alpine:latest
+  stage: validate
+  before_script:
+  - apk update
+  - apk add git
+  script:
+  - git ls-files --exclude='*.sh' --ignored | xargs shellcheck
+
+vint:
+  image: quay.io/python-devs/ci-image:master
+  stage: validate
+  before_script:
+  - pip install vint
+  script:
+  - git ls-files --exclude='*.vim' --ignored | xargs vint

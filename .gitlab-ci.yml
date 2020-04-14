@@ -23,5 +23,5 @@ image_check:
   stage: validate
   script:
   - pip install vim-vint
-  - git ls-files --exclude='*.vim' --ignored | xargs /root/.local/bin/vint -V
+  - git ls-files --exclude='*.vim' --ignored | xargs vint -V
 

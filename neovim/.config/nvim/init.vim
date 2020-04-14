@@ -50,6 +50,9 @@ Plug 'shumphrey/fugitive-gitlab.vim'
 Plug 'rbong/vim-flog'
 Plug 'junegunn/gv.vim'
 Plug 'airblade/vim-gitgutter'
+Plug 'rhysd/git-messenger.vim'
+	let g:git_messenger_no_default_mappings=v:true
+	nmap <leader>gm <Plug>(git-messenger)
 " }}}
 " languages {{{
 Plug 'dart-lang/dart-vim-plugin', { 'for': 'dart' }
@@ -76,6 +79,7 @@ Plug 'uiiaoo/java-syntax.vim'
 " }}}
 Plug 'sbdchd/neoformat' " TODO: setup for languages
 Plug 'dense-analysis/ale'
+	let g:ale_linters = {'rust': ['rls', 'cargo', 'rustfmt']}
 " Plug 'vim-syntastic/syntastic'
 " "	let g:syntastic_java_checkers=['checkstyle']
 " 	let g:syntastic_tex_checkers=['lacheck', 'text/language_check']
@@ -255,7 +259,8 @@ endfunction
 
 lua require'colorizer'.setup()
 lua << EOF
-require'nvim_lsp'.rls.setup{}
+-- require'nvim_lsp'.rls.setup({})
+-- require'nvim_lsp'.rust_analyzer.setup({})
 require'nvim_lsp'.vimls.setup({})
 require'nvim_lsp'.yamlls.setup({})
 require'nvim_lsp'.bashls.setup({})

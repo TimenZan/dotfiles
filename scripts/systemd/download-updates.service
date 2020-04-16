@@ -1,0 +1,10 @@
+[Unit]
+Description=Downloads pacman updates using pacman -Syuw
+
+[Service]
+Type=simple
+User=root
+ExecStart=/usr/bin/pacman -Syuw --noconfirm
+
+[Install]
+Alias=download-updates.service

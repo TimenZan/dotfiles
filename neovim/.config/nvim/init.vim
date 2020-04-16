@@ -76,6 +76,7 @@ Plug 'rust-lang/rust.vim'
 	let g:rustfmt_autosave=1
 Plug 'mrk21/yaml-vim'
 Plug 'uiiaoo/java-syntax.vim'
+Plug 'mattn/emmet-vim'
 " }}}
 Plug 'sbdchd/neoformat' " TODO: setup for languages
 Plug 'dense-analysis/ale'
@@ -89,6 +90,7 @@ Plug 'dense-analysis/ale'
 " 	let g:syntastic_check_on_wq=0
 " Plug 'ludovicchabant/vim-gutentags'
 Plug 'liuchengxu/vista.vim'
+Plug 'scrooloose/nerdTree'
 Plug 'Shougo/echodoc.vim'
 	set shortmess+=c
 	set noshowmode

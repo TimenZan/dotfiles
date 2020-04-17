@@ -53,6 +53,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'rhysd/git-messenger.vim'
 	let g:git_messenger_no_default_mappings=v:true
 	nmap <leader>gm <Plug>(git-messenger)
+Plug 'rhysd/committia.vim'
 " }}}
 " languages {{{
 Plug 'dart-lang/dart-vim-plugin', { 'for': 'dart' }
@@ -97,6 +98,7 @@ Plug 'Shougo/echodoc.vim'
 	let g:echodoc_enable_at_startup=1
 " editing tools {{{
 Plug 'mbbill/undotree'
+Plug 'godlygeek/tabular'
 Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/goyo.vim', { 'on': 'Goyo' } " nice prose writing
 Plug 'tpope/vim-repeat'

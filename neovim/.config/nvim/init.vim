@@ -81,6 +81,7 @@ Plug 'uiiaoo/java-syntax.vim'
 Plug 'mattn/emmet-vim'
 " }}}
 Plug 'sbdchd/neoformat' " TODO: setup for languages
+Plug 'kkoomen/vim-doge'
 Plug 'dense-analysis/ale'
 	let g:ale_linters = {'rust': ['rls', 'cargo', 'rustfmt']}
 " Plug 'vim-syntastic/syntastic'

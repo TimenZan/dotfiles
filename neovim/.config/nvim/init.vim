@@ -150,6 +150,7 @@ syntax on
 set encoding=utf-8
 scriptencoding=utf-8
 set updatetime=100
+set undofile
 set smartcase
 set smartindent
 set linebreak
@@ -265,7 +266,7 @@ endfunction
 
 lua require'colorizer'.setup()
 lua << EOF
--- require'nvim_lsp'.rls.setup({})
+require'nvim_lsp'.rls.setup({})
 -- require'nvim_lsp'.rust_analyzer.setup({})
 require'nvim_lsp'.vimls.setup({})
 require'nvim_lsp'.yamlls.setup({})

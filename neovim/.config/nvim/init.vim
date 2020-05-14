@@ -25,18 +25,23 @@ Plug 'roxma/nvim-yarp'
 " completion {{{
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "	let g:coc_global_extensions = ['coc-snippets', 'coc-git', 'coc-vimtex', 'coc-java', 'coc-marketplace', 'coc-pairs']
-Plug 'neovim/nvim-lsp'
-" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins'}
-" 	let g:deoplete#enable_at_startup=1
-" Plug 'Shougo/deoplete-lsp'
-Plug 'haorenW1025/completion-nvim'
-	let g:completion_enable_snippet = 'UltiSnips'
-	let g:completion_enable_auto_hover = 1
-	let g:completion_confirm_key = "\<C-y>"
-	let g:completion_trigger_character = ['.', '::']
+" Plug 'neovim/nvim-lsp'
+" Plug 'haorenW1025/completion-nvim'
+" 	let g:completion_enable_snippet = 'UltiSnips'
+" 	let g:completion_enable_auto_hover = 1
+" 	let g:completion_confirm_key = "\<C-y>"
+" 	let g:completion_trigger_character = ['.', '::']
 " Plug 'ncm2/float-preview.nvim' " general purpose, not just for ncm2, not
 " needed for completion-nvim
 "	let g:float_preview#docked=0
+Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
+Plug 'prabirshrestha/asyncomplete-ultisnips.vim'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'mattn/vim-lsp-settings'
+inoremap <expr> <cr>   pumvisible() ? "\<C-y>" : "\<cr>"
+imap <c-space> <Plug>(asyncomplete_force_refresh)
 " }}}
 Plug 'SirVer/ultisnips'
 	" let g:UltisnipsExpandTrigger="<tab>"
@@ -135,6 +140,12 @@ Plug '~/secrets/vim_credentials'
 " 	nnoremap <silent> <c-g> :InfoWindowToggle<cr>
 call plug#end()
 
+call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
+	\ 'name': 'ultisnips',
+	\ 'whitelist': ['*'],
+	\ 'completor': function('asyncomplete#sources#ultisnips#completor'),
+	\ }))
+
 colorscheme apprentice
 " augroup load_vimsence
 " 	autocmd!
@@ -171,9 +182,9 @@ augroup numbertoggle
 	autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
 augroup END
 
-augroup completer
-	autocmd BufEnter * lua require'completion'.on_attach()
-augroup END
+" augroup completer
+" 	autocmd BufEnter * lua require'completion'.on_attach()
+" augroup END
 
 " }}}
 
@@ -266,12 +277,12 @@ endfunction
 
 lua require'colorizer'.setup()
 lua << EOF
-require'nvim_lsp'.rls.setup({})
+-- require'nvim_lsp'.rls.setup({})
 -- require'nvim_lsp'.rust_analyzer.setup({})
-require'nvim_lsp'.vimls.setup({})
-require'nvim_lsp'.yamlls.setup({})
-require'nvim_lsp'.bashls.setup({})
-require'nvim_lsp'.texlab.setup({})
+-- require'nvim_lsp'.vimls.setup({})
+-- require'nvim_lsp'.yamlls.setup({})
+-- require'nvim_lsp'.bashls.setup({})
+-- require'nvim_lsp'.texlab.setup({})
 EOF
 
 " }}}

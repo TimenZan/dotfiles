@@ -1,2 +1,2 @@
-set textwidth=99
+set textwidth=95
 let g:tex_flavor='latex'

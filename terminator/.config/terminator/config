@@ -5,44 +5,62 @@
   title_inactive_fg_color = "#bcbcbc"
   title_inactive_bg_color = "#444444"
 [keybindings]
-  close_term = None
-  close_window = None
-  full_screen = None
-  go_down = None
-  go_left = None
+  new_tab = None
   go_next = None
   go_prev = None
-  go_right = None
   go_up = None
-  group_all = None
-  group_tab = None
-  help = None
-  hide_window = None
-  insert_number = None
-  insert_padded = None
-  layout_launcher = None
-  move_tab_left = None
-  move_tab_right = None
-  new_tab = None
-  new_terminator = None
-  new_window = None
-  next_tab = None
-  reset = None
-  reset_clear = None
+  go_down = None
+  go_left = None
+  go_right = None
+  rotate_cw = None
+  rotate_ccw = None
+  split_horiz = None
+  split_vert = None
+  close_term = None
+  toggle_scrollbar = None
+  search = None
+  close_window = None
+  resize_up = None
   resize_down = None
   resize_left = None
   resize_right = None
-  resize_up = None
-  rotate_ccw = None
-  rotate_cw = None
-  scaled_zoom = None
-  search = None
-  split_horiz = None
-  split_vert = None
-  toggle_scrollbar = None
+  move_tab_right = None
+  move_tab_left = None
   toggle_zoom = None
+  scaled_zoom = None
+  next_tab = None
+  full_screen = None
+  reset = None
+  reset_clear = None
+  hide_window = None
+  group_all = None
   ungroup_all = None
+  group_tab = None
   ungroup_tab = None
+  new_window = None
+  new_terminator = None
+  insert_number = None
+  insert_padded = None
+  layout_launcher = None
+  help = None
+[profiles]
+  [[default]]
+    background_color = "#262626"
+    cursor_blink = False
+    cursor_color = "#aaaaaa"
+    font = JetBrains Mono 9
+    show_titlebar = False
+    scrollbar_position = hidden
+    use_system_font = False
+  [[apprentice]]
+    background_color = "#262626"
+    cursor_color = "#bcbcbc"
+    font = JetBrains Mono 11
+    foreground_color = "#bcbcbc"
+    show_titlebar = False
+    scrollbar_position = hidden
+    palette = "#1c1c1c:#af5f5f:#5f875f:#87875f:#5f87af:#5f5f87:#5f8787:#6c6c6c:#444444:#ff8700:#87af87:#ffffaf:#8fafd7:#8787af:#5fafaf:#ffffff"
+    use_system_font = False
 [layouts]
   [[default]]
     [[[child1]]]
@@ -53,25 +71,3 @@
       parent = ""
       type = Window
 [plugins]
-[profiles]
-  [[default]]
-    ;background_darkness = 0.0
-    ;background_type = transparent
-    cursor_blink = False
-    cursor_color = "#aaaaaa"
-    font = JetBrains Mono 11
-    scrollbar_position = hidden
-    show_titlebar = False
-    use_system_font = False
-    background_color = "#262626"
-  [[apprentice]]
-    palette = "#1c1c1c:#af5f5f:#5f875f:#87875f:#5f87af:#5f5f87:#5f8787:#6c6c6c:#444444:#ff8700:#87af87:#ffffaf:#8fafd7:#8787af:#5fafaf:#ffffff"
-    foreground_color = "#bcbcbc"
-    background_color = "#262626"
-    cursor_color = "#bcbcbc"
-    scrollbar_position = hidden
-    use_system_font = False
-    font = JetBrains Mono 11
-    show_titlebar = False
-
-

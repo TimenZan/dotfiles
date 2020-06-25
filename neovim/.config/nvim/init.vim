@@ -85,7 +85,7 @@ Plug 'uiiaoo/java-syntax.vim'
 Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'mattn/emmet-vim'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
-	let g:mkdp_auto_start = 0
+	let g:mkdp_auto_start = 1
 " }}}
 Plug 'sbdchd/neoformat' " TODO: setup for languages
 Plug 'kkoomen/vim-doge'

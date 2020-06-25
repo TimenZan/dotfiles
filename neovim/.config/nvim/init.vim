@@ -82,7 +82,10 @@ Plug 'rust-lang/rust.vim'
 	let g:rustfmt_autosave=1
 Plug 'mrk21/yaml-vim'
 Plug 'uiiaoo/java-syntax.vim'
+Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'mattn/emmet-vim'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
+	let g:mkdp_auto_start = 0
 " }}}
 Plug 'sbdchd/neoformat' " TODO: setup for languages
 Plug 'kkoomen/vim-doge'

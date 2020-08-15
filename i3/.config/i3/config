@@ -11,7 +11,8 @@
 # ASCII art made with http://patorjk.com/software/taag#p=display&c=bash&f=Larry 3D&t=i3 config
 
 # Sets the correct monitor setup
-exec xrandr --output DVI-D-0 --mode 1920x1080 --pos 3640x840 --rotate normal --output HDMI-0 --mode 1920x1080 --pos 0x0 --rotate right --output DP-0 --primary --mode 2560x1440 --pos 1080x0 --rotate normal --output DP-1 --off --output DVI-D-1 --off
+# exec xrandr --output DVI-D-0 --mode 1920x1080 --pos 3640x840 --rotate normal --output HDMI-0 --mode 1920x1080 --pos 0x0 --rotate right --output DP-0 --primary --mode 2560x1440 --pos 1080x0 --rotate normal --output DP-1 --off --output DVI-D-1 --off
+exec xrandr --output DVI-D-0 --mode 1920x1080 --pos 3640x360 --rotate normal --output HDMI-0 --mode 1920x1080 --pos 0x0 --rotate right --output DP-0 --primary --mode 2560x1440 --pos 1080x0 --rotate normal --output DP-1 --off --output DVI-D-1 --off
 # Monitors
 set $monitor1 DP-0
 set $monitor2 HDMI-0

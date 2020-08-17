@@ -61,31 +61,29 @@ Plug 'rhysd/git-messenger.vim'
 Plug 'rhysd/committia.vim'
 " }}}
 " languages {{{
+Plug 'KeitaNakamura/tex-conceal.vim', { 'for': 'tex' }
+	set conceallevel=2
+	let g:tex_conceal='abdgm'
+Plug 'PotatoesMaster/i3-vim-syntax', { 'for': 'config' }
 Plug 'dart-lang/dart-vim-plugin', { 'for': 'dart' }
 	let dart_format_on_save=1
-Plug 'thosakwe/vim-flutter', { 'for': 'dart' }
-Plug 'PotatoesMaster/i3-vim-syntax', { 'for': 'config' }
-Plug 'shirk/vim-gas'
+Plug 'donRaphaco/neotex', { 'for': 'tex' } " autobuilds the tex pdfs | let g:neotex_enabled=2 | let g:neotex_latexdiff=1
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
+	let g:mkdp_auto_start = 1
 Plug 'kovetskiy/sxhkd-vim'
-Plug 'donRaphaco/neotex', { 'for': 'tex' } " autobuilds the tex pdfs
-	let g:neotex_enabled=2
-	let g:neotex_latexdiff=1
 Plug 'lervag/vimtex', { 'for': 'tex' } " adds tex functionality
 	let g:tex_flavor='latex'
 	let g:vimtex_view_method='zathura'
 	let g:vimtex_compiler_progname='nvr'
 	let g:vimtex_quickfix_mode=1
-Plug 'KeitaNakamura/tex-conceal.vim', { 'for': 'tex' }
-	set conceallevel=2
-	let g:tex_conceal='abdgm'
+Plug 'mattn/emmet-vim'
+Plug 'mrk21/yaml-vim'
 Plug 'rust-lang/rust.vim'
 	let g:rustfmt_autosave=1
-Plug 'mrk21/yaml-vim'
+Plug 'shirk/vim-gas'
+Plug 'thosakwe/vim-flutter', { 'for': 'dart' }
 Plug 'uiiaoo/java-syntax.vim'
 Plug 'vim-pandoc/vim-pandoc-syntax'
-Plug 'mattn/emmet-vim'
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
-	let g:mkdp_auto_start = 1
 " }}}
 Plug 'sbdchd/neoformat' " TODO: setup for languages
 Plug 'kkoomen/vim-doge'

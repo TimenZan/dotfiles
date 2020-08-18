@@ -11,16 +11,10 @@ let mapleader =' '
 
 set mouse=a
 
-if ! filereadable(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/plug.vim"'))
-	silent !mkdir -p ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/
-	silent !curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" > ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/plug.vim
-	autocmd once VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
-
 " }}}
 
 " Plugins {{{
-call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"'))
+call plug#begin('~/.config/nvim/plugged')
 Plug 'roxma/nvim-yarp'
 " completion {{{
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -61,6 +55,7 @@ Plug 'rhysd/git-messenger.vim'
 Plug 'rhysd/committia.vim'
 " }}}
 " languages {{{
+Plug 'alx741/vim-stylishask'
 Plug 'KeitaNakamura/tex-conceal.vim', { 'for': 'tex' }
 	set conceallevel=2
 	let g:tex_conceal='abdgm'
@@ -78,6 +73,14 @@ Plug 'lervag/vimtex', { 'for': 'tex' } " adds tex functionality
 	let g:vimtex_quickfix_mode=1
 Plug 'mattn/emmet-vim'
 Plug 'mrk21/yaml-vim'
+Plug 'neovimhaskell/haskell-vim'
+	let g:haskell_enable_quantification = 1
+	let g:haskell_enable_recursivedo = 1
+	let g:haskell_enable_arrowsyntax = 1
+	let g:haskell_enable_pattern_synonyms = 1
+	let g:haskell_enable_typeroles = 1
+	let g:haskell_enable_static_pointers = 1
+	let g:haskell_backpack = 1
 Plug 'rust-lang/rust.vim'
 	let g:rustfmt_autosave=1
 Plug 'shirk/vim-gas'
@@ -89,6 +92,7 @@ Plug 'sbdchd/neoformat' " TODO: setup for languages
 Plug 'kkoomen/vim-doge'
 Plug 'dense-analysis/ale'
 	let g:ale_linters = {'rust': ['rls', 'cargo', 'rustfmt']}
+	let g:ale_linters.haskell = ['stack-ghc-mod', 'hlint']
 " Plug 'vim-syntastic/syntastic'
 " "	let g:syntastic_java_checkers=['checkstyle']
 " 	let g:syntastic_tex_checkers=['lacheck', 'text/language_check']

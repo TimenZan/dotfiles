@@ -33,6 +33,7 @@ Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
 Plug 'prabirshrestha/asyncomplete-ultisnips.vim'
 Plug 'prabirshrestha/vim-lsp'
+	let g:lsp_diagnostic_enabled = 0
 Plug 'mattn/vim-lsp-settings'
 imap <c-space> <Plug>(asyncomplete_force_refresh)
 " }}}
@@ -92,7 +93,11 @@ Plug 'sbdchd/neoformat' " TODO: setup for languages
 Plug 'kkoomen/vim-doge'
 Plug 'dense-analysis/ale'
 	let g:ale_linters = {'rust': ['rls', 'cargo', 'rustfmt']}
+	let g:ale_linters.cpp = ['gcc']
 	let g:ale_linters.haskell = ['stack-ghc-mod', 'hlint']
+	let g:ale_echo_msg_error_str = 'E'
+	let g:ale_echo_msg_warning_str = 'W'
+	let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 " Plug 'vim-syntastic/syntastic'
 " "	let g:syntastic_java_checkers=['checkstyle']
 " 	let g:syntastic_tex_checkers=['lacheck', 'text/language_check']

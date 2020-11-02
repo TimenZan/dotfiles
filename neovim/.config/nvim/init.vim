@@ -15,19 +15,13 @@ set mouse=a
 
 " Plugins {{{
 call plug#begin('~/.config/nvim/plugged')
-Plug 'roxma/nvim-yarp'
-" completion {{{
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
-"	let g:coc_global_extensions = ['coc-snippets', 'coc-git', 'coc-vimtex', 'coc-java', 'coc-marketplace', 'coc-pairs']
+" lsp {{{
 " Plug 'neovim/nvim-lsp'
 " Plug 'haorenW1025/completion-nvim'
 " 	let g:completion_enable_snippet = 'UltiSnips'
 " 	let g:completion_enable_auto_hover = 1
 " 	let g:completion_confirm_key = "\<C-y>"
 " 	let g:completion_trigger_character = ['.', '::']
-" Plug 'ncm2/float-preview.nvim' " general purpose, not just for ncm2, not
-" needed for completion-nvim
-"	let g:float_preview#docked=0
 Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
@@ -36,44 +30,38 @@ Plug 'prabirshrestha/vim-lsp'
 	let g:lsp_diagnostic_enabled = 0
 Plug 'mattn/vim-lsp-settings'
 imap <c-space> <Plug>(asyncomplete_force_refresh)
-" }}}
 Plug 'SirVer/ultisnips'
 	" let g:UltisnipsExpandTrigger="<tab>"
 	let g:UltisnipsJumpForwardTrigger='<c-b>'
 	let g:UltisnipsJumpBackwardTrigger='<c-z>'
 Plug 'gillescastel/latex-snippets'
+Plug 'dense-analysis/ale'
+	let g:ale_linters = {'rust': ['rls', 'cargo', 'rustfmt']}
+	let g:ale_linters.cpp = ['gcc']
+	let g:ale_linters.haskell = ['stack-ghc-mod', 'hlint']
+	let g:ale_echo_msg_error_str = 'E'
+	let g:ale_echo_msg_warning_str = 'W'
+	let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+" }}}
 " vcs {{{
+" git
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'shumphrey/fugitive-gitlab.vim'
-Plug 'lambdalisue/gina.vim'
-Plug 'rbong/vim-flog'
+Plug 'lambdalisue/gina.vim' " either remove or learn to use
 Plug 'junegunn/gv.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'rhysd/git-messenger.vim'
 	let g:git_messenger_no_default_mappings=v:true
 	nmap <leader>gm <Plug>(git-messenger)
-Plug 'rhysd/committia.vim'
+Plug 'rhysd/committia.vim' " set up correctly
 " }}}
 " languages {{{
+" rust
+Plug 'rust-lang/rust.vim'
+	let g:rustfmt_autosave=1
+" haskell
 Plug 'alx741/vim-stylishask'
-Plug 'KeitaNakamura/tex-conceal.vim', { 'for': 'tex' }
-	set conceallevel=2
-	let g:tex_conceal='abdgm'
-Plug 'PotatoesMaster/i3-vim-syntax', { 'for': 'config' }
-Plug 'dart-lang/dart-vim-plugin', { 'for': 'dart' }
-	let dart_format_on_save=1
-Plug 'donRaphaco/neotex', { 'for': 'tex' } " autobuilds the tex pdfs | let g:neotex_enabled=2 | let g:neotex_latexdiff=1
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
-	let g:mkdp_auto_start = 1
-Plug 'kovetskiy/sxhkd-vim'
-Plug 'lervag/vimtex', { 'for': 'tex' } " adds tex functionality
-	let g:tex_flavor='latex'
-	let g:vimtex_view_method='zathura'
-	let g:vimtex_compiler_progname='nvr'
-	let g:vimtex_quickfix_mode=1
-Plug 'mattn/emmet-vim'
-Plug 'mrk21/yaml-vim'
 Plug 'neovimhaskell/haskell-vim'
 	let g:haskell_enable_quantification = 1
 	let g:haskell_enable_recursivedo = 1
@@ -82,55 +70,61 @@ Plug 'neovimhaskell/haskell-vim'
 	let g:haskell_enable_typeroles = 1
 	let g:haskell_enable_static_pointers = 1
 	let g:haskell_backpack = 1
-Plug 'rust-lang/rust.vim'
-	let g:rustfmt_autosave=1
-Plug 'shirk/vim-gas'
-Plug 'thosakwe/vim-flutter', { 'for': 'dart' }
+" java
 Plug 'uiiaoo/java-syntax.vim'
-Plug 'vim-pandoc/vim-pandoc-syntax'
+" dart
+Plug 'dart-lang/dart-vim-plugin', { 'for': 'dart' }
+	let dart_format_on_save=1
+Plug 'thosakwe/vim-flutter', { 'for': 'dart' }
+" (la)tex
+Plug 'KeitaNakamura/tex-conceal.vim', { 'for': 'tex' }
+	set conceallevel=2
+	let g:tex_conceal='abdgm'
+Plug 'lervag/vimtex', { 'for': 'tex' }
+	let g:tex_flavor='latex'
+	let g:vimtex_view_method='zathura'
+	let g:vimtex_compiler_progname='nvr'
+	let g:vimtex_quickfix_mode=1
+" markdown
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
+	let g:mkdp_auto_start = 1
+" config files
+Plug 'kovetskiy/sxhkd-vim'
+Plug 'mrk21/yaml-vim'
+" esoteric
+Plug 'shirk/vim-gas'
 " }}}
-Plug 'sbdchd/neoformat' " TODO: setup for languages
-Plug 'kkoomen/vim-doge'
-Plug 'dense-analysis/ale'
-	let g:ale_linters = {'rust': ['rls', 'cargo', 'rustfmt']}
-	let g:ale_linters.cpp = ['gcc']
-	let g:ale_linters.haskell = ['stack-ghc-mod', 'hlint']
-	let g:ale_echo_msg_error_str = 'E'
-	let g:ale_echo_msg_warning_str = 'W'
-	let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
-" Plug 'vim-syntastic/syntastic'
-" "	let g:syntastic_java_checkers=['checkstyle']
-" 	let g:syntastic_tex_checkers=['lacheck', 'text/language_check']
-" 	let g:syntastic_aggregate_errors=1
-" 	let g:syntastic_auto_loc_list=1
-" 	let g:syntastic_check_on_open=1
-" 	let g:syntastic_check_on_wq=0
-" Plug 'ludovicchabant/vim-gutentags'
+" UI {{{
 Plug 'liuchengxu/vista.vim'
 Plug 'scrooloose/nerdTree'
+Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'Shougo/echodoc.vim'
 	set shortmess+=c
 	set noshowmode
-	let g:echodoc_enable_at_startup=1
-" editing tools {{{
+	let g:echodoc#enable_at_startup=1
+	let g:echodoc#type = 'popup'
+Plug 'vim-airline/vim-airline'
+	let g:airline_powerline_fonts=1
+	let g:airline#extensions#whitespace#mised_indent_algo=2
+Plug 'norcalli/nvim-colorizer.lua'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 Plug 'mbbill/undotree'
+" }}}
+" quality of life tools {{{
 Plug 'godlygeek/tabular'
 Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/goyo.vim', { 'on': 'Goyo' } " nice prose writing
 Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-commentary'
 	map  gc <Plug>Commentary
 	nmap gcc <Plug>CommentairyLine
-Plug 'norcalli/nvim-colorizer.lua'
 Plug 'editorconfig/editorconfig-vim' " allows multiple style settings based on filetype
 	let g:EditorConfig_exclude_patterns=['scp://.\*']
 " }}}
-Plug 'vim-airline/vim-airline'
-	let g:airline_powerline_fonts=1
-	let g:airline#extensions#whitespace#mised_indent_algo=2
-" Plug 'segeljakt/vim-isotope'
 " colorschemes {{{
 Plug 'joshdick/onedark.vim'
 Plug 'ayu-theme/ayu-vim'
@@ -139,14 +133,10 @@ Plug 'lifepillar/vim-solarized8'
 Plug 'morhetz/gruvbox'
 Plug 'romainl/Apprentice', { 'branch': 'fancylines-and-neovim' }
 " }}}
-" fun {{{
-" Plug 'ananagame/vimsence', { 'on': [] } " Discord rich presence
-Plug 'DougBeney/vim-reddit', { 'on': 'Reddit' }
+" misc {{{
 Plug 'tweekmonster/startuptime.vim'
 " }}}
 Plug '~/secrets/vim_credentials'
-" Plug 'mcchrish/info-window.nvim'
-" 	nnoremap <silent> <c-g> :InfoWindowToggle<cr>
 call plug#end()
 
 call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
@@ -156,11 +146,6 @@ call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_opti
 	\ }))
 
 colorscheme apprentice
-" augroup load_vimsence
-" 	autocmd!
-" 	autocmd CursorHold * call plug#load('vimsence')
-" 	autocmd CursorHold * UpdatePresence
-" augroup END
 
 " }}}
 
@@ -239,40 +224,6 @@ inoremap <F10> <esc>:Goyo<CR>a
 " }}}
 
 " {{{ Functions
-" {{{ Pretty Indent Line
-" set list lcs=tab:\▏<20>
-" let g:pretty_indent_namespace = nvim_create_namespace('pretty_indent')
-"
-" function! PrettyIndent()
-" 	let l:view=winsaveview()
-" 	call cursor(1, 1)
-" 	call nvim_buf_clear_namespace(0, g:pretty_indent_namespace, 1, -1)
-" 	while 1
-" 		let l:match = search('^$', 'W')
-" 		if l:match ==# 0
-" 			break
-" 		endif
-" 		let l:indent = cindent(l:match)
-" 		if l:indent > 0
-" 			call nvim_buf_set_virtual_text(
-" 						\   0,
-" 						\   g:pretty_indent_namespace,
-" 						\   l:match - 1,
-" 						\   [[repeat(repeat(' ', &shiftwidth - 1) . '▏', l:indent / &shiftwidth), 'IndentGuide']],
-" 						\   {}
-" 						\)
-" 		endif
-" 	endwhile
-" 	call winrestview(l:view)
-" endfunction
-"
-" augroup PrettyIndent
-" 	autocmd!
-" 	autocmd TextChanged * call PrettyIndent()
-" 	autocmd BufEnter * call PrettyIndent()
-" 	autocmd InsertLeave * call PrettyIndent()
-" augroup END
-" }}}
 " {{{ Syntastic
 function! FindConfig(prefix, what, where)
 	let cfg = findfile(a:what, escape(a:where, ' ') . ';')

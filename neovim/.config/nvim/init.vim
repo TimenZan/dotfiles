@@ -112,8 +112,9 @@ Plug 'junegunn/fzf.vim'
 Plug 'mbbill/undotree'
 " }}}
 " quality of life tools {{{
-Plug 'godlygeek/tabular'
 Plug 'junegunn/vim-easy-align'
+	nmap ga <Plug>(EasyAlign)
+	xmap ga <Plug>(EasyAlign)
 Plug 'junegunn/goyo.vim', { 'on': 'Goyo' } " nice prose writing
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-speeddating'
@@ -187,6 +188,7 @@ augroup END
 
 " Make Y behave like other capitals
 nnoremap Y y$
+vnoremap @ :norm@
 
 " nmap <leader>rn rename
 " nmap <silent> gd gotodefinition

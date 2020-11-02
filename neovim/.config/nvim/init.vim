@@ -157,6 +157,7 @@ scriptencoding=utf-8
 set updatetime=100
 set undofile
 set smartcase
+set incsearch
 set smartindent
 set linebreak
 set hidden
@@ -213,8 +214,6 @@ nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
 nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
 nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
 
-cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
-
 map <F3> :!wc %<CR>
 map <F6> :setlocal spell! spelllang=en_us<CR>
 map <F10> :Goyo<CR>
@@ -224,16 +223,6 @@ inoremap <F10> <esc>:Goyo<CR>a
 " }}}
 
 " {{{ Functions
-" {{{ Syntastic
-function! FindConfig(prefix, what, where)
-	let cfg = findfile(a:what, escape(a:where, ' ') . ';')
-	return cfg !=# '' ? ' ' . a:prefix . ' ' . shellescape(cfg) : ''
-endfunction
-
-" autocmd FileType java let b:syntastic_java_checkstyle_config_file=
-"     \ get(g:, 'syntastic_java_checkstyle_args', '') .
-"     \ FindConfig('-c', 'checkstyle.xml', expand('<afile>:p:h', 1))
-" }}}
 
 lua require'colorizer'.setup()
 lua << EOF

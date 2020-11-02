@@ -123,6 +123,7 @@ Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-commentary'
 	map  gc <Plug>Commentary
 	nmap gcc <Plug>CommentairyLine
+Plug 'machakann/vim-swap'
 Plug 'editorconfig/editorconfig-vim' " allows multiple style settings based on filetype
 	let g:EditorConfig_exclude_patterns=['scp://.\*']
 " }}}

@@ -6,6 +6,7 @@
 "╚═╝╚═╝  ╚═══╝╚═╝   ╚═╝╚═╝  ╚═══╝  ╚═╝╚═╝     ╚═╝
 " Housekeeping {{{
 runtime! archlinux.vim
+set shell=/bin/sh
 
 let mapleader =' '
 
@@ -34,7 +35,11 @@ Plug 'SirVer/ultisnips'
 	" let g:UltisnipsExpandTrigger="<tab>"
 	let g:UltisnipsJumpForwardTrigger='<c-b>'
 	let g:UltisnipsJumpBackwardTrigger='<c-z>'
-Plug 'TimenZan/my-snippets'
+if hostname() == 'arch-desktop'
+	Plug '~/development/plugins/snippets'
+else
+	Plug 'TimenZan/my-snippets'
+endif
 Plug 'dense-analysis/ale'
 	let g:ale_linters = {'rust': ['rls', 'cargo', 'rustfmt']}
 	let g:ale_linters.cpp = ['gcc']

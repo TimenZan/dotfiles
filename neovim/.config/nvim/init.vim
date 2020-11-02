@@ -35,7 +35,7 @@ Plug 'SirVer/ultisnips'
 	" let g:UltisnipsExpandTrigger="<tab>"
 	let g:UltisnipsJumpForwardTrigger='<c-b>'
 	let g:UltisnipsJumpBackwardTrigger='<c-z>'
-if hostname() == 'arch-desktop'
+if hostname() ==# 'arch-desktop'
 	Plug '~/development/plugins/snippets'
 else
 	Plug 'TimenZan/my-snippets'

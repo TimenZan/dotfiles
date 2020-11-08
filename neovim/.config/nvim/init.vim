@@ -85,6 +85,7 @@ Plug 'thosakwe/vim-flutter', { 'for': 'dart' }
 Plug 'KeitaNakamura/tex-conceal.vim', { 'for': 'tex' }
 	set conceallevel=2
 	let g:tex_conceal='abdgm'
+	let g:tex_conceal_frac=1
 Plug 'lervag/vimtex', { 'for': 'tex' }
 	let g:tex_flavor='latex'
 	let g:vimtex_view_method='zathura'

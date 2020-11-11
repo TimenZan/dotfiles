@@ -62,6 +62,7 @@ Plug 'rhysd/git-messenger.vim'
 Plug 'rhysd/committia.vim' " set up correctly
 " }}}
 " languages {{{
+Plug 'sheerun/vim-polyglot'
 " rust
 Plug 'rust-lang/rust.vim'
 	let g:rustfmt_autosave=1

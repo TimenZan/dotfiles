@@ -35,6 +35,7 @@ Plug 'SirVer/ultisnips'
 	" let g:UltisnipsExpandTrigger="<tab>"
 	let g:UltisnipsJumpForwardTrigger='<c-b>'
 	let g:UltisnipsJumpBackwardTrigger='<c-z>'
+Plug 'prabirshrestha/asyncomplete-emoji.vim'
 if hostname() ==# 'arch-desktop'
 	Plug '~/development/plugins/snippets'
 else

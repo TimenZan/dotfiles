@@ -17,7 +17,7 @@ set mouse=a
 " Plugins {{{
 call plug#begin('~/.config/nvim/plugged')
 " lsp {{{
-" Plug 'neovim/nvim-lsp'
+" Plug 'neovim/nvim-lspconfig'
 " Plug 'haorenW1025/completion-nvim'
 " 	let g:completion_enable_snippet = 'UltiSnips'
 " 	let g:completion_enable_auto_hover = 1
@@ -131,6 +131,7 @@ Plug 'tpope/vim-commentary'
 	map  gc <Plug>Commentary
 	nmap gcc <Plug>CommentairyLine
 Plug 'machakann/vim-swap'
+Plug 'RRethy/vim-illuminate'
 Plug 'editorconfig/editorconfig-vim' " allows multiple style settings based on filetype
 	let g:EditorConfig_exclude_patterns=['scp://.\*']
 " }}}
@@ -236,12 +237,12 @@ inoremap <F10> <esc>:Goyo<CR>a
 
 lua require'colorizer'.setup()
 lua << EOF
--- require'nvim_lsp'.rls.setup({})
--- require'nvim_lsp'.rust_analyzer.setup({})
--- require'nvim_lsp'.vimls.setup({})
--- require'nvim_lsp'.yamlls.setup({})
--- require'nvim_lsp'.bashls.setup({})
--- require'nvim_lsp'.texlab.setup({})
+-- require'lspconfig'.rls.setup({})
+-- require'lspconfig'.rust_analyzer.setup({})
+-- require'lspconfig'.vimls.setup({})
+-- require'lspconfig'.yamlls.setup({})
+-- require'lspconfig'.bashls.setup({})
+-- require'lspconfig'.texlab.setup({})
 EOF
 
 " }}}

@@ -52,6 +52,7 @@ Plug 'dense-analysis/ale'
 " vcs {{{
 " git
 Plug 'tpope/vim-fugitive'
+Plug 'idanarye/vim-merginal'
 Plug 'tpope/vim-rhubarb'
 Plug 'shumphrey/fugitive-gitlab.vim'
 Plug 'lambdalisue/gina.vim' " either remove or learn to use
@@ -134,6 +135,8 @@ Plug 'machakann/vim-swap'
 Plug 'RRethy/vim-illuminate'
 Plug 'editorconfig/editorconfig-vim' " allows multiple style settings based on filetype
 	let g:EditorConfig_exclude_patterns=['scp://.\*']
+Plug 'wellle/targets.vim'
+Plug 'wellle/context.vim'
 " }}}
 " colorschemes {{{
 Plug 'joshdick/onedark.vim'

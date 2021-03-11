@@ -105,7 +105,7 @@ Plug 'shirk/vim-gas'
 " UI {{{
 Plug 'liuchengxu/vista.vim'
 Plug 'scrooloose/nerdTree'
-Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'Shougo/echodoc.vim'
 	set shortmess+=c
 	set noshowmode
@@ -158,7 +158,7 @@ call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_opti
 	\ 'completor': function('asyncomplete#sources#ultisnips#completor'),
 	\ }))
 
-colorscheme apprentice
+colorscheme ayu
 
 " }}}
 
@@ -189,6 +189,8 @@ augroup numbertoggle
 	autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
 	autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
 augroup END
+
+au TextYankPost * silent! lua vim.highlight.on_yank { timeout = 500 }
 
 " augroup completer
 " 	autocmd BufEnter * lua require'completion'.on_attach()
@@ -247,6 +249,48 @@ lua << EOF
 -- require'lspconfig'.bashls.setup({})
 -- require'lspconfig'.texlab.setup({})
 EOF
+
+" treesitter highlighting
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+	highlight = {
+		enable = true,
+		-- custom_captures = {
+		--   -- Highlight the @foo.bar capture group with the "Identifier" highlight group.
+		--   ["foo.bar"] = "Identifier",
+		-- },
+		},
+}
+EOF
+
+" treesitter incremental selection
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+	incremental_selection = {
+			enable = true,
+			keymaps = {
+				init_selection = "gnn",
+				node_incremental = "grn",
+				scope_incremental = "grc",
+				node_decremental = "grm",
+			},
+		},
+	}
+EOF
+
+" treesitter indentation
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+	indent = {
+		enable = true
+	}
+}
+EOF
+
+" treesitter folding
+" set foldmethod=expr
+" set foldexpr=nvim_treesitter#foldexpr()
+
 
 " }}}
 

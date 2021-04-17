@@ -195,21 +195,6 @@ au TextYankPost * silent! lua vim.highlight.on_yank { timeout = 500 }
 nnoremap Y y$
 vnoremap @ :norm@
 
-" nmap <leader>rn rename
-" nmap <silent> gd gotodefinition
-" nmap <silent> gy coc-type-definition
-" nmap <silent> gi coc-implementation
-" nmap <silent> gr coc-reference
-" nmap <silent> qf quickfix
-"
-" nmap <silent> <leader>a listdiagnostics
-" nmap <silent> <leader>o coclist outline
-" nmap <silent> <leader>j default action for next item
-" nmap <silent> <leader>k default action for previous item
-"
-" nmap <silent> [g diagnosticsprev
-" nmap <silent> ]g diagnosticsnext
-
 " :h vim.lsp.buf
 nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
 nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
@@ -220,6 +205,9 @@ nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
 nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
 nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
 nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
+nnoremap <silent> g=    <cmd>lua vim.lsp.buf.formatting(nil)<CR>
+
+nnoremap <silent> <leader>rn <cmd>lua vim.lsp.buf.rename()<CR>
 
 map <F3> :!wc %<CR>
 map <F6> :setlocal spell! spelllang=en_us<CR>

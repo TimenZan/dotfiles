@@ -17,20 +17,11 @@ set mouse=a
 " Plugins {{{
 call plug#begin('~/.config/nvim/plugged')
 " lsp {{{
-" Plug 'neovim/nvim-lspconfig'
-" Plug 'haorenW1025/completion-nvim'
-" 	let g:completion_enable_snippet = 'UltiSnips'
-" 	let g:completion_enable_auto_hover = 1
-" 	let g:completion_confirm_key = "\<C-y>"
-" 	let g:completion_trigger_character = ['.', '::']
-Plug 'prabirshrestha/async.vim'
-Plug 'prabirshrestha/asyncomplete.vim'
-Plug 'prabirshrestha/asyncomplete-lsp.vim'
-Plug 'prabirshrestha/asyncomplete-ultisnips.vim'
-Plug 'prabirshrestha/vim-lsp'
-	let g:lsp_diagnostic_enabled = 0
-Plug 'mattn/vim-lsp-settings'
-imap <c-space> <Plug>(asyncomplete_force_refresh)
+Plug 'neovim/nvim-lspconfig'
+Plug 'kabouzeid/nvim-lspinstall'
+Plug 'nvim-lua/completion-nvim'
+	let g:completion_enable_snippet = 'UltiSnips'
+	let g:completion_confirm_key = "\<C-y>"
 Plug 'SirVer/ultisnips'
 	" let g:UltisnipsExpandTrigger="<tab>"
 	let g:UltisnipsJumpForwardTrigger='<c-b>'
@@ -153,13 +144,12 @@ Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 Plug '~/secrets/vim_credentials'
 call plug#end()
 
-call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
-	\ 'name': 'ultisnips',
-	\ 'whitelist': ['*'],
-	\ 'completor': function('asyncomplete#sources#ultisnips#completor'),
-	\ }))
-
 colorscheme ayu
+
+" Use completion-nvim in every buffer
+augroup completionenable
+	autocmd BufEnter * lua require'completion'.on_attach()
+augroup END
 
 " }}}
 
@@ -243,12 +233,30 @@ inoremap <F10> <esc>:Goyo<CR>a
 
 lua require'colorizer'.setup()
 lua << EOF
--- require'lspconfig'.rls.setup({})
--- require'lspconfig'.rust_analyzer.setup({})
--- require'lspconfig'.vimls.setup({})
--- require'lspconfig'.yamlls.setup({})
--- require'lspconfig'.bashls.setup({})
--- require'lspconfig'.texlab.setup({})
+  -- require'lspconfig'.rls.setup({})
+  -- require'lspconfig'.rust_analyzer.setup({})
+  -- require'lspconfig'.vimls.setup({})
+  -- require'lspconfig'.yamlls.setup({})
+  -- require'lspconfig'.bashls.setup({})
+  -- require'lspconfig'.texlab.setup({})
+
+  -- Autosetup for LSP servers
+  require'lspinstall'.setup()
+  local function setup_servers()
+    require'lspinstall'.setup()
+    local servers = require'lspinstall'.installed_servers()
+    for _, server in pairs(servers) do
+      require'lspconfig'[server].setup{}
+    end
+  end
+  
+  setup_servers()
+  
+  -- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
+  require'lspinstall'.post_install_hook = function ()
+    setup_servers() -- reload installed servers
+    vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
+  end
 EOF
 
 " treesitter highlighting

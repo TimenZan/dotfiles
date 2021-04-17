@@ -148,6 +148,7 @@ Plug 'romainl/Apprentice', { 'branch': 'fancylines-and-neovim' }
 " }}}
 " misc {{{
 Plug 'tweekmonster/startuptime.vim'
+Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 " }}}
 Plug '~/secrets/vim_credentials'
 call plug#end()

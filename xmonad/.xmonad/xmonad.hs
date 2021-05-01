@@ -311,6 +311,8 @@ myStartupHook = do
   spawnOn "3:chat"  "signal-desktop"
   spawnOn "3:chat"  "signal-desktop-beta"
   spawnOn "3:chat"  "xdg-open silo://start#whatsapp"
+  spawnOn "3:chat"  "mattermost-desktop"
+  spawnOn "3:chat"  "element-desktop"
   spawnOn "4:music" "spotify"
   spawn "kdeconnect-indicator"
   spawn "nm-applet"

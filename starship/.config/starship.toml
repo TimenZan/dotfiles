@@ -1,0 +1,52 @@
+
+format = """
+$username\
+$hostname\
+$shlvl\
+$directory\
+$git_branch\
+$git_commit\
+$git_state\
+$git_status\
+$hg_branch\
+$java\
+$jobs\
+$time\
+$status\
+$line_break\
+$character"""
+
+add_newline = true
+
+# the prompt character
+[character]
+success_symbol = "[⟩](green)"
+vicmd_symbol = "[⟨](green)"
+error_symbol = "[❯](bold red)"
+
+# battery config for laptop
+
+# show how long a command took to execute
+[cmd_duration]
+min_time = 10_000
+format = " 祥[$duration](yellow)"
+show_notifications = true
+min_time_to_notify = 60_000
+
+# shows current direcory
+[directory]
+truncation_length = 5
+truncate_to_repo = true
+truncation_symbol = "…/"
+style = "cyan"
+
+# maybe set up to show amount of commits ahead/behind master/origin
+[git_branch]
+format = "[ $symbol$branch]($style)"
+
+[hg_branch]
+format = "[ $branch](bold purle)"
+
+[java]
+format = "[ ${symbol}${version}]($style)"
+

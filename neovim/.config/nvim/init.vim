@@ -18,12 +18,13 @@ set mouse=a
 call plug#begin('~/.config/nvim/plugged')
 " lsp {{{
 Plug 'neovim/nvim-lspconfig'
-Plug 'kabouzeid/nvim-lspinstall'
+" Plug 'kabouzeid/nvim-lspinstall'
 Plug 'nvim-lua/completion-nvim'
 	let g:completion_enable_snippet = 'UltiSnips'
 	let g:completion_confirm_key = "\<C-y>"
+	let g:completion_enable_auto_popup = 1
 Plug 'SirVer/ultisnips'
-	" let g:UltisnipsExpandTrigger="<tab>"
+" let g:UltisnipsExpandTrigger="<tab>"
 	let g:UltisnipsJumpForwardTrigger='<c-b>'
 	let g:UltisnipsJumpBackwardTrigger='<c-z>'
 Plug 'prabirshrestha/asyncomplete-emoji.vim'
@@ -58,6 +59,7 @@ Plug 'rhysd/committia.vim' " set up correctly
 " rust
 Plug 'rust-lang/rust.vim'
 	let g:rustfmt_autosave=1
+Plug 'simrat39/rust-tools.nvim'
 " haskell
 Plug 'alx741/vim-stylishask'
 Plug 'neovimhaskell/haskell-vim'
@@ -98,8 +100,6 @@ Plug 'liuchengxu/vista.vim'
 Plug 'scrooloose/nerdTree'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'Shougo/echodoc.vim'
-	set shortmess+=c
-	set noshowmode
 	let g:echodoc#enable_at_startup=1
 	let g:echodoc#type = 'popup'
 Plug 'vim-airline/vim-airline'
@@ -169,6 +169,8 @@ set scrolloff=5
 set sidescrolloff=5
 " set complete=.,w,b,u,t,i,kspell
 set completeopt=menuone,noinsert,noselect
+set shortmess+=c
+set noshowmode
 if (has('termguicolors'))
 	set termguicolors
 endif
@@ -182,10 +184,6 @@ augroup numbertoggle
 augroup END
 
 au TextYankPost * silent! lua vim.highlight.on_yank { timeout = 500 }
-
-" augroup completer
-" 	autocmd BufEnter * lua require'completion'.on_attach()
-" augroup END
 
 " }}}
 
@@ -209,6 +207,8 @@ nnoremap <silent> g=    <cmd>lua vim.lsp.buf.formatting(nil)<CR>
 
 nnoremap <silent> <leader>rn <cmd>lua vim.lsp.buf.rename()<CR>
 
+imap <silent> <c-p> <Plug>(completion_trigger)
+
 map <F3> :!wc %<CR>
 map <F6> :setlocal spell! spelllang=en_us<CR>
 map <F10> :Goyo<CR>
@@ -221,42 +221,42 @@ inoremap <F10> <esc>:Goyo<CR>a
 
 lua require'colorizer'.setup()
 lua << EOF
-  -- require'lspconfig'.rls.setup({})
-  -- require'lspconfig'.rust_analyzer.setup({})
-  -- require'lspconfig'.vimls.setup({})
-  -- require'lspconfig'.yamlls.setup({})
-  -- require'lspconfig'.bashls.setup({})
-  -- require'lspconfig'.texlab.setup({})
+-- require'lspconfig'.rls.setup({})
+require'lspconfig'.rust_analyzer.setup({})
+require'lspconfig'.vimls.setup({})
+require'lspconfig'.yamlls.setup({})
+require'lspconfig'.bashls.setup({})
+require'lspconfig'.texlab.setup({})
 
-  -- Autosetup for LSP servers
-  require'lspinstall'.setup()
-  local function setup_servers()
-    require'lspinstall'.setup()
-    local servers = require'lspinstall'.installed_servers()
-    for _, server in pairs(servers) do
-      require'lspconfig'[server].setup{}
-    end
-  end
-  
-  setup_servers()
-  
-  -- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
-  require'lspinstall'.post_install_hook = function ()
-    setup_servers() -- reload installed servers
-    vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
-  end
+-- -- Autosetup for LSP servers
+-- require'lspinstall'.setup()
+-- local function setup_servers()
+--    require'lspinstall'.setup()
+--    local servers = require'lspinstall'.installed_servers()
+--    for _, server in pairs(servers) do
+--      require'lspconfig'[server].setup{}
+--    end
+-- end
+--
+-- setup_servers()
+--
+-- -- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
+-- require'lspinstall'.post_install_hook = function ()
+--   setup_servers() -- reload installed servers
+--   vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
+-- end
 EOF
 
 " treesitter highlighting
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
 	highlight = {
-		enable = true,
-		-- custom_captures = {
-		--   -- Highlight the @foo.bar capture group with the "Identifier" highlight group.
-		--   ["foo.bar"] = "Identifier",
-		-- },
-		},
+	enable = true,
+	-- custom_captures = {
+	--   -- Highlight the @foo.bar capture group with the "Identifier" highlight group.
+	--   ["foo.bar"] = "Identifier",
+	-- },
+	},
 }
 EOF
 
@@ -264,22 +264,22 @@ EOF
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
 	incremental_selection = {
-			enable = true,
-			keymaps = {
-				init_selection = "gnn",
-				node_incremental = "grn",
-				scope_incremental = "grc",
-				node_decremental = "grm",
-			},
+	enable = true,
+	keymaps = {
+		init_selection = "gnn",
+		node_incremental = "grn",
+		scope_incremental = "grc",
+		node_decremental = "grm",
 		},
-	}
+	},
+}
 EOF
 
 " treesitter indentation
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
 	indent = {
-		enable = true
+	enable = true
 	}
 }
 EOF

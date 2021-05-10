@@ -18,6 +18,7 @@ set mouse=a
 call plug#begin('~/.config/nvim/plugged')
 " lsp {{{
 Plug 'neovim/nvim-lspconfig'
+Plug 'nvim-lua/lsp_extensions.nvim'
 " Plug 'kabouzeid/nvim-lspinstall'
 Plug 'nvim-lua/completion-nvim'
 	let g:completion_enable_snippet = 'UltiSnips'
@@ -192,6 +193,10 @@ augroup filereload
 	" notification after file change
 	autocmd FileChangedShellPost *
 				\ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
+augroup END
+
+augroup rusthints
+	autocmd InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *.rs :lua require'lsp_extensions'.inlay_hints{ prefix = ' » ', highlight = "NonText", enabled = {"ChainingHint"} }
 augroup END
 
 " }}}

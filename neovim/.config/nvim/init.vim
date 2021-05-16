@@ -119,11 +119,11 @@ Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/goyo.vim', { 'on': 'Goyo' } " nice prose writing
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-speeddating'
-Plug 'tpope/vim-surround'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-commentary'
 	map  gc <Plug>Commentary
 	nmap gcc <Plug>CommentairyLine
+Plug 'machakann/vim-sandwich'
 Plug 'machakann/vim-swap'
 Plug 'RRethy/vim-illuminate'
 Plug 'editorconfig/editorconfig-vim' " allows multiple style settings based on filetype

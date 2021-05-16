@@ -131,6 +131,7 @@ Plug 'editorconfig/editorconfig-vim' " allows multiple style settings based on f
 Plug 'wellle/targets.vim'
 Plug 'wellle/context.vim'
 Plug 'windwp/nvim-autopairs'
+Plug 'preservim/nerdcommenter'
 " }}}
 " colorschemes {{{
 Plug 'joshdick/onedark.vim'

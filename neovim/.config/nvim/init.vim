@@ -268,6 +268,10 @@ map <F10> :Goyo<CR>
 map <leader>f :Goyo \| set linebreak<CR>
 inoremap <F10> <esc>:Goyo<CR>a
 
+" Use esc to exit terminal mode
+tnoremap <Esc> <C-\><C-n>
+
+
 " }}}
 
 " {{{ Functions

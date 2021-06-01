@@ -111,6 +111,10 @@ Plug 'norcalli/nvim-colorizer.lua'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'mbbill/undotree'
+Plug 'camspiers/animate.vim'
+Plug 'camspiers/lens.vim'
+	let g:lens#width_resize_max = 100
+	let g:lens#disabled_filetypes = ['nerdtree', 'fzf']
 " }}}
 " quality of life tools {{{
 Plug 'junegunn/vim-easy-align'
@@ -244,6 +248,7 @@ require'lspconfig'.vimls.setup({})
 require'lspconfig'.yamlls.setup({})
 require'lspconfig'.bashls.setup({})
 require'lspconfig'.texlab.setup({})
+require'lspconfig'.clangd.setup({})
 
 require('nvim-autopairs').setup()
 EOF

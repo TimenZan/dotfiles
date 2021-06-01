@@ -262,7 +262,7 @@ nnoremap <silent> <leader>rn <cmd>lua vim.lsp.buf.rename()<CR>
 
 imap <silent> <c-p> <Plug>(completion_trigger)
 
-map <F3> :!wc %<CR>
+map <F3> g<c-g>
 map <F6> :setlocal spell! spelllang=en_us<CR>
 map <F10> :Goyo<CR>
 map <leader>f :Goyo \| set linebreak<CR>

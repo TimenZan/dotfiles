@@ -4,14 +4,6 @@
 "██║██║╚██╗██║██║   ██║   ╚██╗ ██╔╝██║██║╚██╔╝██║
 "██║██║ ╚████║██║   ██║██╗ ╚████╔╝ ██║██║ ╚═╝ ██║
 "╚═╝╚═╝  ╚═══╝╚═╝   ╚═╝╚═╝  ╚═══╝  ╚═╝╚═╝     ╚═╝
-" Housekeeping {{{
-runtime! archlinux.vim
-
-let mapleader =' '
-
-set mouse=a
-
-" }}}
 
 " Plugins {{{
 call plug#begin('~/.config/nvim/plugged')
@@ -168,7 +160,7 @@ Plug 'RRethy/vim-illuminate'
 Plug 'editorconfig/editorconfig-vim' " allows multiple style settings based on filetype
 	let g:EditorConfig_exclude_patterns=['scp://.\*']
 Plug 'wellle/targets.vim'
-Plug 'wellle/context.vim'
+Plug 'romgrk/nvim-treesitter-context'
 Plug 'windwp/nvim-autopairs'
 Plug 'preservim/nerdcommenter'
 " }}}
@@ -358,6 +350,9 @@ require'nvim-treesitter.configs'.setup {
 		enable = true,
 		extended_mode = true,
 	},
+}
+require'treesitter-context.config'.setup{
+	enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
 }
 EOF
 

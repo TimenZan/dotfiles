@@ -99,6 +99,7 @@ Plug 'CaffeineViking/vim-glsl'
 " UI {{{
 Plug 'liuchengxu/vista.vim'
 Plug 'scrooloose/nerdTree'
+Plug 'ryanoasis/vim-devicons'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'Shougo/echodoc.vim'
 	let g:echodoc#enable_at_startup=1
@@ -164,7 +165,6 @@ augroup END
 " Options {{{
 filetype plugin indent on
 syntax on
-set encoding=utf-8
 scriptencoding=utf-8
 set updatetime=100
 set undofile

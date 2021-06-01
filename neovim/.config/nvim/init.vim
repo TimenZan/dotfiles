@@ -286,13 +286,6 @@ EOF
 " set foldmethod=expr
 " set foldexpr=nvim_treesitter#foldexpr()
 
-" treesitter rainbow parens
-lua <<EOF
-require'nvim-treesitter.configs'.setup {
-}
-EOF
-
-
 " }}}
 
 set modelines=1

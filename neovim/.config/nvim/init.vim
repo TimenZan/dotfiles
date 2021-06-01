@@ -98,7 +98,7 @@ Plug 'CaffeineViking/vim-glsl'
 " }}}
 " UI {{{
 Plug 'liuchengxu/vista.vim'
-Plug 'scrooloose/nerdTree'
+Plug 'preservim/nerdTree'
 Plug 'ryanoasis/vim-devicons'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'Shougo/echodoc.vim'

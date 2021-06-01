@@ -6,6 +6,7 @@
 "╚═╝╚═╝  ╚═══╝╚═╝   ╚═╝╚═╝  ╚═══╝  ╚═╝╚═╝     ╚═╝
 
 let mapleader = ' '
+set mouse=a
 
 " Plugins {{{
 call plug#begin('~/.config/nvim/plugged')

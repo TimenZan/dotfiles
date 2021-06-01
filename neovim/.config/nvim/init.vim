@@ -6,7 +6,6 @@
 "╚═╝╚═╝  ╚═══╝╚═╝   ╚═╝╚═╝  ╚═══╝  ╚═╝╚═╝     ╚═╝
 " Housekeeping {{{
 runtime! archlinux.vim
-set shell=/bin/sh
 
 let mapleader =' '
 

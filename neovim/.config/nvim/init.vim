@@ -180,6 +180,7 @@ set sidescrolloff=5
 set completeopt=menuone,noinsert,noselect
 set shortmess+=c
 set noshowmode
+set signcolumn=yes
 if (has('termguicolors'))
 	set termguicolors
 endif

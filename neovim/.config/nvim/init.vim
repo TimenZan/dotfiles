@@ -108,6 +108,7 @@ Plug 'vim-airline/vim-airline'
 	let g:airline_powerline_fonts=1
 	let g:airline#extensions#whitespace#mised_indent_algo=2
 Plug 'norcalli/nvim-colorizer.lua'
+Plug 'p00f/nvim-ts-rainbow'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'mbbill/undotree'
@@ -293,6 +294,16 @@ EOF
 " treesitter folding
 " set foldmethod=expr
 " set foldexpr=nvim_treesitter#foldexpr()
+
+" treesitter rainbow parens
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+	rainbow = {
+	enable = true,
+	extended_mode = true,
+	}
+}
+EOF
 
 
 " }}}

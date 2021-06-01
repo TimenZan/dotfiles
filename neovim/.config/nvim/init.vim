@@ -223,13 +223,16 @@ augroup END
 au TextYankPost * silent! lua vim.highlight.on_yank { timeout = 500 }
 
 " trigger `autoread` when files changes on disk
-set autoread
-augroup filereload
-	autocmd FocusGained,BufEnter,CursorHold,CursorHoldI * if mode() != 'c' | checktime | endif
-	" notification after file change
-	autocmd FileChangedShellPost *
-				\ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
-augroup END
+" don't do this in vscode, as this breaks
+if !exists('g:vscode')
+	set autoread
+	augroup filereload
+		autocmd FocusGained,BufEnter,CursorHold,CursorHoldI * if mode() != 'c' | checktime | endif
+		" notification after file change
+		autocmd FileChangedShellPost *
+					\ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
+	augroup END
+endif
 
 augroup rusthints
 	autocmd InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *.rs :lua require'lsp_extensions'.inlay_hints{ prefix = ' » ', highlight = "NonText", enabled = {"ChainingHint"} }

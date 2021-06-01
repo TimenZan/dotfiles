@@ -156,6 +156,7 @@ Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-commentary'
 	map  gc <Plug>Commentary
 	nmap gcc <Plug>CommentairyLine
+Plug 'tpope/vim-eunuch'
 Plug 'machakann/vim-sandwich'
 Plug 'machakann/vim-swap'
 Plug 'RRethy/vim-illuminate'

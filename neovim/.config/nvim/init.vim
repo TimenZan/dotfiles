@@ -25,7 +25,7 @@ Plug 'nvim-lua/completion-nvim'
 	let g:completion_confirm_key = "\<C-y>"
 	let g:completion_enable_auto_popup = 1
 Plug 'SirVer/ultisnips'
-" let g:UltisnipsExpandTrigger="<tab>"
+	" let g:UltisnipsExpandTrigger="<tab>"
 	let g:UltisnipsJumpForwardTrigger='<c-b>'
 	let g:UltisnipsJumpBackwardTrigger='<c-z>'
 Plug 'prabirshrestha/asyncomplete-emoji.vim'
@@ -254,40 +254,32 @@ require'lspconfig'.clangd.setup({})
 require('nvim-autopairs').setup()
 EOF
 
-" treesitter highlighting
+" treesitter setup
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
+	ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+	--ignore_install = { "javascript" }, -- List of parsers to ignore installing
 	highlight = {
-	enable = true,
-	-- custom_captures = {
-	--   -- Highlight the @foo.bar capture group with the "Identifier" highlight group.
-	--   ["foo.bar"] = "Identifier",
-	-- },
+		enable = true,              -- false will disable the whole extension
+		-- disable = { "c", "rust" },  -- list of language that will be disabled
 	},
-}
-EOF
-
-" treesitter incremental selection
-lua <<EOF
-require'nvim-treesitter.configs'.setup {
 	incremental_selection = {
-	enable = true,
-	keymaps = {
-		init_selection = "gnn",
-		node_incremental = "grn",
-		scope_incremental = "grc",
-		node_decremental = "grm",
+		enable = true,
+		keymaps = {
+			init_selection = "gnn",
+			node_incremental = "grn",
+			scope_incremental = "grc",
+			node_decremental = "grm",
 		},
 	},
-}
-EOF
-
-" treesitter indentation
-lua <<EOF
-require'nvim-treesitter.configs'.setup {
 	indent = {
-	enable = true
-	}
+		enable = true
+	},
+	-- requires nvim-ts-rainbow plugin
+	rainbow = {
+		enable = true,
+		extended_mode = true,
+	},
 }
 EOF
 
@@ -298,10 +290,6 @@ EOF
 " treesitter rainbow parens
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
-	rainbow = {
-	enable = true,
-	extended_mode = true,
-	}
 }
 EOF
 

@@ -166,6 +166,7 @@ Plug 'wellle/targets.vim'
 Plug 'romgrk/nvim-treesitter-context'
 Plug 'windwp/nvim-autopairs'
 Plug 'preservim/nerdcommenter'
+Plug 'tversteeg/registers.nvim'
 " }}}
 " colorschemes {{{
 Plug 'joshdick/onedark.vim'

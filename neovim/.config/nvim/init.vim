@@ -169,12 +169,23 @@ Plug 'preservim/nerdcommenter'
 Plug 'tversteeg/registers.nvim'
 " }}}
 " colorschemes {{{
-Plug 'joshdick/onedark.vim'
+Plug 'tjdevries/colorbuddy.vim'
 Plug 'ayu-theme/ayu-vim'
-Plug 'crusoexia/vim-monokai'
 Plug 'lifepillar/vim-solarized8'
-Plug 'morhetz/gruvbox'
 Plug 'romainl/Apprentice', { 'branch': 'fancylines-and-neovim' }
+Plug 'tjdevries/gruvbuddy.nvim'
+Plug 'morhetz/gruvbox'
+Plug 'rafamadriz/neon'
+Plug 'glepnir/zephyr-nvim'
+Plug 'ishan9299/modus-theme-vim'
+Plug 'Th3Whit3Wolf/onebuddy' " lacks powerline support, maybe fixed in the future
+" Plug 'Th3Whit3Wolf/one-nvim'
+" Plug 'joshdick/onedark.vim'
+" Plug 'navarasu/onedark.nvim'
+Plug 'ray-x/aurora'
+Plug 'novakne/kosmikoa.nvim'
+" Plug 'crusoexia/vim-monokai'
+Plug 'tanvirtin/monokai.nvim'
 " }}}
 " misc {{{
 Plug 'tweekmonster/startuptime.vim'

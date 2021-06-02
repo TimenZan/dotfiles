@@ -6,7 +6,6 @@
 "╚═╝╚═╝  ╚═══╝╚═╝   ╚═╝╚═╝  ╚═══╝  ╚═╝╚═╝     ╚═╝
 
 let mapleader = ' '
-set mouse=a
 
 " Plugins {{{
 call plug#begin('~/.config/nvim/plugged')
@@ -207,20 +206,22 @@ augroup END
 filetype plugin indent on
 syntax on
 scriptencoding=utf-8
-set updatetime=100
-set undofile
-set smartcase
-set incsearch
-set smartindent
-set linebreak
-set hidden
-set scrolloff=5
-set sidescrolloff=5
 " set complete=.,w,b,u,t,i,kspell
 set completeopt=menuone,noselect
-set shortmess+=c
+set hidden
+set incsearch
+set linebreak
+set mouse=a
 set noshowmode
+set nowrap
+set scrolloff=5
+set shortmess+=c
+set sidescrolloff=5
 set signcolumn=yes
+set smartcase
+set smartindent
+set undofile
+set updatetime=100
 if (has('termguicolors'))
 	set termguicolors
 endif

@@ -208,6 +208,7 @@ syntax on
 scriptencoding=utf-8
 " set complete=.,w,b,u,t,i,kspell
 set completeopt=menuone,noselect,noinsert
+set formatoptions=jcroqln1
 set hidden
 set ignorecase | set smartcase
 set incsearch

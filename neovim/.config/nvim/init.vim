@@ -209,6 +209,7 @@ scriptencoding=utf-8
 " set complete=.,w,b,u,t,i,kspell
 set completeopt=menuone,noselect
 set hidden
+set ignorecase | set smartcase
 set incsearch
 set linebreak
 set mouse=a
@@ -218,7 +219,6 @@ set scrolloff=5
 set shortmess+=c
 set sidescrolloff=5
 set signcolumn=yes
-set smartcase
 set smartindent
 set undofile
 set updatetime=100

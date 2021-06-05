@@ -112,8 +112,8 @@ Plug 'lervag/vimtex', { 'for': 'tex' }
 	let g:vimtex_compiler_progname='nvr'
 	let g:vimtex_quickfix_mode=1
 " markdown
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
-	let g:mkdp_auto_start = 1
+" Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
+	" let g:mkdp_auto_start = 1
 " config files
 Plug 'kovetskiy/sxhkd-vim'
 Plug 'mrk21/yaml-vim'

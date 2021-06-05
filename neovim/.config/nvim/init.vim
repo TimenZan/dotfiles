@@ -166,6 +166,7 @@ Plug 'romgrk/nvim-treesitter-context'
 Plug 'windwp/nvim-autopairs'
 Plug 'preservim/nerdcommenter'
 Plug 'tversteeg/registers.nvim'
+Plug 'chrisbra/matchit'
 " }}}
 " colorschemes {{{
 Plug 'tjdevries/colorbuddy.vim'
@@ -207,6 +208,7 @@ filetype plugin indent on
 syntax on
 scriptencoding=utf-8
 " set complete=.,w,b,u,t,i,kspell
+set autowrite
 set completeopt=menuone,noselect,noinsert
 set formatoptions=jcroqln1
 set hidden

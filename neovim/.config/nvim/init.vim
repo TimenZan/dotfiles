@@ -154,7 +154,7 @@ Plug 'lukas-reineke/indent-blankline.nvim', { 'branch': 'lua' }
 	let g:indent_blankline_use_treesitter = v:true
 	let g:indentLine_fileTypeExclude = ['help']
 	let g:indent_blankline_show_current_context = v:false
-	
+
 " }}}
 " quality of life tools {{{
 Plug 'junegunn/vim-easy-align'

@@ -16,38 +16,33 @@ Plug 'nvim-lua/popup.nvim'
 " lsp {{{
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/lsp_extensions.nvim'
-" Plug 'kabouzeid/nvim-lspinstall'
-Plug 'nvim-lua/completion-nvim'
-	let g:completion_enable_snippet = 'UltiSnips'
-	let g:completion_confirm_key = "\<C-y>"
-	let g:completion_enable_auto_popup = 1
-" Plug 'hrsh7th/nvim-compe'
-" 	let g:compe = {}
-" 	let g:compe.enabled = v:true
-" 	let g:compe.autocomplete = v:true
-" 	let g:compe.debug = v:false
-" 	let g:compe.min_length = 1
-" 	let g:compe.preselect = 'enable'
-" 	let g:compe.throttle_time = 80
-" 	let g:compe.source_timeout = 200
-" 	let g:compe.incomplete_delay = 400
-" 	let g:compe.max_abbr_width = 100
-" 	let g:compe.max_kind_width = 100
-" 	let g:compe.max_menu_width = 100
-" 	let g:compe.documentation = v:true
+Plug 'hrsh7th/nvim-compe'
+	let g:compe = {}
+	let g:compe.enabled = v:true
+	let g:compe.autocomplete = v:true
+	let g:compe.debug = v:false
+	let g:compe.min_length = 1
+	let g:compe.preselect = 'enable'
+	let g:compe.throttle_time = 80
+	let g:compe.source_timeout = 200
+	let g:compe.incomplete_delay = 400
+	let g:compe.max_abbr_width = 100
+	let g:compe.max_kind_width = 100
+	let g:compe.max_menu_width = 100
+	let g:compe.documentation = v:true
 
-" 	let g:compe.source = {}
-" 	let g:compe.source.path = v:true
-" 	let g:compe.source.buffer = v:true
-" 	let g:compe.source.calc = v:true
-" 	let g:compe.source.nvim_lsp = v:true
-" 	let g:compe.source.nvim_lua = v:true
-" 	let g:compe.source.ultisnips = v:true
-" inoremap <silent><expr> <C-p>     compe#complete()
-" inoremap <silent><expr> <C-y>     compe#confirm('<C-y>')
-" inoremap <silent><expr> <C-e>     compe#close('<C-e>')
-" " inoremap <silent><expr> <C-n>     compe#scroll({ 'delta': +4 })
-" " inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
+	let g:compe.source = {}
+	let g:compe.source.path = v:true
+	let g:compe.source.buffer = v:true
+	let g:compe.source.calc = v:true
+	let g:compe.source.nvim_lsp = v:true
+	let g:compe.source.nvim_lua = v:true
+	let g:compe.source.ultisnips = v:true
+inoremap <silent><expr> <C-p>     compe#complete()
+inoremap <silent><expr> <C-y>     compe#confirm('<C-y>')
+inoremap <silent><expr> <C-e>     compe#close('<C-e>')
+" inoremap <silent><expr> <C-n>     compe#scroll({ 'delta': +4 })
+" inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
 Plug 'SirVer/ultisnips'
 	" let g:UltisnipsExpandTrigger="<tab>"
 	let g:UltisnipsJumpForwardTrigger='<c-b>'
@@ -133,9 +128,6 @@ Plug 'preservim/nerdTree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ryanoasis/vim-devicons'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'Shougo/echodoc.vim'
-	let g:echodoc#enable_at_startup=1
-	let g:echodoc#type = 'popup'
 Plug 'vim-airline/vim-airline'
 	let g:airline_powerline_fonts=1
 	let g:airline#extensions#whitespace#mised_indent_algo=2
@@ -208,10 +200,6 @@ call plug#end()
 
 colorscheme ayu
 
-" Use completion-nvim in every buffer
-augroup completionenable
-	autocmd BufEnter * lua require'completion'.on_attach()
-augroup END
 
 " }}}
 
@@ -221,7 +209,7 @@ syntax on
 scriptencoding=utf-8
 " set complete=.,w,b,u,t,i,kspell
 set autowrite
-set completeopt=menuone,noselect,noinsert
+set completeopt=menuone,noselect
 set formatoptions=jcroqln1
 set hidden
 set ignorecase | set smartcase
@@ -262,10 +250,6 @@ if !exists('g:vscode')
 					\ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
 	augroup END
 endif
-
-" augroup rusthints
-" 	autocmd InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *.rs :lua require'lsp_extensions'.inlay_hints{ prefix = ' » ', highlight = "NonText", enabled = {"TypeHint", "ChainingHint", "ParameterHint"} }
-" augroup END
 
 " }}}
 
@@ -316,8 +300,19 @@ tnoremap <Esc> <C-\><C-n>
 
 lua require'colorizer'.setup()
 lua << EOF
--- require'lspconfig'.rls.setup({})
-require'lspconfig'.rust_analyzer.setup({})
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+capabilities.textDocument.completion.completionItem.resolveSupport = {
+	properties = {
+		'documentation',
+		'detail',
+		'additionalTextEdits',
+	}
+}
+
+require'lspconfig'.rust_analyzer.setup({
+	capabilities = capabilities,
+})
 require'lspconfig'.vimls.setup({})
 require'lspconfig'.yamlls.setup({})
 require'lspconfig'.bashls.setup({})

@@ -32,11 +32,12 @@ Plug 'hrsh7th/nvim-compe'
 	let g:compe.documentation = v:true
 
 	let g:compe.source = {}
-	let g:compe.source.path = v:true
 	let g:compe.source.buffer = v:true
 	let g:compe.source.calc = v:true
 	let g:compe.source.nvim_lsp = v:true
 	let g:compe.source.nvim_lua = v:true
+	let g:compe.source.path = v:true
+	let g:compe.source.spell = v:true
 	let g:compe.source.ultisnips = v:true
 inoremap <silent><expr> <C-p>     compe#complete()
 inoremap <silent><expr> <C-y>     compe#confirm('<C-y>')

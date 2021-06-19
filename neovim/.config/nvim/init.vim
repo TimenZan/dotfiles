@@ -172,7 +172,7 @@ Plug 'romgrk/nvim-treesitter-context'
 Plug 'windwp/nvim-autopairs'
 Plug 'preservim/nerdcommenter'
 Plug 'tversteeg/registers.nvim'
-Plug 'chrisbra/matchit'
+Plug 'andymass/vim-matchup'
 " }}}
 " colorschemes {{{
 Plug 'tjdevries/colorbuddy.vim'

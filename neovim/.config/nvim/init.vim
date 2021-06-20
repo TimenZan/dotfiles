@@ -321,6 +321,32 @@ require'lspconfig'.bashls.setup({})
 require'lspconfig'.texlab.setup({})
 require'lspconfig'.clangd.setup({})
 
+local runtime_path = vim.split(package.path, ';')
+table.insert(runtime_path, "lua/?.lua")
+-- table.insert(runtime_path, "lua/?/init.vim")
+require'lspconfig'.sumneko_lua.setup({
+	cmd = {'lua-language-server', '-E', '/usr/share/lua-language-server/main.lua'};
+	settings = {
+		Lua = {
+			runtime = {
+				version = 'LuaJIT',
+				path = runtime_path,
+			},
+			diagnostics = {
+				globals = {'vim'},
+			},
+			workspace = {
+				-- Make the server aware of Neovim runtime files
+				library = vim.api.nvim_get_runtime_file("", true),
+			},
+			-- Do not send telemetry data containing a randomized but unique identifier
+			telemetry = {
+				enable = false,
+			},
+		},
+	},
+})
+
 local rust_opts = {
 	tools = {
 		autoSetHints = true, -- automatically set inlay hints

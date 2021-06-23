@@ -139,6 +139,11 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'mbbill/undotree'
 Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-bibtex.nvim' " TODO: set to use global `.bib`
+Plug 'nvim-telescope/telescope-symbols.nvim'
+Plug 'nvim-telescope/telescope-fzf-writer.nvim'
+Plug 'fhill2/telescope-ultisnips.nvim'
+Plug 'crispgm/telescope-heading.nvim'
 Plug 'camspiers/animate.vim'
 Plug 'camspiers/lens.vim'
 	let g:lens#width_resize_max = 100
@@ -263,24 +268,35 @@ vnoremap @ :norm@
 
 " :h vim.lsp.buf
 nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
+nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
+nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
 nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
-nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
 nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
-nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
 nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
 nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
 nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
 nnoremap <silent> g=    <cmd>lua vim.lsp.buf.formatting(nil)<CR>
 nnoremap <silent> ga    <cmd>lua vim.lsp.buf.code_action()<CR>
-nnoremap <silent> g[ <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
-nnoremap <silent> g] <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
+nnoremap <silent> g[    <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
+nnoremap <silent> g]    <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
 
-" Find files using Telescope command-line sugar.
-nnoremap <leader>ff <cmd>Telescope find_files<cr>
-nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-nnoremap <leader>fb <cmd>Telescope buffers<cr>
-nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+" bindings for nvim-telescope start with <leader>f
+nnoremap <leader>ff  <cmd>Telescope find_files<cr>
+nnoremap <leader>fb  <cmd>Telescope file_browser<cr>
+"nnoremap <leader>fg  <cmd>Telescope live_grep<cr>
+nnoremap <leader>fg  <cmd>lua require('telescope').extensions.fzf_writer.staged_grep()<cr>
+"nnoremap <leader>fb  <cmd>Telescope buffers<cr>
+nnoremap <leader>fh  <cmd>Telescope help_tags<cr>
+nnoremap <leader>fr  <cmd>Telescope lsp_references<cr>
+nnoremap <leader>fd  <cmd>Telescope lsp_workspace_diagnostics<cr>
+nnoremap <leader>fss <cmd>Telescope bibtex<cr>
+nnoremap <leader>fse <cmd>lua require('telescope.builtin').symbols{sources = {'emoji', 'kaomoji'}}<cr>
+nnoremap <leader>fsg <cmd>lua require('telescope.builtin').symbols{sources = {'gitmoji'}}<cr>
+nnoremap <leader>fsm <cmd>lua require('telescope.builtin').symbols{sources = {'math'}}<cr>
+nnoremap <leader>fsl <cmd>lua require('telescope.builtin').symbols{sources = {'latex'}}<cr>
+nnoremap <leader>fu  <cmd>Telescope ultisnips<cr>
+" TODO: add searching through dictionary file
 
 nnoremap <silent> <leader>rn <cmd>lua vim.lsp.buf.rename()<CR>
 
@@ -289,7 +305,7 @@ imap <silent> <c-p> <Plug>(completion_trigger)
 map <F3> g<c-g>
 map <F6> :setlocal spell! spelllang=en_us<CR>
 map <F10> :Goyo<CR>
-map <leader>f :Goyo \| set linebreak<CR>
+" map <leader>f :Goyo \| set linebreak<CR>
 inoremap <F10> <esc>:Goyo<CR>a
 
 " Use esc to exit terminal mode
@@ -301,7 +317,10 @@ tnoremap <Esc> <C-\><C-n>
 " {{{ Functions
 
 lua require'colorizer'.setup()
-lua require('tz.lsp')
+lua require'tz.lsp'
+lua require'telescope'.load_extension('heading')
+lua require'telescope'.load_extension("bibtex")
+lua require'telescope'.load_extension('ultisnips')
 
 " treesitter setup
 lua <<EOF

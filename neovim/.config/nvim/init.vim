@@ -50,7 +50,6 @@ Plug 'SirVer/ultisnips'
 	" let g:UltisnipsExpandTrigger="<tab>"
 	let g:UltisnipsJumpForwardTrigger='<c-b>'
 	let g:UltisnipsJumpBackwardTrigger='<c-z>'
-Plug 'prabirshrestha/asyncomplete-emoji.vim'
 if hostname() ==# 'arch-desktop'
 	Plug '~/development/plugins/snippets'
 else
@@ -119,7 +118,6 @@ Plug 'lervag/vimtex', { 'for': 'tex' }
 " Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
 	" let g:mkdp_auto_start = 1
 " config files
-Plug 'kovetskiy/sxhkd-vim'
 Plug 'mrk21/yaml-vim'
 " esoteric
 Plug 'shirk/vim-gas'
@@ -176,9 +174,10 @@ Plug 'editorconfig/editorconfig-vim' " allows multiple style settings based on f
 Plug 'wellle/targets.vim'
 Plug 'romgrk/nvim-treesitter-context'
 Plug 'windwp/nvim-autopairs'
-Plug 'preservim/nerdcommenter'
+" Plug 'preservim/nerdcommenter'
 Plug 'tversteeg/registers.nvim'
 Plug 'andymass/vim-matchup'
+	let g:matchup_matchparen_offscreen = {}
 " }}}
 " colorschemes {{{
 Plug 'tjdevries/colorbuddy.vim'
@@ -207,7 +206,6 @@ Plug '~/secrets/vim_credentials'
 call plug#end()
 
 colorscheme ayu
-
 
 " }}}
 

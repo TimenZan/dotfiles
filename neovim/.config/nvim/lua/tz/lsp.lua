@@ -80,3 +80,4 @@ local rust_opts = {
 require'rust-tools'.setup(rust_opts)
 
 require'nvim-autopairs'.setup()
+require'lsp_signature'.on_attach()

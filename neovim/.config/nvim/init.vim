@@ -289,6 +289,7 @@ nnoremap <leader>fg  <cmd>lua require('telescope').extensions.fzf_writer.staged_
 nnoremap <leader>fh  <cmd>Telescope help_tags<cr>
 nnoremap <leader>fr  <cmd>Telescope lsp_references<cr>
 nnoremap <leader>fd  <cmd>Telescope lsp_workspace_diagnostics<cr>
+nnoremap <leader>fa  <cmd>Telescope lsp_code_actions<cr>
 nnoremap <leader>fss <cmd>Telescope bibtex<cr>
 nnoremap <leader>fse <cmd>lua require('telescope.builtin').symbols{sources = {'emoji', 'kaomoji'}}<cr>
 nnoremap <leader>fsg <cmd>lua require('telescope.builtin').symbols{sources = {'gitmoji'}}<cr>

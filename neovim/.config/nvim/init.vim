@@ -264,24 +264,26 @@ endif
 
 " Bindings {{{
 
-" Make Y behave like other capitals
+" Make `Y` behave like other capitals
 nnoremap Y y$
+" Make `@` work on multiple lines
 vnoremap @ :norm@
 
 " :h vim.lsp.buf
-nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
-nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
-nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
-nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
-nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
-nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
-nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
-nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
-nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
-nnoremap <silent> g=    <cmd>lua vim.lsp.buf.formatting(nil)<CR>
-nnoremap <silent> ga    <cmd>lua vim.lsp.buf.code_action()<CR>
-nnoremap <silent> g[    <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
-nnoremap <silent> g]    <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
+nnoremap <silent> gd         <cmd>lua vim.lsp.buf.declaration()<CR>
+nnoremap <silent> gD         <cmd>lua vim.lsp.buf.implementation()<CR>
+nnoremap <silent> 1gD        <cmd>lua vim.lsp.buf.type_definition()<CR>
+nnoremap <silent> <c-]>      <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> K          <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <silent> <c-k>      <cmd>lua vim.lsp.buf.signature_help()<CR>
+nnoremap <silent> gr         <cmd>lua vim.lsp.buf.references()<CR>
+nnoremap <silent> g0         <cmd>lua vim.lsp.buf.document_symbol()<CR>
+nnoremap <silent> gW         <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
+nnoremap <silent> g=         <cmd>lua vim.lsp.buf.formatting(nil)<CR>
+nnoremap <silent> ga         <cmd>lua vim.lsp.buf.code_action()<CR>
+nnoremap <silent> g[         <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
+nnoremap <silent> g]         <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
+nnoremap <silent> <leader>rn <cmd>lua vim.lsp.buf.rename()<CR>
 
 " bindings for nvim-telescope start with <leader>f
 nnoremap <leader>ff  <cmd>Telescope find_files<cr>
@@ -301,13 +303,9 @@ nnoremap <leader>fsl <cmd>lua require('telescope.builtin').symbols{sources = {'l
 nnoremap <leader>fu  <cmd>Telescope ultisnips<cr>
 " TODO: add searching through dictionary file
 
-nnoremap <silent> <leader>rn <cmd>lua vim.lsp.buf.rename()<CR>
-
-imap <silent> <c-p> <Plug>(completion_trigger)
-
-map <F3> g<c-g>
-map <F6> :setlocal spell! spelllang=en_us<CR>
-map <F10> :Goyo<CR>
+noremap <F3> g<c-g>
+noremap <F6> :setlocal spell! spelllang=en_us<CR>
+noremap <F10> :Goyo<CR>
 " map <leader>f :Goyo \| set linebreak<CR>
 inoremap <F10> <esc>:Goyo<CR>a
 

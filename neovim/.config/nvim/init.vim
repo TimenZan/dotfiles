@@ -157,8 +157,8 @@ Plug 'lukas-reineke/indent-blankline.nvim', { 'branch': 'lua' }
 " }}}
 " quality of life tools {{{
 Plug 'junegunn/vim-easy-align'
-	nmap ga <Plug>(EasyAlign)
-	xmap ga <Plug>(EasyAlign)
+	nmap <leader>ga <Plug>(EasyAlign)
+	xmap <leader>ga <Plug>(EasyAlign)
 Plug 'junegunn/goyo.vim', { 'on': 'Goyo' } " nice prose writing
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-speeddating'

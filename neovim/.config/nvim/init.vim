@@ -221,11 +221,13 @@ set formatoptions=jcroqln1
 set hidden
 set ignorecase | set smartcase
 set incsearch
+set lazyredraw
 set linebreak
 set mouse=a
 set noshowmode
 set nowrap
 set scrolloff=5
+set shiftround
 set shortmess+=c
 set sidescrolloff=5
 set signcolumn=yes

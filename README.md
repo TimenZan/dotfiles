@@ -15,5 +15,5 @@ git clone git@gitlab.com:TimenZan/dotfiles.git ~/.dotfiles
 Or you can only use the configs that you want to use
 ```sh
 cd ~/.dotfiles
-stow neovim zsh # and any other programs
+stow neovim starship # and any other programs
 ```

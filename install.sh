@@ -1,3 +1,3 @@
 #!/usr/bin/env sh
 
-stow bash compton i3 kitty neovim terminator zsh xmonad starship
+stow i3 neovim xmonad starship

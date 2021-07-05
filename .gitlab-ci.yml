@@ -8,7 +8,7 @@ shellcheck:
   - apk update
   - apk add git
   script:
-  - git ls-files --exclude='*.sh' --ignored | xargs shellcheck
+  - git ls-files --exclude='*.sh' --ignored --cached | xargs shellcheck
 
 vint:
   image: renovate/pip
@@ -16,5 +16,5 @@ vint:
   before_script:
   - pip install vim-vint --user
   script:
-  - git ls-files --exclude='*.vim' --ignored | xargs /home/ubuntu/.local/bin/vint -V
+  - git ls-files --exclude='*.vim' --ignored --cached | xargs /home/ubuntu/.local/bin/vint -V
 

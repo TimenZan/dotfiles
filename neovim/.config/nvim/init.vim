@@ -148,7 +148,7 @@ Plug 'camspiers/animate.vim'
 Plug 'camspiers/lens.vim'
 	let g:lens#width_resize_max = 100
 	let g:lens#disabled_filetypes = ['nerdtree', 'fzf']
-Plug 'lukas-reineke/indent-blankline.nvim', { 'branch': 'lua' }
+Plug 'lukas-reineke/indent-blankline.nvim'
 	let g:indentLine_char = '▏'
 	let g:indent_blankline_use_treesitter = v:true
 	let g:indentLine_fileTypeExclude = ['help']

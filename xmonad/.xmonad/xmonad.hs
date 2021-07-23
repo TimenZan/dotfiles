@@ -64,6 +64,7 @@ myWorkspaces =
 --
 myLayout
   = onWorkspace "3:chat" (Mirror (Tall 1 (3 / 100) (1 / 2))) $
+    onWorkspace "9" (noBorders (fullscreenFull Full)) $
     avoidStruts
       (ThreeColMid 1 (3 / 100) (1 / 2) ||| Tall 1 (3 / 100) (1 / 2) |||
          Mirror (Tall 1 (3 / 100) (1 / 2))

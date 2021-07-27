@@ -79,6 +79,19 @@ local rust_opts = {
 }
 require'rust-tools'.setup(rust_opts)
 
+require("flutter-tools").setup({
+	widget_guides = {
+		enabled = true,
+	},
+	closing_tags = {
+		prefix = ">=> ",
+	},
+	dev_tools = {
+		autostart = false,
+		auto_open_browser = false,
+	}
+})
+
 require'nvim-autopairs'.setup()
 require'lsp_signature'.on_attach()
 require'lspkind'.init({

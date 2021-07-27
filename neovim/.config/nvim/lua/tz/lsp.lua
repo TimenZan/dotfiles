@@ -93,7 +93,7 @@ require("flutter-tools").setup({
 })
 
 require'nvim-autopairs'.setup()
-require'lsp_signature'.on_attach()
+require'lsp_signature'.setup()
 require'lspkind'.init({
 	-- enables text annotations
 	--

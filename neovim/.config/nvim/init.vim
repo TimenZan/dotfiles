@@ -103,7 +103,8 @@ Plug 'neovimhaskell/haskell-vim'
 Plug 'uiiaoo/java-syntax.vim'
 " dart
 Plug 'dart-lang/dart-vim-plugin', { 'for': 'dart' }
-	let dart_format_on_save=1
+	let g:dart_format_on_save = 1
+	let g:dart_style_guide = 2
 Plug 'akinsho/flutter-tools.nvim'
 " (la)tex
 Plug 'KeitaNakamura/tex-conceal.vim', { 'for': 'tex' }
@@ -301,7 +302,6 @@ nnoremap <leader>fsg <cmd>lua require('telescope.builtin').symbols{sources = {'g
 nnoremap <leader>fsm <cmd>lua require('telescope.builtin').symbols{sources = {'math'}}<cr>
 nnoremap <leader>fsl <cmd>lua require('telescope.builtin').symbols{sources = {'latex'}}<cr>
 nnoremap <leader>fu  <cmd>Telescope ultisnips<cr>
-nnoremap <leader>fc  <cmd>Telescope flutter commands<cr>
 " TODO: add searching through dictionary file
 
 noremap <F3> g<c-g>
@@ -323,7 +323,6 @@ lua require'tz.lsp'
 lua require'telescope'.load_extension('heading')
 lua require'telescope'.load_extension("bibtex")
 lua require'telescope'.load_extension('ultisnips')
-lua require("telescope").load_extension("flutter")
 
 " treesitter setup
 lua <<EOF

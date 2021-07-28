@@ -40,9 +40,6 @@ rust_capabilities.textDocument.completion.completionItem.resolveSupport = {
 		'additionalTextEdits',
 	}
 }
--- require'lspconfig'.rust_analyzer.setup({
--- 	capabilities = rust_capabilities,
--- })
 
 local rust_opts = {
 	tools = {
@@ -79,6 +76,15 @@ local rust_opts = {
 }
 require'rust-tools'.setup(rust_opts)
 
+local flutter_capabilities = vim.lsp.protocol.make_client_capabilities()
+flutter_capabilities.textDocument.completion.completionItem.snippetSupport = true
+flutter_capabilities.textDocument.completion.completionItem.resolveSupport = {
+	properties = {
+		'documentation',
+		'detail',
+		'additionalTextEdits',
+	}
+}
 require("flutter-tools").setup({
 	widget_guides = {
 		enabled = true,
@@ -89,7 +95,10 @@ require("flutter-tools").setup({
 	dev_tools = {
 		autostart = false,
 		auto_open_browser = false,
-	}
+	},
+	lsp = {
+		capabilities = flutter_capabilities,
+	}, -- options for dartls
 })
 
 require'nvim-autopairs'.setup()

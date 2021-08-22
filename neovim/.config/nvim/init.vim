@@ -131,6 +131,7 @@ Plug 'preservim/nerdTree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ryanoasis/vim-devicons'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'JoosepAlviste/nvim-ts-context-commentstring'
 Plug 'vim-airline/vim-airline'
 	let g:airline_powerline_fonts=1
 	let g:airline#extensions#whitespace#mised_indent_algo=2
@@ -332,6 +333,9 @@ lua require'range-highlight'.setup{}
 " treesitter setup
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
+	context_commentstring = {
+		enable = true
+	},
 	ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
 	--ignore_install = { "javascript" }, -- List of parsers to ignore installing
 	highlight = {

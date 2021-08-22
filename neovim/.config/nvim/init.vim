@@ -263,6 +263,8 @@ if !exists('g:vscode')
 	augroup END
 endif
 
+let g:markdown_fenced_languages = ['html', 'python', 'ruby', 'vim', 'rust', 'javascript']
+
 " }}}
 
 " Bindings {{{

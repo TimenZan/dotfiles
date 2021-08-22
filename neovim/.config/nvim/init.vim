@@ -154,6 +154,8 @@ Plug 'lukas-reineke/indent-blankline.nvim'
 	let g:indent_blankline_use_treesitter = v:true
 	let g:indentLine_fileTypeExclude = ['help']
 	let g:indent_blankline_show_current_context = v:false
+Plug 'winston0410/cmd-parser.nvim'
+Plug 'winston0410/range-highlight.nvim'
 
 " }}}
 " quality of life tools {{{
@@ -323,6 +325,7 @@ lua require'tz.lsp'
 lua require'telescope'.load_extension('heading')
 lua require'telescope'.load_extension("bibtex")
 lua require'telescope'.load_extension('ultisnips')
+lua require'range-highlight'.setup{}
 
 " treesitter setup
 lua <<EOF

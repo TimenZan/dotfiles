@@ -16,46 +16,26 @@ Plug 'nvim-lua/popup.nvim'
 " lsp {{{
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/lsp_extensions.nvim'
-Plug 'hrsh7th/nvim-compe'
-	let g:compe = {}
-	let g:compe.enabled = v:true
-	let g:compe.autocomplete = v:true
-	let g:compe.debug = v:false
-	let g:compe.min_length = 1
-	let g:compe.preselect = 'enable'
-	let g:compe.throttle_time = 80
-	let g:compe.source_timeout = 200
-	let g:compe.incomplete_delay = 400
-	let g:compe.max_abbr_width = 100
-	let g:compe.max_kind_width = 100
-	let g:compe.max_menu_width = 100
-	let g:compe.documentation = v:true
-
-	let g:compe.source = {}
-	let g:compe.source.buffer = v:true
-	let g:compe.source.calc = v:true
-	let g:compe.source.nvim_lsp = v:true
-	let g:compe.source.nvim_lua = v:true
-	let g:compe.source.path = v:true
-	let g:compe.source.spell = v:true
-	let g:compe.source.ultisnips = v:true
-inoremap <silent><expr> <C-p>     compe#complete()
-inoremap <silent><expr> <C-y>     compe#confirm('<C-y>')
-inoremap <silent><expr> <C-e>     compe#close('<C-e>')
-" inoremap <silent><expr> <C-n>     compe#scroll({ 'delta': +4 })
-" inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'L3MON4D3/LuaSnip'
+Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'ray-x/lsp_signature.nvim'
 Plug 'onsails/lspkind-nvim'
 Plug 'kosayoda/nvim-lightbulb'
-Plug 'SirVer/ultisnips'
-	" let g:UltisnipsExpandTrigger="<tab>"
-	let g:UltisnipsJumpForwardTrigger='<c-b>'
-	let g:UltisnipsJumpBackwardTrigger='<c-z>'
+" Plug 'SirVer/ultisnips'
+" 	" let g:UltisnipsExpandTrigger="<tab>"
+" 	let g:UltisnipsJumpForwardTrigger='<c-b>'
+" 	let g:UltisnipsJumpBackwardTrigger='<c-z>'
 if hostname() ==# 'arch-desktop'
 	Plug '~/development/plugins/snippets'
 else
 	Plug 'TimenZan/my-snippets'
 endif
+Plug 'rafamadriz/friendly-snippets'
+Plug 'Nash0x7E2/awesome-flutter-snippets'
 Plug 'weilbith/nvim-lsp-smag'
 Plug 'dense-analysis/ale'
 	let g:ale_linters = {'rust': ['analyzer', 'cargo', 'rustfmt']}
@@ -145,7 +125,6 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-bibtex.nvim' " TODO: set to use global `.bib`
 Plug 'nvim-telescope/telescope-symbols.nvim'
 Plug 'nvim-telescope/telescope-fzf-writer.nvim'
-Plug 'fhill2/telescope-ultisnips.nvim'
 Plug 'crispgm/telescope-heading.nvim'
 Plug 'camspiers/animate.vim'
 Plug 'camspiers/lens.vim'
@@ -306,7 +285,6 @@ nnoremap <leader>fse <cmd>lua require('telescope.builtin').symbols{sources = {'e
 nnoremap <leader>fsg <cmd>lua require('telescope.builtin').symbols{sources = {'gitmoji'}}<cr>
 nnoremap <leader>fsm <cmd>lua require('telescope.builtin').symbols{sources = {'math'}}<cr>
 nnoremap <leader>fsl <cmd>lua require('telescope.builtin').symbols{sources = {'latex'}}<cr>
-nnoremap <leader>fu  <cmd>Telescope ultisnips<cr>
 " TODO: add searching through dictionary file
 
 noremap <F3> g<c-g>
@@ -325,10 +303,11 @@ tnoremap <Esc> <C-\><C-n>
 
 lua require'colorizer'.setup()
 lua require'tz.lsp'
+lua require'tz.completion'
 lua require'telescope'.load_extension('heading')
 lua require'telescope'.load_extension("bibtex")
-lua require'telescope'.load_extension('ultisnips')
 lua require'range-highlight'.setup{}
+lua require("luasnip/loaders/from_vscode").lazy_load()
 
 " treesitter setup
 lua <<EOF

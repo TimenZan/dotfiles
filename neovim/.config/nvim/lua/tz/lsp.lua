@@ -5,6 +5,22 @@ require'lspconfig'.bashls.setup({})
 require'lspconfig'.texlab.setup({})
 require'lspconfig'.clangd.setup({})
 
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.documentationFormat = { 'markdown', 'plaintext' }
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+capabilities.textDocument.completion.completionItem.preselectSupport = true
+capabilities.textDocument.completion.completionItem.insertReplaceSupport = true
+capabilities.textDocument.completion.completionItem.labelDetailsSupport = true
+capabilities.textDocument.completion.completionItem.deprecatedSupport = true
+capabilities.textDocument.completion.completionItem.commitCharactersSupport = true
+capabilities.textDocument.completion.completionItem.tagSupport = { valueSet = { 1 } }
+capabilities.textDocument.completion.completionItem.resolveSupport = {
+  properties = {
+    'documentation',
+    'detail',
+    'additionalTextEdits',
+  },
+}
 local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, "lua/?.lua")
 -- table.insert(runtime_path, "lua/?/init.vim")
@@ -30,16 +46,6 @@ require'lspconfig'.sumneko_lua.setup({
 		},
 	},
 })
-
-local rust_capabilities = vim.lsp.protocol.make_client_capabilities()
-rust_capabilities.textDocument.completion.completionItem.snippetSupport = true
-rust_capabilities.textDocument.completion.completionItem.resolveSupport = {
-	properties = {
-		'documentation',
-		'detail',
-		'additionalTextEdits',
-	}
-}
 
 local rust_opts = {
 	tools = {
@@ -71,20 +77,11 @@ local rust_opts = {
 		},
 	},
 	server = {
-		capabilities = rust_capabilities,
+		capabilities = capabilities,
 	}, -- options for rust-analyzer
 }
 require'rust-tools'.setup(rust_opts)
 
-local flutter_capabilities = vim.lsp.protocol.make_client_capabilities()
-flutter_capabilities.textDocument.completion.completionItem.snippetSupport = true
-flutter_capabilities.textDocument.completion.completionItem.resolveSupport = {
-	properties = {
-		'documentation',
-		'detail',
-		'additionalTextEdits',
-	}
-}
 require("flutter-tools").setup({
 	widget_guides = {
 		enabled = true,
@@ -97,56 +94,11 @@ require("flutter-tools").setup({
 		auto_open_browser = false,
 	},
 	lsp = {
-		capabilities = flutter_capabilities,
+		capabilities = capabilities,
 	}, -- options for dartls
 })
 
 require'nvim-autopairs'.setup()
-require("nvim-autopairs.completion.compe").setup({
-  map_cr = true, --  map <CR> on insert mode
-  map_complete = true -- it will auto insert `(` after select function or method item
-})
-require'lsp_signature'.setup()
-require'lspkind'.init({
-	-- enables text annotations
-	--
-	-- default: true
-	with_text = true,
-
-	-- default symbol map
-	-- can be either 'default' or
-	-- 'codicons' for codicon preset (requires vscode-codicons font installed)
-	--
-	-- default: 'default'
-	preset = 'default',
-
-	-- override preset symbols
-	--
-	-- default: {}
-	symbol_map = {
-		Text = '',
-		Method = 'ƒ',
-		Function = '',
-		Constructor = '',
-		Variable = '',
-		Class = '',
-		Interface = 'ﰮ',
-		Module = '',
-		Property = '',
-		Unit = '',
-		Value = '',
-		Enum = '了',
-		Keyword = '',
-		Snippet = '﬌',
-		Color = '',
-		File = '',
-		Folder = '',
-		EnumMember = '',
-		Constant = '',
-		Struct = ''
-	},
-})
-
 vim.cmd [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]]
 
 require'nvim-lightbulb'.update_lightbulb {

@@ -257,6 +257,10 @@ nnoremap Y y$
 " Make `@` work on multiple lines
 vnoremap @ :norm@
 
+" center screen and unfold on search
+nnoremap <silent> n nzzzv
+nnoremap <silent> N Nzzzv
+
 " :h vim.lsp.buf
 nnoremap <silent> gd         <cmd>lua vim.lsp.buf.declaration()<CR>
 nnoremap <silent> gD         <cmd>lua vim.lsp.buf.implementation()<CR>

@@ -113,11 +113,10 @@ Plug 'liuchengxu/vista.vim'
 Plug 'preservim/nerdTree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ryanoasis/vim-devicons'
+Plug 'kyazdani42/nvim-web-devicons'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'JoosepAlviste/nvim-ts-context-commentstring'
-Plug 'vim-airline/vim-airline'
-	let g:airline_powerline_fonts=1
-	let g:airline#extensions#whitespace#mised_indent_algo=2
+Plug 'hoob3rt/lualine.nvim'
 Plug 'norcalli/nvim-colorizer.lua'
 Plug 'p00f/nvim-ts-rainbow'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -227,7 +226,6 @@ require('material').setup({
 	custom_highlights = {} -- Overwrite highlights with your own
 })
 EOF
-
 colorscheme material
 
 " }}}
@@ -346,6 +344,7 @@ tnoremap <Esc> <C-\><C-n>
 lua require'colorizer'.setup()
 lua require'tz.lsp'
 lua require'tz.completion'
+lua require'tz.line'
 lua require'telescope'.load_extension('heading')
 lua require'telescope'.load_extension("bibtex")
 lua require'range-highlight'.setup{}

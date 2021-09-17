@@ -15,11 +15,11 @@ capabilities.textDocument.completion.completionItem.deprecatedSupport = true
 capabilities.textDocument.completion.completionItem.commitCharactersSupport = true
 capabilities.textDocument.completion.completionItem.tagSupport = { valueSet = { 1 } }
 capabilities.textDocument.completion.completionItem.resolveSupport = {
-  properties = {
-    'documentation',
-    'detail',
-    'additionalTextEdits',
-  },
+	properties = {
+		'documentation',
+		'detail',
+		'additionalTextEdits',
+	},
 }
 local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, "lua/?.lua")
@@ -76,9 +76,17 @@ local rust_opts = {
 			},
 		},
 	},
-	server = {
-		capabilities = capabilities,
-	}, -- options for rust-analyzer
+	-- server = {
+	-- 	capabilities = capabilities,
+	-- 	settings = {
+	-- 		["rust-analyzer"] = {
+	-- 			-- enable clippy on save
+	-- 			checkOnSave = {
+	-- 				command = "clippy"
+	-- 			},
+	-- 		}
+	-- 	}
+	-- }, -- options for rust-analyzer
 }
 require'rust-tools'.setup(rust_opts)
 

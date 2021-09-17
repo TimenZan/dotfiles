@@ -39,20 +39,6 @@ endif
 Plug 'rafamadriz/friendly-snippets'
 Plug 'Nash0x7E2/awesome-flutter-snippets'
 Plug 'weilbith/nvim-lsp-smag'
-Plug 'dense-analysis/ale'
-	let g:ale_linters = {'rust': ['analyzer', 'cargo', 'rustfmt']}
-	let g:ale_linters.cpp = ['gcc']
-	let g:ale_linters.haskell = ['stack-ghc-mod', 'hlint']
-	let g:ale_echo_msg_error_str = 'E'
-	let g:ale_echo_msg_warning_str = 'W'
-	let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
-	let g:ale_rust_analyzer_config = {
-				\ 'diagnostics': { 'disabled': ['unresolved-import'] },
-				\ 'cargo': { 'loadOutDirsFromCheck': v:true },
-				\ 'procMacro': { 'enable': v:true },
-				\ 'checkOnSave': { 'command': 'clippy', 'enable': v:true }
-				\ }
-" }}}
 " vcs {{{
 " git
 Plug 'tpope/vim-fugitive'

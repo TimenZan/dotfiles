@@ -6,6 +6,7 @@
 "╚═╝╚═╝  ╚═══╝╚═╝   ╚═╝╚═╝  ╚═══╝  ╚═╝╚═╝     ╚═╝
 
 let mapleader = ' '
+let g:python3_host_prog = '/usr/bin/python3'
 
 " Plugins {{{
 call plug#begin('~/.config/nvim/plugged')
@@ -39,6 +40,7 @@ endif
 Plug 'rafamadriz/friendly-snippets'
 Plug 'Nash0x7E2/awesome-flutter-snippets'
 Plug 'weilbith/nvim-lsp-smag'
+" }}}
 " vcs {{{
 " git
 Plug 'tpope/vim-fugitive'
@@ -145,6 +147,7 @@ Plug 'editorconfig/editorconfig-vim' " allows multiple style settings based on f
 	let g:EditorConfig_exclude_patterns=['scp://.\*']
 Plug 'wellle/targets.vim'
 Plug 'romgrk/nvim-treesitter-context'
+Plug 'danth/pathfinder.vim'
 Plug 'windwp/nvim-autopairs'
 " Plug 'preservim/nerdcommenter'
 Plug 'tversteeg/registers.nvim'
@@ -318,6 +321,7 @@ noremap <F6> :setlocal spell! spelllang=en_us<CR>
 noremap <F10> :Goyo<CR>
 " map <leader>f :Goyo \| set linebreak<CR>
 inoremap <F10> <esc>:Goyo<CR>a
+nnoremap <leader>pe <cmd>PathfinderExplain<cr>
 
 " Use esc to exit terminal mode
 tnoremap <Esc> <C-\><C-n>

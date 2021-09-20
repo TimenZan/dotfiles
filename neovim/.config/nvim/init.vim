@@ -126,7 +126,7 @@ Plug 'lukas-reineke/indent-blankline.nvim'
 	let g:indent_blankline_show_current_context = v:false
 Plug 'winston0410/cmd-parser.nvim'
 Plug 'winston0410/range-highlight.nvim'
-
+Plug 'kassio/neoterm'
 " }}}
 " quality of life tools {{{
 Plug 'junegunn/vim-easy-align'

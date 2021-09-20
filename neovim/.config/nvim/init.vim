@@ -50,6 +50,7 @@ Plug 'shumphrey/fugitive-gitlab.vim'
 Plug 'lambdalisue/gina.vim' " either remove or learn to use
 Plug 'junegunn/gv.vim'
 Plug 'airblade/vim-gitgutter'
+Plug 'rhysd/conflict-marker.vim'
 Plug 'rhysd/git-messenger.vim'
 	let g:git_messenger_no_default_mappings=v:true
 	nmap <leader>gm <Plug>(git-messenger)
@@ -151,6 +152,7 @@ Plug 'danth/pathfinder.vim'
 Plug 'windwp/nvim-autopairs'
 " Plug 'preservim/nerdcommenter'
 Plug 'tversteeg/registers.nvim'
+Plug 'wsdjeg/vim-fetch'
 Plug 'andymass/vim-matchup'
 	let g:matchup_matchparen_offscreen = {}
 " }}}

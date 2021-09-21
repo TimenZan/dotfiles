@@ -40,6 +40,7 @@ endif
 Plug 'rafamadriz/friendly-snippets'
 Plug 'Nash0x7E2/awesome-flutter-snippets'
 Plug 'weilbith/nvim-lsp-smag'
+Plug 'folke/trouble.nvim'
 " }}}
 " vcs {{{
 " git
@@ -313,6 +314,14 @@ nnoremap <leader>fsm <cmd>lua require('telescope.builtin').symbols{sources = {'m
 nnoremap <leader>fsl <cmd>lua require('telescope.builtin').symbols{sources = {'latex'}}<cr>
 " TODO: add searching through dictionary file
 
+" bindings for trouble.nvim
+nnoremap <leader>dx <cmd>TroubleToggle<cr>
+nnoremap <leader>dw <cmd>TroubleToggle lsp_workspace_diagnostics<cr>
+nnoremap <leader>dd <cmd>TroubleToggle lsp_document_diagnostics<cr>
+nnoremap <leader>dq <cmd>TroubleToggle quickfix<cr>
+nnoremap <leader>dl <cmd>TroubleToggle loclist<cr>
+nnoremap <leader>dr <cmd>TroubleToggle lsp_references<cr>
+
 noremap <F3> g<c-g>
 noremap <F6> :setlocal spell! spelllang=en_us<CR>
 noremap <F10> :Goyo<CR>
@@ -328,6 +337,7 @@ tnoremap <Esc> <C-\><C-n>
 
 " {{{ Functions
 
+
 lua require'colorizer'.setup()
 lua require'tz.lsp'
 lua require'tz.completion'
@@ -336,6 +346,22 @@ lua require'telescope'.load_extension('heading')
 lua require'telescope'.load_extension("bibtex")
 lua require'range-highlight'.setup{}
 lua require("luasnip/loaders/from_vscode").lazy_load()
+
+" telescope config
+lua <<EOF
+local actions = require("telescope.actions")
+local trouble = require("trouble.providers.telescope")
+local telescope = require("telescope")
+
+telescope.setup {
+  defaults = {
+    mappings = {
+      i = { ["<c-t>"] = trouble.open_with_trouble },
+      n = { ["<c-t>"] = trouble.open_with_trouble },
+    },
+  },
+}
+EOF
 
 " treesitter setup
 lua <<EOF

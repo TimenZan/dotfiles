@@ -183,6 +183,7 @@ Plug 'marko-cerovac/material.nvim'
 Plug 'tweekmonster/startuptime.vim'
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 " }}}
+Plug '~/development/nvim-fatal'
 Plug '~/secrets/vim_credentials'
 call plug#end()
 

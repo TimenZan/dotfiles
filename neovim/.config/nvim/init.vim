@@ -257,7 +257,6 @@ augroup numbertoggle
 augroup END
 
 au TextYankPost * silent! lua vim.highlight.on_yank { timeout = 500 }
-autocmd BufWrite *.lua call LuaFormat()
 
 " trigger `autoread` when files changes on disk
 " don't do this in vscode, as this breaks

@@ -26,6 +26,9 @@ table.insert(runtime_path, "lua/?.lua")
 -- table.insert(runtime_path, "lua/?/init.vim")
 require'lspconfig'.sumneko_lua.setup({
 	cmd = {'lua-language-server', '-E', '/usr/share/lua-language-server/main.lua'};
+	on_attach = function(client, bufnr)
+		require "lsp_signature".on_attach()
+	end,
 	settings = {
 		Lua = {
 			runtime = {

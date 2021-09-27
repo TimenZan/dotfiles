@@ -64,6 +64,8 @@ Plug 'rust-lang/rust.vim'
 Plug 'simrat39/rust-tools.nvim'
 " haskell
 Plug 'alx741/vim-stylishask'
+" lua
+Plug 'andrejlevkovitch/vim-lua-format'
 Plug 'neovimhaskell/haskell-vim'
 	let g:haskell_enable_quantification = 1
 	let g:haskell_enable_recursivedo = 1
@@ -254,6 +256,7 @@ augroup numbertoggle
 augroup END
 
 au TextYankPost * silent! lua vim.highlight.on_yank { timeout = 500 }
+autocmd BufWrite *.lua call LuaFormat()
 
 " trigger `autoread` when files changes on disk
 " don't do this in vscode, as this breaks

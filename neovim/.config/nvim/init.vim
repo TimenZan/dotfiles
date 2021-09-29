@@ -131,6 +131,8 @@ Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'winston0410/cmd-parser.nvim'
 Plug 'winston0410/range-highlight.nvim'
 Plug 'kassio/neoterm'
+Plug 'romgrk/nvim-treesitter-context'
+Plug 'haringsrob/nvim_context_vt'
 " }}}
 " quality of life tools {{{
 Plug 'junegunn/vim-easy-align'
@@ -150,7 +152,6 @@ Plug 'RRethy/vim-illuminate'
 Plug 'editorconfig/editorconfig-vim' " allows multiple style settings based on filetype
 	let g:EditorConfig_exclude_patterns=['scp://.\*']
 Plug 'wellle/targets.vim'
-Plug 'romgrk/nvim-treesitter-context'
 Plug 'danth/pathfinder.vim'
 Plug 'windwp/nvim-autopairs'
 " Plug 'preservim/nerdcommenter'

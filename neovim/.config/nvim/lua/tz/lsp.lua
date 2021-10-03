@@ -69,18 +69,16 @@ local rust_opts = {
                 {"╰", "FloatBorder"}, {"│", "FloatBorder"}
             }
         }
-    }
-    -- server = {
-    -- 	capabilities = capabilities,
-    -- 	settings = {
-    -- 		["rust-analyzer"] = {
-    -- 			-- enable clippy on save
-    -- 			checkOnSave = {
-    -- 				command = "clippy"
-    -- 			},
-    -- 		}
-    -- 	}
-    -- }, -- options for rust-analyzer
+    },
+    server = {
+        capabilities = capabilities,
+        settings = {
+            ["rust-analyzer"] = {
+                -- enable clippy on save
+                checkOnSave = {command = "clippy"}
+            }
+        }
+    } -- options for rust-analyzer
 }
 require'rust-tools'.setup(rust_opts)
 

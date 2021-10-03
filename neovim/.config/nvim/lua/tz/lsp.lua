@@ -4,6 +4,7 @@ require'lspconfig'.bashls.setup({})
 require'lspconfig'.texlab.setup({})
 require'lspconfig'.clangd.setup({})
 require'lspconfig'.pyright.setup({})
+require'lspconfig'.jedi_language_server.setup({})
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.documentationFormat = {
@@ -176,4 +177,3 @@ require'trouble'.setup {
     },
     use_lsp_diagnostic_signs = false -- enabling this will use the signs defined in your lsp client
 }
-

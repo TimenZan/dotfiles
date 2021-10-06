@@ -1,36 +1,23 @@
-require'lspconfig'.vimls.setup({})
-require'lspconfig'.yamlls.setup({})
-require'lspconfig'.bashls.setup({})
-require'lspconfig'.texlab.setup({})
-require'lspconfig'.clangd.setup({})
-require'lspconfig'.pyright.setup({})
-require'lspconfig'.jedi_language_server.setup({})
+local servers = {
+    'vimls', 'yamlls', 'bashls', 'texlab', 'clangd', 'pyright',
+    'jedi_language_server'
+}
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.documentationFormat = {
-    'markdown', 'plaintext'
-}
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-capabilities.textDocument.completion.completionItem.preselectSupport = true
-capabilities.textDocument.completion.completionItem.insertReplaceSupport = true
-capabilities.textDocument.completion.completionItem.labelDetailsSupport = true
-capabilities.textDocument.completion.completionItem.deprecatedSupport = true
-capabilities.textDocument.completion.completionItem.commitCharactersSupport =
-    true
-capabilities.textDocument.completion.completionItem.tagSupport = {
-    valueSet = {1}
-}
-capabilities.textDocument.completion.completionItem.resolveSupport = {
-    properties = {'documentation', 'detail', 'additionalTextEdits'}
-}
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp
+                                                                     .protocol
+                                                                     .make_client_capabilities())
+for _, server in pairs(servers) do
+    require'lspconfig'[server].setup {capabilities = capabilities}
+end
+
 local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, "lua/?.lua")
--- table.insert(runtime_path, "lua/?/init.vim")
-require'lspconfig'.sumneko_lua.setup({
+require'lspconfig'.sumneko_lua.setup {
+    capabilities = capabilities,
     cmd = {
         'lua-language-server', '-E', '/usr/share/lua-language-server/main.lua'
     },
-    on_attach = function(client, bufnr) require"lsp_signature".on_attach() end,
+    on_attach = function(_, _) require'lsp_signature'.on_attach() end,
     settings = {
         Lua = {
             runtime = {version = 'LuaJIT', path = runtime_path},
@@ -43,7 +30,7 @@ require'lspconfig'.sumneko_lua.setup({
             telemetry = {enable = false}
         }
     }
-})
+}
 
 local rust_opts = {
     tools = {

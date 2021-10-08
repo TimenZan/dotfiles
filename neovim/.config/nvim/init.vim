@@ -101,7 +101,6 @@ Plug 'shirk/vim-gas'
 Plug 'CaffeineViking/vim-glsl'
 " }}}
 " UI {{{
-Plug 'liuchengxu/vista.vim'
 Plug 'preservim/nerdTree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ryanoasis/vim-devicons'

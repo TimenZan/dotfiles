@@ -116,7 +116,7 @@ Plug 'mbbill/undotree'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-bibtex.nvim' " TODO: set to use global `.bib`
 Plug 'nvim-telescope/telescope-symbols.nvim'
-Plug 'nvim-telescope/telescope-fzf-writer.nvim'
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 Plug 'crispgm/telescope-heading.nvim'
 Plug 'camspiers/animate.vim'
 Plug 'camspiers/lens.vim'
@@ -302,8 +302,7 @@ nnoremap <silent> <leader>rn <cmd>lua vim.lsp.buf.rename()<CR>
 
 " bindings for nvim-telescope start with <leader>f
 nnoremap <leader>ff  <cmd>Telescope find_files<cr>
-"nnoremap <leader>fg  <cmd>Telescope live_grep<cr>
-nnoremap <leader>fg  <cmd>lua require('telescope').extensions.fzf_writer.staged_grep()<cr>
+nnoremap <leader>fg  <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb  <cmd>Telescope buffers<cr>
 nnoremap <leader>fh  <cmd>Telescope help_tags<cr>
 nnoremap <leader>fr  <cmd>Telescope lsp_references<cr>
@@ -365,6 +364,8 @@ telescope.setup {
     },
   },
 }
+
+telescope.load_extension'fzf'
 EOF
 
 " treesitter setup

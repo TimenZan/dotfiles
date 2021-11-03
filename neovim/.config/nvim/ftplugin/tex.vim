@@ -1,4 +1,5 @@
 set textwidth=95
+set tabstop=4
 let g:tex_flavor='latex'
 
 let b:images_folder = simplify(expand('%:p:h') . '/images/')

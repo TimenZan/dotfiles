@@ -124,7 +124,7 @@ cmp.setup {
         end
     },
 
-    experimental = {ghost_text = false},
+    experimental = {ghost_text = true},
 
     sources = {
         {name = 'luasnip'},

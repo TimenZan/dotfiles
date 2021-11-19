@@ -335,6 +335,7 @@ nnoremap <leader>pe <cmd>PathfinderExplain<cr>
 " Use esc to exit terminal mode
 tnoremap <Esc> <C-\><C-n>
 
+snoremap <silent><expr> <c-l> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<c-l>'
 
 " }}}
 

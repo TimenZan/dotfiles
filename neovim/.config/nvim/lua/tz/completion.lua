@@ -127,7 +127,12 @@ cmp.setup {
     experimental = {ghost_text = false},
 
     sources = {
-        {name = 'luasnip'}, {name = 'nvim_lsp'}, {name = 'buffer'},
-        {name = 'path'}, {name = 'calc'}, {name = 'spell'}
+        {name = 'luasnip'},
+        {name = 'nvim_lua'},
+        {name = 'nvim_lsp'},
+        {name = 'path'},
+        {name = 'calc'},
+        {name = 'buffer'},
+        {name = 'spell'},
     }
 }

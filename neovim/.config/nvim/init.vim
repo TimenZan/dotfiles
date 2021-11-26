@@ -151,7 +151,7 @@ Plug 'RRethy/vim-illuminate'
 Plug 'editorconfig/editorconfig-vim' " allows multiple style settings based on filetype
 	let g:EditorConfig_exclude_patterns=['scp://.\*']
 Plug 'wellle/targets.vim'
-Plug 'danth/pathfinder.vim'
+" Plug 'danth/pathfinder.vim'
 Plug 'windwp/nvim-autopairs'
 " Plug 'preservim/nerdcommenter'
 Plug 'tversteeg/registers.nvim'

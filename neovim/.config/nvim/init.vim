@@ -101,6 +101,9 @@ Plug 'shirk/vim-gas'
 Plug 'CaffeineViking/vim-glsl'
 " }}}
 " UI {{{
+Plug 'mfussenegger/nvim-dap'
+Plug 'theHamsta/nvim-dap-virtual-text'
+Plug 'nvim-telescope/telescope-dap.nvim'
 Plug 'preservim/nerdTree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ryanoasis/vim-devicons'
@@ -317,6 +320,22 @@ nnoremap <leader>fsm <cmd>lua require('telescope.builtin').symbols{sources = {'m
 nnoremap <leader>fsl <cmd>lua require('telescope.builtin').symbols{sources = {'latex'}}<cr>
 " TODO: add searching through dictionary file
 
+" bindings for nvim-dap
+nnoremap <silent> <leader>nc <cmd>lua require'dap'.continue()<CR>
+nnoremap <silent> <leader>ns <cmd>lua require'dap'.step_over()<CR>
+nnoremap <silent> <leader>ni <cmd>lua require'dap'.step_into()<CR>
+nnoremap <silent> <leader>no <cmd>lua require'dap'.step_out()<CR>
+nnoremap <silent> <leader>nb <cmd>lua require'dap'.toggle_breakpoint()<CR>
+nnoremap <silent> <leader>nB <cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>
+nnoremap <silent> <leader>nl <cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>
+"nnoremap <silent> <leader>ndr <cmd>lua require'dap'.repl.open()<CR>
+nnoremap <silent> <leader>nr <cmd>lua require'dap'.run_last()<CR>
+nnoremap <leader>fnc <cmd>Telescope dap commands<cr>
+nnoremap <leader>fns <cmd>Telescope dap configurations<cr>
+nnoremap <leader>fnb <cmd>Telescope dap list_breakpoints<cr>
+nnoremap <leader>fnv <cmd>Telescope dap variables<cr>
+nnoremap <leader>fnf <cmd>Telescope dap frames<cr>
+
 " bindings for trouble.nvim
 nnoremap <leader>dx <cmd>TroubleToggle<cr>
 nnoremap <leader>dw <cmd>TroubleToggle lsp_workspace_diagnostics<cr>
@@ -346,10 +365,12 @@ lua require'colorizer'.setup()
 lua require'tz.lsp'
 lua require'tz.completion'
 lua require'tz.line'
-lua require'telescope'.load_extension('heading')
-lua require'telescope'.load_extension("bibtex")
+lua require'telescope'.load_extension'heading'
+lua require'telescope'.load_extension'bibtex'
+lua require'telescope'.load_extension'dap'
 lua require'range-highlight'.setup{}
-lua require("luasnip/loaders/from_vscode").lazy_load()
+lua require'luasnip/loaders/from_vscode'.lazy_load()
+lua require'nvim-dap-virtual-text'.setup()
 
 " telescope config
 lua <<EOF

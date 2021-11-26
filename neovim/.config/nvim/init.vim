@@ -66,7 +66,6 @@ Plug 'simrat39/rust-tools.nvim'
 " haskell
 Plug 'alx741/vim-stylishask'
 " lua
-Plug 'andrejlevkovitch/vim-lua-format'
 Plug 'neovimhaskell/haskell-vim'
 	let g:haskell_enable_quantification = 1
 	let g:haskell_enable_recursivedo = 1

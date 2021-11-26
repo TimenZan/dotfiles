@@ -6,8 +6,13 @@ local servers = {
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp
                                                                      .protocol
                                                                      .make_client_capabilities())
+local on_attach = function(client)
+    require'illuminate'.on_attach(client)
+    require'lsp_signature'.on_attach()
+end
+
 for _, server in pairs(servers) do
-    require'lspconfig'[server].setup {capabilities = capabilities}
+    require'lspconfig'[server].setup {capabilities = capabilities, on_attach = on_attach}
 end
 
 local runtime_path = vim.split(package.path, ';')
@@ -17,7 +22,7 @@ require'lspconfig'.sumneko_lua.setup {
     cmd = {
         'lua-language-server', '-E', '/usr/share/lua-language-server/main.lua'
     },
-    on_attach = function(_, _) require'lsp_signature'.on_attach() end,
+    on_attach = on_attach,
     settings = {
         Lua = {
             runtime = {version = 'LuaJIT', path = runtime_path},
@@ -59,6 +64,7 @@ local rust_opts = {
     },
     server = {
         capabilities = capabilities,
+        on_attach = on_attach,
         settings = {
             ["rust-analyzer"] = {
                 -- enable clippy on save
@@ -73,7 +79,7 @@ require("flutter-tools").setup({
     widget_guides = {enabled = true},
     closing_tags = {prefix = ">=> "},
     dev_tools = {autostart = false, auto_open_browser = false},
-    lsp = {capabilities = capabilities} -- options for dartls
+    lsp = {capabilities = capabilities, on_attach = function (client) require'illuminate'.on_attach(client) end} -- options for dartls
 })
 
 require'nvim-autopairs'.setup()

@@ -93,7 +93,7 @@ Plug 'lervag/vimtex', { 'for': 'tex' }
 	let g:vimtex_quickfix_mode=1
 " markdown
 " Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
-	" let g:mkdp_auto_start = 1
+" let g:mkdp_auto_start = 1
 " config files
 Plug 'mrk21/yaml-vim'
 " esoteric
@@ -110,6 +110,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ryanoasis/vim-devicons'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 Plug 'JoosepAlviste/nvim-ts-context-commentstring'
 Plug 'hoob3rt/lualine.nvim'
 Plug 'norcalli/nvim-colorizer.lua'
@@ -206,7 +207,7 @@ require('material').setup({
 	contrast_windows = { -- Specify which windows get the contrasted (darker) background
 		"terminal", -- Darker terminal background
 		"packer", -- Darker packer background
-		"qf" -- Darker qf list background
+		"qf", -- Darker qf list background
 	},
 	text_contrast = {
 		lighter = false, -- Enable higher contrast text for lighter style
@@ -361,12 +362,12 @@ snoremap <silent><expr> <c-l> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expa
 
 " {{{ Functions
 
-
 lua require'colorizer'.setup()
 lua require'tz.lsp'
 lua require'tz.completion'
 lua require'tz.line'
 lua require'tz.dap'
+lua require'tz.treesitter'
 lua require'telescope'.load_extension'heading'
 lua require'telescope'.load_extension'bibtex'
 lua require'telescope'.load_extension'dap'
@@ -381,50 +382,15 @@ local trouble = require("trouble.providers.telescope")
 local telescope = require("telescope")
 
 telescope.setup {
-  defaults = {
-    mappings = {
-      i = { ["<c-t>"] = trouble.open_with_trouble },
-      n = { ["<c-t>"] = trouble.open_with_trouble },
-    },
-  },
-}
+	defaults = {
+		mappings = {
+			i = { ["<c-t>"] = trouble.open_with_trouble },
+			n = { ["<c-t>"] = trouble.open_with_trouble },
+			},
+		},
+	}
 
 telescope.load_extension'fzf'
-EOF
-
-" treesitter setup
-lua <<EOF
-require'nvim-treesitter.configs'.setup {
-	context_commentstring = {
-		enable = true
-	},
-	ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
-	--ignore_install = { "javascript" }, -- List of parsers to ignore installing
-	highlight = {
-		enable = true,              -- false will disable the whole extension
-		-- disable = { "c", "rust" },  -- list of language that will be disabled
-	},
-	incremental_selection = {
-		enable = true,
-		keymaps = {
-			init_selection = "gnn",
-			node_incremental = "grn",
-			scope_incremental = "grc",
-			node_decremental = "grm",
-		},
-	},
-	indent = {
-		enable = true
-	},
-	-- requires nvim-ts-rainbow plugin
-	rainbow = {
-		enable = true,
-		extended_mode = true,
-	},
-}
-require'treesitter-context.config'.setup{
-	enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
-}
 EOF
 
 " treesitter folding

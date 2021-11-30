@@ -29,15 +29,6 @@ Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'ray-x/lsp_signature.nvim'
 Plug 'onsails/lspkind-nvim'
 Plug 'kosayoda/nvim-lightbulb'
-" Plug 'SirVer/ultisnips'
-" 	" let g:UltisnipsExpandTrigger="<tab>"
-" 	let g:UltisnipsJumpForwardTrigger='<c-b>'
-" 	let g:UltisnipsJumpBackwardTrigger='<c-z>'
-if hostname() ==# 'arch-desktop'
-	Plug '~/development/plugins/snippets'
-else
-	Plug 'TimenZan/my-snippets'
-endif
 Plug 'rafamadriz/friendly-snippets'
 Plug 'Nash0x7E2/awesome-flutter-snippets'
 Plug 'weilbith/nvim-lsp-smag'
@@ -81,7 +72,7 @@ Plug 'dart-lang/dart-vim-plugin', { 'for': 'dart' }
 	let g:dart_format_on_save = 1
 	let g:dart_style_guide = 2
 Plug 'akinsho/flutter-tools.nvim'
-" (la)tex
+" [la]tex
 Plug 'KeitaNakamura/tex-conceal.vim', { 'for': 'tex' }
 	set conceallevel=2
 	let g:tex_conceal='abdgm'
@@ -105,8 +96,6 @@ Plug 'mfussenegger/nvim-dap'
 Plug 'theHamsta/nvim-dap-virtual-text'
 Plug 'rcarriga/nvim-dap-ui'
 Plug 'nvim-telescope/telescope-dap.nvim'
-Plug 'preservim/nerdTree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ryanoasis/vim-devicons'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -142,10 +131,9 @@ Plug 'haringsrob/nvim_context_vt'
 Plug 'junegunn/vim-easy-align'
 	nmap <leader>ga <Plug>(EasyAlign)
 	xmap <leader>ga <Plug>(EasyAlign)
-Plug 'junegunn/goyo.vim', { 'on': 'Goyo' } " nice prose writing
+Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-speeddating'
-"Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-commentary'
 	map  gc <Plug>Commentary
 	nmap gcc <Plug>CommentairyLine
@@ -153,12 +141,11 @@ Plug 'tpope/vim-eunuch'
 Plug 'machakann/vim-sandwich'
 Plug 'machakann/vim-swap'
 Plug 'RRethy/vim-illuminate'
-Plug 'editorconfig/editorconfig-vim' " allows multiple style settings based on filetype
+Plug 'editorconfig/editorconfig-vim'
 	let g:EditorConfig_exclude_patterns=['scp://.\*']
 Plug 'wellle/targets.vim'
 " Plug 'danth/pathfinder.vim'
 Plug 'windwp/nvim-autopairs'
-" Plug 'preservim/nerdcommenter'
 Plug 'tversteeg/registers.nvim'
 Plug 'wsdjeg/vim-fetch'
 Plug 'andymass/vim-matchup'
@@ -189,7 +176,6 @@ Plug 'tweekmonster/startuptime.vim'
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 " }}}
 Plug '~/development/nvim-fatal'
-Plug '~/secrets/vim_credentials'
 call plug#end()
 
 lua <<EOF

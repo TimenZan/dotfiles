@@ -9,20 +9,14 @@ local luasnip = require 'luasnip'
 local lspkind = require 'lspkind'
 lspkind.init({
     -- enables text annotations
-    --
-    -- default: true
     with_text = true,
 
     -- default symbol map
     -- can be either 'default' or
     -- 'codicons' for codicon preset (requires vscode-codicons font installed)
-    --
-    -- default: 'default'
     preset = 'default',
 
     -- override preset symbols
-    --
-    -- default: {}
     symbol_map = {
         Text = '',
         Method = 'ƒ',

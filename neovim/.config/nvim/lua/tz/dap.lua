@@ -1,7 +1,6 @@
 require'dapui'.setup{
   icons = { expanded = "▾", collapsed = "▸" },
   mappings = {
-    -- Use a table to apply multiple mappings
     expand = { "<CR>", "<2-LeftMouse>" },
     open = "o",
     remove = "d",
@@ -9,7 +8,6 @@ require'dapui'.setup{
     repl = "r",
   },
   sidebar = {
-    -- You can change the order of elements in the sidebar
     elements = {
       -- Provide as ID strings or tables with "id" and "size" keys
       {

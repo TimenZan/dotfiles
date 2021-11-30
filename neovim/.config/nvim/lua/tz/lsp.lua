@@ -67,7 +67,6 @@ local rust_opts = {
         on_attach = on_attach,
         settings = {
             ["rust-analyzer"] = {
-                -- enable clippy on save
                 checkOnSave = {command = "clippy"}
             }
         }
@@ -113,14 +112,11 @@ require'nvim-lightbulb'.update_lightbulb {
     },
     virtual_text = {
         enabled = false,
-        -- Text to show at virtual text
         text = "💡"
     },
     status_text = {
         enabled = false,
-        -- Text to provide when code actions are available
         text = "💡",
-        -- Text to provide when no actions are available
         text_unavailable = ""
     }
 }

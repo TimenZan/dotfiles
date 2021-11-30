@@ -219,7 +219,6 @@ scriptencoding=utf-8
 set autowrite
 set completeopt=menuone,noselect
 set formatoptions=jcroqln1
-set hidden
 set ignorecase | set smartcase
 set incsearch
 set lazyredraw

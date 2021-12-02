@@ -220,6 +220,7 @@ set autowrite
 set completeopt=menuone,noselect
 set formatoptions=jcroqln1
 set ignorecase | set smartcase
+set inccommand=split
 set incsearch
 set lazyredraw
 set linebreak

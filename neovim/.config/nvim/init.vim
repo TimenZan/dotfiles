@@ -152,24 +152,24 @@ Plug 'andymass/vim-matchup'
 	let g:matchup_matchparen_offscreen = {}
 " }}}
 " colorschemes {{{
-Plug 'tjdevries/colorbuddy.vim'
-Plug 'ayu-theme/ayu-vim'
-Plug 'lifepillar/vim-solarized8'
-Plug 'romainl/Apprentice', { 'branch': 'fancylines-and-neovim' }
-Plug 'tjdevries/gruvbuddy.nvim'
-Plug 'morhetz/gruvbox'
-Plug 'rafamadriz/neon'
-Plug 'glepnir/zephyr-nvim'
-Plug 'ishan9299/modus-theme-vim'
-Plug 'Th3Whit3Wolf/onebuddy' " lacks powerline support, maybe fixed in the future
+" Plug 'tjdevries/colorbuddy.vim'
+" Plug 'ayu-theme/ayu-vim'
+" Plug 'lifepillar/vim-solarized8'
+" Plug 'romainl/Apprentice', { 'branch': 'fancylines-and-neovim' }
+" Plug 'tjdevries/gruvbuddy.nvim'
+" Plug 'morhetz/gruvbox'
+" Plug 'rafamadriz/neon'
+" Plug 'glepnir/zephyr-nvim'
+" Plug 'ishan9299/modus-theme-vim'
+" Plug 'Th3Whit3Wolf/onebuddy' " lacks powerline support, maybe fixed in the future
 " Plug 'Th3Whit3Wolf/one-nvim'
 " Plug 'joshdick/onedark.vim'
 " Plug 'navarasu/onedark.nvim'
-Plug 'ray-x/aurora'
-Plug 'novakne/kosmikoa.nvim'
+" Plug 'ray-x/aurora'
+" Plug 'novakne/kosmikoa.nvim'
 " Plug 'crusoexia/vim-monokai'
-Plug 'tanvirtin/monokai.nvim'
-Plug 'marko-cerovac/material.nvim'
+" Plug 'tanvirtin/monokai.nvim'
+Plug 'ray-x/starry.nvim'
 " }}}
 " misc {{{
 Plug 'tweekmonster/startuptime.vim'
@@ -178,36 +178,7 @@ Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 Plug '~/development/nvim-fatal'
 call plug#end()
 
-lua <<EOF
-vim.g.material_style = "darker"
-require('material').setup({
-	contrast = true, -- Enable contrast for sidebars, floating windows and popup menus like Nvim-Tree
-	borders = true, -- Enable borders between verticaly split windows
-	italics = {
-		comments = true, -- Enable italic comments
-		keywords = false, -- Enable italic keywords
-		functions = false, -- Enable italic functions
-		strings = false, -- Enable italic strings
-		variables = false -- Enable italic variables
-	},
-	contrast_windows = { -- Specify which windows get the contrasted (darker) background
-		"terminal", -- Darker terminal background
-		"packer", -- Darker packer background
-		"qf", -- Darker qf list background
-	},
-	text_contrast = {
-		lighter = false, -- Enable higher contrast text for lighter style
-		darker = false -- Enable higher contrast text for darker style
-	},
-	disable = {
-		background = false, -- Prevent the theme from setting the background (NeoVim then uses your teminal background)
-		term_colors = false, -- Prevent the theme from setting terminal colors
-		eob_lines = false -- Hide the end-of-buffer lines
-	},
-	custom_highlights = {} -- Overwrite highlights with your own
-})
-EOF
-colorscheme material
+colorscheme oceanic
 
 " }}}
 

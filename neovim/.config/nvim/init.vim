@@ -330,6 +330,17 @@ lua require'luasnip/loaders/from_vscode'.lazy_load()
 lua require'nvim-dap-virtual-text'.setup()
 lua require'Comment'.setup()
 
+lua <<EOF
+require'nvim_context_vt'.setup{
+	custom_text_handler = function(node)
+		if vim.bo.filetype == 'dart' then
+			return nil
+		end
+		return require'nvim-treesitter.ts_utils'.get_node_text(node)[1]
+	end
+}
+EOF
+
 " telescope config
 lua <<EOF
 local actions = require("telescope.actions")

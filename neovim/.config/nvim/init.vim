@@ -100,7 +100,6 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/nvim-treesitter-textobjects'
-Plug 'JoosepAlviste/nvim-ts-context-commentstring'
 Plug 'hoob3rt/lualine.nvim'
 Plug 'norcalli/nvim-colorizer.lua'
 Plug 'p00f/nvim-ts-rainbow'
@@ -134,9 +133,7 @@ Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-speeddating'
-Plug 'tpope/vim-commentary'
-	map  gc <Plug>Commentary
-	nmap gcc <Plug>CommentairyLine
+Plug 'numToStr/Comment.nvim'
 Plug 'tpope/vim-eunuch'
 Plug 'machakann/vim-sandwich'
 Plug 'machakann/vim-swap'
@@ -331,6 +328,7 @@ lua require'telescope'.load_extension'dap'
 lua require'range-highlight'.setup{}
 lua require'luasnip/loaders/from_vscode'.lazy_load()
 lua require'nvim-dap-virtual-text'.setup()
+lua require'Comment'.setup()
 
 " telescope config
 lua <<EOF

@@ -12,8 +12,38 @@ local on_attach = function(client)
 end
 
 for _, server in pairs(servers) do
-    require'lspconfig'[server].setup {capabilities = capabilities, on_attach = on_attach}
+    require'lspconfig'[server].setup {
+        capabilities = capabilities,
+        on_attach = on_attach
+    }
 end
+
+local efm_languages = {
+    lua = {{formatCommand = "lua-format -i", formatStdin = true}},
+    vim = {
+        {
+            lintCommand = 'vint --enable-neovim --style-problems --no-color -',
+            lintStdin = true,
+            lintFormats = '%f:%l:%c: %m'
+        }
+    }
+}
+local efm_filetypes = {}
+for key, _ in pairs(efm_languages) do table.insert(efm_filetypes, key) end
+
+require'lspconfig'.efm.setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    init_options = {
+        documentFormatting = true,
+        hover = true,
+        documentSymbol = true,
+        codeAction = true,
+        completion = true
+    },
+    settings = {rootMarkers = {'.git/'}, languages = efm_languages},
+    filetypes = efm_filetypes
+}
 
 local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, "lua/?.lua")
@@ -65,11 +95,7 @@ local rust_opts = {
     server = {
         capabilities = capabilities,
         on_attach = on_attach,
-        settings = {
-            ["rust-analyzer"] = {
-                checkOnSave = {command = "clippy"}
-            }
-        }
+        settings = {["rust-analyzer"] = {checkOnSave = {command = "clippy"}}}
     } -- options for rust-analyzer
 }
 require'rust-tools'.setup(rust_opts)
@@ -78,7 +104,12 @@ require("flutter-tools").setup({
     widget_guides = {enabled = true},
     closing_tags = {prefix = ">=> "},
     dev_tools = {autostart = false, auto_open_browser = false},
-    lsp = {capabilities = capabilities, on_attach = function (client) require'illuminate'.on_attach(client) end} -- options for dartls
+    lsp = {
+        capabilities = capabilities,
+        on_attach = function(client)
+            require'illuminate'.on_attach(client)
+        end
+    } -- options for dartls
 })
 
 require'nvim-autopairs'.setup()
@@ -110,15 +141,8 @@ require'nvim-lightbulb'.update_lightbulb {
         -- - winblend   transparency of the window (0-100)
         win_opts = {}
     },
-    virtual_text = {
-        enabled = false,
-        text = "💡"
-    },
-    status_text = {
-        enabled = false,
-        text = "💡",
-        text_unavailable = ""
-    }
+    virtual_text = {enabled = false, text = "💡"},
+    status_text = {enabled = false, text = "💡", text_unavailable = ""}
 }
 
 require'trouble'.setup {

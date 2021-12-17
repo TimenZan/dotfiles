@@ -146,6 +146,7 @@ Plug 'wellle/targets.vim'
 Plug 'windwp/nvim-autopairs'
 Plug 'tversteeg/registers.nvim'
 Plug 'wsdjeg/vim-fetch'
+Plug 'jessarcher/vim-heritage'
 Plug 'andymass/vim-matchup'
 	let g:matchup_matchparen_offscreen = {}
 " }}}

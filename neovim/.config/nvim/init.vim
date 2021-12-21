@@ -300,8 +300,8 @@ nnoremap <leader>fnf <cmd>Telescope dap frames<cr>
 
 " bindings for trouble.nvim
 nnoremap <leader>dx <cmd>TroubleToggle<cr>
-nnoremap <leader>dw <cmd>TroubleToggle lsp_workspace_diagnostics<cr>
-nnoremap <leader>dd <cmd>TroubleToggle lsp_document_diagnostics<cr>
+nnoremap <leader>dw <cmd>TroubleToggle workspace_diagnostics<cr>
+nnoremap <leader>dd <cmd>TroubleToggle document_diagnostics<cr>
 nnoremap <leader>dq <cmd>TroubleToggle quickfix<cr>
 nnoremap <leader>dl <cmd>TroubleToggle loclist<cr>
 nnoremap <leader>dr <cmd>TroubleToggle lsp_references<cr>

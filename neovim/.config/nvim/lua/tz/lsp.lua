@@ -45,6 +45,18 @@ require'lspconfig'.efm.setup {
     filetypes = efm_filetypes
 }
 
+require'lspconfig'.arduino_language_server.setup {
+    cmd = {
+        "arduino-language-server",
+        "-cli", "/bin/arduino-cli",
+        "-cli-config", "~/.arduino15/arduino-cli.yaml",
+        "-clangd", "/bin/clangd",
+        "-board-name", "Generic STM32F103C series",
+        "-fqbn", "stm32duino:STM32F1:genericSTM32F103C",
+        -- "-log",
+    },
+}
+
 local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, "lua/?.lua")
 require'lspconfig'.sumneko_lua.setup {

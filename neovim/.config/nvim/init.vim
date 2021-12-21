@@ -86,6 +86,10 @@ Plug 'lervag/vimtex', { 'for': 'tex' }
 	let g:vimtex_quickfix_mode=1
 " markdown
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
+" arduino
+Plug 'stevearc/vim-arduino'
+	let g:arduino_dir = '/usr/share/arduino'
+	let g:arduino_home_dir = $HOME . '.arduino15'
 let g:mkdp_auto_start = 1
 " config files
 Plug 'mrk21/yaml-vim'

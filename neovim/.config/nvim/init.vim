@@ -160,7 +160,7 @@ Plug 'andymass/vim-matchup'
 " Plug 'lifepillar/vim-solarized8'
 " Plug 'romainl/Apprentice', { 'branch': 'fancylines-and-neovim' }
 " Plug 'tjdevries/gruvbuddy.nvim'
-" Plug 'morhetz/gruvbox'
+Plug 'morhetz/gruvbox'
 " Plug 'rafamadriz/neon'
 " Plug 'glepnir/zephyr-nvim'
 " Plug 'ishan9299/modus-theme-vim'
@@ -181,7 +181,7 @@ Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 Plug '~/development/nvim-fatal'
 call plug#end()
 
-colorscheme oceanic
+colorscheme gruvbox
 
 " }}}
 

@@ -9,7 +9,7 @@ local luasnip = require 'luasnip'
 local lspkind = require 'lspkind'
 lspkind.init({
     -- enables text annotations
-    with_text = true,
+    mode = 'symbol_text',
 
     -- default symbol map
     -- can be either 'default' or

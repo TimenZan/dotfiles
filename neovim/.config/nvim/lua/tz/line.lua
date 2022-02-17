@@ -24,7 +24,7 @@ require'lualine'.setup {
     sections = {
         lualine_a = {'mode'},
         lualine_b = {'branch', 'diff'},
-        lualine_c = {'filename'},
+        lualine_c = {'filename', 'lsp_progress'},
         lualine_x = {'filetype'},
         lualine_y = {'progress', 'location'},
         lualine_z = {diagnostics}

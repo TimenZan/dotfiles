@@ -106,6 +106,7 @@ Plug 'nvim-telescope/telescope-dap.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 Plug 'hoob3rt/lualine.nvim'
+Plug 'arkav/lualine-lsp-progress'
 Plug 'norcalli/nvim-colorizer.lua'
 Plug 'p00f/nvim-ts-rainbow'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }

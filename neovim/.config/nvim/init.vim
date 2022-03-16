@@ -106,7 +106,7 @@ Plug 'nvim-telescope/telescope-dap.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 Plug 'hoob3rt/lualine.nvim'
-Plug 'arkav/lualine-lsp-progress'
+Plug 'j-hui/fidget.nvim'
 Plug 'norcalli/nvim-colorizer.lua'
 Plug 'p00f/nvim-ts-rainbow'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -226,7 +226,8 @@ au TextYankPost * silent! lua vim.highlight.on_yank { timeout = 500 }
 
 " trigger `autoread` when files changes on disk
 " don't do this in vscode, as this breaks
-if !exists('g:vscode')
+" if !exists('g:vscode')
+if v:false
 	set autoread
 	augroup filereload
 		autocmd FocusGained,BufEnter,CursorHold,CursorHoldI * if mode() != 'c' | checktime | endif

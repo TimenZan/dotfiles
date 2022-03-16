@@ -125,9 +125,9 @@ require("flutter-tools").setup({
 })
 
 require'nvim-autopairs'.setup()
-vim.cmd [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]]
+vim.cmd [[autocmd CursorMoved,CursorMovedI,InsertChange * lua require'nvim-lightbulb'.update_lightbulb()]]
 
-require'nvim-lightbulb'.update_lightbulb {
+require'nvim-lightbulb'.setup {
     sign = {
         enabled = true,
         -- Priority of the gutter sign

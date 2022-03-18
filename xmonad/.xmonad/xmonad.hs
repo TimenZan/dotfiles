@@ -303,7 +303,7 @@ myManageHook = composeAll [ resource =? "desktop_window" --> doIgnore
 --
 myStartupHook = do
   spawnOn "1:web"   "firefox"
-  spawnOn "9"       "thunderbird"
+  -- spawnOn "9"       "thunderbird"
   spawnOn "9"       "qbittorrent"
   spawnOn "9"       "steam"
   -- spawnOn "3:chat"  "caprine"

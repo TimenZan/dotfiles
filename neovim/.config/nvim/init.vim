@@ -131,6 +131,7 @@ Plug 'winston0410/range-highlight.nvim'
 Plug 'kassio/neoterm'
 Plug 'romgrk/nvim-treesitter-context'
 Plug 'haringsrob/nvim_context_vt'
+Plug 'stevearc/dressing.nvim'
 " }}}
 " quality of life tools {{{
 Plug 'junegunn/vim-easy-align'

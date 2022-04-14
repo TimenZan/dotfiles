@@ -42,7 +42,7 @@ lspkind.init({
 })
 cmp.setup {
     completion = {
-        autocomplete = {types.cmp.TriggerEvent.TextChanged},
+        autocomplete = { types.cmp.TriggerEvent.TextChanged },
         completeopt = 'menu,menuone,noselect',
         keyword_pattern = [[\%(-\?\d\+\%(\.\d\+\)\?\|\h\w*\%(-\w*\)*\)]],
         keyword_length = 1,
@@ -57,12 +57,14 @@ cmp.setup {
 
     preselect = types.cmp.PreselectMode.Item,
 
-    documentation = {
-        border = {'', '', '', ' ', '', '', '', ' '},
-        winhighlight = 'NormalFloat:CmpDocumentation,FloatBorder:CmpDocumentationBorder',
-        maxwidth = math.floor((WIDE_HEIGHT * 2) *
-                                  (vim.o.columns / (WIDE_HEIGHT * 2 * 16 / 9))),
-        maxheight = math.floor(WIDE_HEIGHT * (WIDE_HEIGHT / vim.o.lines))
+    window = {
+        documentation = {
+            border = { '', '', '', ' ', '', '', '', ' ' },
+            winhighlight = 'NormalFloat:CmpDocumentation,FloatBorder:CmpDocumentationBorder',
+            maxwidth = math.floor((WIDE_HEIGHT * 2) *
+            (vim.o.columns / (WIDE_HEIGHT * 2 * 16 / 9))),
+            maxheight = math.floor(WIDE_HEIGHT * (WIDE_HEIGHT / vim.o.lines))
+        },
     },
 
     confirmation = {
@@ -90,11 +92,11 @@ cmp.setup {
         ['<Tab>'] = function(fallback)
             if vim.fn.pumvisible() == 1 then
                 vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<C-n>', true,
-                                                               true, true), 'n')
+                    true, true), 'n')
             elseif luasnip.expand_or_jumpable() then
                 vim.fn.feedkeys(vim.api.nvim_replace_termcodes(
-                                    '<Plug>luasnip-expand-or-jump', true, true,
-                                    true), '')
+                    '<Plug>luasnip-expand-or-jump', true, true,
+                    true), '')
             else
                 fallback()
             end
@@ -105,7 +107,7 @@ cmp.setup {
         deprecated = true,
         format = function(entry, vim_item)
             vim_item.kind = lspkind.presets.default[vim_item.kind] .. " " ..
-                                vim_item.kind
+                vim_item.kind
             vim_item.menu = ({
                 buffer = "[Buffer]",
                 nvim_lsp = "[LSP]",
@@ -118,15 +120,15 @@ cmp.setup {
         end
     },
 
-    experimental = {ghost_text = true},
+    experimental = { ghost_text = true },
 
     sources = {
-        {name = 'luasnip'},
-        {name = 'nvim_lua'},
-        {name = 'nvim_lsp'},
-        {name = 'path'},
-        {name = 'calc'},
-        {name = 'buffer'},
-        {name = 'spell'},
+        { name = 'luasnip' },
+        { name = 'nvim_lua' },
+        { name = 'nvim_lsp' },
+        { name = 'path' },
+        { name = 'calc' },
+        { name = 'buffer' },
+        { name = 'spell' },
     }
 }

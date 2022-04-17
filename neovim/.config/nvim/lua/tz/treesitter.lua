@@ -1,11 +1,11 @@
-require'nvim-treesitter.configs'.setup {
+require 'nvim-treesitter.configs'.setup {
     context_commentstring = {
         enable = true
     },
     ensure_installed = "all",
     highlight = {
         enable = true,
-        disable = {"lua"},
+        disable = { "lua" },
         additional_vim_regex_highlighting = true,
     },
     incremental_selection = {
@@ -59,6 +59,6 @@ require'nvim-treesitter.configs'.setup {
     }
 }
 
-require'treesitter-context.config'.setup{
+require 'treesitter-context.config'.setup {
     enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
 }

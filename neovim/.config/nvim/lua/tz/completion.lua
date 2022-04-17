@@ -4,6 +4,7 @@ local cmp = require('cmp')
 
 local WIDE_HEIGHT = 40
 local luasnip = require 'luasnip'
+require 'luasnip/loaders/from_vscode'.lazy_load()
 
 -- require'lsp_signature'.setup()
 local lspkind = require 'lspkind'

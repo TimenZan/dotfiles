@@ -15,6 +15,8 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/popup.nvim'
 Plug 'ryanoasis/vim-devicons'
 Plug 'kyazdani42/nvim-web-devicons'
+Plug 'tpope/vim-repeat'
+Plug 'winston0410/cmd-parser.nvim'
 " }}}
 " lsp {{{
 Plug 'neovim/nvim-lspconfig'
@@ -31,9 +33,7 @@ Plug 'ray-x/lsp_signature.nvim'
 Plug 'onsails/lspkind-nvim'
 Plug 'kosayoda/nvim-lightbulb'
 Plug 'rafamadriz/friendly-snippets'
-Plug 'Nash0x7E2/awesome-flutter-snippets'
-Plug 'weilbith/nvim-lsp-smag'
-Plug 'folke/trouble.nvim'
+Plug 'weilbith/nvim-lsp-smag' " SMArt taGs
 " }}}
 " vcs {{{
 " git
@@ -57,7 +57,6 @@ Plug 'rust-lang/rust.vim'
 Plug 'simrat39/rust-tools.nvim'
 " haskell
 Plug 'alx741/vim-stylishask'
-" lua
 Plug 'neovimhaskell/haskell-vim'
 	let g:haskell_enable_quantification = 1
 	let g:haskell_enable_recursivedo = 1
@@ -72,6 +71,7 @@ Plug 'uiiaoo/java-syntax.vim'
 Plug 'dart-lang/dart-vim-plugin', { 'for': 'dart' }
 	let g:dart_format_on_save = 1
 	let g:dart_style_guide = 2
+Plug 'Nash0x7E2/awesome-flutter-snippets'
 Plug 'akinsho/flutter-tools.nvim'
 " [la]tex
 Plug 'KeitaNakamura/tex-conceal.vim', { 'for': 'tex' }
@@ -85,11 +85,11 @@ Plug 'lervag/vimtex', { 'for': 'tex' }
 	let g:vimtex_quickfix_mode=1
 " markdown
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
+	let g:mkdp_auto_start = 1
 " arduino
 Plug 'stevearc/vim-arduino'
 	let g:arduino_dir = '/usr/share/arduino'
 	let g:arduino_home_dir = $HOME . '.arduino15'
-let g:mkdp_auto_start = 1
 " config files
 Plug 'mrk21/yaml-vim'
 " esoteric
@@ -125,11 +125,12 @@ Plug 'lukas-reineke/indent-blankline.nvim'
 	let g:indent_blankline_use_treesitter = v:true
 	let g:indentLine_fileTypeExclude = ['help']
 	let g:indent_blankline_show_current_context = v:false
-Plug 'winston0410/cmd-parser.nvim'
 Plug 'winston0410/range-highlight.nvim'
 Plug 'kassio/neoterm'
 Plug 'romgrk/nvim-treesitter-context'
 Plug 'haringsrob/nvim_context_vt'
+Plug 'folke/trouble.nvim'
+Plug 'tversteeg/registers.nvim'
 Plug 'stevearc/dressing.nvim'
 Plug 'JASONews/glow-hover'
 " }}}
@@ -138,7 +139,6 @@ Plug 'junegunn/vim-easy-align'
 	nmap <leader>ga <Plug>(EasyAlign)
 	xmap <leader>ga <Plug>(EasyAlign)
 Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
-Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-speeddating'
 Plug 'numToStr/Comment.nvim'
 Plug 'tpope/vim-eunuch'
@@ -148,32 +148,14 @@ Plug 'RRethy/vim-illuminate'
 Plug 'editorconfig/editorconfig-vim'
 	let g:EditorConfig_exclude_patterns=['scp://.\*']
 Plug 'wellle/targets.vim'
-" Plug 'danth/pathfinder.vim'
 Plug 'windwp/nvim-autopairs'
-Plug 'tversteeg/registers.nvim'
 Plug 'wsdjeg/vim-fetch'
 Plug 'jessarcher/vim-heritage'
 Plug 'andymass/vim-matchup'
 	let g:matchup_matchparen_offscreen = {}
 " }}}
 " colorschemes {{{
-" Plug 'tjdevries/colorbuddy.vim'
-" Plug 'ayu-theme/ayu-vim'
-" Plug 'lifepillar/vim-solarized8'
-" Plug 'romainl/Apprentice', { 'branch': 'fancylines-and-neovim' }
-" Plug 'tjdevries/gruvbuddy.nvim'
 Plug 'morhetz/gruvbox'
-" Plug 'rafamadriz/neon'
-" Plug 'glepnir/zephyr-nvim'
-" Plug 'ishan9299/modus-theme-vim'
-" Plug 'Th3Whit3Wolf/onebuddy' " lacks powerline support, maybe fixed in the future
-" Plug 'Th3Whit3Wolf/one-nvim'
-" Plug 'joshdick/onedark.vim'
-" Plug 'navarasu/onedark.nvim'
-" Plug 'ray-x/aurora'
-" Plug 'novakne/kosmikoa.nvim'
-" Plug 'crusoexia/vim-monokai'
-" Plug 'tanvirtin/monokai.nvim'
 Plug 'ray-x/starry.nvim'
 " }}}
 " misc {{{
@@ -191,7 +173,6 @@ colorscheme gruvbox
 filetype plugin indent on
 syntax on
 scriptencoding=utf-8
-" set complete=.,w,b,u,t,i,kspell
 set autowrite
 set completeopt=menuone,noselect
 set formatoptions=jcroqln1
@@ -244,8 +225,6 @@ let g:markdown_fenced_languages = ['html', 'python', 'ruby', 'vim', 'rust', 'jav
 
 " Bindings {{{
 
-" Make `Y` behave like other capitals
-nnoremap Y y$
 " Make `@` work on multiple lines
 vnoremap @ :norm@
 
@@ -257,10 +236,8 @@ nnoremap <silent> N Nzzzv
 nnoremap <silent> gd         <cmd>lua vim.lsp.buf.declaration()<CR>
 nnoremap <silent> gD         <cmd>lua vim.lsp.buf.implementation()<CR>
 nnoremap <silent> 1gD        <cmd>lua vim.lsp.buf.type_definition()<CR>
-" nnoremap <silent> 1gD        <cmd>TroubleToggle lsp_type_definitions<CR>
 nnoremap <silent> K          <cmd>lua vim.lsp.buf.hover()<CR>
 nnoremap <silent> <c-k>      <cmd>lua vim.lsp.buf.signature_help()<CR>
-" nnoremap <silent> gr         <cmd>lua vim.lsp.buf.references()<CR>
 nnoremap <silent> gr         <cmd>TroubleToggle lsp_references<CR>
 nnoremap <silent> g0         <cmd>lua vim.lsp.buf.document_symbol()<CR>
 nnoremap <silent> gW         <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
@@ -316,64 +293,24 @@ noremap <F6> :setlocal spell! spelllang=en_us<CR>
 noremap <F10> :Goyo<CR>
 " map <leader>f :Goyo \| set linebreak<CR>
 inoremap <F10> <esc>:Goyo<CR>a
-nnoremap <leader>pe <cmd>PathfinderExplain<cr>
 
 " Use esc to exit terminal mode
 tnoremap <Esc> <C-\><C-n>
 
-snoremap <silent><expr> <c-l> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<c-l>'
+inoremap <silent><expr> <c-l> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<c-l>'
+snoremap <silent> <c-l> <cmd>lua require('luasnip').jump(1)<CR>
 
 " }}}
 
 " {{{ Functions
 
-lua require'colorizer'.setup()
 lua require'tz.lsp'
 lua require'tz.completion'
 lua require'tz.line'
 lua require'tz.dap'
 lua require'tz.treesitter'
 lua require'tz.ui'
-lua require'telescope'.load_extension'heading'
-lua require'telescope'.load_extension'bibtex'
-lua require'telescope'.load_extension'dap'
-lua require'range-highlight'.setup{}
-lua require'luasnip/loaders/from_vscode'.lazy_load()
-lua require'nvim-dap-virtual-text'.setup()
 lua require'Comment'.setup()
-
-lua <<EOF
-require'nvim_context_vt'.setup{
-	custom_text_handler = function(node)
-		if vim.bo.filetype == 'dart' then
-			return nil
-		end
-		return require'nvim-treesitter.ts_utils'.get_node_text(node)[1]
-	end
-}
-EOF
-
-" telescope config
-lua <<EOF
-local actions = require("telescope.actions")
-local trouble = require("trouble.providers.telescope")
-local telescope = require("telescope")
-
-telescope.setup {
-	defaults = {
-		mappings = {
-			i = { ["<c-t>"] = trouble.open_with_trouble },
-			n = { ["<c-t>"] = trouble.open_with_trouble },
-			},
-		},
-	}
-
-telescope.load_extension'fzf'
-EOF
-
-" treesitter folding
-" set foldmethod=expr
-" set foldexpr=nvim_treesitter#foldexpr()
 
 " }}}
 

@@ -57,7 +57,7 @@ require 'lspconfig'.efm.setup {
     on_attach = on_attach,
     capabilities = capabilities,
     init_options = {
-        documentFormatting = true,
+        documentFormatting = false,
         hover = true,
         documentSymbol = true,
         codeAction = true,

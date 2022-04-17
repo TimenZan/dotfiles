@@ -89,6 +89,8 @@ cmp.setup {
             behavior = cmp.ConfirmBehavior.Replace,
             select = true
         }),
+        ['<C-n>'] = cmp.mapping.select_next_item({ behavior = types.cmp.SelectBehavior.Insert }),
+        ['<C-p>'] = cmp.mapping.select_prev_item({ behavior = types.cmp.SelectBehavior.Insert }),
         ['<Tab>'] = function(fallback)
             if vim.fn.pumvisible() == 1 then
                 vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<C-n>', true,

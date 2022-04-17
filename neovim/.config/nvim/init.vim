@@ -87,6 +87,7 @@ Plug 'lervag/vimtex', { 'for': 'tex' }
 " markdown
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
 	let g:mkdp_auto_start = 1
+Plug 'ellisonleao/glow.nvim'
 " arduino
 Plug 'stevearc/vim-arduino'
 	let g:arduino_dir = '/usr/share/arduino'
@@ -288,6 +289,8 @@ nnoremap <leader>dd <cmd>TroubleToggle document_diagnostics<cr>
 nnoremap <leader>dq <cmd>TroubleToggle quickfix<cr>
 nnoremap <leader>dl <cmd>TroubleToggle loclist<cr>
 nnoremap <leader>dr <cmd>TroubleToggle lsp_references<cr>
+
+nnoremap <leader>p <cmd>Glow<CR>
 
 noremap <F3> g<c-g>
 noremap <F6> :setlocal spell! spelllang=en_us<CR>

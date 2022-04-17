@@ -1,6 +1,6 @@
 local servers = {
     'vimls', 'yamlls', 'bashls', 'texlab', 'clangd', 'pyright',
-    'jedi_language_server', 'hls'
+    'jedi_language_server', 'hls', 'ltex'
 }
 
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp

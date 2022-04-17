@@ -6,14 +6,19 @@ Timen Zandbergen's dotfiles
 
 ## Usage
 Pull the repository into your home folder and then create the symbolic links
-with [GNU Stow](https://www.gnu.org/software/stow/)
+with [GNU Stow](https://www.gnu.org/software/stow/).
 
 ```sh
-git clone git@gitlab.com:TimenZan/dotfiles.git ~/.dotfiles
-./install.sh
-```
-Or you can only use the configs that you want to use
-```sh
-cd ~/.dotfiles
+cd ~/dotfiles
 stow neovim starship # and any other programs
 ```
+
+Make sure to install all the needed external programs for neovim.
+```bash
+# programs
+yay -Syu neovim-git fzf ripgrep bat fd glow
+# language servers
+yay -Syu bash-language-server clang rust-analyzer lua-language-server texlab vim-language-server yaml-language-server shellcheck pyright jedi-language-server efm-langserver haskell-language-server-static ltex-ls-bin proselint vint
+pip install --user --upgrade pynvim
+```
+

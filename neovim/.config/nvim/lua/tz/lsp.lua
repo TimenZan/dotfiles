@@ -27,7 +27,7 @@ local proselint = {
 local efm_languages = {
     vim = {
         {
-            lintCommand = 'vint --enable-neovim --style-problems --no-color -',
+            lintCommand = 'vint --enable-neovim --style --no-color -',
             lintStdin = true,
             lintFormats = { '%f:%l:%c: %m' }
         }

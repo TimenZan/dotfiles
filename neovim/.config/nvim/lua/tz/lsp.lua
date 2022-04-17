@@ -67,17 +67,17 @@ require 'lspconfig'.efm.setup {
     filetypes = efm_filetypes
 }
 
-require 'lspconfig'.arduino_language_server.setup {
-    cmd = {
-        "arduino-language-server",
-        "-cli", "/bin/arduino-cli",
-        "-cli-config", "~/.arduino15/arduino-cli.yaml",
-        "-clangd", "/bin/clangd",
-        "-board-name", "Generic STM32F103C series",
-        "-fqbn", "stm32duino:STM32F1:genericSTM32F103C",
-        -- "-log",
-    },
-}
+-- require 'lspconfig'.arduino_language_server.setup {
+--     cmd = {
+--         "arduino-language-server",
+--         "-cli", "/bin/arduino-cli",
+--         "-cli-config", "~/.arduino15/arduino-cli.yaml",
+--         "-clangd", "/bin/clangd",
+--         "-board-name", "Generic STM32F103C series",
+--         "-fqbn", "stm32duino:STM32F1:genericSTM32F103C",
+--         -- "-log",
+--     },
+-- }
 
 local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, "lua/?.lua")
@@ -134,7 +134,7 @@ local rust_opts = {
 }
 require 'rust-tools'.setup(rust_opts)
 
-require("flutter-tools").setup({
+require 'flutter-tools'.setup {
     widget_guides = { enabled = true },
     closing_tags = { prefix = ">=> " },
     dev_tools = { autostart = false, auto_open_browser = false },
@@ -144,7 +144,7 @@ require("flutter-tools").setup({
             require 'illuminate'.on_attach(client)
         end
     } -- options for dartls
-})
+}
 
 require 'nvim-autopairs'.setup()
 vim.cmd [[autocmd CursorMoved,CursorMovedI,InsertChange * lua require'nvim-lightbulb'.update_lightbulb()]]

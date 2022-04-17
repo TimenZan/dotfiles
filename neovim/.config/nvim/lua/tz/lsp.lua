@@ -1,6 +1,6 @@
 local servers = {
     'vimls', 'yamlls', 'bashls', 'texlab', 'clangd', 'pyright',
-    'jedi_language_server', 'hls', 'ltex'
+    'jedi_language_server', 'hls'
 }
 
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp
@@ -19,6 +19,8 @@ for _, server in pairs(servers) do
         on_attach = on_attach
     }
 end
+
+require 'lspconfig'.ltex.setup(require 'tz.lsp.ltex')
 
 local proselint = {
     lintCommand = 'proselint -',

@@ -2,6 +2,8 @@ local compare = require('cmp.config.compare')
 local types = require('cmp.types')
 local cmp = require('cmp')
 
+require 'cmp_git'.setup()
+
 local WIDE_HEIGHT = 40
 local luasnip = require 'luasnip'
 require 'luasnip/loaders/from_vscode'.lazy_load()
@@ -131,6 +133,7 @@ cmp.setup {
         { name = 'nvim_lsp' },
         { name = 'path' },
         { name = 'calc' },
+        { name = 'cmp_git' },
         { name = 'buffer' },
         { name = 'spell' },
     }

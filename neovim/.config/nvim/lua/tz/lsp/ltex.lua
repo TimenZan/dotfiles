@@ -72,6 +72,14 @@ return {
     handlers = {
         ["workspace/executeCommand"] = on_workspace_executecommand,
     },
+    settings = {
+        ltex = {
+            additionalRules = {
+                enablePickyRules = true,
+                motherTongue = "nl",
+            };
+        },
+    };
 }
 
 -- or something like this:
@@ -83,4 +91,3 @@ return {
 --         ["workspace/executeCommand"] = on_workspace_executecommand,
 --     },
 -- }
-

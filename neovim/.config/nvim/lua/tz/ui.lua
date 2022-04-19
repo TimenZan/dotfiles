@@ -42,3 +42,10 @@ require 'nvim_context_vt'.setup {
 
 require 'colorizer'.setup()
 require 'range-highlight'.setup {}
+require 'fidget'.setup {
+    sources = {
+        ltex = {
+            ignore = true,
+        },
+    },
+}

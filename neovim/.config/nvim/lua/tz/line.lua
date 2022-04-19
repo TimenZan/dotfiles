@@ -1,4 +1,3 @@
-require "fidget".setup {}
 local diagnostics = {
     'diagnostics',
     -- table of diagnostic sources, available sources:

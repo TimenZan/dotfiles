@@ -42,6 +42,7 @@ require 'nvim_context_vt'.setup {
 
 require 'colorizer'.setup()
 require 'range-highlight'.setup {}
+require 'gitsigns'.setup {}
 require 'fidget'.setup {
     sources = {
         ltex = {

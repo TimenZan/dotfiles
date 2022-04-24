@@ -44,7 +44,8 @@ Plug 'tpope/vim-rhubarb'
 Plug 'shumphrey/fugitive-gitlab.vim'
 Plug 'lambdalisue/gina.vim' " either remove or learn to use
 Plug 'junegunn/gv.vim'
-Plug 'airblade/vim-gitgutter'
+" Plug 'airblade/vim-gitgutter'
+Plug 'lewis6991/gitsigns.nvim'
 Plug 'rhysd/conflict-marker.vim'
 Plug 'rhysd/git-messenger.vim'
 	let g:git_messenger_no_default_mappings=v:true
@@ -159,6 +160,8 @@ Plug 'andymass/vim-matchup'
 " colorschemes {{{
 Plug 'morhetz/gruvbox'
 Plug 'ray-x/starry.nvim'
+Plug 'catppuccin/nvim', {'as': 'catppuccin'}
+Plug 'EdenEast/nightfox.nvim'
 " }}}
 " misc {{{
 Plug 'tweekmonster/startuptime.vim'

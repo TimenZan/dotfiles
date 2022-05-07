@@ -246,7 +246,7 @@ nnoremap <silent> <c-k>      <cmd>lua vim.lsp.buf.signature_help()<CR>
 nnoremap <silent> gr         <cmd>TroubleToggle lsp_references<CR>
 nnoremap <silent> g0         <cmd>lua vim.lsp.buf.document_symbol()<CR>
 nnoremap <silent> gW         <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
-nnoremap <silent> g=         <cmd>lua vim.lsp.buf.formatting(nil)<CR>
+nnoremap <silent> g=         <cmd>lua vim.lsp.buf.format{async=true}<CR>
 nnoremap <silent> ga         <cmd>lua vim.lsp.buf.code_action()<CR>
 nnoremap <silent> g[         <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
 nnoremap <silent> g]         <cmd>lua vim.lsp.diagnostic.goto_next()<CR>

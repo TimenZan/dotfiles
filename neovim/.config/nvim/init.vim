@@ -145,6 +145,7 @@ Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
 Plug 'tpope/vim-speeddating'
 Plug 'numToStr/Comment.nvim'
 Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-abolish'
 Plug 'machakann/vim-sandwich'
 Plug 'machakann/vim-swap'
 Plug 'RRethy/vim-illuminate'

@@ -68,7 +68,7 @@ myLayout
     avoidStruts
       (ThreeColMid 1 (3 / 100) (1 / 2) ||| Tall 1 (3 / 100) (1 / 2) |||
          Mirror (Tall 1 (3 / 100) (1 / 2))
-         ||| tabbed shrinkText tabConfig
+         -- ||| tabbed shrinkText tabConfig
          ||| Full
          ||| spiral (6 / 7))
 
@@ -82,10 +82,10 @@ myNormalBorderColor = "#000000"
 myFocusedBorderColor = "#808080"
 
 -- Colors for text and backgrounds of each tab when in "Tabbed" layout.
-tabConfig
-  = defaultTheme{activeBorderColor = "#7C7C7C", activeTextColor = "#CEFFAC",
-                 activeColor = "#000000", inactiveBorderColor = "#C7C7C",
-                 inactiveTextColor = "#EEEEEE", inactiveColor = "#000000"}
+-- tabConfig
+--   = defaultTheme{activeBorderColor = "#7C7C7C", activeTextColor = "#CEFFAC",
+--                  activeColor = "#000000", inactiveBorderColor = "#C7C7C",
+--                  inactiveTextColor = "#EEEEEE", inactiveColor = "#000000"}
 
 -- Color of current window title in xmobar.
 xmobarTitleColor = "#FFB6B0"
@@ -278,7 +278,7 @@ myMouseBindings XConfig{XMonad.modMask = modMask}
 --
 myManageHook = composeAll [ resource =? "desktop_window" --> doIgnore
                           , className =? "Galculator" --> doFloat
-			  --, className =? "Steam" --> doFloat
+                          --, className =? "Steam" --> doFloat
                           , className =? "Gimp" --> doFloat
                           , resource =? "gpicview" --> doFloat
                           , className =? "MPlayer" --> doFloat

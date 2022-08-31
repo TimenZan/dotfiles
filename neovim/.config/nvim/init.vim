@@ -166,7 +166,7 @@ Plug 'EdenEast/nightfox.nvim'
 " }}}
 " misc {{{
 Plug 'tweekmonster/startuptime.vim'
-Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
+" Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 " }}}
 Plug '~/development/nvim-fatal'
 call plug#end()

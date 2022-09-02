@@ -106,7 +106,6 @@ require 'lspconfig'.sumneko_lua.setup {
 local rust_opts = {
     tools = {
         autoSetHints = true, -- automatically set inlay hints
-        hover_with_actions = true, -- show hover actions in the hover window
         runnables = {
             use_telescope = true -- use telescope.nvim
         },
@@ -125,8 +124,9 @@ local rust_opts = {
                 { "╮", "FloatBorder" }, { "│", "FloatBorder" },
                 { "╯", "FloatBorder" }, { "─", "FloatBorder" },
                 { "╰", "FloatBorder" }, { "│", "FloatBorder" }
-            }
-        }
+            },
+            auto_focus = true,
+        },
     },
     server = {
         capabilities = capabilities,

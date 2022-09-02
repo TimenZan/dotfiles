@@ -259,8 +259,8 @@ nnoremap <leader>fg  <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb  <cmd>Telescope buffers<cr>
 nnoremap <leader>fh  <cmd>Telescope help_tags<cr>
 nnoremap <leader>fr  <cmd>Telescope lsp_references<cr>
-nnoremap <leader>fd  <cmd>Telescope lsp_workspace_diagnostics<cr>
-nnoremap <leader>fa  <cmd>Telescope lsp_code_actions<cr>
+" nnoremap <leader>fd  <cmd>Telescope lsp_workspace_diagnostics<cr>
+" nnoremap <leader>fa  <cmd>Telescope lsp_code_actions<cr>
 nnoremap <leader>fsd <cmd>Telescope lsp_document_symbols<cr>
 nnoremap <leader>fsw <cmd>Telescope lsp_workspace_symbols<cr>
 nnoremap <leader>fss <cmd>Telescope bibtex<cr>

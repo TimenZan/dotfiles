@@ -164,6 +164,7 @@ Plug 'morhetz/gruvbox'
 Plug 'ray-x/starry.nvim'
 Plug 'catppuccin/nvim', {'as': 'catppuccin'}
 Plug 'EdenEast/nightfox.nvim'
+Plug 'aktersnurra/no-clown-fiesta.nvim' 
 " }}}
 " misc {{{
 Plug 'tweekmonster/startuptime.vim'

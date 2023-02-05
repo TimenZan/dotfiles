@@ -141,7 +141,6 @@ Plug 'JASONews/glow-hover'
 Plug 'junegunn/vim-easy-align'
 	nmap <leader>ga <Plug>(EasyAlign)
 	xmap <leader>ga <Plug>(EasyAlign)
-Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
 Plug 'tpope/vim-speeddating'
 Plug 'numToStr/Comment.nvim'
 Plug 'tpope/vim-eunuch'
@@ -300,9 +299,6 @@ nnoremap <leader>p <cmd>Glow<CR>
 
 noremap <F3> g<c-g>
 noremap <F6> :setlocal spell! spelllang=en_us<CR>
-noremap <F10> :Goyo<CR>
-" map <leader>f :Goyo \| set linebreak<CR>
-inoremap <F10> <esc>:Goyo<CR>a
 
 " Use esc to exit terminal mode
 tnoremap <Esc> <C-\><C-n>

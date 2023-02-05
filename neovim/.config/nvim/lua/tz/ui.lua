@@ -25,11 +25,7 @@ require 'dressing'.setup {
     },
 }
 
-require 'glow-hover'.setup {
-    max_width = 50,
-    padding = 10,
-    border = 'shadow',
-}
+require 'glow-hover'.setup {}
 
 require 'nvim_context_vt'.setup {
     custom_text_handler = function(node)

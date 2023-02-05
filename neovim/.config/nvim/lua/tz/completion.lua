@@ -109,7 +109,6 @@ cmp.setup {
     },
 
     formatting = {
-        deprecated = true,
         -- format = function(entry, vim_item)
         --     vim_item.kind = lspkind.presets.default[vim_item.kind] .. " " ..
         --         vim_item.kind

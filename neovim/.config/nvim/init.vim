@@ -238,6 +238,8 @@ vnoremap @ :norm@
 " center screen and unfold on search
 nnoremap <silent> n nzzzv
 nnoremap <silent> N Nzzzv
+vnoremap <silent> < <gv
+vnoremap <silent> > >gv
 
 " :h vim.lsp.buf
 nnoremap <silent> gd         <cmd>lua vim.lsp.buf.declaration()<CR>

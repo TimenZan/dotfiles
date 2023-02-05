@@ -157,6 +157,7 @@ Plug 'wsdjeg/vim-fetch'
 Plug 'jessarcher/vim-heritage'
 Plug 'andymass/vim-matchup'
 	let g:matchup_matchparen_offscreen = {}
+Plug 'tpope/vim-characterize'
 " }}}
 " colorschemes {{{
 Plug 'morhetz/gruvbox'
@@ -248,7 +249,7 @@ nnoremap <silent> gr         <cmd>TroubleToggle lsp_references<CR>
 nnoremap <silent> g0         <cmd>lua vim.lsp.buf.document_symbol()<CR>
 nnoremap <silent> gW         <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
 nnoremap <silent> g=         <cmd>lua vim.lsp.buf.format{async=true}<CR>
-nnoremap <silent> ga         <cmd>lua vim.lsp.buf.code_action()<CR>
+nnoremap <silent> <leader>a  <cmd>lua vim.lsp.buf.code_action()<CR>
 nnoremap <silent> g[         <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
 nnoremap <silent> g]         <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
 nnoremap <silent> <leader>rn <cmd>lua vim.lsp.buf.rename()<CR>

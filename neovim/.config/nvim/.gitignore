@@ -4,3 +4,4 @@ autoload/plug.vim
 autoload/plug.vim.old
 undo/**
 spell/
+lua/.luarc.json

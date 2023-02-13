@@ -79,26 +79,17 @@ require 'lspconfig'.efm.setup {
 --     },
 -- }
 
-local runtime_path = vim.split(package.path, ';')
-table.insert(runtime_path, "lua/?.lua")
-require 'lspconfig'.sumneko_lua.setup {
+require 'lspconfig'.lua_ls.setup {
     capabilities = capabilities,
-    cmd = {
-        'lua-language-server', '-E', '/usr/share/lua-language-server/main.lua'
-    },
     on_attach = on_attach,
     settings = {
         Lua = {
-            runtime = { version = 'LuaJIT', path = runtime_path },
-            diagnostics = { globals = { 'vim' } },
-            workspace = {
-                -- Make the server aware of Neovim runtime files
-                library = vim.api.nvim_get_runtime_file("", true)
-            },
-            -- Do not send telemetry data containing a randomized but unique identifier
-            telemetry = { enable = false }
-        }
-    }
+            runtime = { version = 'LuaJIT' },
+            diagnostics = { globals = {'vim'} },
+            workspace = { library = vim.api.nvim_get_runtime_file("", true) },
+            telemetry = { enable = false },
+        },
+    },
 }
 
 local rust_opts = {

@@ -59,14 +59,7 @@ Plug 'rust-lang/rust.vim'
 Plug 'simrat39/rust-tools.nvim'
 " haskell
 Plug 'alx741/vim-stylishask'
-Plug 'neovimhaskell/haskell-vim'
-	let g:haskell_enable_quantification = 1
-	let g:haskell_enable_recursivedo = 1
-	let g:haskell_enable_arrowsyntax = 1
-	let g:haskell_enable_pattern_synonyms = 1
-	let g:haskell_enable_typeroles = 1
-	let g:haskell_enable_static_pointers = 1
-	let g:haskell_backpack = 1
+Plug 'MrcJkb/haskell-tools.nvim'
 " java
 Plug 'uiiaoo/java-syntax.vim'
 " dart
@@ -252,6 +245,7 @@ nnoremap <silent> g0         <cmd>lua vim.lsp.buf.document_symbol()<CR>
 nnoremap <silent> gW         <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
 nnoremap <silent> g=         <cmd>lua vim.lsp.buf.format{async=true}<CR>
 nnoremap <silent> <leader>a  <cmd>lua vim.lsp.buf.code_action()<CR>
+nnoremap <silent> <leader>l  <cmd>lua vim.lsp.codelens.run()<CR>
 nnoremap <silent> g[         <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
 nnoremap <silent> g]         <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
 nnoremap <silent> <leader>rn <cmd>lua vim.lsp.buf.rename()<CR>

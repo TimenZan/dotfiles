@@ -1,6 +1,6 @@
 local servers = {
     'vimls', 'yamlls', 'bashls', 'texlab', 'clangd', 'pyright',
-    'jedi_language_server', 'hls'
+    'jedi_language_server'
 }
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
@@ -124,6 +124,19 @@ local rust_opts = {
     } -- options for rust-analyzer
 }
 require 'rust-tools'.setup(rust_opts)
+
+local ht = require 'haskell-tools'
+ht.setup {
+    hls = {
+        capabilities = capabilities,
+        on_attach = function(client, bufnr)
+            vim.keymap.set('n', '<leader>ha', ht.lsp.buf_eval_all, {buffer = bufnr})
+            vim.keymap.set('n', '<leader>hs', ht.hoogle.hoogle_signature, opts)
+            on_attach(client, bufnr)
+        end
+    }
+
+}
 
 require 'flutter-tools'.setup {
     widget_guides = { enabled = true },

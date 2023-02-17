@@ -10,6 +10,7 @@ $git_state\
 $git_status\
 $hg_branch\
 $java\
+$conda\
 $jobs\
 $time\
 $status\

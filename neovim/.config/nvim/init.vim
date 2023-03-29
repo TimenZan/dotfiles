@@ -17,6 +17,7 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'tpope/vim-repeat'
 Plug 'winston0410/cmd-parser.nvim'
+Plug 'antoinemadec/FixCursorHold.nvim'
 " }}}
 " lsp {{{
 Plug 'neovim/nvim-lspconfig'
@@ -35,6 +36,12 @@ Plug 'onsails/lspkind-nvim'
 Plug 'kosayoda/nvim-lightbulb'
 Plug 'rafamadriz/friendly-snippets'
 Plug 'weilbith/nvim-lsp-smag' " SMArt taGs
+" }}}
+" test {{{
+Plug 'nvim-neotest/neotest'
+Plug 'mrcjkb/neotest-haskell'
+Plug 'rouge8/neotest-rust'
+Plug 'hkupty/iron.nvim'
 " }}}
 " vcs {{{
 " git
@@ -291,6 +298,16 @@ nnoremap <leader>dq <cmd>TroubleToggle quickfix<cr>
 nnoremap <leader>dl <cmd>TroubleToggle loclist<cr>
 nnoremap <leader>dr <cmd>TroubleToggle lsp_references<cr>
 
+" neotest bindings
+nnoremap <leader>tr <cmd>lua require'neotest'.run.run()<CR>
+nnoremap <leader>tt <cmd>lua require'neotest'.run.run({suite = true})<CR>
+nnoremap <leader>tf <cmd>lua require'neotest'.run.run(vim.fn.expand("%"))<CR>
+nnoremap <leader>td <cmd>lua require'neotest'.run.run({strategy = "dap"})<CR>
+nnoremap <leader>tq <cmd>lua require'neotest'.run.stop()<CR>
+nnoremap <leader>ta <cmd>lua require'neotest'.run.attach()<CR>
+nnoremap <leader>ts <cmd>lua require'neotest'.summary.toggle()<CR>
+
+
 nnoremap <leader>p <cmd>Glow<CR>
 
 noremap <F3> g<c-g>
@@ -312,6 +329,7 @@ lua require'tz.line'
 lua require'tz.dap'
 lua require'tz.treesitter'
 lua require'tz.ui'
+lua require'tz.test'
 lua require'Comment'.setup()
 
 " }}}

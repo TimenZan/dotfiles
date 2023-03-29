@@ -127,6 +127,9 @@ require 'rust-tools'.setup(rust_opts)
 
 local ht = require 'haskell-tools'
 ht.setup {
+    repl = {
+        handler = 'builtin',
+    },
     hls = {
         capabilities = capabilities,
         on_attach = function(client, bufnr)
@@ -135,8 +138,9 @@ ht.setup {
             on_attach(client, bufnr)
         end
     }
-
 }
+
+vim.keymap.set('n', '<leader>hr', ht.repl.toggle)
 
 require 'flutter-tools'.setup {
     widget_guides = { enabled = true },

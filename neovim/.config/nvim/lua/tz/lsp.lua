@@ -136,8 +136,13 @@ ht.setup {
             vim.keymap.set('n', '<leader>ha', ht.lsp.buf_eval_all, {buffer = bufnr})
             vim.keymap.set('n', '<leader>hs', ht.hoogle.hoogle_signature, opts)
             on_attach(client, bufnr)
-        end
-    }
+        end,
+        default_settings = {
+            haskell = {
+                formattingProvider = 'stylish-haskell',
+            },
+        },
+    },
 }
 
 vim.keymap.set('n', '<leader>hr', ht.repl.toggle)

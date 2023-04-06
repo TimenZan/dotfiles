@@ -18,6 +18,9 @@ Plug 'kyazdani42/nvim-web-devicons'
 Plug 'tpope/vim-repeat'
 Plug 'winston0410/cmd-parser.nvim'
 Plug 'antoinemadec/FixCursorHold.nvim'
+Plug 'kana/vim-textobj-user'
+Plug 'neovimhaskell/nvim-hs.vim'
+Plug 'liuchengxu/vim-which-key'
 " }}}
 " lsp {{{
 Plug 'neovim/nvim-lspconfig'
@@ -67,6 +70,8 @@ Plug 'simrat39/rust-tools.nvim'
 " haskell
 Plug 'alx741/vim-stylishask'
 Plug 'MrcJkb/haskell-tools.nvim'
+" agda
+Plug 'isovector/cornelis'
 " java
 Plug 'uiiaoo/java-syntax.vim'
 " dart

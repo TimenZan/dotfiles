@@ -7,6 +7,7 @@ require 'cmp_git'.setup()
 local WIDE_HEIGHT = 40
 local luasnip = require 'luasnip'
 require 'luasnip/loaders/from_vscode'.lazy_load()
+require 'luasnip.loaders.from_lua'.load({paths = "~/.config/nvim/snippets"})
 
 local lspkind = require 'lspkind'
 
@@ -87,7 +88,7 @@ cmp.setup {
     event = {},
 
     mapping = {
-        ['<c-y>'] = cmp.mapping.confirm({
+        ['<c-space>'] = cmp.mapping.confirm({
             behavior = cmp.ConfirmBehavior.Replace,
             select = true
         }),
@@ -135,7 +136,7 @@ cmp.setup {
         })
     },
 
-    experimental = { ghost_text = true },
+    -- experimental = { ghost_text = true },
 
     sources = {
         { name = 'luasnip' },

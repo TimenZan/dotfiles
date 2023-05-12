@@ -2,6 +2,10 @@ require("neotest").setup({
     adapters = {
         require("neotest-haskell")({
             dap = { justMyCode = false },
+            build_tools = { 'stack', 'cabal' },
+            frameworks = {
+                {framework = 'tasty', modules = { "Test.Tasty", "from-upstream"}, },
+            },
         }),
         require("neotest-rust")({}),
     },

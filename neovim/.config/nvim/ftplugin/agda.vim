@@ -28,3 +28,5 @@ nnoremap <buffer> K <cmd>CornelisWhyInScope<CR>
 nnoremap <buffer> <leader>a <cmd>CornelisAuto<CR>
 nnoremap <buffer> g[ <cmd>CornelisPrevGoal<CR>
 nnoremap <buffer> g] <cmd>CornelisNextGoal<CR>
+
+call cornelis#bind_input("mid", "·")

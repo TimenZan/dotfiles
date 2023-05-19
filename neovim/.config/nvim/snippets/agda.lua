@@ -27,4 +27,6 @@ return {
     ),
     s({trig="equiv",dscr="≡⟨ ? ⟩"}, t("≡⟨ ? ⟩")),
     s({trig="trivial",dscr="≡⟨ refl ⟩"}, t("≡⟨ refl ⟩")),
+    s({trig="bigstep",dscr="—↠"}, t("—↠ ")),
+    s({trig="reduces",dscr="—→⟨ {! !} ⟩"}, t("—→⟨ {! !} ⟩")),
 }

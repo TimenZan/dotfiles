@@ -86,7 +86,7 @@ Plug 'KeitaNakamura/tex-conceal.vim', { 'for': 'tex' }
 	let g:tex_conceal='abdgm'
 	let g:tex_conceal_frac=1
 Plug 'lervag/vimtex', { 'for': 'tex' }
-	let g:tex_flavor='latex'
+	let g:tex_flavor='lualatex'
 	let g:vimtex_view_method='zathura'
 	let g:vimtex_compiler_progname='nvr'
 	let g:vimtex_quickfix_mode=1
@@ -177,7 +177,7 @@ Plug 'tweekmonster/startuptime.vim'
 Plug '~/development/nvim-fatal'
 call plug#end()
 
-colorscheme gruvbox
+colorscheme catppuccin-mocha
 
 " }}}
 

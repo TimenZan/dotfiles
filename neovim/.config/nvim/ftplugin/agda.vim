@@ -17,6 +17,7 @@ nnoremap <c-c><c-space> <cmd>CornelisGive<CR>
 nnoremap <c-c><c-c> <cmd>CornelisMakeCase<CR>
 nnoremap <c-c><c-m> <cmd>CornelisQuestionToMeta<CR>
 nnoremap <c-c><c-d> <cmd>CornelisTypeInfer<CR>
+nnoremap <c-c><c-.> <cmd>CornelisTypeContextInfer<CR>
 nnoremap <c-c><c-n> <cmd>CornelisNormalize<CR>
 nnoremap <c-c><c-r> <cmd>CornelisRefine<CR>
 
@@ -30,3 +31,8 @@ nnoremap <buffer> g[ <cmd>CornelisPrevGoal<CR>
 nnoremap <buffer> g] <cmd>CornelisNextGoal<CR>
 
 call cornelis#bind_input("mid", "·")
+call cornelis#bind_input("p1", "proj₁")
+call cornelis#bind_input("p2", "proj₂")
+call cornelis#bind_input("rt", "⊢")
+call cornelis#bind_input("rtt", "⊨")
+

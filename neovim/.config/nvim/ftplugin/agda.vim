@@ -35,4 +35,6 @@ call cornelis#bind_input("p1", "proj₁")
 call cornelis#bind_input("p2", "proj₂")
 call cornelis#bind_input("rt", "⊢")
 call cornelis#bind_input("rtt", "⊨")
+call cornelis#bind_input(",", "⸴")
+call cornelis#bind_input("check", "✓")
 

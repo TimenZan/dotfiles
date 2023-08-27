@@ -1,6 +1,0 @@
-cmdargs:
-  env:
-    neovim: true
-  error-limit: 0
-  stat: true
-  color: true

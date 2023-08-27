@@ -125,28 +125,6 @@ local rust_opts = {
 }
 require 'rust-tools'.setup(rust_opts)
 
-local ht = require 'haskell-tools'
-ht.setup {
-    repl = {
-        handler = 'builtin',
-    },
-    hls = {
-        capabilities = capabilities,
-        on_attach = function(client, bufnr)
-            vim.keymap.set('n', '<leader>ha', ht.lsp.buf_eval_all, {buffer = bufnr})
-            vim.keymap.set('n', '<leader>hs', ht.hoogle.hoogle_signature, opts)
-            on_attach(client, bufnr)
-        end,
-        default_settings = {
-            haskell = {
-                formattingProvider = 'stylish-haskell',
-            },
-        },
-    },
-}
-
-vim.keymap.set('n', '<leader>hr', ht.repl.toggle)
-
 require 'flutter-tools'.setup {
     widget_guides = { enabled = true },
     closing_tags = { prefix = ">=> " },

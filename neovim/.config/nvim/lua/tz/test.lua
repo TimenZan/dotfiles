@@ -8,6 +8,15 @@ require("neotest").setup({
             },
         }),
         require("neotest-rust")({}),
+        require("neotest-scala")({
+            -- Command line arguments for runner
+            -- Can also be a function to return dynamic values
+            args = {"--no-color"},
+            -- Possibly values bloop|sbt.
+            runner = "sbt",
+            -- Possibly values utest|munit|scalatest.
+            framework = "utest",
+        }),
     },
     summary = {
         mappings = {

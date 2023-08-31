@@ -44,6 +44,7 @@ Plug 'weilbith/nvim-lsp-smag' " SMArt taGs
 Plug 'nvim-neotest/neotest'
 Plug 'mrcjkb/neotest-haskell'
 Plug 'rouge8/neotest-rust'
+Plug 'stevanmilic/neotest-scala'
 Plug 'hkupty/iron.nvim'
 " }}}
 " vcs {{{
@@ -74,6 +75,8 @@ Plug 'MrcJkb/haskell-tools.nvim'
 Plug 'isovector/cornelis'
 " java
 Plug 'uiiaoo/java-syntax.vim'
+" scala
+Plug 'scalameta/nvim-metals'
 " dart
 Plug 'dart-lang/dart-vim-plugin', { 'for': 'dart' }
 	let g:dart_format_on_save = 1

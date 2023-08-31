@@ -1,6 +1,5 @@
 local servers = {
-    'vimls', 'yamlls', 'bashls', 'texlab', 'clangd', 'pyright',
-    'jedi_language_server'
+    'vimls', 'yamlls', 'jsonls', 'bashls', 'texlab', 'pyright', 'tsserver', 'eslint',
 }
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
@@ -18,6 +17,34 @@ for _, server in pairs(servers) do
     }
 end
 
+require 'lspconfig'.pylsp.setup({
+    capabilities = capabilities,
+    on_attach = on_attach,
+    settings = {
+        pyslp = {
+            plugins = {
+                black = {
+                    enabled = true,
+                    cache_config = true,
+                },
+                pycodestyle = {
+                    ignore = {},
+                    maxLineLength = 100
+                },
+            },
+        },
+    },
+})
+
+require 'lspconfig'.clangd.setup({
+    capabilities = capabilities,
+    on_attach = function(client)
+        require("clangd_extensions.inlay_hints").setup_autocmd()
+        require("clangd_extensions.inlay_hints").set_inlay_hints()
+        on_attach(client)
+    end,
+})
+
 require 'lspconfig'.ltex.setup(require 'tz.lsp.ltex')
 
 local proselint = {
@@ -27,13 +54,6 @@ local proselint = {
     lintSeverity = 3, --marks everything as Info severity, same as ltex
 }
 local efm_languages = {
-    vim = {
-        {
-            lintCommand = 'vint --enable-neovim --style --no-color -',
-            lintStdin = true,
-            lintFormats = { '%f:%l:%c: %m' }
-        }
-    },
     tex = {
         proselint,
     },
@@ -85,7 +105,7 @@ require 'lspconfig'.lua_ls.setup {
     settings = {
         Lua = {
             runtime = { version = 'LuaJIT' },
-            diagnostics = { globals = {'vim'} },
+            diagnostics = { globals = { 'vim' } },
             workspace = { library = vim.api.nvim_get_runtime_file("", true) },
             telemetry = { enable = false },
         },
@@ -94,7 +114,7 @@ require 'lspconfig'.lua_ls.setup {
 
 local rust_opts = {
     tools = {
-        autoSetHints = true, -- automatically set inlay hints
+        autoSetHints = true,     -- automatically set inlay hints
         runnables = {
             use_telescope = true -- use telescope.nvim
         },
@@ -104,7 +124,7 @@ local rust_opts = {
             -- other_hints_prefix = " » ",
             other_hints_prefix = ">=> ",
             max_len_align_padding = false, -- don't align to longest line in file
-            right_align = false -- don't align to the extreme right
+            right_align = false            -- don't align to the extreme right
         },
         hover_actions = {
             -- see vim.api.nvim_open_win()
@@ -136,6 +156,11 @@ require 'flutter-tools'.setup {
         end
     } -- options for dartls
 }
+
+require 'lean'.setup({
+    lsp = {on_attach = on_attach},
+    mappings = true,
+})
 
 require 'nvim-autopairs'.setup()
 vim.cmd [[autocmd CursorMoved,CursorMovedI,InsertChange * lua require'nvim-lightbulb'.update_lightbulb()]]

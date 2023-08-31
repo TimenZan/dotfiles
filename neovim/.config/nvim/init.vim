@@ -73,10 +73,14 @@ Plug 'alx741/vim-stylishask'
 Plug 'MrcJkb/haskell-tools.nvim'
 " agda
 Plug 'isovector/cornelis'
+" lean
+Plug 'Julian/lean.nvim'
 " java
 Plug 'uiiaoo/java-syntax.vim'
 " scala
 Plug 'scalameta/nvim-metals'
+" C/++
+Plug 'p00f/clangd_extensions.nvim'
 " dart
 Plug 'dart-lang/dart-vim-plugin', { 'for': 'dart' }
 	let g:dart_format_on_save = 1

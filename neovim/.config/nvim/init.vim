@@ -78,7 +78,7 @@ Plug 'Julian/lean.nvim'
 " java
 Plug 'uiiaoo/java-syntax.vim'
 " scala
-Plug 'scalameta/nvim-metals'
+Plug 'scalameta/nvim-metals', {'for': 'scala'}
 " C/++
 Plug 'p00f/clangd_extensions.nvim'
 " dart
@@ -132,7 +132,7 @@ Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 Plug 'hoob3rt/lualine.nvim'
 Plug 'j-hui/fidget.nvim'
 Plug 'norcalli/nvim-colorizer.lua'
-Plug 'p00f/nvim-ts-rainbow'
+" Plug 'p00f/nvim-ts-rainbow'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'mbbill/undotree'
@@ -152,12 +152,12 @@ Plug 'lukas-reineke/indent-blankline.nvim'
 	let g:indent_blankline_show_current_context = v:false
 Plug 'winston0410/range-highlight.nvim'
 Plug 'kassio/neoterm'
-Plug 'romgrk/nvim-treesitter-context'
+Plug 'nvim-treesitter/nvim-treesitter-context'
 Plug 'haringsrob/nvim_context_vt'
 Plug 'folke/trouble.nvim'
 Plug 'tversteeg/registers.nvim'
 Plug 'stevearc/dressing.nvim'
-Plug 'JASONews/glow-hover'
+" Plug 'JASONews/glow-hover'
 " }}}
 " quality of life tools {{{
 Plug 'junegunn/vim-easy-align'

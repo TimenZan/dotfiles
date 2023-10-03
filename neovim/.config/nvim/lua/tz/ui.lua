@@ -25,7 +25,7 @@ require 'dressing'.setup {
     },
 }
 
-require 'glow-hover'.setup {}
+-- require 'glow-hover'.setup {}
 
 require 'nvim_context_vt'.setup {
     custom_text_handler = function(node)

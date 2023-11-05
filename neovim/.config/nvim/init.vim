@@ -170,8 +170,6 @@ Plug 'tpope/vim-abolish'
 Plug 'machakann/vim-sandwich'
 Plug 'machakann/vim-swap'
 Plug 'RRethy/vim-illuminate'
-Plug 'editorconfig/editorconfig-vim'
-	let g:EditorConfig_exclude_patterns=['scp://.\*']
 Plug 'wellle/targets.vim'
 Plug 'windwp/nvim-autopairs'
 Plug 'wsdjeg/vim-fetch'

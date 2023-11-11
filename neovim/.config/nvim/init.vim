@@ -75,8 +75,6 @@ Plug 'MrcJkb/haskell-tools.nvim'
 Plug 'isovector/cornelis'
 " lean
 Plug 'Julian/lean.nvim'
-" java
-Plug 'uiiaoo/java-syntax.vim'
 " scala
 Plug 'scalameta/nvim-metals', {'for': 'scala'}
 " C/++

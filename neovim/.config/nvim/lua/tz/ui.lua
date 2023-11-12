@@ -16,14 +16,14 @@ telescope.load_extension 'heading'
 telescope.load_extension 'bibtex'
 telescope.load_extension 'dap'
 
-require 'dressing'.setup {
-    input = {
-        insert_only = false,
-    },
-    select = {
-        backend = { 'telescope' }
-    },
-}
+-- require 'dressing'.setup {
+--     input = {
+--         insert_only = false,
+--     },
+--     select = {
+--         backend = { 'telescope' }
+--     },
+-- }
 
 -- require 'glow-hover'.setup {}
 

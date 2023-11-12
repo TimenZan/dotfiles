@@ -13,10 +13,11 @@ local diagnostics = {
     -- symbols = {error = 'E', warn = 'W', info = 'I', hint = 'H'}
 }
 
-require 'lualine'.setup {
+require('lualine').setup {
     options = {
         icons_enabled = true,
-        theme = 'material',
+        -- theme = 'material',
+        theme = 'catppuccin',
         component_separators = { '', '' },
         section_separators = { '', '' },
         disabled_filetypes = {}

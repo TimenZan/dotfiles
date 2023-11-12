@@ -6,7 +6,6 @@
 "╚═╝╚═╝  ╚═══╝╚═╝   ╚═╝╚═╝  ╚═══╝  ╚═╝╚═╝     ╚═╝
 
 let mapleader = ' '
-let g:python3_host_prog = '/usr/bin/python3'
 
 " Plugins {{{
 call plug#begin('~/.config/nvim/plugged')
@@ -30,10 +29,12 @@ Plug 'hrsh7th/cmp-nvim-lua'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-calc'
+Plug 'hrsh7th/cmp-cmdline'
 Plug 'f3fora/cmp-spell'
 Plug 'petertriho/cmp-git'
 Plug 'L3MON4D3/LuaSnip'
 Plug 'saadparwaiz1/cmp_luasnip'
+Plug 'micangl/cmp-vimtex'
 Plug 'ray-x/lsp_signature.nvim'
 Plug 'onsails/lspkind-nvim'
 Plug 'kosayoda/nvim-lightbulb'
@@ -118,6 +119,9 @@ Plug 'mrk21/yaml-vim'
 " esoteric
 Plug 'shirk/vim-gas'
 Plug 'CaffeineViking/vim-glsl'
+" web
+" Plug 'aurum77/live-server.nvim', { 'do': ':LiveServerInstall'}
+Plug 'turbio/bracey.vim', {'do': 'npm install --prefix server'}
 " }}}
 " UI {{{
 Plug '~/development/vim-concealer'
@@ -127,10 +131,11 @@ Plug 'rcarriga/nvim-dap-ui'
 Plug 'nvim-telescope/telescope-dap.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/nvim-treesitter-textobjects'
-Plug 'hoob3rt/lualine.nvim'
+Plug 'nvim-lualine/lualine.nvim'
 Plug 'j-hui/fidget.nvim'
 Plug 'norcalli/nvim-colorizer.lua'
 " Plug 'p00f/nvim-ts-rainbow'
+Plug 'hiphish/rainbow-delimiters.nvim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'mbbill/undotree'
@@ -188,7 +193,6 @@ Plug 'aktersnurra/no-clown-fiesta.nvim'
 Plug 'tweekmonster/startuptime.vim'
 " Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 " }}}
-Plug '~/development/nvim-fatal'
 call plug#end()
 
 colorscheme catppuccin-mocha
@@ -350,6 +354,7 @@ lua require'tz.treesitter'
 lua require'tz.ui'
 lua require'tz.test'
 lua require'Comment'.setup()
+lua require'ibl'.setup()
 
 " }}}
 

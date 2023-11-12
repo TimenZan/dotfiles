@@ -1,5 +1,6 @@
 local servers = {
     'vimls', 'yamlls', 'jsonls', 'bashls', 'texlab', 'pyright', 'tsserver', 'eslint',
+    'cssls', 'html'
 }
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()

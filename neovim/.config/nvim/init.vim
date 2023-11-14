@@ -354,7 +354,6 @@ lua require'tz.treesitter'
 lua require'tz.ui'
 lua require'tz.test'
 lua require'Comment'.setup()
-lua require'ibl'.setup()
 
 " }}}
 

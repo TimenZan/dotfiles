@@ -20,10 +20,6 @@ require 'nvim-treesitter.configs'.setup {
     indent = {
         enable = true
     },
-    rainbow = { -- requires nvim-ts-rainbow plugin
-        enable = true,
-        extended_mode = true,
-    },
     textobjects = {
         select = {
             enable = true,

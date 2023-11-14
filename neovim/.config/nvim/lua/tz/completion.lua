@@ -64,6 +64,9 @@ local mapping = {
     ['<C-n>'] = cmp.mapping.select_next_item({ behavior = types.cmp.SelectBehavior.Select }),
     ['<C-p>'] = cmp.mapping.select_prev_item({ behavior = types.cmp.SelectBehavior.Select }),
 
+    ["<A-n>"] = cmp.mapping.scroll_docs(-4),
+    ["<A-p>"] = cmp.mapping.scroll_docs(4),
+
     ["<Tab>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
             cmp.select_next_item()
@@ -88,8 +91,6 @@ local mapping = {
         end
     end, { "i", "s" }),
 
-    ["<C-d>"] = cmp.mapping.scroll_docs(-4),
-    ["<C-f>"] = cmp.mapping.scroll_docs(4),
     -- ["<C-x>"] = cmp.mapping.complete({ config = {} }),
 }
 

@@ -115,28 +115,26 @@ require 'lspconfig'.lua_ls.setup {
 
 local rust_opts = {
     tools = {
-        autoSetHints = true,     -- automatically set inlay hints
         runnables = {
             use_telescope = true -- use telescope.nvim
         },
         inlay_hints = {
-            show_parameter_hints = true,
             parameter_hints_prefix = " « ",
             -- other_hints_prefix = " » ",
             other_hints_prefix = ">=> ",
-            max_len_align_padding = false, -- don't align to longest line in file
-            right_align = false            -- don't align to the extreme right
+            -- max_len_align_padding = false, -- don't align to longest line in file
+            -- right_align = false            -- don't align to the extreme right
         },
-        hover_actions = {
-            -- see vim.api.nvim_open_win()
-            border = {
-                { "╭", "FloatBorder" }, { "─", "FloatBorder" },
-                { "╮", "FloatBorder" }, { "│", "FloatBorder" },
-                { "╯", "FloatBorder" }, { "─", "FloatBorder" },
-                { "╰", "FloatBorder" }, { "│", "FloatBorder" }
-            },
-            auto_focus = true,
-        },
+        -- hover_actions = {
+        --     -- see vim.api.nvim_open_win()
+        --     border = {
+        --         { "╭", "FloatBorder" }, { "─", "FloatBorder" },
+        --         { "╮", "FloatBorder" }, { "│", "FloatBorder" },
+        --         { "╯", "FloatBorder" }, { "─", "FloatBorder" },
+        --         { "╰", "FloatBorder" }, { "│", "FloatBorder" }
+        --     },
+        --     auto_focus = true,
+        -- },
     },
     server = {
         capabilities = capabilities,

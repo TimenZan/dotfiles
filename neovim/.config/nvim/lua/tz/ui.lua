@@ -40,9 +40,16 @@ require 'colorizer'.setup()
 require 'range-highlight'.setup {}
 require 'gitsigns'.setup {}
 require 'fidget'.setup {
-    sources = {
-        ltex = {
-            ignore = true,
+    progress = {
+        ignore_done_already = true,
+        ignore = {
+            "ltex",
         },
+    },
+    notification = {
+        override_vim_notify = true,
+        view = {
+            group_separator = ""
+        }
     },
 }

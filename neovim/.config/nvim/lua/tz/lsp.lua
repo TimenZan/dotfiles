@@ -6,9 +6,9 @@ local servers = {
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 local on_attach = function(client)
     require 'illuminate'.on_attach(client)
-    require 'lsp_signature'.on_attach({
-        fix_pos = true,
-    })
+    -- require 'lsp_signature'.on_attach({
+    --     fix_pos = true,
+    -- })
 end
 
 for _, server in pairs(servers) do

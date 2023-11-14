@@ -11,6 +11,12 @@ require 'luasnip.loaders.from_lua'.load({ paths = "~/.config/nvim/snippets" })
 
 local lspkind = require 'lspkind'
 
+local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+cmp.event:on(
+    'confirm_done',
+    cmp_autopairs.on_confirm_done()
+)
+
 -- lspkind.init({
 --     -- enables text annotations
 --     mode = 'symbol',
@@ -48,8 +54,8 @@ local mapping = {
         behavior = cmp.ConfirmBehavior.Replace,
         select = true
     }),
-    ['<C-n>'] = cmp.mapping.select_next_item({ behavior = types.cmp.SelectBehavior.Insert }),
-    ['<C-p>'] = cmp.mapping.select_prev_item({ behavior = types.cmp.SelectBehavior.Insert }),
+    ['<C-n>'] = cmp.mapping.select_next_item({ behavior = types.cmp.SelectBehavior.Select }),
+    ['<C-p>'] = cmp.mapping.select_prev_item({ behavior = types.cmp.SelectBehavior.Select }),
     ['<Tab>'] = function(fallback)
         if vim.fn.pumvisible() == 1 then
             vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<C-n>', true,
@@ -61,7 +67,9 @@ local mapping = {
         else
             fallback()
         end
-    end
+    end,
+    ["<C-d>"] = cmp.mapping.scroll_docs(-4),
+    ["<C-f>"] = cmp.mapping.scroll_docs(4),
 }
 
 
@@ -141,17 +149,24 @@ cmp.setup {
 
     -- experimental = { ghost_text = true },
 
-    sources = {
-        { name = 'vimtex' },
-        { name = 'luasnip' },
-        { name = 'nvim_lua' },
-        { name = 'nvim_lsp' },
-        { name = 'path' },
-        { name = 'calc' },
-        { name = 'cmp_git' },
-        { name = 'buffer' },
-        { name = 'spell' },
-    }
+    sources = cmp.config.sources({
+        { { name = 'nvim_lsp_signature_help' }, },
+        {
+            { name = 'vimtex' },
+            { name = 'luasnip' },
+            { name = 'nvim_lua' },
+            { name = 'nvim_lsp' },
+        },
+        {
+            { name = 'path' },
+            { name = 'calc' },
+        },
+        {
+            { name = 'cmp_git' },
+            { name = 'buffer' },
+            { name = 'spell' },
+        },
+    })
 }
 
 -- -- Set configuration for specific filetype.

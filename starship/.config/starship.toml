@@ -11,6 +11,7 @@ $git_status\
 $hg_branch\
 $java\
 $conda\
+$python\
 $jobs\
 $time\
 $status\

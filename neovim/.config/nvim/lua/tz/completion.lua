@@ -115,7 +115,9 @@ cmp.setup({
     sorting = {
         priority_weight = 2,
         comparators = {
-            compare.offset, compare.exact, compare.score, compare.kind,
+            compare.offset, compare.exact,
+            require('clangd_extensions.cmp_scores'),
+            compare.score, compare.kind,
             compare.sort_text, compare.length, compare.order
         }
     },

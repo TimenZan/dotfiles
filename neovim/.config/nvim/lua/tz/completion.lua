@@ -4,50 +4,18 @@ local cmp = require('cmp')
 
 require 'cmp_git'.setup()
 
-local WIDE_HEIGHT = 40
 local luasnip = require 'luasnip'
 require 'luasnip/loaders/from_vscode'.lazy_load()
 require 'luasnip.loaders.from_lua'.load({ paths = "~/.config/nvim/snippets" })
 
 -- local lspkind = require 'lspkind'
 
+require 'nvim-autopairs'.setup()
 local cmp_autopairs = require('nvim-autopairs.completion.cmp')
 cmp.event:on(
     'confirm_done',
     cmp_autopairs.on_confirm_done()
 )
-
--- lspkind.init({
---     -- enables text annotations
---     mode = 'symbol',
---     -- default symbol map
---     -- can be either 'default' or
---     -- 'codicons' for codicon preset (requires vscode-codicons font installed)
---     preset = 'default',
---     -- override preset symbols
---     symbol_map = {
---         Text = '',
---         Method = 'ƒ',
---         Function = '',
---         Constructor = '',
---         Variable = '',
---         Class = '',
---         Interface = 'ﰮ',
---         Module = '',
---         Property = '',
---         Unit = '',
---         Value = '',
---         Enum = '了',
---         Keyword = '',
---         Snippet = '﬌',
---         Color = '',
---         File = '',
---         Folder = '',
---         EnumMember = '',
---         Constant = '',
---         Struct = ''
---     }
--- })
 
 local has_words_before = function()
     unpack = unpack or table.unpack
@@ -107,10 +75,9 @@ cmp.setup({
 
     snippet = {
         expand = function(args)
-            require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+            require('luasnip').lsp_expand(args.body)
         end,
     },
-
 
     sorting = {
         priority_weight = 2,
@@ -136,7 +103,7 @@ cmp.setup({
     }, {
         { name = 'cmp_git' },
         { name = 'buffer', keyword_length = 3 },
-        { name = 'spell',  keyword_length = 3 },
+        { name = 'spell',  keyword_length = 5 },
     }),
 })
 

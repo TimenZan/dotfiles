@@ -19,7 +19,6 @@ Plug 'winston0410/cmd-parser.nvim'
 Plug 'antoinemadec/FixCursorHold.nvim'
 Plug 'kana/vim-textobj-user'
 Plug 'neovimhaskell/nvim-hs.vim'
-Plug 'liuchengxu/vim-which-key'
 " }}}
 " lsp {{{
 Plug 'neovim/nvim-lspconfig'
@@ -38,7 +37,6 @@ Plug 'micangl/cmp-vimtex'
 " Plug 'ray-x/lsp_signature.nvim'
 Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
 Plug 'onsails/lspkind-nvim'
-Plug 'kosayoda/nvim-lightbulb'
 Plug 'rafamadriz/friendly-snippets'
 Plug 'weilbith/nvim-lsp-smag' " SMArt taGs
 " }}}
@@ -73,10 +71,6 @@ Plug 'simrat39/rust-tools.nvim'
 " haskell
 Plug 'alx741/vim-stylishask'
 Plug 'MrcJkb/haskell-tools.nvim'
-" agda
-Plug 'isovector/cornelis'
-" lean
-Plug 'Julian/lean.nvim'
 " Coq
 Plug 'whonore/Coqtail' " for ftdetect, syntax, basic ftplugin, etc
 Plug 'tomtomjhj/coq-lsp.nvim'
@@ -84,12 +78,6 @@ Plug 'tomtomjhj/coq-lsp.nvim'
 Plug 'scalameta/nvim-metals', {'for': 'scala'}
 " C/++
 Plug 'p00f/clangd_extensions.nvim'
-" dart
-Plug 'dart-lang/dart-vim-plugin', { 'for': 'dart' }
-	let g:dart_format_on_save = 1
-	let g:dart_style_guide = 2
-Plug 'Nash0x7E2/awesome-flutter-snippets'
-Plug 'akinsho/flutter-tools.nvim'
 " [la]tex
 Plug 'KeitaNakamura/tex-conceal.vim', { 'for': 'tex' }
 	set conceallevel=2
@@ -97,16 +85,6 @@ Plug 'KeitaNakamura/tex-conceal.vim', { 'for': 'tex' }
 	let g:tex_conceal_frac=1
 Plug 'lervag/vimtex', { 'for': 'tex' }
 	let g:tex_flavor='lualatex'
-	" let g:vimtex_compiler_latexmk = {
- "    \ 'options' : [
- "    \   '-pdf',
- "    \   '-shell-escape',
- "    \   '-verbose',
- "    \   '-file-line-error',
- "    \   '-synctex=1',
- "    \   '-interaction=nonstopmode',
- "    \ ],
- "    \}
 	let g:vimtex_view_method='zathura'
 	let g:vimtex_compiler_progname='nvr'
 	let g:vimtex_quickfix_mode=1
@@ -128,7 +106,6 @@ Plug 'CaffeineViking/vim-glsl'
 Plug 'turbio/bracey.vim', {'do': 'npm install --prefix server'}
 " }}}
 " UI {{{
-Plug '~/development/vim-concealer'
 Plug 'mfussenegger/nvim-dap'
 Plug 'theHamsta/nvim-dap-virtual-text'
 Plug 'rcarriga/nvim-dap-ui'
@@ -138,11 +115,9 @@ Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'j-hui/fidget.nvim'
 Plug 'norcalli/nvim-colorizer.lua'
-" Plug 'p00f/nvim-ts-rainbow'
 Plug 'hiphish/rainbow-delimiters.nvim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'mbbill/undotree'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-bibtex.nvim' " TODO: set to use global `.bib`
 Plug 'nvim-telescope/telescope-symbols.nvim'
@@ -208,12 +183,9 @@ filetype plugin indent on
 syntax on
 scriptencoding=utf-8
 set autowrite
-set completeopt=menuone,noselect
-set formatoptions=jcroqln1
+set formatoptions+=ro/an1l
 set ignorecase | set smartcase
 set inccommand=split
-set incsearch
-set lazyredraw
 set linebreak
 set mouse=a
 set noshowmode
@@ -223,7 +195,6 @@ set shiftround
 set shortmess+=c
 set sidescrolloff=5
 set signcolumn=yes
-set smartindent
 set undofile
 set updatetime=100
 if (has('termguicolors'))
@@ -239,19 +210,6 @@ augroup numbertoggle
 augroup END
 
 au TextYankPost * silent! lua vim.highlight.on_yank { timeout = 500 }
-
-" trigger `autoread` when files changes on disk
-" don't do this in vscode, as this breaks
-" if !exists('g:vscode')
-if v:false
-	set autoread
-	augroup filereload
-		autocmd FocusGained,BufEnter,CursorHold,CursorHoldI * if mode() != 'c' | checktime | endif
-		" notification after file change
-		autocmd FileChangedShellPost *
-					\ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
-	augroup END
-endif
 
 let g:markdown_fenced_languages = ['html', 'python', 'ruby', 'vim', 'rust', 'javascript']
 

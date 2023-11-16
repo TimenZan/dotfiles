@@ -2,6 +2,10 @@ local actions = require("telescope.actions")
 local trouble = require("trouble.providers.telescope")
 local telescope = require("telescope")
 
+require 'trouble'.setup {
+    auto_close = true,
+}
+
 telescope.setup {
     defaults = {
         mappings = {
@@ -26,15 +30,6 @@ telescope.load_extension 'dap'
 -- }
 
 -- require 'glow-hover'.setup {}
-
-require 'nvim_context_vt'.setup {
-    custom_text_handler = function(node)
-        if vim.bo.filetype == 'dart' then
-            return nil
-        end
-        return require 'nvim-treesitter.ts_utils'.get_node_text(node)[1]
-    end
-}
 
 require 'colorizer'.setup()
 require 'range-highlight'.setup {}

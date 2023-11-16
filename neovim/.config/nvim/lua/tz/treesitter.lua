@@ -54,6 +54,8 @@ require 'nvim-treesitter.configs'.setup {
     }
 }
 
-require 'treesitter-context'.setup {
-    enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
+require 'treesitter-context'.setup {}
+require 'nvim_context_vt'.setup {
+    disable_ft = { 'markdown', 'dart' },
+    prefix = ' ',
 }

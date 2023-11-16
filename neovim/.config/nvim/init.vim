@@ -77,6 +77,9 @@ Plug 'MrcJkb/haskell-tools.nvim'
 Plug 'isovector/cornelis'
 " lean
 Plug 'Julian/lean.nvim'
+" Coq
+Plug 'whonore/Coqtail' " for ftdetect, syntax, basic ftplugin, etc
+Plug 'tomtomjhj/coq-lsp.nvim'
 " scala
 Plug 'scalameta/nvim-metals', {'for': 'scala'}
 " C/++

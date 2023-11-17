@@ -183,7 +183,7 @@ filetype plugin indent on
 syntax on
 scriptencoding=utf-8
 set autowrite
-set formatoptions+=ro/an1l
+set formatoptions+=ro/n1l
 set ignorecase | set smartcase
 set inccommand=split
 set linebreak

@@ -3,12 +3,13 @@ local servers = {
     'cssls', 'html'
 }
 
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
+local capabilities = vim.tbl_deep_extend("force",
+    vim.lsp.protocol.make_client_capabilities(),
+    require('cmp_nvim_lsp').default_capabilities()
+)
+
 local on_attach = function(client)
     require 'illuminate'.on_attach(client)
-    -- require 'lsp_signature'.on_attach({
-    --     fix_pos = true,
-    -- })
 end
 
 for _, server in pairs(servers) do
@@ -143,4 +144,3 @@ local rust_opts = {
     },
 }
 require 'rust-tools'.setup(rust_opts)
-

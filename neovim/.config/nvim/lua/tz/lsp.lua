@@ -1,6 +1,6 @@
 local servers = {
     'vimls', 'yamlls', 'jsonls', 'bashls', 'texlab', 'pyright', 'tsserver', 'eslint',
-    'cssls', 'html'
+    'cssls', 'html', 'taplo'
 }
 
 local capabilities = vim.tbl_deep_extend("force",

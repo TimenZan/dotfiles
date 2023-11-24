@@ -50,7 +50,7 @@ add_newline = true
 # the prompt character
 [character]
 success_symbol = "[⟩](green)"
-vicmd_symbol = "[⟨](green)"
+vimcmd_symbol = "[⟨](green)"
 error_symbol = "[❯](bold red)"
 
 # battery config for laptop

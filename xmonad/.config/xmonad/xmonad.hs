@@ -1,25 +1,31 @@
 {-# OPTIONS_GHC -Wno-missing-signatures #-}
 
-import qualified Data.Map as M
-import System.Exit
-import XMonad
-import XMonad.Actions.SpawnOn
-import XMonad.Actions.UpdatePointer
-import XMonad.Hooks.ManageDocks
+import qualified Data.Map                      as M
+import           System.Exit
+import           XMonad
+import           XMonad.Actions.SpawnOn
+import           XMonad.Actions.UpdatePointer
+import           XMonad.Hooks.ManageDocks
 
-import XMonad.Layout.ThreeColumns
-import qualified XMonad.StackSet as W
+import           XMonad.Layout.ThreeColumns
+import qualified XMonad.StackSet               as W
 
-import XMonad.Hooks.DynamicLog (PP (ppCurrent, ppSep, ppTitle), shorten, xmobarColor, xmobarPP)
-import XMonad.Hooks.EwmhDesktops (ewmh)
-import XMonad.Hooks.ManageHelpers (isDialog)
-import XMonad.Hooks.StatusBar (statusBarProp, withEasySB)
-import XMonad.Hooks.WindowSwallowing (swallowEventHook)
-import XMonad.Layout.Accordion (Accordion (Accordion))
-import XMonad.Layout.Magnifier (magnifiercz')
-import XMonad.Layout.Renamed (Rename (Replace), renamed)
-import XMonad.Layout.Spiral (spiral)
-import XMonad.Util.SpawnOnce (spawnOnce)
+import           System.Posix.Unistd           (SystemID (nodeName),
+                                                getSystemID)
+import           XMonad.Hooks.EwmhDesktops     (ewmh)
+import           XMonad.Hooks.ManageHelpers    (isDialog)
+import           XMonad.Hooks.StatusBar        (statusBarProp, withEasySB)
+import           XMonad.Hooks.StatusBar.PP     (PP (ppCurrent, ppSep, ppTitle),
+                                                shorten, xmobarColor, xmobarPP)
+import           XMonad.Hooks.WindowSwallowing (swallowEventHook)
+import           XMonad.Layout.Accordion       (Accordion (Accordion))
+import           XMonad.Layout.Fullscreen      (fullscreenFull)
+import           XMonad.Layout.Magnifier       (magnifiercz, magnifiercz')
+import           XMonad.Layout.NoBorders       (noBorders)
+import           XMonad.Layout.PerWorkspace    (onWorkspace)
+import           XMonad.Layout.Renamed         (Rename (Replace), renamed)
+import           XMonad.Layout.Spiral          (spiral)
+import           XMonad.Util.SpawnOnce         (spawnOnOnce, spawnOnce)
 
 -- The command to lock the screen or show the screensaver.
 myScreensaver :: String
@@ -40,33 +46,32 @@ myLauncher :: String
 myLauncher = "dmenu-frecency"
 
 myWorkspaces :: [String]
-myWorkspaces = ["1:web", "2:background", "3:chat", "4:music", "5:code"] ++ map show [(6 :: Integer) .. 9]
+myWorkspaces = ["1:web", "2:chat", "3:background", "4:music", "5:code"] ++ map show [(6 :: Integer) .. 9]
 
--- myLayout = onWorkspace "3:chat" (Mirror (Tall 1 (3 / 100) (1 / 2)))
---                 $ onWorkspace "9" (noBorders (fullscreenFull Full))
---                 $ avoidStruts
---                         ( ThreeColMid 1 (3 / 100) (1 / 2)
---                                 ||| Tall 1 (3 / 100) (1 / 2)
---                                 ||| Mirror (Tall 1 (3 / 100) (1 / 2))
---                                 -- \||| tabbed shrinkText tabConfig
---                                 ||| Full
---                                 ||| spiral (6 / 7)
---                         )
---                 ||| noBorders (fullscreenFull Full)
+-- \||| noBorders (fullscreenFull Full)
 
 myLayout =
-  threeCol
-    ||| magThreeCol
-    ||| Accordion
-    ||| Tall 1 (3 / 100) (1 / 2)
-    ||| Mirror (Tall 1 (3 / 100) (1 / 2))
-    ||| Full
-    ||| spiral (6 / 7)
+  onWorkspace
+    "2:chat"
+    ( magnifiercz 1.4 (Mirror $ Tall 1 (3 / 100) (1 / 2))
+        ||| Accordion
+    )
+    $ onWorkspace
+      "9"
+      (noBorders (fullscreenFull Full))
+      ( threeCol
+          ||| magThreeCol
+          ||| Accordion
+          ||| Tall 1 (3 / 100) (1 / 2)
+          ||| Mirror (Tall 1 (3 / 100) (1 / 2))
+          ||| Full
+          ||| spiral (16 / 9)
+      )
  where
   threeCol = ThreeColMid 1 (3 / 100) (1 / 2)
   magThreeCol =
-    renamed [Replace "ThreeCol Magnified"]
-      $ magnifiercz' 1.4 threeCol
+    renamed [Replace "ThreeCol Magnified"] $
+      magnifiercz' 1.4 threeCol
 
 ------------------------------------------------------------------------
 -- Colors and borders
@@ -101,41 +106,41 @@ myBorderWidth = 1
 myModMask = mod4Mask
 
 myKeys conf@XConfig{XMonad.modMask = modMask} =
-  M.fromList
-    $ [ ((modMask .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
-      , ((modMask .|. controlMask, xK_l), spawn myScreensaver)
-      , ((modMask, xK_p), spawn myLauncher)
-      , ((0, xK_Print), spawn mySelectScreenshot)
-      , ((modMask .|. controlMask .|. shiftMask, xK_p), spawn myScreenshot)
-      , ((modMask .|. shiftMask, xK_c), kill)
-      , ((modMask, xK_space), sendMessage NextLayout)
-      , ((modMask .|. shiftMask, xK_space), setLayout $ XMonad.layoutHook conf)
-      , ((modMask, xK_n), refresh)
-      , ((modMask, xK_Tab), windows W.focusDown)
-      , ((modMask, xK_j), windows W.focusDown)
-      , ((modMask, xK_k), windows W.focusUp)
-      , ((modMask, xK_m), windows W.focusMaster)
-      , ((modMask, xK_Return), windows W.swapMaster)
-      , ((modMask .|. shiftMask, xK_j), windows W.swapDown)
-      , ((modMask .|. shiftMask, xK_k), windows W.swapUp)
-      , ((modMask, xK_h), sendMessage Shrink)
-      , ((modMask, xK_l), sendMessage Expand)
-      , ((modMask, xK_t), withFocused $ windows . W.sink)
-      , ((modMask, xK_comma), sendMessage (IncMasterN 1))
-      , ((modMask, xK_period), sendMessage (IncMasterN (-1)))
-      , ((modMask .|. shiftMask, xK_q), io exitSuccess)
-      , ((modMask, xK_q), restart "xmonad" True)
-      ]
-    ++ [ ((m .|. modMask, k), windows $ f i)
-       | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_9]
-       , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]
-       ]
-    ++ [ ( (m .|. modMask, key)
-         , screenWorkspace sc >>= flip whenJust (windows . f)
-         )
-       | (key, sc) <- zip [xK_w, xK_e, xK_r] [2, 0, 1]
-       , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]
-       ]
+  M.fromList $
+    [ ((modMask .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
+    , ((modMask .|. controlMask, xK_l), spawn myScreensaver)
+    , ((modMask, xK_p), spawn myLauncher)
+    , ((0, xK_Print), spawn mySelectScreenshot)
+    , ((modMask .|. controlMask .|. shiftMask, xK_p), spawn myScreenshot)
+    , ((modMask .|. shiftMask, xK_c), kill)
+    , ((modMask, xK_space), sendMessage NextLayout)
+    , ((modMask .|. shiftMask, xK_space), setLayout $ XMonad.layoutHook conf)
+    , ((modMask, xK_n), refresh)
+    , ((modMask, xK_Tab), windows W.focusDown)
+    , ((modMask, xK_j), windows W.focusDown)
+    , ((modMask, xK_k), windows W.focusUp)
+    , ((modMask, xK_m), windows W.focusMaster)
+    , ((modMask, xK_Return), windows W.swapMaster)
+    , ((modMask .|. shiftMask, xK_j), windows W.swapDown)
+    , ((modMask .|. shiftMask, xK_k), windows W.swapUp)
+    , ((modMask, xK_h), sendMessage Shrink)
+    , ((modMask, xK_l), sendMessage Expand)
+    , ((modMask, xK_t), withFocused $ windows . W.sink)
+    , ((modMask, xK_comma), sendMessage (IncMasterN 1))
+    , ((modMask, xK_period), sendMessage (IncMasterN (-1)))
+    , ((modMask .|. shiftMask, xK_q), io exitSuccess)
+    , ((modMask, xK_q), restart "xmonad" True)
+    ]
+      ++ [ ((m .|. modMask, k), windows $ f i)
+         | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_9]
+         , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]
+         ]
+      ++ [ ( (m .|. modMask, key)
+           , screenWorkspace sc >>= flip whenJust (windows . f)
+           )
+         | (key, sc) <- zip [xK_e, xK_r] [0, 1]
+         , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]
+         ]
 
 myMouseBindings XConfig{XMonad.modMask = modMask} =
   M.fromList
@@ -154,7 +159,12 @@ myManageHook =
     , isDialog --> doFloat
     ]
 
-myStartupHook = do
+desktopStartupHook = do
+  spawnOnOnce "9" "qbittorrent"
+  spawnOnOnce "9" "steam"
+  spawnOnOnce "4:music" "spotify"
+
+laptopStartupHook = do
   spawnOnce "dunst"
   spawnOnce "xcape"
   spawnOnce "feh --bg-scale ~/.bg.png"
@@ -168,26 +178,27 @@ myXmobarPP =
     }
 
 main = do
-  xmonad
-    $ ewmh
-    $ docks
-    $ withEasySB (statusBarProp "xmobar" (pure myXmobarPP)) toggleStrutsKey
-    $ def
-      { terminal = "kitty"
-      , focusFollowsMouse = True
-      , borderWidth = myBorderWidth
-      , modMask = myModMask
-      , workspaces = myWorkspaces
-      , normalBorderColor = myNormalBorderColor
-      , focusedBorderColor = myFocusedBorderColor
-      , keys = myKeys
-      , mouseBindings = myMouseBindings
-      , layoutHook = myLayout
-      , manageHook = myManageHook <+> manageDocks <+> manageSpawn
-      , startupHook = myStartupHook
-      , handleEventHook = swallowEventHook (className =? "Alacritty" <||> className =? "Kitty") (return True)
-      , logHook = updatePointer (0.5, 0.5) (0, 0)
-      }
+  host <- fmap nodeName getSystemID
+  xmonad $
+    ewmh $
+      docks $
+        withEasySB (statusBarProp "xmobar" (pure myXmobarPP)) toggleStrutsKey $
+          def
+            { terminal = "kitty"
+            , focusFollowsMouse = True
+            , borderWidth = myBorderWidth
+            , modMask = myModMask
+            , workspaces = myWorkspaces
+            , normalBorderColor = myNormalBorderColor
+            , focusedBorderColor = myFocusedBorderColor
+            , keys = myKeys
+            , mouseBindings = myMouseBindings
+            , layoutHook = myLayout
+            , manageHook = myManageHook <+> manageDocks <+> manageSpawn
+            , startupHook = if host == "desktop-arch" then desktopStartupHook else laptopStartupHook
+            , handleEventHook = swallowEventHook (className =? "Alacritty" <||> className =? "kitty") (return True)
+            , logHook = updatePointer (0.5, 0.5) (0, 0)
+            }
  where
   toggleStrutsKey :: XConfig Layout -> (KeyMask, KeySym)
   toggleStrutsKey XConfig{modMask = m} = (m, xK_b)

@@ -55,6 +55,7 @@ require 'nvim-treesitter.configs'.setup {
 }
 
 require 'treesitter-context'.setup {}
+vim.cmd("hi TreesitterContextBottom gui=underline guisp=Grey")
 require 'nvim_context_vt'.setup {
     disable_ft = { 'markdown', 'dart' },
     prefix = ' ',

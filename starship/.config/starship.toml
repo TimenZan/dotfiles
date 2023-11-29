@@ -80,7 +80,7 @@ format = "[ $symbol$branch ]($style)"
 disabled = false
 added_style = "green"
 deleted_style = "red"
-format = '([$added]($added_style))[±](peach)([$deleted]($deleted_style) )'
+format = '([$added]($added_style))[±](peach)([$deleted]($deleted_style)) '
 
 [git_status]
 format = '([$all_status$ahead_behind]($style) )'

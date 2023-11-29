@@ -62,7 +62,7 @@ style = 'bold red'
 [cmd_duration]
 min_time = 10_000
 format = "[⏱ $duration](yellow)"
-show_notifications = true
+show_notifications = false
 min_time_to_notify = 60_000
 
 # shows current direcory

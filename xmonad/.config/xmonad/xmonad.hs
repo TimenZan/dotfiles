@@ -52,13 +52,13 @@ myLauncher :: String
 myLauncher = "dmenu-frecency"
 
 myWorkspaces :: [String]
-myWorkspaces = ["1:web", "2:chat", "3:background", "4:music", "5:code"] ++ map show [(6 :: Integer) .. 9]
+myWorkspaces = map show [(1 :: Integer) .. 9]
 
 -- \||| noBorders (fullscreenFull Full)
 
 myLayout =
   onWorkspace
-    "2:chat"
+    "2"
     ( magnifiercz 1.4 (Mirror $ Tall 1 (3 / 100) (1 / 2))
         ||| Accordion
     )
@@ -163,8 +163,8 @@ myManageHook =
   composeAll
     [ className =? "Gimp" --> doFloat
     , isDialog --> doFloat
-    , moveC "discord" "2:chat"
-    , moveC "spotify" "4:music"
+    , moveC "discord" "2"
+    , moveC "spotify" "4"
     , moveC "Steam" "9"
     , isFullscreen --> (doF W.focusDown <+> doFullFloat)
     ]
@@ -174,7 +174,7 @@ myManageHook =
 desktopStartupHook = do
   spawnOnOnce "9" "qbittorrent"
   spawnOnOnce "9" "steam"
-  spawnOnOnce "4:music" "spotify"
+  spawnOnOnce "4" "spotify"
 
 laptopStartupHook = do
   spawnOnce "dunst"

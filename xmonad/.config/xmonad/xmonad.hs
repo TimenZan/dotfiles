@@ -1,31 +1,37 @@
 {-# OPTIONS_GHC -Wno-missing-signatures #-}
 
-import qualified Data.Map                      as M
-import           System.Exit
-import           XMonad
-import           XMonad.Actions.SpawnOn
-import           XMonad.Actions.UpdatePointer
-import           XMonad.Hooks.ManageDocks
+import qualified Data.Map as M
+import System.Exit
+import XMonad
+import XMonad.Actions.SpawnOn
+import XMonad.Actions.UpdatePointer
+import XMonad.Hooks.ManageDocks
 
-import           XMonad.Layout.ThreeColumns
-import qualified XMonad.StackSet               as W
+import XMonad.Layout.ThreeColumns
+import qualified XMonad.StackSet as W
 
-import           System.Posix.Unistd           (SystemID (nodeName),
-                                                getSystemID)
-import           XMonad.Hooks.EwmhDesktops     (ewmh)
-import           XMonad.Hooks.ManageHelpers    (isDialog)
-import           XMonad.Hooks.StatusBar        (statusBarProp, withEasySB)
-import           XMonad.Hooks.StatusBar.PP     (PP (ppCurrent, ppSep, ppTitle),
-                                                shorten, xmobarColor, xmobarPP)
-import           XMonad.Hooks.WindowSwallowing (swallowEventHook)
-import           XMonad.Layout.Accordion       (Accordion (Accordion))
-import           XMonad.Layout.Fullscreen      (fullscreenFull)
-import           XMonad.Layout.Magnifier       (magnifiercz, magnifiercz')
-import           XMonad.Layout.NoBorders       (noBorders)
-import           XMonad.Layout.PerWorkspace    (onWorkspace)
-import           XMonad.Layout.Renamed         (Rename (Replace), renamed)
-import           XMonad.Layout.Spiral          (spiral)
-import           XMonad.Util.SpawnOnce         (spawnOnOnce, spawnOnce)
+import System.Posix.Unistd (
+  SystemID (nodeName),
+  getSystemID,
+ )
+import XMonad.Hooks.EwmhDesktops (ewmh)
+import XMonad.Hooks.ManageHelpers (doFullFloat, isDialog, isFullscreen)
+import XMonad.Hooks.StatusBar (statusBarProp, withEasySB)
+import XMonad.Hooks.StatusBar.PP (
+  PP (ppCurrent, ppSep, ppTitle),
+  shorten,
+  xmobarColor,
+  xmobarPP,
+ )
+import XMonad.Hooks.WindowSwallowing (swallowEventHook)
+import XMonad.Layout.Accordion (Accordion (Accordion))
+import XMonad.Layout.Fullscreen (fullscreenFull)
+import XMonad.Layout.Magnifier (magnifiercz, magnifiercz')
+import XMonad.Layout.NoBorders (noBorders)
+import XMonad.Layout.PerWorkspace (onWorkspace)
+import XMonad.Layout.Renamed (Rename (Replace), renamed)
+import XMonad.Layout.Spiral (spiral)
+import XMonad.Util.SpawnOnce (spawnOnOnce, spawnOnce)
 
 -- The command to lock the screen or show the screensaver.
 myScreensaver :: String
@@ -157,7 +163,13 @@ myManageHook =
   composeAll
     [ className =? "Gimp" --> doFloat
     , isDialog --> doFloat
+    , moveC "discord" "2:chat"
+    , moveC "spotify" "4:music"
+    , moveC "Steam" "9"
+    , isFullscreen --> (doF W.focusDown <+> doFullFloat)
     ]
+ where
+  moveC c w = className =? c --> doShift w
 
 desktopStartupHook = do
   spawnOnOnce "9" "qbittorrent"

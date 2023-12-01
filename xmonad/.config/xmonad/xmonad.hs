@@ -59,8 +59,8 @@ myWorkspaces = map show [(1 :: Integer) .. 9]
 myLayout =
   onWorkspace
     "2"
-    ( magnifiercz 1.4 (Mirror $ Tall 1 (3 / 100) (1 / 2))
-        ||| Accordion
+    ( Accordion
+        ||| magnifiercz 1.4 (Mirror $ Tall 1 (3 / 100) (1 / 2))
     )
     $ onWorkspace
       "9"

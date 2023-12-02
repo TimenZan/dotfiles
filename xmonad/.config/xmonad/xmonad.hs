@@ -1,37 +1,34 @@
 {-# OPTIONS_GHC -Wno-missing-signatures #-}
 
-import qualified Data.Map as M
-import System.Exit
-import XMonad
-import XMonad.Actions.SpawnOn
-import XMonad.Actions.UpdatePointer
-import XMonad.Hooks.ManageDocks
+import qualified Data.Map                      as M
+import           System.Exit
+import           XMonad
+import           XMonad.Actions.SpawnOn
+import           XMonad.Actions.UpdatePointer
+import           XMonad.Hooks.ManageDocks
 
-import XMonad.Layout.ThreeColumns
-import qualified XMonad.StackSet as W
+import           XMonad.Layout.ThreeColumns
+import qualified XMonad.StackSet               as W
 
-import System.Posix.Unistd (
-  SystemID (nodeName),
-  getSystemID,
- )
-import XMonad.Hooks.EwmhDesktops (ewmh)
-import XMonad.Hooks.ManageHelpers (doFullFloat, isDialog, isFullscreen)
-import XMonad.Hooks.StatusBar (statusBarProp, withEasySB)
-import XMonad.Hooks.StatusBar.PP (
-  PP (ppCurrent, ppSep, ppTitle),
-  shorten,
-  xmobarColor,
-  xmobarPP,
- )
-import XMonad.Hooks.WindowSwallowing (swallowEventHook)
-import XMonad.Layout.Accordion (Accordion (Accordion))
-import XMonad.Layout.Fullscreen (fullscreenFull)
-import XMonad.Layout.Magnifier (magnifiercz, magnifiercz')
-import XMonad.Layout.NoBorders (noBorders)
-import XMonad.Layout.PerWorkspace (onWorkspace)
-import XMonad.Layout.Renamed (Rename (Replace), renamed)
-import XMonad.Layout.Spiral (spiral)
-import XMonad.Util.SpawnOnce (spawnOnOnce, spawnOnce)
+import           System.Posix.Unistd           (SystemID (nodeName),
+                                                getSystemID)
+import           XMonad.Hooks.EwmhDesktops     (ewmh)
+import           XMonad.Hooks.ManageHelpers    (doFullFloat, isDialog,
+                                                isFullscreen)
+import           XMonad.Hooks.StatusBar        (statusBarProp, withEasySB)
+import           XMonad.Hooks.StatusBar.PP     (PP (ppCurrent, ppSep, ppTitle),
+                                                shorten, xmobarColor, xmobarPP)
+import           XMonad.Hooks.WindowSwallowing (swallowEventHook)
+import           XMonad.Layout.Accordion       (Accordion (Accordion))
+import           XMonad.Layout.BoringWindows   (boringWindows, focusDown,
+                                                focusMaster, focusUp)
+import           XMonad.Layout.Fullscreen      (fullscreenFull)
+import           XMonad.Layout.Magnifier       (magnifiercz, magnifiercz')
+import           XMonad.Layout.NoBorders       (noBorders)
+import           XMonad.Layout.PerWorkspace    (onWorkspace)
+import           XMonad.Layout.Renamed         (Rename (Replace), renamed)
+import           XMonad.Layout.Spiral          (spiral)
+import           XMonad.Util.SpawnOnce         (spawnOnOnce, spawnOnce)
 
 -- The command to lock the screen or show the screensaver.
 myScreensaver :: String
@@ -57,11 +54,12 @@ myWorkspaces = map show [(1 :: Integer) .. 9]
 -- \||| noBorders (fullscreenFull Full)
 
 myLayout =
-  onWorkspace
-    "2"
-    ( Accordion
-        ||| magnifiercz 1.4 (Mirror $ Tall 1 (3 / 100) (1 / 2))
-    )
+  boringWindows
+    $ onWorkspace
+      "2"
+      ( Accordion
+          ||| magnifiercz 1.4 (Mirror $ Tall 1 (3 / 100) (1 / 2))
+      )
     $ onWorkspace
       "9"
       (noBorders (fullscreenFull Full))
@@ -122,10 +120,10 @@ myKeys conf@XConfig{XMonad.modMask = modMask} =
     , ((modMask, xK_space), sendMessage NextLayout)
     , ((modMask .|. shiftMask, xK_space), setLayout $ XMonad.layoutHook conf)
     , ((modMask, xK_n), refresh)
-    , ((modMask, xK_Tab), windows W.focusDown)
-    , ((modMask, xK_j), windows W.focusDown)
-    , ((modMask, xK_k), windows W.focusUp)
-    , ((modMask, xK_m), windows W.focusMaster)
+    , ((modMask, xK_Tab),focusDown)
+    , ((modMask, xK_j), focusDown)
+    , ((modMask, xK_k), focusUp)
+    , ((modMask, xK_m), focusMaster)
     , ((modMask, xK_Return), windows W.swapMaster)
     , ((modMask .|. shiftMask, xK_j), windows W.swapDown)
     , ((modMask .|. shiftMask, xK_k), windows W.swapUp)

@@ -24,7 +24,7 @@ import           XMonad.Layout.BoringWindows   (boringWindows, focusDown,
                                                 focusMaster, focusUp)
 import           XMonad.Layout.Fullscreen      (fullscreenFull)
 import           XMonad.Layout.Magnifier       (magnifiercz, magnifiercz')
-import           XMonad.Layout.NoBorders       (noBorders)
+import           XMonad.Layout.NoBorders       (noBorders, smartBorders)
 import           XMonad.Layout.PerWorkspace    (onWorkspace)
 import           XMonad.Layout.Renamed         (Rename (Replace), renamed)
 import           XMonad.Layout.Spiral          (spiral)
@@ -55,6 +55,7 @@ myWorkspaces = map show [(1 :: Integer) .. 9]
 
 myLayout =
   boringWindows
+    $ smartBorders
     $ onWorkspace
       "2"
       ( Accordion
@@ -120,7 +121,7 @@ myKeys conf@XConfig{XMonad.modMask = modMask} =
     , ((modMask, xK_space), sendMessage NextLayout)
     , ((modMask .|. shiftMask, xK_space), setLayout $ XMonad.layoutHook conf)
     , ((modMask, xK_n), refresh)
-    , ((modMask, xK_Tab),focusDown)
+    , ((modMask, xK_Tab), focusDown)
     , ((modMask, xK_j), focusDown)
     , ((modMask, xK_k), focusUp)
     , ((modMask, xK_m), focusMaster)

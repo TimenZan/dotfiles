@@ -1,16 +1,11 @@
 -- vim:ft=haskell
-Config {
-        font = "JetBrainsMono Nerd Font:bold:size=10"
-        -- , additionalFonts = [ "xft:Bitstream Vera Sans Mono:size=8:antialias=true", "FontAwesome:size=10", "Source Code Pro:size=10:regular:antialias=true"]
-        -- , additionalFonts = ["FontAwesome:size=10", "Source Code Pro:size=10:regular:antialias=true"]
+Config {  font = "JetBrainsMono Nerd Font:bold:size=10"
         , borderColor = "black"
         , border = TopB
         , bgColor = "black"
         , fgColor = "grey"
         , position = OnScreen 1 ( BottomW L 100 )
-        -- , position = Static { xpos = 0, ypos = 0, width = 1346, height = 20 }
         , commands = [ Run XMonadLog
-                -- Run Cpu ["-L","25","-H","50","--normal","green","--high","red"] 10
                 , Run MultiCpu [
                 "--template", "<total>%",
                 "--Low","25","--High","70",
@@ -29,27 +24,9 @@ Config {
                 , Run Swap ["-t","<used>M"] 10
                 , Run Com "uname" ["-s","-r"] "" 36000
                 , Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
-                -- , Run Mpris2 "spotify" ["-t", "<artist> - [<tracknumber> - <album>] <title>"] 10
-                -- , Run Battery [
-                --         "-t", "<acstatus>: <left>% - <timeleft>",
-                --         "--",
-                --         --"-c", "charge_full",
-                --         "-O", "AC",
-                --         "-o", "Bat",
-                --         "-h", "green",
-                --         "-l", "red"
-                --         ] 10
-                -- , Run CoreTemp [ "--template" , "Temp: <core0>°C|<core1>°C"
-                --         , "--Low"      , "70"        -- units: °C
-                --         , "--High"     , "80"        -- units: °C
-                --         , "--low"      , "darkgreen"
-                --         , "--normal"   , "darkorange"
-                --         , "--high"     , "darkred"
-                --         ] 10
                 , Run DiskU [("/", "<free>/<size>"), ("sda", "<free>/<size>")] [] 10
                 ]
         , sepChar = "%"
         , alignSep = "}{"
         , template = "%XMonadLog% } cpu: %multicpu% %multicoretemp% | mem: %memory% %swap% | %disku%  { %uname% | <fc=#ee9a00>%date%</fc> "
-        -- , template = "%XMonadLog% %multicoretemp%"
         }

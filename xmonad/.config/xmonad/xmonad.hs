@@ -180,6 +180,9 @@ laptopStartupHook = do
   spawnOnce "xcape"
   spawnOnce "feh --bg-scale ~/.bg.png"
 
+allStartupHook = do
+  spawnOnce "picom -b"
+
 myXmobarPP :: PP
 myXmobarPP =
   xmobarPP
@@ -206,7 +209,7 @@ main = do
             , mouseBindings = myMouseBindings
             , layoutHook = myLayout
             , manageHook = myManageHook <+> manageDocks <+> manageSpawn
-            , startupHook = if host == "desktop-arch" then desktopStartupHook else laptopStartupHook
+            , startupHook = (if host == "desktop-arch" then desktopStartupHook else laptopStartupHook) <+> allStartupHook
             , handleEventHook = swallowEventHook (className =? "Alacritty" <||> className =? "kitty") (return True)
             , logHook = updatePointer (0.5, 0.5) (0, 0)
             }

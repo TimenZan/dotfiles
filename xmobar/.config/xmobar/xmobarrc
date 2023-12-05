@@ -30,8 +30,8 @@ Config { -- font = "-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*"
                         "-t", "<acstatus>: <left>% - <timeleft>",
                         "--",
                         --"-c", "charge_full",
-                        "-O", "AC",
-                        "-o", "Bat",
+                        "-O", "ac",
+                        "-o", "bat",
                         "-h", "green",
                         "-l", "red"
                         ] 10

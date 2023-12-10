@@ -90,7 +90,6 @@ Plug 'lervag/vimtex', { 'for': 'tex' }
 	let g:vimtex_quickfix_mode=1
 " markdown
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
-	let g:mkdp_auto_start = 1
 Plug 'ellisonleao/glow.nvim'
 " arduino
 Plug 'stevearc/vim-arduino'

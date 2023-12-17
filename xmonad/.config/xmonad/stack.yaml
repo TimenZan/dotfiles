@@ -45,6 +45,8 @@ packages:
 #
 # extra-deps: []
 
+ghc-options:
+  "$everything": "-O2 -funfolding-use-threshold=32 -optc-O3"
 # Override default flag values for local packages and extra-deps
 # flags: {}
 

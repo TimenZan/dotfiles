@@ -12,12 +12,15 @@ import qualified XMonad.StackSet               as W
 
 import           System.Posix.Unistd           (SystemID (nodeName),
                                                 getSystemID)
-import           XMonad.Hooks.EwmhDesktops     (ewmh)
+import           XMonad.Hooks.EwmhDesktops     (ewmh, setEwmhActivateHook)
 import           XMonad.Hooks.ManageHelpers    (doFullFloat, isDialog,
                                                 isFullscreen)
+import           XMonad.Hooks.RefocusLast      (refocusLastLogHook)
 import           XMonad.Hooks.StatusBar        (statusBarProp, withEasySB)
 import           XMonad.Hooks.StatusBar.PP     (PP (ppCurrent, ppSep, ppTitle),
-                                                shorten, xmobarColor, xmobarPP)
+                                                filterOutWsPP, shorten,
+                                                xmobarColor, xmobarPP)
+import           XMonad.Hooks.UrgencyHook      (doAskUrgent)
 import           XMonad.Hooks.WindowSwallowing (swallowEventHook)
 import           XMonad.Layout.Accordion       (Accordion (Accordion))
 import           XMonad.Layout.BoringWindows   (boringWindows, focusDown,
@@ -28,6 +31,12 @@ import           XMonad.Layout.NoBorders       (noBorders, smartBorders)
 import           XMonad.Layout.PerWorkspace    (onWorkspace)
 import           XMonad.Layout.Renamed         (Rename (Replace), renamed)
 import           XMonad.Layout.Spiral          (spiral)
+import           XMonad.Util.NamedScratchpad   (NamedScratchpad (NS),
+                                                customFloating,
+                                                namedScratchpadAction,
+                                                namedScratchpadManageHook,
+                                                nsHideOnFocusLoss,
+                                                scratchpadWorkspaceTag)
 import           XMonad.Util.SpawnOnce         (spawnOnOnce, spawnOnce)
 
 -- The command to lock the screen or show the screensaver.
@@ -101,6 +110,17 @@ xmobarCurrentWorkspaceColor = "#CEFFAC"
 myBorderWidth = 1
 
 ------------------------------------------------------------------------
+-- Scratchpads
+scratchpads =
+  -- TODO change theme to make clear it's a scratchpad
+  [ NS "term" "kitty --name NNscratchpad --class NNscratchpad --title NNscratchpad" (title =? "NNscratchpad") bigFloat
+  ]
+ where
+  -- TODO: position correctly
+  -- rect: marginLeft marginTop width height
+  bigFloat = customFloating $ W.RationalRect (2 / 6) (1 / 6) (2 / 4) (2 / 3)
+
+------------------------------------------------------------------------
 -- Key bindings
 --
 -- modMask lets you specify which modkey you want to use. The default
@@ -114,6 +134,7 @@ myKeys conf@XConfig{XMonad.modMask = modMask} =
   M.fromList $
     [ ((modMask .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
     , ((modMask .|. controlMask, xK_l), spawn myScreensaver)
+    , ((modMask, xK_f), namedScratchpadAction scratchpads "term")
     , ((modMask, xK_p), spawn myLauncher)
     , ((0, xK_Print), spawn mySelectScreenshot)
     , ((modMask .|. controlMask .|. shiftMask, xK_p), spawn myScreenshot)
@@ -185,34 +206,40 @@ allStartupHook = do
 
 myXmobarPP :: PP
 myXmobarPP =
-  xmobarPP
-    { ppTitle = xmobarColor xmobarTitleColor "" . shorten 50
-    , ppCurrent = xmobarColor xmobarCurrentWorkspaceColor ""
-    , ppSep = "   "
-    }
+  filterOutWsPP
+    [scratchpadWorkspaceTag]
+    $ xmobarPP
+      { ppTitle = xmobarColor xmobarTitleColor "" . shorten 50
+      , ppCurrent = xmobarColor xmobarCurrentWorkspaceColor ""
+      , ppSep = "   "
+      }
 
 main = do
   host <- fmap nodeName getSystemID
   xmonad $
-    ewmh $
-      docks $
-        withEasySB (statusBarProp "xmobar" (pure myXmobarPP)) toggleStrutsKey $
-          def
-            { terminal = "kitty"
-            , focusFollowsMouse = True
-            , borderWidth = myBorderWidth
-            , modMask = myModMask
-            , workspaces = myWorkspaces
-            , normalBorderColor = myNormalBorderColor
-            , focusedBorderColor = myFocusedBorderColor
-            , keys = myKeys
-            , mouseBindings = myMouseBindings
-            , layoutHook = myLayout
-            , manageHook = myManageHook <+> manageDocks <+> manageSpawn
-            , startupHook = (if host == "desktop-arch" then desktopStartupHook else laptopStartupHook) <+> allStartupHook
-            , handleEventHook = swallowEventHook (className =? "Alacritty" <||> className =? "kitty") (return True)
-            , logHook = updatePointer (0.5, 0.5) (0, 0)
-            }
+    setEwmhActivateHook doAskUrgent $
+      ewmh $
+        docks $
+          withEasySB (statusBarProp "xmobar" (pure myXmobarPP)) toggleStrutsKey $
+            def
+              { terminal = "kitty"
+              , focusFollowsMouse = True
+              , borderWidth = myBorderWidth
+              , modMask = myModMask
+              , workspaces = myWorkspaces
+              , normalBorderColor = myNormalBorderColor
+              , focusedBorderColor = myFocusedBorderColor
+              , keys = myKeys
+              , mouseBindings = myMouseBindings
+              , layoutHook = myLayout
+              , manageHook = namedScratchpadManageHook scratchpads <+> myManageHook <+> manageDocks <+> manageSpawn
+              , startupHook = (if host == "desktop-arch" then desktopStartupHook else laptopStartupHook) <+> allStartupHook
+              , handleEventHook = swallowEventHook (className =? "Alacritty" <||> className =? "kitty") (return True)
+              , logHook =
+                  updatePointer (0.5, 0.5) (0, 0)
+                    >> refocusLastLogHook
+                    >> nsHideOnFocusLoss scratchpads
+              }
  where
   toggleStrutsKey :: XConfig Layout -> (KeyMask, KeySym)
   toggleStrutsKey XConfig{modMask = m} = (m, xK_b)

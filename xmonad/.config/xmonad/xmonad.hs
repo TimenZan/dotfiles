@@ -199,6 +199,7 @@ desktopStartupHook = do
 laptopStartupHook = do
   spawnOnce "dunst"
   spawnOnce "xcape"
+  spawnOnce "blueman-applet"
   spawnOnce "feh --bg-scale ~/.bg.png"
 
 allStartupHook = do

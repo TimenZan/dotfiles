@@ -21,7 +21,7 @@ Config {  font = "JetBrainsMono Nerd Font:bold:size=10"
                         "--high", "red"
                         ] 50
                 , Run Memory ["-t","<usedratio>%"] 10
-                , Run Swap ["-t","<used>M"] 10
+                , Run Swap ["-t","<usedratio>%"] 10
                 , Run Com "uname" ["-s","-r"] "" 36000
                 , Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
                 , Run DiskU [("/", "<free>/<size>"), ("sda", "<free>/<size>")] [] 10

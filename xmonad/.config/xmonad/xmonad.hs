@@ -12,6 +12,9 @@ import qualified XMonad.StackSet               as W
 
 import           System.Posix.Unistd           (SystemID (nodeName),
                                                 getSystemID)
+import           XMonad.Actions.Minimize       (maximizeWindowAndFocus,
+                                                minimizeWindow,
+                                                withLastMinimized)
 import           XMonad.Hooks.EwmhDesktops     (ewmh, setEwmhActivateHook)
 import           XMonad.Hooks.ManageHelpers    (doFullFloat, isDialog,
                                                 isFullscreen)
@@ -27,9 +30,11 @@ import           XMonad.Layout.BoringWindows   (boringWindows, focusDown,
                                                 focusMaster, focusUp)
 import           XMonad.Layout.Fullscreen      (fullscreenFull)
 import           XMonad.Layout.Magnifier       (magnifiercz, magnifiercz')
+import           XMonad.Layout.Minimize        (minimize)
 import           XMonad.Layout.NoBorders       (noBorders, smartBorders)
 import           XMonad.Layout.PerWorkspace    (onWorkspace)
-import           XMonad.Layout.Renamed         (Rename (Replace), renamed)
+import           XMonad.Layout.Renamed         (Rename (CutWordsLeft, Replace),
+                                                renamed)
 import           XMonad.Layout.Spiral          (spiral)
 import           XMonad.Util.NamedScratchpad   (NamedScratchpad (NS),
                                                 customFloating,
@@ -63,7 +68,9 @@ myWorkspaces = map show [(1 :: Integer) .. 9]
 -- \||| noBorders (fullscreenFull Full)
 
 myLayout =
-  boringWindows
+  renamed [CutWordsLeft 1] $
+  minimize
+    $ boringWindows
     $ smartBorders
     $ onWorkspace
       "2"
@@ -135,6 +142,8 @@ myKeys conf@XConfig{XMonad.modMask = modMask} =
     [ ((modMask .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
     , ((modMask .|. controlMask, xK_l), spawn myScreensaver)
     , ((modMask, xK_f), namedScratchpadAction scratchpads "term")
+    , ((modMask, xK_v), withFocused minimizeWindow)
+    , ((modMask .|. shiftMask, xK_v), withLastMinimized maximizeWindowAndFocus)
     , ((modMask, xK_p), spawn myLauncher)
     , ((0, xK_Print), spawn mySelectScreenshot)
     , ((modMask .|. controlMask .|. shiftMask, xK_p), spawn myScreenshot)
@@ -192,7 +201,7 @@ myManageHook =
   moveC c w = className =? c --> doShift w
 
 desktopStartupHook = do
-  spawnOnOnce "9" "qbittorrent"
+  spawnOnOnce "9" "nice qbittorrent"
   spawnOnOnce "9" "steam"
   spawnOnOnce "4" "spotify"
 

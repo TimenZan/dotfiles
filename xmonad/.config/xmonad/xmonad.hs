@@ -28,14 +28,20 @@ import           XMonad.Hooks.WindowSwallowing (swallowEventHook)
 import           XMonad.Layout.Accordion       (Accordion (Accordion))
 import           XMonad.Layout.BoringWindows   (boringWindows, focusDown,
                                                 focusMaster, focusUp)
+import           XMonad.Layout.CenterMainFluid (CenterMainFluid (CenterMainFluid))
 import           XMonad.Layout.Fullscreen      (fullscreenFull)
+import           XMonad.Layout.HintedGrid      (Grid (Grid))
+import           XMonad.Layout.HintedTile      (Alignment (TopLeft),
+                                                HintedTile (HintedTile),
+                                                Orientation (Wide))
 import           XMonad.Layout.Magnifier       (magnifiercz, magnifiercz')
 import           XMonad.Layout.Minimize        (minimize)
 import           XMonad.Layout.NoBorders       (noBorders, smartBorders)
 import           XMonad.Layout.PerWorkspace    (onWorkspace)
+import           XMonad.Layout.Reflect         (reflectHoriz)
 import           XMonad.Layout.Renamed         (Rename (CutWordsLeft, Replace),
                                                 renamed)
-import           XMonad.Layout.Spiral          (spiral)
+import           XMonad.Layout.Roledex         (Roledex (Roledex))
 import           XMonad.Util.NamedScratchpad   (NamedScratchpad (NS),
                                                 customFloating,
                                                 namedScratchpadAction,
@@ -65,11 +71,9 @@ myLauncher = "dmenu-frecency"
 myWorkspaces :: [String]
 myWorkspaces = map show [(1 :: Integer) .. 9]
 
--- \||| noBorders (fullscreenFull Full)
-
 myLayout =
-  renamed [CutWordsLeft 1] $
-  minimize
+  renamed [CutWordsLeft 1]
+    $ minimize
     $ boringWindows
     $ smartBorders
     $ onWorkspace
@@ -80,19 +84,22 @@ myLayout =
     $ onWorkspace
       "9"
       (noBorders (fullscreenFull Full))
-      ( threeCol
-          ||| magThreeCol
-          ||| Accordion
-          ||| Tall 1 (3 / 100) (1 / 2)
-          ||| Mirror (Tall 1 (3 / 100) (1 / 2))
+      ( CenterMainFluid 1 (3 / 100) 0.50
+          ||| threeCol
+          -- \||| Tall 1 (3 / 100) (1 / 2)
           ||| Full
-          ||| spiral (16 / 9)
+          ||| Grid False
+          ||| Roledex
       )
  where
-  threeCol = ThreeColMid 1 (3 / 100) (1 / 2)
-  magThreeCol =
-    renamed [Replace "ThreeCol Magnified"] $
-      magnifiercz' 1.4 threeCol
+  -- \||| spiral (16 / 9)
+
+  threeCol =
+    renamed [CutWordsLeft 1] $
+    reflectHoriz $ ThreeColMid 1 (3 / 100) (1 / 2)
+  -- magThreeCol =
+  --   renamed [Replace "ThreeCol Magnified"] $
+  --     magnifiercz' 1.4 threeCol
 
 ------------------------------------------------------------------------
 -- Colors and borders

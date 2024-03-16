@@ -100,6 +100,7 @@ Plug 'mrk21/yaml-vim'
 " esoteric
 Plug 'shirk/vim-gas'
 Plug 'CaffeineViking/vim-glsl'
+Plug 'aklt/plantuml-syntax'
 " web
 " Plug 'aurum77/live-server.nvim', { 'do': ':LiveServerInstall'}
 Plug 'turbio/bracey.vim', {'do': 'npm install --prefix server'}
@@ -181,6 +182,8 @@ colorscheme catppuccin-mocha
 filetype plugin indent on
 syntax on
 scriptencoding=utf-8
+set foldtext=
+set fillchars=fold:\ 
 set autowrite
 set formatoptions+=ro/n1l
 set ignorecase | set smartcase
@@ -189,6 +192,11 @@ set linebreak
 set mouse=a
 set noshowmode
 set nowrap
+" set cpoptions+="n"
+" set showbreak="⮑ "
+" set showbreak="++++ "
+" set breakindent
+" set breakindentopt+="sbr,list:-1"
 set scrolloff=5
 set shiftround
 set shortmess+=c

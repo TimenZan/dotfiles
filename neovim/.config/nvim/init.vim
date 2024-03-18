@@ -10,6 +10,7 @@ let mapleader = ' '
 " Plugins {{{
 call plug#begin('~/.config/nvim/plugged')
 " libs {{{
+Plug 'nvim-neotest/nvim-nio'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/popup.nvim'
 Plug 'ryanoasis/vim-devicons'

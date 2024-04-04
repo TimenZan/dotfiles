@@ -1,6 +1,6 @@
-vim.api.nvim_set_option('expandtab', true)
-vim.api.nvim_set_option('tabstop', 2)
-vim.api.nvim_set_option('shiftwidth', 2)
+vim.bo.expandtab = true
+vim.bo.tabstop = 2
+vim.bo.shiftwidth = 2
 
 
 local ht = require 'haskell-tools'

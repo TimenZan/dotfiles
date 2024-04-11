@@ -44,7 +44,6 @@ Plug 'weilbith/nvim-lsp-smag' " SMArt taGs
 " test {{{
 Plug 'nvim-neotest/neotest'
 Plug 'mrcjkb/neotest-haskell'
-Plug 'rouge8/neotest-rust'
 Plug 'stevanmilic/neotest-scala'
 Plug 'hkupty/iron.nvim'
 " }}}
@@ -68,7 +67,7 @@ Plug 'rhysd/committia.vim' " set up correctly
 " rust
 Plug 'rust-lang/rust.vim'
 	let g:rustfmt_autosave=1
-Plug 'simrat39/rust-tools.nvim'
+Plug 'mrcjkb/rustaceanvim'
 " haskell
 Plug 'alx741/vim-stylishask'
 Plug 'MrcJkb/haskell-tools.nvim'

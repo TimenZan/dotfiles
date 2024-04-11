@@ -4,14 +4,14 @@ require("neotest").setup({
             dap = { justMyCode = false },
             build_tools = { 'stack', 'cabal' },
             frameworks = {
-                {framework = 'tasty', modules = { "Test.Tasty", "from-upstream"}, },
+                { framework = 'tasty', modules = { "Test.Tasty", "from-upstream" }, },
             },
         }),
-        require("neotest-rust")({}),
+        require('rustaceanvim.neotest'),
         require("neotest-scala")({
             -- Command line arguments for runner
             -- Can also be a function to return dynamic values
-            args = {"--no-color"},
+            args = { "--no-color" },
             -- Possibly values bloop|sbt.
             runner = "sbt",
             -- Possibly values utest|munit|scalatest.

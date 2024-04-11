@@ -3,6 +3,21 @@ local servers = {
     'cssls', 'html', 'taplo'
 }
 
+local pragma_once = vim.api.nvim_create_augroup("MyLspConfig-7ce9faed-3f74-4011-b31e-38b0d0426781", { clear = true })
+
+vim.api.nvim_create_autocmd("LspAttach", {
+    group = pragma_once,
+    callback = function (args)
+        local client = vim.lsp.get_client_by_id(args.data.client_id)
+        if client then
+            if client.server_capabilities.inlayHintProvider then
+                vim.lsp.inlay_hint.enable(args.buf, true)
+            end
+        end
+        -- whatever other lsp config you want
+    end
+})
+
 local capabilities = vim.tbl_deep_extend("force",
     vim.lsp.protocol.make_client_capabilities(),
     require('cmp_nvim_lsp').default_capabilities()
@@ -34,7 +49,7 @@ require 'lspconfig'.pylsp.setup({
 
 require 'lspconfig'.clangd.setup({
     capabilities = capabilities,
-    on_attach = function(client)
+    on_attach = function (client)
         require("clangd_extensions.inlay_hints").setup_autocmd()
         require("clangd_extensions.inlay_hints").set_inlay_hints()
     end,
@@ -105,34 +120,8 @@ require 'lspconfig'.lua_ls.setup {
     },
 }
 
-local rust_opts = {
-    tools = {
-        runnables = {
-            use_telescope = true -- use telescope.nvim
-        },
-        inlay_hints = {
-            parameter_hints_prefix = " « ",
-            -- other_hints_prefix = " » ",
-            other_hints_prefix = ">=> ",
-            -- max_len_align_padding = false, -- don't align to longest line in file
-            -- right_align = false            -- don't align to the extreme right
-        },
-        -- hover_actions = {
-        --     -- see vim.api.nvim_open_win()
-        --     border = {
-        --         { "╭", "FloatBorder" }, { "─", "FloatBorder" },
-        --         { "╮", "FloatBorder" }, { "│", "FloatBorder" },
-        --         { "╯", "FloatBorder" }, { "─", "FloatBorder" },
-        --         { "╰", "FloatBorder" }, { "│", "FloatBorder" }
-        --     },
-        --     auto_focus = true,
-        -- },
-    },
+vim.g.rustaceanvim = {
     server = {
         capabilities = capabilities,
-        settings = { ["rust-analyzer"] = { checkOnSave = { command = "clippy" } } }
     },
 }
-require 'rust-tools'.setup(rust_opts)
-
--- vim.g.rustaceanvim.server.on_attach = on_attach

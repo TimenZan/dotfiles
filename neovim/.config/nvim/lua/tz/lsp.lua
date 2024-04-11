@@ -8,20 +8,14 @@ local capabilities = vim.tbl_deep_extend("force",
     require('cmp_nvim_lsp').default_capabilities()
 )
 
-local on_attach = function(client)
-    require 'illuminate'.on_attach(client)
-end
-
 for _, server in pairs(servers) do
     require 'lspconfig'[server].setup {
         capabilities = capabilities,
-        on_attach = on_attach
     }
 end
 
 require 'lspconfig'.pylsp.setup({
     capabilities = capabilities,
-    on_attach = on_attach,
     settings = {
         pyslp = {
             plugins = {
@@ -43,7 +37,6 @@ require 'lspconfig'.clangd.setup({
     on_attach = function(client)
         require("clangd_extensions.inlay_hints").setup_autocmd()
         require("clangd_extensions.inlay_hints").set_inlay_hints()
-        on_attach(client)
     end,
 })
 
@@ -76,7 +69,6 @@ local efm_filetypes = {}
 for key, _ in pairs(efm_languages) do table.insert(efm_filetypes, key) end
 
 require 'lspconfig'.efm.setup {
-    on_attach = on_attach,
     capabilities = capabilities,
     init_options = {
         documentFormatting = false,
@@ -103,7 +95,6 @@ require 'lspconfig'.efm.setup {
 
 require 'lspconfig'.lua_ls.setup {
     capabilities = capabilities,
-    on_attach = on_attach,
     settings = {
         Lua = {
             runtime = { version = 'LuaJIT' },
@@ -139,8 +130,9 @@ local rust_opts = {
     },
     server = {
         capabilities = capabilities,
-        on_attach = on_attach,
         settings = { ["rust-analyzer"] = { checkOnSave = { command = "clippy" } } }
     },
 }
 require 'rust-tools'.setup(rust_opts)
+
+-- vim.g.rustaceanvim.server.on_attach = on_attach

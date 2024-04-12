@@ -7,11 +7,13 @@ local pragma_once = vim.api.nvim_create_augroup("MyLspConfig-7ce9faed-3f74-4011-
 
 vim.api.nvim_create_autocmd("LspAttach", {
     group = pragma_once,
-    callback = function (args)
+    callback = function(args)
         local client = vim.lsp.get_client_by_id(args.data.client_id)
         if client then
             if client.server_capabilities.inlayHintProvider then
-                vim.lsp.inlay_hint.enable(args.buf, true)
+                if vim.lsp.inlay_hint then
+                    vim.lsp.inlay_hint.enable(args.buf, true)
+                end
             end
         end
         -- whatever other lsp config you want
@@ -49,7 +51,7 @@ require 'lspconfig'.pylsp.setup({
 
 require 'lspconfig'.clangd.setup({
     capabilities = capabilities,
-    on_attach = function (client)
+    on_attach = function(client)
         require("clangd_extensions.inlay_hints").setup_autocmd()
         require("clangd_extensions.inlay_hints").set_inlay_hints()
     end,

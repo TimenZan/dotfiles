@@ -1,6 +1,6 @@
 {-# OPTIONS_GHC -Wno-missing-signatures #-}
 
-import qualified Data.Map                      as M
+import qualified Data.Map                       as M
 import           System.Exit
 import           XMonad
 import           XMonad.Actions.SpawnOn
@@ -8,47 +8,46 @@ import           XMonad.Actions.UpdatePointer
 import           XMonad.Hooks.ManageDocks
 
 import           XMonad.Layout.ThreeColumns
-import qualified XMonad.StackSet               as W
+import qualified XMonad.StackSet                as W
 
-import           System.Posix.Unistd           (SystemID (nodeName),
-                                                getSystemID)
-import           XMonad.Actions.Minimize       (maximizeWindowAndFocus,
-                                                minimizeWindow,
-                                                withLastMinimized)
-import           XMonad.Hooks.EwmhDesktops     (ewmh, setEwmhActivateHook)
-import           XMonad.Hooks.ManageHelpers    (doFullFloat, isDialog,
-                                                isFullscreen)
-import           XMonad.Hooks.RefocusLast      (refocusLastLogHook)
-import           XMonad.Hooks.StatusBar        (statusBarProp, withEasySB)
-import           XMonad.Hooks.StatusBar.PP     (PP (ppCurrent, ppSep, ppTitle),
-                                                filterOutWsPP, shorten,
-                                                xmobarColor, xmobarPP)
-import           XMonad.Hooks.UrgencyHook      (doAskUrgent)
-import           XMonad.Hooks.WindowSwallowing (swallowEventHook)
-import           XMonad.Layout.Accordion       (Accordion (Accordion))
-import           XMonad.Layout.BoringWindows   (boringWindows, focusDown,
-                                                focusMaster, focusUp)
-import           XMonad.Layout.CenterMainFluid (CenterMainFluid (CenterMainFluid))
-import           XMonad.Layout.Fullscreen      (fullscreenFull)
-import           XMonad.Layout.HintedGrid      (Grid (Grid))
-import           XMonad.Layout.HintedTile      (Alignment (TopLeft),
-                                                HintedTile (HintedTile),
-                                                Orientation (Wide))
-import           XMonad.Layout.Magnifier       (magnifiercz, magnifiercz')
-import           XMonad.Layout.Minimize        (minimize)
-import           XMonad.Layout.NoBorders       (noBorders, smartBorders)
-import           XMonad.Layout.PerWorkspace    (onWorkspace)
-import           XMonad.Layout.Reflect         (reflectHoriz)
-import           XMonad.Layout.Renamed         (Rename (CutWordsLeft, Replace),
-                                                renamed)
-import           XMonad.Layout.Roledex         (Roledex (Roledex))
-import           XMonad.Util.NamedScratchpad   (NamedScratchpad (NS),
-                                                customFloating,
-                                                namedScratchpadAction,
-                                                namedScratchpadManageHook,
-                                                nsHideOnFocusLoss,
-                                                scratchpadWorkspaceTag)
-import           XMonad.Util.SpawnOnce         (spawnOnOnce, spawnOnce)
+import           System.Posix.Unistd            (SystemID (nodeName),
+                                                 getSystemID)
+import           XMonad.Actions.Minimize        (maximizeWindowAndFocus,
+                                                 minimizeWindow,
+                                                 withLastMinimized)
+import           XMonad.Hooks.EwmhDesktops      (ewmh, setEwmhActivateHook)
+import           XMonad.Hooks.FloatConfigureReq (fixSteamFlickerMMMH,
+                                                 floatConfReqHook)
+import           XMonad.Hooks.ManageHelpers     (doFullFloat, isDialog,
+                                                 isFullscreen)
+import           XMonad.Hooks.RefocusLast       (refocusLastLogHook)
+import           XMonad.Hooks.StatusBar         (statusBarProp, withEasySB)
+import           XMonad.Hooks.StatusBar.PP      (PP (ppCurrent, ppSep, ppTitle),
+                                                 filterOutWsPP, shorten,
+                                                 xmobarColor, xmobarPP)
+import           XMonad.Hooks.UrgencyHook       (doAskUrgent)
+import           XMonad.Hooks.WindowSwallowing  (swallowEventHook)
+import           XMonad.Layout.Accordion        (Accordion (Accordion))
+import           XMonad.Layout.BoringWindows    (boringWindows, focusDown,
+                                                 focusMaster, focusUp)
+import           XMonad.Layout.CenterMainFluid  (CenterMainFluid (CenterMainFluid))
+import           XMonad.Layout.Fullscreen       (fullscreenFull)
+import           XMonad.Layout.HintedGrid       (Grid (Grid))
+import           XMonad.Layout.Magnifier        (magnifiercz)
+import           XMonad.Layout.Minimize         (minimize)
+import           XMonad.Layout.NoBorders        (noBorders, smartBorders)
+import           XMonad.Layout.PerWorkspace     (onWorkspace)
+import           XMonad.Layout.Reflect          (reflectHoriz)
+import           XMonad.Layout.Renamed          (Rename (CutWordsLeft), renamed)
+import           XMonad.Layout.Roledex          (Roledex (Roledex))
+import           XMonad.Util.Hacks              (fixSteamFlicker)
+import           XMonad.Util.NamedScratchpad    (NamedScratchpad (NS),
+                                                 customFloating,
+                                                 namedScratchpadAction,
+                                                 namedScratchpadManageHook,
+                                                 nsHideOnFocusLoss,
+                                                 scratchpadWorkspaceTag)
+import           XMonad.Util.SpawnOnce          (spawnOnOnce, spawnOnce)
 
 -- The command to lock the screen or show the screensaver.
 myScreensaver :: String
@@ -96,10 +95,12 @@ myLayout =
 
   threeCol =
     renamed [CutWordsLeft 1] $
-    reflectHoriz $ ThreeColMid 1 (3 / 100) (1 / 2)
-  -- magThreeCol =
-  --   renamed [Replace "ThreeCol Magnified"] $
-  --     magnifiercz' 1.4 threeCol
+      reflectHoriz $
+        ThreeColMid 1 (3 / 100) (1 / 2)
+
+-- magThreeCol =
+--   renamed [Replace "ThreeCol Magnified"] $
+--     magnifiercz' 1.4 threeCol
 
 ------------------------------------------------------------------------
 -- Colors and borders
@@ -200,7 +201,6 @@ myManageHook =
     [ className =? "Gimp" --> doFloat
     , isDialog --> doFloat
     , moveC "discord" "2"
-    , moveC "spotify" "4"
     , moveC "Steam" "9"
     , isFullscreen --> (doF W.focusDown <+> doFullFloat)
     ]
@@ -251,7 +251,10 @@ main = do
               , layoutHook = myLayout
               , manageHook = namedScratchpadManageHook scratchpads <+> myManageHook <+> manageDocks <+> manageSpawn
               , startupHook = (if host == "desktop-arch" then desktopStartupHook else laptopStartupHook) <+> allStartupHook
-              , handleEventHook = swallowEventHook (className =? "Alacritty" <||> className =? "kitty") (return True)
+              , handleEventHook
+                = fixSteamFlicker
+                <+> floatConfReqHook fixSteamFlickerMMMH
+                <+> swallowEventHook (className =? "Alacritty" <||> className =? "kitty") (return True)
               , logHook =
                   updatePointer (0.5, 0.5) (0, 0)
                     >> refocusLastLogHook

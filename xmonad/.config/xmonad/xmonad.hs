@@ -19,7 +19,7 @@ import           XMonad.Hooks.EwmhDesktops      (ewmh, setEwmhActivateHook)
 import           XMonad.Hooks.FloatConfigureReq (fixSteamFlickerMMMH,
                                                  floatConfReqHook)
 import           XMonad.Hooks.ManageHelpers     (doFullFloat, isDialog,
-                                                 isFullscreen)
+                                                 isFullscreen, (/=?))
 import           XMonad.Hooks.RefocusLast       (refocusLastLogHook)
 import           XMonad.Hooks.StatusBar         (statusBarProp, withEasySB)
 import           XMonad.Hooks.StatusBar.PP      (PP (ppCurrent, ppSep, ppTitle),
@@ -128,7 +128,7 @@ myBorderWidth = 1
 -- Scratchpads
 scratchpads =
   -- TODO change theme to make clear it's a scratchpad
-  [ NS "term" "kitty --name NNscratchpad --class NNscratchpad --title NNscratchpad" (title =? "NNscratchpad") bigFloat
+  [ NS "term" "kitty --title NNscratchpad --single-instance " (title =? "NNscratchpad") bigFloat
   ]
  where
   -- TODO: position correctly
@@ -147,7 +147,7 @@ myModMask = mod4Mask
 
 myKeys conf@XConfig{XMonad.modMask = modMask} =
   M.fromList $
-    [ ((modMask .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
+    [ ((modMask .|. shiftMask, xK_Return), spawn $ terminal conf)
     , ((modMask .|. controlMask, xK_l), spawn myScreensaver)
     , ((modMask, xK_f), namedScratchpadAction scratchpads "term")
     , ((modMask, xK_v), withFocused minimizeWindow)
@@ -157,7 +157,7 @@ myKeys conf@XConfig{XMonad.modMask = modMask} =
     , ((modMask .|. controlMask .|. shiftMask, xK_p), spawn myScreenshot)
     , ((modMask .|. shiftMask, xK_c), kill)
     , ((modMask, xK_space), sendMessage NextLayout)
-    , ((modMask .|. shiftMask, xK_space), setLayout $ XMonad.layoutHook conf)
+    , ((modMask .|. shiftMask, xK_space), setLayout $ layoutHook conf)
     , ((modMask, xK_n), refresh)
     , ((modMask, xK_Tab), focusDown)
     , ((modMask, xK_j), focusDown)
@@ -175,7 +175,7 @@ myKeys conf@XConfig{XMonad.modMask = modMask} =
     , ((modMask, xK_q), restart "xmonad" True)
     ]
       ++ [ ((m .|. modMask, k), windows $ f i)
-         | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_9]
+         | (i, k) <- zip (workspaces conf) [xK_1 .. xK_9]
          , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]
          ]
       ++ [ ( (m .|. modMask, key)
@@ -239,7 +239,7 @@ main = do
         docks $
           withEasySB (statusBarProp "xmobar" (pure myXmobarPP)) toggleStrutsKey $
             def
-              { terminal = "kitty"
+              { terminal = "kitty -1"
               , focusFollowsMouse = True
               , borderWidth = myBorderWidth
               , modMask = myModMask
@@ -254,7 +254,7 @@ main = do
               , handleEventHook
                 = fixSteamFlicker
                 <+> floatConfReqHook fixSteamFlickerMMMH
-                <+> swallowEventHook (className =? "Alacritty" <||> className =? "kitty") (return True)
+                <+> swallowEventHook (className =? "Alacritty" <||> className =? "kitty") (className /=? "kitty")
               , logHook =
                   updatePointer (0.5, 0.5) (0, 0)
                     >> refocusLastLogHook

@@ -26,11 +26,13 @@ import           XMonad.Hooks.StatusBar.PP      (PP (ppCurrent, ppSep, ppTitle),
                                                  filterOutWsPP, shorten,
                                                  xmobarColor, xmobarPP)
 import           XMonad.Hooks.UrgencyHook       (doAskUrgent)
-import           XMonad.Hooks.WindowSwallowing  (swallowEventHook)
+import           XMonad.Hooks.WindowSwallowing  (swallowEventHook,
+                                                 swallowEventHookSub)
 import           XMonad.Layout.Accordion        (Accordion (Accordion))
 import           XMonad.Layout.BoringWindows    (boringWindows, focusDown,
                                                  focusMaster, focusUp)
 import           XMonad.Layout.CenterMainFluid  (CenterMainFluid (CenterMainFluid))
+import           XMonad.Layout.Decoration       (shrinkText)
 import           XMonad.Layout.Fullscreen       (fullscreenFull)
 import           XMonad.Layout.HintedGrid       (Grid (Grid))
 import           XMonad.Layout.Magnifier        (magnifiercz)
@@ -40,6 +42,9 @@ import           XMonad.Layout.PerWorkspace     (onWorkspace)
 import           XMonad.Layout.Reflect          (reflectHoriz)
 import           XMonad.Layout.Renamed          (Rename (CutWordsLeft), renamed)
 import           XMonad.Layout.Roledex          (Roledex (Roledex))
+import           XMonad.Layout.Simplest
+import           XMonad.Layout.SubLayouts
+import           XMonad.Layout.Tabbed
 import           XMonad.Util.Hacks              (fixSteamFlicker)
 import           XMonad.Util.NamedScratchpad    (NamedScratchpad (NS),
                                                  customFloating,
@@ -48,6 +53,7 @@ import           XMonad.Util.NamedScratchpad    (NamedScratchpad (NS),
                                                  nsHideOnFocusLoss,
                                                  scratchpadWorkspaceTag)
 import           XMonad.Util.SpawnOnce          (spawnOnOnce, spawnOnce)
+import           XMonad.Util.Themes
 
 -- The command to lock the screen or show the screensaver.
 myScreensaver :: String
@@ -70,11 +76,17 @@ myLauncher = "dmenu-frecency"
 myWorkspaces :: [String]
 myWorkspaces = map show [(1 :: Integer) .. 9]
 
+myTabTheme = (theme kavonForestTheme) {
+  fontName = "xft:monospace:pixelsize=12:antialias=true:hinting=true",
+  decoHeight = 15
+}
+
 myLayout =
-  renamed [CutWordsLeft 1]
+  renamed [CutWordsLeft 2]
     $ minimize
     $ boringWindows
     $ smartBorders
+    $ addTabs shrinkText myTabTheme $ subLayout [] Simplest
     $ onWorkspace
       "2"
       ( Accordion
@@ -83,7 +95,7 @@ myLayout =
     $ onWorkspace
       "9"
       (noBorders (fullscreenFull Full))
-      ( CenterMainFluid 1 (3 / 100) 0.50
+      (  CenterMainFluid 1 (3 / 100) 0.50
           ||| threeCol
           -- \||| Tall 1 (3 / 100) (1 / 2)
           ||| Full
@@ -128,7 +140,7 @@ myBorderWidth = 1
 -- Scratchpads
 scratchpads =
   -- TODO change theme to make clear it's a scratchpad
-  [ NS "term" "kitty --title NNscratchpad --single-instance " (title =? "NNscratchpad") bigFloat
+  [ NS "term" "kitty --class NNscratchpad --single-instance --instance-group NNscratchpadGroup" (className =? "NNscratchpad") bigFloat
   ]
  where
   -- TODO: position correctly
@@ -220,6 +232,7 @@ laptopStartupHook = do
 
 allStartupHook = do
   spawnOnce "picom -b"
+  spawnOnOnce "NSP" "kitty --class NNscratchpad --single-instance --instance-group NNscratchpadGroup"
 
 myXmobarPP :: PP
 myXmobarPP =
@@ -254,7 +267,7 @@ main = do
               , handleEventHook
                 = fixSteamFlicker
                 <+> floatConfReqHook fixSteamFlickerMMMH
-                <+> swallowEventHook (className =? "Alacritty" <||> className =? "kitty") (className /=? "kitty")
+                <+> swallowEventHookSub (className =? "Alacritty" <||> className =? "kitty") (className /=? "kitty" <&&> className /=? "NNscratchpad")
               , logHook =
                   updatePointer (0.5, 0.5) (0, 0)
                     >> refocusLastLogHook

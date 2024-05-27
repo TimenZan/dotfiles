@@ -5,6 +5,16 @@ local cmp = require('cmp')
 require 'cmp_git'.setup()
 
 local luasnip = require 'luasnip'
+local lstypes = require 'luasnip.util.types'
+luasnip.config.setup {
+    ext_opts = {
+        [lstypes.choiceNode] = {
+            active = {
+                virt_text = { { "●", "#fab387" } }
+            },
+        },
+    },
+}
 require 'luasnip/loaders/from_vscode'.lazy_load()
 require 'luasnip.loaders.from_lua'.load({ paths = "~/.config/nvim/snippets" })
 

@@ -93,6 +93,7 @@ cmp.setup({
         { name = 'nvim_lua' },
         { name = 'luasnip' }, -- For luasnip users.
         { name = 'nvim_lsp' },
+        { name = 'crates' },
     }, {
         { name = 'path' },
         { name = 'calc' },

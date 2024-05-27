@@ -68,6 +68,7 @@ Plug 'rhysd/committia.vim' " set up correctly
 Plug 'rust-lang/rust.vim'
 	let g:rustfmt_autosave=1
 Plug 'mrcjkb/rustaceanvim'
+Plug 'Saecki/crates.nvim'
 " haskell
 Plug 'alx741/vim-stylishask'
 Plug 'MrcJkb/haskell-tools.nvim'
@@ -327,6 +328,7 @@ lua require'tz.treesitter'
 lua require'tz.ui'
 lua require'tz.test'
 lua require'Comment'.setup()
+lua require'crates'.setup()
 
 " }}}
 

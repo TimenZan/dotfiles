@@ -72,6 +72,7 @@ Plug 'Saecki/crates.nvim'
 " haskell
 Plug 'alx741/vim-stylishask'
 Plug 'MrcJkb/haskell-tools.nvim'
+Plug 'mrcjkb/haskell-snippets.nvim'
 " Coq
 Plug 'whonore/Coqtail' " for ftdetect, syntax, basic ftplugin, etc
 Plug 'tomtomjhj/coq-lsp.nvim'
@@ -205,9 +206,6 @@ set sidescrolloff=5
 set signcolumn=yes
 set undofile
 set updatetime=100
-if (has('termguicolors'))
-	set termguicolors
-endif
 
 set number relativenumber
 " toggle absolute/relative number
@@ -229,9 +227,6 @@ let g:markdown_fenced_languages = ['html', 'python', 'ruby', 'vim', 'rust', 'jav
 
 " Bindings {{{
 
-" Make `@` work on multiple lines
-vnoremap @ :norm@
-
 " center screen and unfold on search
 nnoremap <silent> n nzzzv
 nnoremap <silent> N Nzzzv
@@ -242,16 +237,12 @@ vnoremap <silent> > >gv
 nnoremap <silent> gd         <cmd>lua vim.lsp.buf.declaration()<CR>
 nnoremap <silent> gD         <cmd>lua vim.lsp.buf.implementation()<CR>
 nnoremap <silent> 1gD        <cmd>lua vim.lsp.buf.type_definition()<CR>
-nnoremap <silent> K          <cmd>lua vim.lsp.buf.hover()<CR>
 nnoremap <silent> <c-k>      <cmd>lua vim.lsp.buf.signature_help()<CR>
-nnoremap <silent> gr         <cmd>TroubleToggle lsp_references<CR>
 nnoremap <silent> g0         <cmd>lua vim.lsp.buf.document_symbol()<CR>
 nnoremap <silent> gW         <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
 nnoremap <silent> g=         <cmd>lua vim.lsp.buf.format{async=true}<CR>
 nnoremap <silent> <leader>a  <cmd>lua vim.lsp.buf.code_action()<CR>
 nnoremap <silent> <leader>l  <cmd>lua vim.lsp.codelens.run()<CR>
-nnoremap <silent> g[         <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
-nnoremap <silent> g]         <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
 nnoremap <silent> <leader>rn <cmd>lua vim.lsp.buf.rename()<CR>
 
 " bindings for nvim-telescope start with <leader>f
@@ -311,9 +302,6 @@ noremap <F6> :setlocal spell! spelllang=en_us<CR>
 
 " Use esc to exit terminal mode
 tnoremap <Esc> <C-\><C-n>
-
-inoremap <silent><expr> <c-l> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<c-l>'
-snoremap <silent> <c-l> <cmd>lua require('luasnip').jump(1)<CR>
 
 " }}}
 

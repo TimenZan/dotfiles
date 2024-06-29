@@ -37,9 +37,10 @@ import           XMonad.Layout.Fullscreen       (fullscreenFull)
 import           XMonad.Layout.HintedGrid       (Grid (Grid))
 import           XMonad.Layout.Magnifier        (magnifiercz)
 import           XMonad.Layout.Minimize         (minimize)
+import           XMonad.Layout.MultiToggle
 import           XMonad.Layout.NoBorders        (noBorders, smartBorders)
 import           XMonad.Layout.PerWorkspace     (onWorkspace)
-import           XMonad.Layout.Reflect          (reflectHoriz)
+import           XMonad.Layout.Reflect
 import           XMonad.Layout.Renamed          (Rename (CutWordsLeft), renamed)
 import           XMonad.Layout.Roledex          (Roledex (Roledex))
 import           XMonad.Layout.Simplest
@@ -87,6 +88,7 @@ myLayout =
     $ boringWindows
     $ smartBorders
     $ addTabs shrinkText myTabTheme $ subLayout [] Simplest
+    $ mkToggle (single REFLECTX)
     $ onWorkspace
       "2"
       ( Accordion
@@ -192,6 +194,7 @@ myKeys conf@XConfig{XMonad.modMask = modMask} =
     , ((modMask, xK_t), withFocused $ windows . W.sink)
     , ((modMask, xK_comma), sendMessage (IncMasterN 1))
     , ((modMask, xK_period), sendMessage (IncMasterN (-1)))
+    , ((modMask .|. controlMask, xK_x), sendMessage $ Toggle REFLECTX)
     , ((modMask .|. shiftMask, xK_q), io exitSuccess)
     , ((modMask, xK_q), restart "xmonad" True)
     ]

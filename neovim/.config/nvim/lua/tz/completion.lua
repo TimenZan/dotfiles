@@ -95,8 +95,9 @@ cmp.setup({
 
     sources = cmp.config.sources({
         { name = 'nvim_lsp_signature_help' },
-        -- { name = 'vimtex' },
+        { name = 'vimtex' },
         { name = 'nvim_lua' },
+        { name = 'omni',                   option = { disable_omnifunc = {} } },
         { name = 'luasnip' },
         { name = 'nvim_lsp' },
         { name = 'crates' },
@@ -104,7 +105,7 @@ cmp.setup({
         { name = 'path' },
         { name = 'calc' },
     }, {
-        { name = 'cmp_git' },
+        { name = 'git' },
         { name = 'buffer', keyword_length = 3 },
         { name = 'spell',  keyword_length = 5 },
     }),

@@ -78,10 +78,16 @@ cmp.setup({
     sorting = {
         priority_weight = 2,
         comparators = {
-            compare.offset, compare.exact,
+            compare.offset,
+            compare.exact,
             require('clangd_extensions.cmp_scores'),
-            compare.score, compare.kind,
-            compare.sort_text, compare.length, compare.order
+            compare.score,
+            compare.kind,
+            compare.length,
+            compare.order,
+            compare.recently_used,
+            compare.locality,
+            compare.scopes,
         }
     },
 
@@ -91,7 +97,7 @@ cmp.setup({
         { name = 'nvim_lsp_signature_help' },
         -- { name = 'vimtex' },
         { name = 'nvim_lua' },
-        { name = 'luasnip' }, -- For luasnip users.
+        { name = 'luasnip' },
         { name = 'nvim_lsp' },
         { name = 'crates' },
     }, {

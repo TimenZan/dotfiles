@@ -102,13 +102,11 @@ myLayout =
           ||| Grid False
           ||| Roledex
       )
- where
+  where
   -- \||| spiral (16 / 9)
 
-  threeCol =
-    renamed [CutWordsLeft 1] $
-      reflectHoriz $
-        ThreeColMid 1 (3 / 100) (1 / 2)
+    threeCol =
+        ThreeCol 1 (3 / 100) (1 / 2)
 
 -- magThreeCol =
 --   renamed [Replace "ThreeCol Magnified"] $

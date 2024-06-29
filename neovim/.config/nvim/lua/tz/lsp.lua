@@ -1,6 +1,6 @@
 local servers = {
     'vimls', 'yamlls', 'jsonls', 'bashls', 'texlab', 'pyright', 'tsserver', 'eslint',
-    'cssls', 'html', 'taplo'
+    'cssls', 'html', 'taplo', 'jdtls', 'harper_ls'
 }
 
 local pragma_once = vim.api.nvim_create_augroup("MyLspConfig-7ce9faed-3f74-4011-b31e-38b0d0426781", { clear = true })

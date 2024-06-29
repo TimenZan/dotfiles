@@ -3,9 +3,14 @@ require 'nvim-treesitter.configs'.setup {
         enable = true
     },
     ensure_installed = "all",
+    sync_install = true,
+    auto_install = false,
+    ignore_install = {},
     highlight = {
         enable = true,
-        additional_vim_regex_highlighting = true,
+        disable = {"latex", "tex"},
+        disable_ft = {"tex", "latex"},
+        additional_vim_regex_highlighting = {"tex"},
     },
     incremental_selection = {
         enable = true,

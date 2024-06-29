@@ -4,7 +4,7 @@ local open_with_trouble = require 'trouble.sources.telescope'.open
 local add_to_trouble = require 'trouble.sources.telescope'.add
 
 require 'trouble'.setup {
-    auto_close = true,
+    -- auto_close = true,
 }
 
 telescope.setup {
@@ -86,4 +86,3 @@ require 'registers'.setup {
         register_type_blockwise = "⸾", -- ⭿ ⋮
     },
 }
-

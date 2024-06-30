@@ -101,6 +101,7 @@ cmp.setup({
         { name = 'luasnip' },
         { name = 'nvim_lsp' },
         { name = 'crates' },
+        { name = 'diag-codes' },
     }, {
         { name = 'path' },
         { name = 'calc' },

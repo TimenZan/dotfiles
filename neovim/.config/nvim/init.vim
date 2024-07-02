@@ -40,7 +40,6 @@ Plug 'micangl/cmp-vimtex'
 Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
 Plug 'onsails/lspkind-nvim'
 Plug 'rafamadriz/friendly-snippets'
-Plug 'weilbith/nvim-lsp-smag' " SMArt taGs
 " }}}
 " test {{{
 Plug 'nvim-neotest/neotest'

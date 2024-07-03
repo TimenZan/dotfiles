@@ -43,12 +43,13 @@ table.insert(plugs, {
         },
         windows = { indent = 1 },
     },
+    event = 'VeryLazy',
 })
 
 table.insert(plugs, {
     'mfussenegger/nvim-dap',
     dependencies = {
-        { 'theHamsta/nvim-dap-virtual-text', config = true, lazy = false },
+        { 'theHamsta/nvim-dap-virtual-text', config = true, event = 'VeryLazy' },
         'rcarriga/nvim-dap-ui',
         'nvim-telescope/telescope-dap.nvim',
     },
@@ -87,6 +88,8 @@ table.insert(plugs, {
             },
         }
     end,
+
+    event = 'VeryLazy',
 
     cmd = {
         'DapContinue',

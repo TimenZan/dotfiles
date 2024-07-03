@@ -2,7 +2,7 @@ local plugs = {}
 
 table.insert(plugs, {
     'nvim-treesitter/nvim-treesitter',
-    lazy = false,
+    event = 'VeryLazy',
     build = ":TSUpdate",
     config = function()
         require 'nvim-treesitter.configs'.setup {
@@ -34,6 +34,7 @@ table.insert(plugs, {
 table.insert(plugs, {
     'nvim-treesitter/nvim-treesitter-context',
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
+    event = 'VeryLazy',
     config = function()
         vim.cmd "hi TreesitterContextBottom gui=underline guisp=Grey"
         vim.cmd "hi TreesitterContextLineNumberBottom gui=underline guisp=Grey"
@@ -45,6 +46,7 @@ table.insert(plugs, {
 
 table.insert(plugs, {
     'haringsrob/nvim_context_vt',
+    event = 'VeryLazy',
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
     opts = {
         disable_ft = { 'markdown', 'dart' },
@@ -53,6 +55,7 @@ table.insert(plugs, {
 })
 table.insert(plugs, {
     'nvim-treesitter/nvim-treesitter-textobjects',
+    event = 'VeryLazy',
     depedencies = {
         { 'nvim-treesitter/nvim-treesitter'},
     },

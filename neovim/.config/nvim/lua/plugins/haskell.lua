@@ -11,6 +11,7 @@ table.insert(plugs, {
 
 table.insert(plugs, {
     'mrcjkb/haskell-snippets.nvim',
+    ft = { 'haskell' },
     config = function()
         require 'luasnip'.add_snippets('haskell', require 'haskell-snippets'.all, { key = 'haskell' })
     end,

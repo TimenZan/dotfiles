@@ -4,7 +4,7 @@ local pragma_once = vim.api.nvim_create_augroup("MyLspConfig-7ce9faed-3f74-4011-
 
 vim.api.nvim_create_autocmd("LspAttach", {
     group = pragma_once,
-    callback = function(args)
+    callback = function (args)
         local client = vim.lsp.get_client_by_id(args.data.client_id)
         if client then
             if client.server_capabilities.inlayHintProvider then
@@ -19,7 +19,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 table.insert(plugs, {
     "neovim/nvim-lspconfig",
-    config = function()
+    config = function ()
         local capabilities = vim.tbl_deep_extend("force",
             vim.lsp.protocol.make_client_capabilities(),
             require('cmp_nvim_lsp').default_capabilities()
@@ -31,7 +31,7 @@ table.insert(plugs, {
             options.capabilities = capabilities
             require 'lspconfig'[server].setup { options }
         end
-    end
+    end,
 })
 
 return plugs

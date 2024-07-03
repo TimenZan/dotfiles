@@ -2,7 +2,8 @@ local plugs = {}
 
 table.insert(plugs, {
     'Vigemus/iron.nvim',
-    config = function()
+    event = 'VeryLazy',
+    config = function ()
         require 'iron.core'.setup {
             config = {
                 scratch_repl = false,
@@ -11,7 +12,7 @@ table.insert(plugs, {
                         command = { "fish" }
                     },
                     haskell = {
-                        command = function(meta)
+                        command = function (meta)
                             local file = vim.api.nvim_buf_get_name(meta.current_bufnr)
                             return require('haskell-tools').repl.mk_repl_cmd(file)
                         end

@@ -10,6 +10,7 @@ table.insert(plugs, {
 
 table.insert(plugs, {
     'j-hui/fidget.nvim',
+    lazy = false,
     opts = {
         progress = {
             ignore_done_already = true,
@@ -29,7 +30,8 @@ table.insert(plugs, {
 table.insert(plugs, {
     'lukas-reineke/indent-blankline.nvim',
     main = 'ibl',
-    config = function()
+    event = 'VeryLazy',
+    config = function ()
         vim.g.indentLine_char = '▏'
         vim.g.indent_blankline_use_treesitter = true
         vim.g.indentLine_fileTypeExclude = { 'help' }
@@ -38,7 +40,7 @@ table.insert(plugs, {
         local highlight =
         { "RainbowRed", "RainbowYellow", "RainbowBlue", "RainbowOrange", "RainbowGreen", "RainbowViolet", "RainbowCyan", }
         vim.g.rainbow_delimiters = { highlight = highlight }
-        hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
+        hooks.register(hooks.type.HIGHLIGHT_SETUP, function ()
             vim.api.nvim_set_hl(0, "RainbowRed", { fg = "#E06C75" })
             vim.api.nvim_set_hl(0, "RainbowYellow", { fg = "#E5C07B" })
             vim.api.nvim_set_hl(0, "RainbowBlue", { fg = "#61AFEF" })
@@ -76,7 +78,8 @@ table.insert(plugs, {
     dependencies = {
         'camspiers/animate.vim',
     },
-    init = function()
+    enabled = false,
+    init = function ()
         -- TODO: make dependent on filetype?
         -- vim.g.lens.width_resize_max = 100
         -- vim.g.lens.disabled_filetypes = { 'nerdtree', 'fzf' }
@@ -86,6 +89,7 @@ table.insert(plugs, {
 table.insert(plugs, {
     'stevearc/dressing.nvim',
     opts = {},
+    lazy = false,
 })
 
 return plugs

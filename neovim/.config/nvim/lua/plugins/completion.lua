@@ -1,16 +1,11 @@
 local plugs = {}
 
 table.insert(plugs, {
-    'petertriho/cmp-git',
-    main = 'cmp_git',
-    config = true,
-})
-
-table.insert(plugs, {
     'L3MON4D3/LuaSnip',
     dependencies = {
         'rafamadriz/friendly-snippets',
     },
+    event = { 'InsertEnter', },
     build = 'make install_jsregexp',
     config = function()
         local luasnip = require 'luasnip'
@@ -32,7 +27,7 @@ table.insert(plugs, {
 table.insert(plugs, {
     'hrsh7th/nvim-cmp',
     name = 'cmp',
-    lazy = false,
+    event = { 'InsertEnter', 'CmdlineEnter', },
     dependencies = {
         'JMarkin/cmp-diag-codes',
         'L3MON4D3/LuaSnip',
@@ -46,7 +41,7 @@ table.insert(plugs, {
         'hrsh7th/cmp-omni',
         'hrsh7th/cmp-path',
         'micangl/cmp-vimtex',
-        'petertriho/cmp-git',
+        { 'petertriho/cmp-git',    config = true, main = 'cmp_git', },
         'saadparwaiz1/cmp_luasnip',
         { 'windwp/nvim-autopairs', config = true, },
     },
@@ -160,6 +155,20 @@ table.insert(plugs, {
     end,
 })
 
+table.insert(plugs, {
+    'folke/lazydev.nvim',
+    ft = 'lua',
+    -- cmd = 'LazyDev',
+    opts = {
+        library = {
+            { path = 'luvit-meta/library', words = { 'vim%.uv' } },
+            { path = 'LazyVim',            words = { 'LazyVim' } },
+            { path = 'lazy.nvim',          words = { 'LazyVim' } },
+        },
+    },
+})
+
+table.insert(plugs, { "Bilal2453/luvit-meta", lazy = true })
 
 
 return plugs

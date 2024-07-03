@@ -29,7 +29,7 @@ end
 --- @param cur string the current module
 --- @param directory string the directory to consume
 --- @return table any combined table of all required files
-M.iterate_dir = function(cur, directory)
+M.iterate_dir = function (cur, directory)
     local res = {}
     local fnames = vim.tbl_filter(is_lua, scandir(directory))
     for _, filename in ipairs(fnames) do
@@ -42,6 +42,21 @@ M.iterate_dir = function(cur, directory)
         end
     end
     return res
+end
+
+--- Modify all specs to be loaded on `VeryLazy` if they don't already specify an event
+--- @param plugs table the specifications to modify
+--- @return table
+M.all_verylazy = function (plugs)
+    return vim.tbl_map(
+        function (e)
+            if type(e) == 'string' then
+                e = { e }
+            end
+            e.event = e.event or { 'VeryLazy', }
+            return e
+        end,
+        plugs)
 end
 
 return M

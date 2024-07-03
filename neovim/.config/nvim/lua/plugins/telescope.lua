@@ -11,7 +11,7 @@ table.insert(plugs, {
         'crispgm/telescope-heading.nvim',
         'folke/trouble.nvim',
     },
-    config = function()
+    config = function ()
         local telescope = require 'telescope'
         local actions = require 'telescope.actions'
         local trouble_ts = require 'trouble.sources.telescope'

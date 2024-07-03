@@ -2,9 +2,9 @@ local plugs = {}
 
 table.insert(plugs, {
     'nvim-treesitter/nvim-treesitter',
-    event = 'VeryLazy',
+    -- event = 'VeryLazy',
     build = ":TSUpdate",
-    config = function()
+    config = function ()
         require 'nvim-treesitter.configs'.setup {
             context_commentstring = { enable = true },
             ensure_installed = { "c", "lua", "vim", "vimdoc", "query" },
@@ -35,10 +35,10 @@ table.insert(plugs, {
     'nvim-treesitter/nvim-treesitter-context',
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
     event = 'VeryLazy',
-    config = function()
+    config = function ()
         vim.cmd "hi TreesitterContextBottom gui=underline guisp=Grey"
         vim.cmd "hi TreesitterContextLineNumberBottom gui=underline guisp=Grey"
-        vim.keymap.set('n', '[c', function()
+        vim.keymap.set('n', '[c', function ()
             require 'treesitter-context'.go_to_context(vim.v.count1)
         end, { silent = true })
     end
@@ -57,9 +57,9 @@ table.insert(plugs, {
     'nvim-treesitter/nvim-treesitter-textobjects',
     event = 'VeryLazy',
     depedencies = {
-        { 'nvim-treesitter/nvim-treesitter'},
+        { 'nvim-treesitter/nvim-treesitter' },
     },
-    config = function()
+    config = function ()
         require 'nvim-treesitter.configs'.setup {
             textobjects = {
                 select = {

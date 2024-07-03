@@ -16,21 +16,15 @@ local plugs = {
     { 'RRethy/vim-illuminate' },
     -- TODO: move back to original when my PR is merged
     { 'timenzan/targets.vim' },
-    { 'wsdjeg/vim-fetch' },
-    { 'jessarcher/vim-heritage' },
+    { 'wsdjeg/vim-fetch',        lazy = false, },
+    { 'jessarcher/vim-heritage', },
     {
         'andymass/vim-matchup',
-        init = function()
+        lazy = false,
+        init = function ()
             vim.g.matchup_matchparen_offscreen = {}
         end,
     },
 }
 
-
-return vim.tbl_map(
-    function(e)
-        -- None of these plugins are vital to initial UI
-        e.event = 'VeryLazy'
-        return e
-    end,
-    plugs)
+return require 'util'.all_verylazy(plugs)

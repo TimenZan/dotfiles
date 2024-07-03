@@ -12,13 +12,12 @@ local plugs = {
     --	}
     {
         'rhysd/committia.vim',
-        config = function()
+        config = function ()
             vim.keymap.set({ 'n', 'i', 'v', 's' }, '<a-n>', '<Plug>(committia-scroll-diff-down-half)')
             vim.keymap.set({ 'n', 'i', 'v', 's' }, '<a-p>', '<Plug>(committia-scroll-diff-up-half)')
-        end
+        end,
+        lazy = false, -- Needs to be loaded before UI is drawn
     },
 }
 
-
-
-return plugs
+return require 'util'.all_verylazy(plugs)

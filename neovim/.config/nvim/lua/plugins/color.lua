@@ -4,10 +4,12 @@ table.insert(plugs, {
     'norcalli/nvim-colorizer.lua',
     main = 'colorizer',
     opts = {},
+    event = 'VeryLazy',
 })
 
 table.insert(plugs, {
     'hiphish/rainbow-delimiters.nvim',
+    event = 'VeryLazy',
 })
 
 table.insert(plugs, { 'EdenEast/nightfox.nvim', priority = 1000, })
@@ -19,6 +21,7 @@ table.insert(plugs, { 'ray-x/starry.nvim', priority = 1000, })
 table.insert(plugs, {
     'catppuccin/nvim',
     name = 'catppuccin',
+    lazy = false,
     priority = 1000,
     config = function() vim.cmd.colorscheme 'catppuccin-mocha' end,
 })

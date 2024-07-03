@@ -17,7 +17,6 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'tpope/vim-repeat'
 Plug 'winston0410/cmd-parser.nvim'
-Plug 'antoinemadec/FixCursorHold.nvim'
 Plug 'kana/vim-textobj-user'
 Plug 'neovimhaskell/nvim-hs.vim'
 " }}}

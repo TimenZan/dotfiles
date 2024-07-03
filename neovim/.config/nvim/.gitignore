@@ -5,3 +5,4 @@ autoload/plug.vim.old
 undo/**
 spell/
 lua/.luarc.json
+lazy-lock.json

@@ -1,0 +1,37 @@
+return {{}}
+-- -- Proselint configuration
+-- local proselint = {
+--     lintCommand = 'proselint -',
+--     lintStdin = true,
+--     lintFormats = { '%f:%l:%c: %m' },
+--     lintSeverity = 3, --marks everything as Info severity, same as ltex
+-- }
+--
+-- -- track the configurations, {ft = command}
+-- local efm_languages = {}
+--
+-- -- All filetypes that use proselint
+-- local efm_proselint = { "tex", "gitcommit", "markdown", "plaintext", "bib" }
+-- for _, f in pairs(efm_proselint) do
+--     vim.tbl_deep_extend('force', efm_languages[f], { f = proselint })
+-- end
+--
+-- -- track the filetypes that efm should activate for
+-- local efm_filetypes = {}
+-- for key, _ in pairs(efm_languages) do table.insert(efm_filetypes, key) end
+--
+-- local efm_config = {
+--     init_options = {
+--         documentFormatting = false,
+--         hover = true,
+--         documentSymbol = true,
+--         codeAction = true,
+--         completion = true
+--     },
+--     settings = { rootMarkers = { '.git/' }, languages = efm_languages },
+--     filetypes = efm_filetypes
+-- }
+--
+-- return {
+--     { 'efm', efm_config },
+-- }

@@ -53,6 +53,7 @@ table.insert(plugs, {
         prefix = ' ',
     },
 })
+
 table.insert(plugs, {
     'nvim-treesitter/nvim-treesitter-textobjects',
     event = 'VeryLazy',
@@ -123,5 +124,19 @@ table.insert(plugs, {
         vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T_expr, { expr = true })
     end,
 })
+
+table.insert(plugs, {
+    'Wansmer/treesj',
+    dependencies = { 'nvim-treesitter/nvim-treesitter', },
+    opts = { use_default_keymaps = false, },
+    cmd = { 'TSJToggle', 'TSJSplit', 'TSJJoin', },
+    keys = {
+        { '<c-j>',     function () require 'treesj'.toggle { split = { recursive = false } } end },
+        { '<cs-j>',    function () require 'treesj'.toggle { split = { recursive = true } } end },
+        { '<leader>j', function () require 'treesj'.join { join = { recursive = false } } end },
+        { '<leader>J', function () require 'treesj'.join { join = { recursive = true } } end },
+    },
+})
+
 
 return plugs

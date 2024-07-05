@@ -22,12 +22,12 @@ vim.opt_global.shortmess:append "c"
 vim.opt.number = true
 vim.opt.relativenumber = true
 
-local dont_number_ft = { help = true, lazy = true, }
+local dont_number_ft = { help = true, lazy = true, ['neotest-summary'] = true, }
 
 local numbertoggle = vim.api.nvim_create_augroup("numbertoggle-3f649135-8322-4918-a0a1-2083c6527e92", { clear = true })
 vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "InsertLeave" }, {
     group = numbertoggle,
-    callback = function(args)
+    callback = function (args)
         if not dont_number_ft[vim.bo.filetype] then
             vim.opt.relativenumber = true
         end
@@ -35,7 +35,7 @@ vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "InsertLeave" }, {
 })
 vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost", "InsertEnter" }, {
     group = numbertoggle,
-    callback = function(args)
+    callback = function (args)
         if not dont_number_ft[vim.bo.filetype] then
             vim.opt.relativenumber = false
         end
@@ -45,7 +45,7 @@ vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost", "InsertEnter" }, {
 local highlightYank = vim.api.nvim_create_augroup("highlightYank-c1065828-0dc6-4433-ad56-b479f24ec397", { clear = true })
 vim.api.nvim_create_autocmd("TextYankPost", {
     group = highlightYank,
-    callback = function(args)
+    callback = function (args)
         vim.highlight.on_yank { timeout = 500 }
     end
 })

@@ -22,7 +22,7 @@ vim.opt_global.shortmess:append "c"
 vim.opt.number = true
 vim.opt.relativenumber = true
 
-local dont_number_ft = { help = true, lazy = true, ['neotest-summary'] = true, }
+local dont_number_ft = { help = true, lazy = true, ['neotest-summary'] = true, DressingInput = true, }
 
 local numbertoggle = vim.api.nvim_create_augroup("numbertoggle-3f649135-8322-4918-a0a1-2083c6527e92", { clear = true })
 vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "InsertLeave" }, {

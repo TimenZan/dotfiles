@@ -14,8 +14,7 @@ local plugs = {
     { 'machakann/vim-sandwich' },
     { 'machakann/vim-swap' },
     { 'RRethy/vim-illuminate' },
-    -- TODO: move back to original when my PR is merged
-    { 'timenzan/targets.vim' },
+    { 'wellle/targets.vim' },
     { 'wsdjeg/vim-fetch',        lazy = false, },
     { 'jessarcher/vim-heritage', },
     {

@@ -11,7 +11,7 @@ table.insert(plugs, {
         'mrcjkb/rustaceanvim',
     },
 
-    config = function()
+    config = function ()
         require 'neotest'.setup {
             adapters = {
                 require 'neotest-haskell' ({
@@ -41,13 +41,13 @@ table.insert(plugs, {
     cmd = 'Neotest',
 
     keys = {
-        { '<leader>ta', function() require 'neotest'.run.attach() end },
-        { '<leader>td', function() require 'neotest'.run.run({ strategy = "dap" }) end },
-        { '<leader>tf', function() require 'neotest'.run.run(vim.fn.expand("%")) end },
-        { '<leader>tq', function() require 'neotest'.run.stop() end },
-        { '<leader>tr', function() require 'neotest'.run.run() end },
-        { '<leader>ts', function() require 'neotest'.summary.toggle() end },
-        { '<leader>tt', function() require 'neotest'.run.run({ suite = true }) end },
+        { '<leader>ta', function () require 'neotest'.run.attach() end },
+        { '<leader>td', function () require 'neotest'.run.run({ strategy = "dap" }) end },
+        { '<leader>tf', function () require 'neotest'.run.run(vim.fn.expand("%")) end },
+        { '<leader>tq', function () require 'neotest'.run.stop() end },
+        { '<leader>tr', function () require 'neotest'.run.run() end },
+        { '<leader>ts', function () require 'neotest'.summary.toggle() end },
+        { '<leader>tt', function () require 'neotest'.run.run({ suite = true }) end },
     },
 })
 

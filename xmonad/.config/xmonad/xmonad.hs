@@ -141,7 +141,7 @@ myBorderWidth = 1
 -- Scratchpads
 scratchpads =
   -- TODO change theme to make clear it's a scratchpad
-  [ NS "term" "kitty --class NNscratchpad --single-instance --instance-group NNscratchpadGroup" (className =? "NNscratchpad") bigFloat
+  [ NS "term" "kitty --class NNscratchpad --single-instance" (className =? "NNscratchpad") bigFloat
   ]
  where
   -- TODO: position correctly

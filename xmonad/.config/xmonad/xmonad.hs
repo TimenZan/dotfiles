@@ -96,6 +96,9 @@ myLayout =
           ||| (Mirror (Tall 1 (3 / 100) (1 / 2)))
       )
     $ onWorkspace
+      "4"
+      ( Mirror Accordion )
+    $ onWorkspace
       "9"
       (noBorders (fullscreenFull Full))
       (  CenterMainFluid 1 (3 / 100) 0.50
@@ -162,10 +165,10 @@ myKeys conf@XConfig{XMonad.modMask = modMask} =
   M.fromList $
     [ ((modMask .|. shiftMask, xK_Return), spawn $ terminal conf)
     , ((modMask .|. controlMask, xK_l), spawn myScreensaver)
-    , ((modMask, xK_f), namedScratchpadAction scratchpads "term")
+    , ((modMask, xK_r), namedScratchpadAction scratchpads "term")
     , ((modMask, xK_v), withFocused minimizeWindow)
     , ((modMask .|. shiftMask, xK_v), withLastMinimized maximizeWindowAndFocus)
-    , ((modMask, xK_p), spawn myLauncher)
+    , ((modMask, xK_d), spawn myLauncher)
     , ((0, xK_Print), spawn mySelectScreenshot)
     , ((modMask .|. controlMask .|. shiftMask, xK_p), spawn myScreenshot)
     , ((modMask .|. shiftMask, xK_c), kill)
@@ -183,6 +186,7 @@ myKeys conf@XConfig{XMonad.modMask = modMask} =
     -- , ((modMask .|. controlMask, xK_l), sendMessage $ pullGroup R)
     -- , ((modMask .|. controlMask, xK_k), sendMessage $ pullGroup U)
     -- , ((modMask .|. controlMask, xK_j), sendMessage $ pullGroup D)
+    -- For some reason this merges with the one below the one below
     , ((modMask .|. controlMask, xK_j), withFocused (sendMessage . mergeDir W.focusDown'))
     , ((modMask .|. controlMask, xK_k), withFocused (sendMessage . mergeDir W.focusUp'))
     , ((modMask .|. controlMask, xK_m), withFocused (sendMessage . MergeAll))
@@ -206,7 +210,7 @@ myKeys conf@XConfig{XMonad.modMask = modMask} =
       ++ [ ( (m .|. modMask, key)
            , screenWorkspace sc >>= flip whenJust (windows . f)
            )
-         | (key, sc) <- zip [xK_e, xK_r] [0, 1]
+         | (key, sc) <- zip [xK_f, xK_p] [0, 1]
          , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]
          ]
 

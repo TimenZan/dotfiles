@@ -7,7 +7,7 @@ table.insert(plugs, {
     config = function ()
         require 'nvim-treesitter.configs'.setup {
             context_commentstring = { enable = true },
-            ensure_installed = { "c", "lua", "vim", "vimdoc", "query" },
+            ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "haskell" },
             sync_install = true,
             auto_install = true,
             ignore_install = {},

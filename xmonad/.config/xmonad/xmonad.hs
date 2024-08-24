@@ -282,7 +282,7 @@ laptopStartupHook = do
 
 allStartupHook = do
   spawnOnce "picom -b"
-  spawnOnOnce "NSP" "kitty --class NNscratchpad --single-instance --instance-group NNscratchpadGroup"
+  spawnOnOnce "NSP" "kitty --class NNscratchpad --single-instance"
 
 myXmobarPP :: PP
 myXmobarPP =

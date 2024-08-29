@@ -58,6 +58,7 @@ import XMonad.Layout.Fullscreen (fullscreenFull)
 import XMonad.Layout.HintedGrid (Grid (Grid))
 import XMonad.Layout.Magnifier (magnifiercz)
 import XMonad.Layout.Minimize (minimize)
+import XMonad.Layout.Mosaic (Aspect (Taller))
 import XMonad.Layout.MultiToggle
 import XMonad.Layout.NoBorders (noBorders, smartBorders)
 import XMonad.Layout.PerWorkspace (onWorkspace)
@@ -122,7 +123,9 @@ myLayout =
       )
     $ onWorkspace
       "4"
-      (Mirror Accordion)
+      ( Mirror Accordion
+          ||| Tall 1 (3 / 100) (1 / 2)
+      )
     $ onWorkspace
       "9"
       (noBorders (fullscreenFull Full))

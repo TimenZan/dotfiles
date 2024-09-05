@@ -3,5 +3,5 @@ return {
     { cssls = {} },
     { eslint = {} },
     { html = {} },
-    { tsserver = {} },
+    { ts_ls = {} },
 }

@@ -137,7 +137,6 @@ table.insert(plugs, {
         })
         cmp.setup.cmdline(':', {
             mapping = cmp.mapping.preset.cmdline(),
-            -- mapping = mapping,
             sources = cmp.config.sources({
                 { name = 'path' },
             }, {

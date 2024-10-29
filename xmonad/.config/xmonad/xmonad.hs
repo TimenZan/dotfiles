@@ -305,7 +305,7 @@ main = do
     $ docks
     $ withEasySB (statusBarProp "xmobar" (pure myXmobarPP)) toggleStrutsKey
     $ def
-      { terminal = "kitty -1"
+      { terminal = "kitty"
       , focusFollowsMouse = True
       , borderWidth = myBorderWidth
       , modMask = myModMask

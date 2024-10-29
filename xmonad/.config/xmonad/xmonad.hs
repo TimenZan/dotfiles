@@ -195,6 +195,7 @@ myKeys conf@XConfig{XMonad.modMask = modMask} =
   M.fromList
     $ [ ((modMask .|. shiftMask, xK_Return), spawn $ terminal conf)
       , ((modMask .|. controlMask, xK_l), spawn myScreensaver)
+      , ((modMask .|. controlMask, xK_p), spawn "1password")
       , ((modMask, xK_r), namedScratchpadAction scratchpads "term")
       , ((modMask, xK_v), withFocused minimizeWindow)
       , ((modMask .|. shiftMask, xK_v), withLastMinimized maximizeWindowAndFocus)

@@ -63,6 +63,7 @@ import XMonad.Layout.MultiToggle
 import XMonad.Layout.NoBorders (noBorders, smartBorders)
 import XMonad.Layout.PerWorkspace (onWorkspace)
 import XMonad.Layout.Reflect
+import XMonad.Layout.MultiToggle.Instances
 import XMonad.Layout.Renamed (Rename (CutWordsLeft), renamed)
 import XMonad.Layout.Roledex (Roledex (Roledex))
 import XMonad.Layout.Simplest
@@ -115,6 +116,8 @@ myLayout =
     $ addTabs shrinkText myTabTheme
     $ subLayout [] Simplest
     $ mkToggle (single REFLECTX)
+    $ mkToggle (single REFLECTY)
+    $ mkToggle (single MIRROR)
     $ onWorkspace
       "2"
       ( Accordion
@@ -226,11 +229,15 @@ myKeys conf@XConfig{XMonad.modMask = modMask} =
       , ((modMask, xK_comma), sendMessage (IncMasterN 1))
       , ((modMask, xK_period), sendMessage (IncMasterN (-1)))
       , ((modMask .|. controlMask, xK_x), sendMessage $ Toggle REFLECTX)
+      , ((modMask .|. shiftMask, xK_x), sendMessage $ Toggle MIRROR)
+      , ((modMask .|. controlMask, xK_y), sendMessage $ Toggle REFLECTY)
       , ((modMask .|. shiftMask, xK_q), io exitSuccess)
       , ((modMask, xK_q), restart "xmonad" True)
       , ((modMask, xK_n), nextScreen)
       , ((modMask .|. shiftMask, xK_n), shiftNextScreen)
       , ((modMask .|. controlMask, xK_n), swapNextScreen)
+      , ((mod4Mask, xK_F1), spawn "sleep 1 && xdotool mousedown 1")
+      , ((mod4Mask, xK_F2), spawn "sleep 1 && xdotool mousedown 3")
       ]
     ++ [ ((m .|. modMask, k), windows $ f i)
        | (i, k) <- zip (workspaces conf) [xK_1 .. xK_9]
@@ -252,12 +259,12 @@ myKeys conf@XConfig{XMonad.modMask = modMask} =
 
 myMouseBindings XConfig{XMonad.modMask = modMask} =
   M.fromList
-    -- mod-button1, Set the window to floating mode and move by dragging
+    -- mod-left-click, Set the window to floating mode and move by dragging
     [ ((modMask, button1), \w -> focus w >> mouseMoveWindow w)
-    , -- mod-button2, Raise the window to the top of the stack
-      ((modMask, button2), \w -> focus w >> windows W.swapMaster)
-    , -- mod-button3, Set the window to floating mode and resize by dragging
-      ((modMask, button3), \w -> focus w >> mouseResizeWindow w)
+    -- mod-middle, Raise the window to the top of the stack
+    ,((modMask, button2), \w -> focus w >> windows W.swapMaster)
+    -- mod-right-click, Set the window to floating mode and resize by dragging
+    ,((modMask, button3), \w -> focus w >> mouseResizeWindow w)
     ]
 
 myManageHook :: ManageHook

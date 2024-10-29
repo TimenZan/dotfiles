@@ -283,7 +283,7 @@ myManageHook =
 desktopStartupHook = do
   spawnOnOnce "9" "nice qbittorrent"
   spawnOnOnce "9" "steam"
-  spawnOnOnce "4" "spotify"
+  spawnOnOnce "4" "tidal-hifi"
 
 laptopStartupHook = do
   spawnOnce "dunst"

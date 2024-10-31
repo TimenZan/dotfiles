@@ -81,6 +81,8 @@ import XMonad.Util.NamedScratchpad (
 import XMonad.Util.SpawnOnce (spawnOnOnce, spawnOnce)
 import XMonad.Util.Themes
 
+import Graphics.X11.ExtraTypes.XF86
+
 -- The command to lock the screen or show the screensaver.
 myScreensaver :: String
 myScreensaver = "/usr/bin/xscreensaver-command -l"
@@ -239,6 +241,11 @@ myKeys conf@XConfig{XMonad.modMask = modMask} =
       , ((modMask .|. controlMask, xK_n), swapNextScreen)
       , ((mod4Mask, xK_F1), spawn "sleep 1 && xdotool mousedown 1")
       , ((mod4Mask, xK_F2), spawn "sleep 1 && xdotool mousedown 3")
+      -- Media keys
+      , ((0, xF86XK_AudioNext), spawn "playerctl next")
+      , ((0, xF86XK_AudioPrev), spawn "playerctl previous")
+      , ((0, xF86XK_AudioPlay), spawn "playerctl play-pause")
+      , ((0, xF86XK_AudioStop), spawn "playerctl play-pause")
       ]
     ++ [ ((m .|. modMask, k), windows $ f i)
        | (i, k) <- zip (workspaces conf) [xK_1 .. xK_9]

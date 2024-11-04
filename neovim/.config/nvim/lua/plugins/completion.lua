@@ -7,18 +7,39 @@ table.insert(plugs, {
     },
     event = { 'InsertEnter', },
     build = 'make install_jsregexp',
-    config = function()
+    config = function ()
         local luasnip = require 'luasnip'
         local lstypes = require 'luasnip.util.types'
         luasnip.config.setup {
             ext_opts = {
+                [lstypes.snippet] = {
+                    active = { hl_group = "Underlined", },
+                },
                 [lstypes.choiceNode] = {
                     active = {
                         virt_text = { { "●", "#fab387" }, },
                     },
                 },
+                [lstypes.insertNode] = {
+                    active = {
+                        virt_text = { { "●", "Table" }, },
+                    },
+                },
             },
+            enable_autosnippets = true,
+            cut_selection_keys = "<a-e>",
+            update_events = 'TextChanged,TextChangedI,InsertLeave',
         }
+
+        vim.keymap.set({ "i", "s" }, "<c-e>", function ()
+            if luasnip.choice_active() then
+                luasnip.change_choice(1)
+            end
+        end, { silent = true })
+        vim.keymap.set({ "i", "s" }, "<c-s-e>", function ()
+            require 'luasnip.extras.select_choice' ()
+        end, { silent = true })
+
         require 'luasnip/loaders/from_vscode'.lazy_load()
         require 'luasnip.loaders.from_lua'.load({ paths = { "~/.config/nvim/snippets" } })
     end,
@@ -45,7 +66,7 @@ table.insert(plugs, {
         'saadparwaiz1/cmp_luasnip',
         { 'windwp/nvim-autopairs', config = true, },
     },
-    config = function()
+    config = function ()
         local cmp = require 'cmp'
         local comparators = require 'cmp.config.compare'
         local types = require 'cmp.types'
@@ -64,15 +85,15 @@ table.insert(plugs, {
             ["<A-n>"] = cmp.mapping.scroll_docs(-4),
             ["<A-p>"] = cmp.mapping.scroll_docs(4),
 
-            ["<C-l>"] = cmp.mapping(function(fallback)
-                if luasnip.expand_or_jumpable() then
+            ["<C-l>"] = cmp.mapping(function (fallback)
+                if luasnip.expand_or_locally_jumpable() then
                     luasnip.expand_or_jump()
                 else
                     fallback()
                 end
             end, { "i", "s", "n" }),
 
-            ["<C-h>"] = cmp.mapping(function(fallback)
+            ["<C-h>"] = cmp.mapping(function (fallback)
                 if luasnip.jumpable(-1) then
                     luasnip.jump(-1)
                 else
@@ -90,7 +111,7 @@ table.insert(plugs, {
                 documentation = cmp.config.window.bordered(),
             },
             snippet = {
-                expand = function(args)
+                expand = function (args)
                     require 'luasnip'.lsp_expand(args.body)
                 end,
             },
@@ -124,6 +145,7 @@ table.insert(plugs, {
                 { name = 'calc' },
             }, {
                 { name = 'git' },
+                -- TODO only on "text like" files or in comments
                 { name = 'buffer', keyword_length = 3 },
                 { name = 'spell',  keyword_length = 5 },
             }),
@@ -167,7 +189,7 @@ table.insert(plugs, {
     },
 })
 
-table.insert(plugs, { "Bilal2453/luvit-meta", lazy = true })
+table.insert(plugs, { "Bilal2453/luvit-meta", ft = 'lua', })
 
 
 return plugs

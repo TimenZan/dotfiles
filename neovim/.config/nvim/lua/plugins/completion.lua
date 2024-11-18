@@ -20,11 +20,11 @@ table.insert(plugs, {
                         virt_text = { { "●", "#fab387" }, },
                     },
                 },
-                [lstypes.insertNode] = {
-                    active = {
-                        virt_text = { { "●", "Table" }, },
-                    },
-                },
+                -- [lstypes.insertNode] = {
+                --     active = {
+                --         virt_text = { { "●", "Table" }, },
+                --     },
+                -- },
             },
             enable_autosnippets = true,
             cut_selection_keys = "<a-e>",
@@ -62,9 +62,19 @@ table.insert(plugs, {
         'hrsh7th/cmp-omni',
         'hrsh7th/cmp-path',
         'micangl/cmp-vimtex',
-        { 'petertriho/cmp-git',    config = true, main = 'cmp_git', },
+        { 'petertriho/cmp-git', config = true, main = 'cmp_git', },
         'saadparwaiz1/cmp_luasnip',
-        { 'windwp/nvim-autopairs', config = true, },
+        {
+            'windwp/nvim-autopairs',
+            config = function ()
+                local ap = require 'nvim-autopairs'
+                ap.setup {
+                    map_c_w = true,
+                    disable_filetype = { "TelescopePrompt", "spectre_panel", "tex" },
+                }
+                ap.get_rules("'")[1].not_filetypes = { "tex" }
+            end,
+        },
     },
     config = function ()
         local cmp = require 'cmp'
@@ -86,8 +96,10 @@ table.insert(plugs, {
             ["<A-p>"] = cmp.mapping.scroll_docs(4),
 
             ["<C-l>"] = cmp.mapping(function (fallback)
-                if luasnip.expand_or_locally_jumpable() then
-                    luasnip.expand_or_jump()
+                -- if luasnip.expand_or_locally_jumpable() then
+                --     luasnip.expand_or_jump()
+                if luasnip.locally_jumpable() then
+                    luasnip.jump(1)
                 else
                     fallback()
                 end

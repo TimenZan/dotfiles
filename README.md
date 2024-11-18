@@ -16,9 +16,15 @@ stow neovim starship # and any other programs
 Make sure to install all the needed external programs for neovim.
 ```bash
 # programs
-yay -Syu neovim-git fzf ripgrep bat fd glow
+paru -Syu neovim-git fzf ripgrep bat fd glow
 # language servers
-yay -Syu bash-language-server clang rust-analyzer lua-language-server texlab vim-language-server yaml-language-server shellcheck pyright jedi-language-server efm-langserver haskell-language-server-static ltex-ls-bin proselint vint
+paru -Syu bash-language-server clang lua-language-server texlab yaml-language-server shellcheck pyright jedi-language-server efm-langserver ltex-ls-bin proselint
 pip install --user --upgrade pynvim
 ```
 
+# Other settings,
+
+For sharper font rendering, add the following line to `/etc/environment`:
+```
+FREETYPE_PROPERTIES="cff:no-stem-darkening=0 autofitter:no-stem-darkening=0"
+```

@@ -24,6 +24,38 @@ local plugs = {
             vim.g.matchup_matchparen_offscreen = {}
         end,
     },
+    { -- move out of encapsulating characters
+        'abecodes/tabout.nvim',
+        event = 'InsertCharPre',
+        config = function ()
+            require 'tabout'.setup {
+                tabkey = '<c-l>',
+                backwards_tabkey = '',
+                act_as_tab = false,
+                act_as_shift_tab = false,
+                -- default_tab = '<C-t>', -- shift default action (only at the beginning of a line, otherwise <TAB> is used)
+                -- default_shift_tab = '<C-d>', -- reverse shift default action,
+                enable_backwards = true,
+                completion = false,
+                -- commented out since these are the default
+                -- tabouts = {
+                --     { open = "'", close = "'" },
+                --     { open = '"', close = '"' },
+                --     { open = '`', close = '`' },
+                --     { open = '(', close = ')' },
+                --     { open = '[', close = ']' },
+                --     { open = '{', close = '}' }
+                -- },
+                ignore_beginning = false,
+                exclude = {}
+            }
+        end,
+        dependencies = { -- ensure tabout is loaded after these
+            "nvim-treesitter/nvim-treesitter",
+            "L3MON4D3/LuaSnip",
+            "hrsh7th/nvim-cmp"
+        },
+    },
 }
 
 return require 'util'.all_verylazy(plugs)

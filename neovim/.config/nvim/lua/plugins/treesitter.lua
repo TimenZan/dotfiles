@@ -1,3 +1,4 @@
+---@diagnostic disable: missing-fields
 local plugs = {}
 
 table.insert(plugs, {
@@ -74,6 +75,12 @@ table.insert(plugs, {
                         ['ac'] = '@comment.outer',
                         ['ic'] = '@comment.inner',
                         ["as"] = { query = "@scope", query_group = "locals", desc = "Select language scope" },
+                    },
+                },
+                swap = {
+                    enable = true,
+                    swap_next = {
+                        ["<leader>,"] = "@parameter.inner",
                     },
                 },
                 move = {

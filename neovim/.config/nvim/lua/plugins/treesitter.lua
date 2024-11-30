@@ -71,8 +71,8 @@ table.insert(plugs, {
                         -- You can use the capture groups defined in textobjects.scm
                         ['af'] = '@function.outer',
                         ['if'] = '@function.inner',
-                        ['ac'] = '@class.outer',
-                        ['ic'] = '@class.inner',
+                        ['ac'] = '@comment.outer',
+                        ['ic'] = '@comment.inner',
                         ["as"] = { query = "@scope", query_group = "locals", desc = "Select language scope" },
                     },
                 },

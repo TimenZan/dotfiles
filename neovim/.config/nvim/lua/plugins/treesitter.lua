@@ -3,7 +3,7 @@ local plugs = {}
 
 table.insert(plugs, {
     'nvim-treesitter/nvim-treesitter',
-    -- event = 'VeryLazy',
+    lazy = false,
     build = ":TSUpdate",
     config = function ()
         require 'nvim-treesitter.configs'.setup {
@@ -29,6 +29,17 @@ table.insert(plugs, {
             },
             indent = { enable = true },
         }
+
+        -- Repeat movement with ; and ,
+        -- ensure ; goes forward and , goes backward regardless of the last direction
+        local ts_repeat_move = require 'nvim-treesitter.textobjects.repeatable_move'
+        vim.keymap.set({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move_next)
+        vim.keymap.set({ "n", "x", "o" }, ",", ts_repeat_move.repeat_last_move_previous)
+        -- Make builtin f, F, t, T also repeatable with ; and ,
+        vim.keymap.set({ "n", "x", "o" }, "f", ts_repeat_move.builtin_f_expr, { expr = true })
+        vim.keymap.set({ "n", "x", "o" }, "F", ts_repeat_move.builtin_F_expr, { expr = true })
+        vim.keymap.set({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t_expr, { expr = true })
+        vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T_expr, { expr = true })
     end
 })
 
@@ -82,34 +93,37 @@ table.insert(plugs, {
                     swap_next = {
                         ["<leader>,"] = "@parameter.inner",
                     },
+                    swap_previous = {
+                        ["<leader>."] = "@parameter.inner",
+                    },
                 },
                 move = {
                     enable = true,
                     set_jumps = true,
                     goto_next_start = {
-                        [']m'] = '@function.outer',
-                        [']]'] = '@class.outer',
+                        [']f'] = '@function.outer',
+                        -- [']]'] = '@class.outer',
                         ["]s"] = { query = "@scope", query_group = "locals", desc = "Next scope" },
                         ["]z"] = { query = "@fold", query_group = "folds", desc = "Next fold" },
                     },
                     goto_next_end = {
-                        [']M'] = '@function.outer',
-                        [']['] = '@class.outer',
+                        [']F'] = '@function.outer',
+                        -- [']['] = '@class.outer',
                     },
                     goto_previous_start = {
-                        ['[m'] = '@function.outer',
-                        ['[['] = '@class.outer',
+                        ['[f'] = '@function.outer',
+                        -- ['[['] = '@class.outer',
                     },
                     goto_previous_end = {
-                        ['[M'] = '@function.outer',
-                        ['[]'] = '@class.outer',
+                        ['[F'] = '@function.outer',
+                        -- ['[]'] = '@class.outer',
                     },
-                    goto_next = {
-                        ["]d"] = "@conditional.outer",
-                    },
-                    goto_previous = {
-                        ["[d"] = "@conditional.outer",
-                    },
+                    -- goto_next = {
+                    --     ["]d"] = "@conditional.outer",
+                    -- },
+                    -- goto_previous = {
+                    --     ["[d"] = "@conditional.outer",
+                    -- },
                 },
             },
         }

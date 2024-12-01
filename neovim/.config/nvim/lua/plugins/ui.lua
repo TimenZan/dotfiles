@@ -92,4 +92,17 @@ table.insert(plugs, {
     lazy = false,
 })
 
+table.insert(plugs, {
+    'https://git.sr.ht/~whynothugo/lsp_lines.nvim',
+    config = function ()
+        vim.diagnostic.config {
+            virtual_text = false,
+            virtual_lines = { highlight_whole_line = false },
+        }
+        require 'lsp_lines'.setup()
+    end,
+    -- TODO: add keybinding to disable, maybe with some 'global' zen mode
+    -- TODO: filter by language server?
+})
+
 return plugs

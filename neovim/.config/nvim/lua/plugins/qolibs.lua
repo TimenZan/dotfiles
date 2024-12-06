@@ -56,6 +56,13 @@ local plugs = {
             "hrsh7th/nvim-cmp"
         },
     },
+    {
+        "pteroctopus/faster.nvim",
+        opts = {
+            -- threshold size, in MB
+            filesize = 1,
+        },
+    },
 }
 
 return require 'util'.all_verylazy(plugs)

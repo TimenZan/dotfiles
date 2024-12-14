@@ -169,4 +169,17 @@ table.insert(plugs, {
 })
 
 
+table.insert(plugs, {
+    "t-troebst/perfanno.nvim",
+    dependencies = {
+        'nvim-telescope/telescope.nvim',
+    },
+    event = 'VeryLazy',
+    -- TODO: lazy load plugin on commands and/or keybindings
+    -- TODO: add keybindings or telescope/picker menu
+    config = function ()
+        require "perfanno".setup()
+    end,
+})
+
 return plugs

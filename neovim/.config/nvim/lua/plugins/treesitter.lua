@@ -29,17 +29,6 @@ table.insert(plugs, {
             },
             indent = { enable = true },
         }
-
-        -- Repeat movement with ; and ,
-        -- ensure ; goes forward and , goes backward regardless of the last direction
-        local ts_repeat_move = require 'nvim-treesitter.textobjects.repeatable_move'
-        vim.keymap.set({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move_next)
-        vim.keymap.set({ "n", "x", "o" }, ",", ts_repeat_move.repeat_last_move_previous)
-        -- Make builtin f, F, t, T also repeatable with ; and ,
-        vim.keymap.set({ "n", "x", "o" }, "f", ts_repeat_move.builtin_f_expr, { expr = true })
-        vim.keymap.set({ "n", "x", "o" }, "F", ts_repeat_move.builtin_F_expr, { expr = true })
-        vim.keymap.set({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t_expr, { expr = true })
-        vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T_expr, { expr = true })
     end
 })
 
@@ -91,10 +80,13 @@ table.insert(plugs, {
                 swap = {
                     enable = true,
                     swap_next = {
-                        ["<leader>,"] = "@parameter.inner",
+                        ["<leader>s,"] = "@parameter.inner",
+                        ["<leader>ss"] = "@statement.outer",
                     },
                     swap_previous = {
-                        ["<leader>."] = "@parameter.inner",
+                        ["<leader>S,"] = "@parameter.inner",
+                        ["<leader>SS"] = "@statement.outer",
+                        ["<leader>Ss"] = "@statement.outer",
                     },
                 },
                 move = {
@@ -124,6 +116,15 @@ table.insert(plugs, {
                     -- goto_previous = {
                     --     ["[d"] = "@conditional.outer",
                     -- },
+                },
+                lsp_interop = {
+                    enable = true,
+                    border = 'none',
+                    floating_preview_opts = {},
+                    peek_definition_code = {
+                        ["<leader>pf"] = "@function.outer",
+                        ["<leader>pc"] = "@class.outer",
+                    },
                 },
             },
         }

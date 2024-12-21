@@ -1,0 +1,223 @@
+      -- LSP Support
+      {'neovim/nvim-lspconfig'},
+      {'williamboman/mason.nvim'},
+      {'williamboman/mason-lspconfig.nvim'},
+
+  use 'ray-x/lsp_signature.nvim'
+  -- use 'voldikss/vim-floaterm'
+
+    'NeogitOrg/neogit',
+    requires = {
+      {'nvim-lua/plenary.nvim'},
+    },
+
+
+
+## neotest
+local set = vim.keymap.set
+set('n', '<leader>tt', neotest.run.run)
+set('n', '<leader>tf', function() neotest.run.run(vim.fn.expand("%")) end)
+set('n', '<leader>ta', function() neotest.run.run(vim.fn.getcwd()) end)
+set('n', '<leader>tp', neotest.output_panel.open)
+set('n', '<leader>ts', neotest.summary.toggle)
+
+## Telescope
+local builtin = require('telescope.builtin')
+vim.keymap.set('n', '<leader>ff', builtin.git_files, {})
+vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
+vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+vim.keymap.set('n', '<leader>fm', builtin.marks, {})
+vim.keymap.set('n', '<leader>ft', builtin.treesitter, {})
+vim.keymap.set('n', '<leader>fg', builtin.diagnostics, {})
+vim.keymap.set('n', '<leader>fk', builtin.keymaps, {})
+vim.keymap.set('n', '<leader>fr', builtin.live_grep, {})
+vim.keymap.set('n', '<leader>fo', function() builtin.lsp_document_symbols{ignore_symbols="field"} end, {})
+vim.keymap.set('n', '<leader>fs', builtin.spell_suggest, {})
+
+local ts = require('telescope')
+ts.setup({})
+
+
+        local gs = package.loaded.gitsigns
+
+
+
+
+        map('n', '<leader>hu', gs.undo_stage_hunk, { desc = 'undo stage' })
+        map('n', '<leader>hp', gs.preview_hunk_inline, { desc = 'preview current hunk' })
+        map('n', '<leader>hb', gs.toggle_current_line_blame, { desc = 'toggle current line blame' })
+        map('n', '<leader>hd', gs.toggle_deleted, { desc = 'show deleted lines' })
+        map('n', '<leader>hw', gs.toggle_word_diff, { desc = 'toggle word diff' })
+        map('n', '<localleader>gw', gs.stage_buffer, { desc = 'stage entire buffer' })
+        map('n', '<localleader>gre', gs.reset_buffer, { desc = 'reset entire buffer' })
+        map('n', '<localleader>gbl', gs.blame_line, { desc = 'blame current line' })
+        map('n', '<leader>lm', function() gs.setqflist('all') end, { desc = 'list modified in quickfix' })
+        bmap({ 'n', 'v' }, '<leader>hs', '<Cmd>Gitsigns stage_hunk<CR>', { desc = 'stage hunk' })
+        bmap({ 'n', 'v' }, '<leader>hr', '<Cmd>Gitsigns reset_hunk<CR>', { desc = 'reset hunk' })
+        bmap({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>', { desc = 'select hunk' })
+
+
+        map('n', '[h', function()
+          vim.schedule(function() gs.next_hunk() end)
+          return '<Ignore>'
+        end, { expr = true, desc = 'go to next git hunk' })
+
+        map('n', ']h', function()
+          vim.schedule(function() gs.prev_hunk() end)
+          return '<Ignore>'
+        end, { expr = true, desc = 'go to previous git hunk' })
+      end,
+
+
+  {
+    'mbbill/undotree',
+    cmd = 'UndotreeToggle',
+    keys = { { '<leader>u', '<Cmd>UndotreeToggle<CR>', desc = 'undotree: toggle' } },
+    config = function()
+      vim.g.undotree_TreeNodeShape = '◦' -- Alternative: '◉'
+      vim.g.undotree_SetFocusWhenToggle = 1
+    end,
+  },
+
+
+
+
+
+luasnip.config.set_config({
+        history = false,
+        region_check_events = 'CursorMoved,CursorHold,InsertEnter',
+        delete_check_events = 'InsertLeave',
+        ext_opts = {
+          [types.choiceNode] = {
+            active = {
+              hl_mode = 'combine',
+              virt_text = { { '●', 'Operator' } },
+            },
+          },
+          [types.insertNode] = {
+            active = {
+              hl_mode = 'combine',
+              virt_text = { { '●', 'Type' } },
+            },
+          },
+        },
+        enable_autosnippets = true,
+        snip_env = {
+          fmt = fmt,
+          m = extras.match,
+          t = ls.text_node,
+          f = ls.function_node,
+          c = ls.choice_node,
+          d = ls.dynamic_node,
+          i = ls.insert_node,
+          l = extras.lamda,
+          snippet = ls.snippet,
+        },
+      })
+
+
+-- register as ex command
+as.command('LuaSnipEdit', function() require('luasnip.loaders.from_lua').edit_snippet_files() end)
+
+
+
+local function nearest() neotest().run.run() end
+local function next_failed() neotest().jump.prev({ status = 'failed' }) end
+local function prev_failed() neotest().jump.next({ status = 'failed' }) end
+local function toggle_summary() neotest().summary.toggle() end
+local function cancel() neotest().run.stop({ interactive = true }) end
+
+
+
+-- treesitter config
+        incremental_selection = {
+          enable = true,
+          disable = { 'help' },
+          keymaps = {
+            init_selection = '<CR>', -- maps in normal mode to init the node/scope selection
+            node_incremental = '<CR>', -- increment to the upper named parent
+            node_decremental = '<C-CR>', -- decrement to the previous node
+          },
+        },
+
+-- treesitter textobjects
+            keymaps = {
+              ['af'] = { query = '@function.outer', desc = 'ts: all function' },
+              ['if'] = { query = '@function.inner', desc = 'ts: inner function' },
+              ['ac'] = { query = '@class.outer', desc = 'ts: all class' },
+              ['ic'] = { query = '@class.inner', desc = 'ts: inner class' },
+              ['aC'] = { query = '@conditional.outer', desc = 'ts: all conditional' },
+              ['iC'] = { query = '@conditional.inner', desc = 'ts: inner conditional' },
+              ['aL'] = { query = '@assignment.lhs', desc = 'ts: assignment lhs' },
+              ['aR'] = { query = '@assignment.rhs', desc = 'ts: assignment rhs' },
+            },
+
+
+
+
+--- Autosize horizontal split to match its minimum content
+--- https://vim.fandom.com/wiki/Automatically_fitting_a_quickfix_window_height
+---@param min_height number
+---@param max_height number
+function as.adjust_split_height(min_height, max_height)
+  api.nvim_win_set_height(0, math.max(math.min(fn.line('$'), max_height), min_height))
+end
+
+-- interesting use of dynamic luasnip nodes
+  snippet(
+    {
+      trig = 'plg',
+      name = 'plugin spec',
+      dscr = {
+        'plugin spec block',
+        'e.g.',
+        "{'author/plugin'}",
+      },
+    },
+    fmt([[{{"{}"{}}}]], {
+      d(1, function()
+        -- Get the author and URL in the clipboard and auto populate the author and project
+        local default = snippet('', { i(1, 'author'), t('/'), i(2, 'plugin') })
+        local clip = fn.getreg('*')
+        if not vim.startswith(clip, 'https://github.com/') then return default end
+        local parts = vim.split(clip, '/')
+        if #parts < 2 then return default end
+        local author, project = parts[#parts - 1], parts[#parts]
+        return snippet('', { t(author .. '/' .. project) })
+      end),
+      c(2, {
+        fmt(
+          [[
+              , config = function()
+                require("{}").setup()
+              end
+          ]],
+          { i(1, 'module') }
+        ),
+        t(''),
+      }),
+    })
+  ),
+
+
+-- semantic highlights
+    vim.api.nvim_set_hl(0, "@lsp.mod.usedAsMutableReference.cpp", { underline = true })
+    vim.api.nvim_set_hl(0, "@lsp.mod.usedAsMutablePointer.cpp", { underline = true })
+    vim.api.nvim_set_hl(0, "@lsp.typemod.function.defaultLibrary.lua", { link = "@function.builtin" })
+    vim.api.nvim_set_hl(0, "@lsp.typemod.variable.defaultLibrary.cpp", { link = "@lsp" })
+    vim.api.nvim_set_hl(0, "@lsp.typemod.function.defaultLibrary.cpp", { link = "@lsp" })
+
+    -- Custom highlights for DAP
+
+    vim.api.nvim_set_hl(0, "Breakpoint", { fg = palette.love })
+    vim.api.nvim_set_hl(0, "Logpoint", { fg = palette.gold })
+    vim.api.nvim_set_hl(0, "Continue", { fg = palette.pine })
+
+    -- Custom highlights for Treesitter
+
+    vim.api.nvim_set_hl(0, "@attribute", { fg = palette.muted })
+
+-- enable global statusline
+vim.opt.laststatus = 3
+
+

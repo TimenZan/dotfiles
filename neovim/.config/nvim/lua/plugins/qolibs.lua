@@ -58,6 +58,7 @@ local plugs = {
     },
     {
         "pteroctopus/faster.nvim",
+        lazy = false,
         opts = {
             -- threshold size, in MB
             filesize = 1,

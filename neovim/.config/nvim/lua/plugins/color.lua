@@ -25,8 +25,15 @@ table.insert(plugs, {
     priority = 1000,
     config = function ()
         require 'catppuccin'.setup {
+            dim_inactive = {
+                enabled = true,
+            },
             integrations = {
                 blink_cmp = true,
+                fidget = true,
+                neotest = true,
+                lsp_trouble = true,
+                sandwich = true,
             },
         }
         vim.cmd.colorscheme 'catppuccin-mocha'

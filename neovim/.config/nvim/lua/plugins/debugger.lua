@@ -179,8 +179,38 @@ table.insert(plugs, {
     -- TODO: lazy load plugin on commands and/or keybindings
     -- TODO: add keybindings or telescope/picker menu
     config = function ()
-        require "perfanno".setup()
-    end,
+        local perfanno = require 'perfanno'
+        local util = require 'perfanno.util'
+        perfanno.setup {
+            -- Creates a 10-step RGB color gradient between background color and "#CC3300"
+            -- line_highlights = util.make_bg_highlights(nil, "#CC3300", 10),
+            -- vt_highlight = util.make_fg_highlight("#CC3300"),
+            annotate_after_load = true,
+            annotate_on_open = true,
+        }
+        local telescope = require("telescope")
+        local actions = telescope.extensions.perfanno.actions
+        telescope.setup {
+            extensions = {
+                perfanno = {
+                    -- Special mappings in the telescope finders
+                    mappings = {
+                        ["i"] = {
+                            -- Find hottest callers of selected entry
+                            ["<C-h>"] = actions.hottest_callers,
+                            -- Find hottest callees of selected entry
+                            ["<C-l>"] = actions.hottest_callees,
+                        },
+
+                        ["n"] = {
+                            ["gu"] = actions.hottest_callers,
+                            ["gd"] = actions.hottest_callees,
+                        }
+                    }
+                }
+            }
+        }
+    end
 })
 
 return plugs

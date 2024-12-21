@@ -31,13 +31,32 @@ table.insert(plugs, {
             update_events = 'TextChanged,TextChangedI,InsertLeave',
         }
 
-        vim.keymap.set({ "i", "s" }, "<c-e>", function ()
+        vim.keymap.set({ "i", "s" }, "<c-enter>", function ()
             if luasnip.choice_active() then
                 luasnip.change_choice(1)
             end
         end, { silent = true })
-        vim.keymap.set({ "i", "s" }, "<c-s-e>", function ()
+        vim.keymap.set({ "i", "s" }, "<c-s-enter>", function ()
             require 'luasnip.extras.select_choice' ()
+        end, { silent = true })
+
+        vim.keymap.set({ 'i', 's', 'n' }, "<C-l>", function ()
+            -- if luasnip.expand_or_locally_jumpable() then
+            --     luasnip.expand_or_jump()
+            if luasnip.locally_jumpable() then
+                luasnip.jump(1)
+            else
+                -- nop
+            end
+        end, { silent = true })
+        vim.keymap.set({ 'i', 's', 'n' }, "<C-h>", function ()
+            -- if luasnip.expand_or_locally_jumpable() then
+            --     luasnip.expand_or_jump()
+            if luasnip.jumpable(-1) then
+                luasnip.jump(-1)
+            else
+                -- nop
+            end
         end, { silent = true })
 
         require 'luasnip/loaders/from_vscode'.lazy_load()
@@ -46,7 +65,27 @@ table.insert(plugs, {
 })
 
 table.insert(plugs, {
+    'windwp/nvim-autopairs',
+    config = function ()
+        -- TODO: Add autopairs for generics <T>
+        local ap = require 'nvim-autopairs'
+        ap.setup {
+            map_c_w = true,
+            map_cr = true,
+            disable_filetype = { "TelescopePrompt", "spectre_panel", },
+            check_ts = true,
+            ts_config = {},
+            -- enables i_<A-e> to wrap an object in a pair
+            fast_wrap = {},
+        }
+        ap.get_rules("'")[1].not_filetypes = { "tex" }
+    end,
+
+})
+
+table.insert(plugs, {
     'hrsh7th/nvim-cmp',
+    enabled = false,
     name = 'cmp',
     event = { 'InsertEnter', 'CmdlineEnter', },
     dependencies = {
@@ -64,17 +103,7 @@ table.insert(plugs, {
         'micangl/cmp-vimtex',
         { 'petertriho/cmp-git', config = true, main = 'cmp_git', },
         'saadparwaiz1/cmp_luasnip',
-        {
-            'windwp/nvim-autopairs',
-            config = function ()
-                local ap = require 'nvim-autopairs'
-                ap.setup {
-                    map_c_w = true,
-                    disable_filetype = { "TelescopePrompt", "spectre_panel", "tex" },
-                }
-                ap.get_rules("'")[1].not_filetypes = { "tex" }
-            end,
-        },
+        'windwp/nvim-autopairs',
     },
     config = function ()
         local cmp = require 'cmp'
@@ -186,6 +215,129 @@ table.insert(plugs, {
             )
         })
     end,
+})
+
+table.insert(plugs, {
+    'saghen/blink.cmp',
+    -- allows fetching of pre-built binaries
+    version = '*',
+    dependencies = {
+        { 'L3MON4D3/LuaSnip',   version = '*' },
+        { 'folke/lazydev.nvim', },
+    },
+    ---@module 'blink.cmp'
+    ---@type blink.cmp.Config
+    opts = {
+        -- 'default' for mappings similar to built-in completion
+        -- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys to navigate)
+        -- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
+        -- see the "default configuration" section below for full documentation on how to define
+        -- your own keymap.
+        -- TODO make similar to extant cmp.nvim, including default bindings
+        keymap = {
+            preset = 'none',
+            ['<C-space>'] = { 'select_and_accept', 'fallback' },
+            ['<C-n>'] = { 'select_next', 'fallback' },
+            ['<C-p>'] = { 'select_prev', 'fallback' },
+
+            ['<A-n>'] = { 'scroll_documentation_down', 'fallback' },
+            ['<A-p>'] = { 'scroll_documentation_up', 'fallback' },
+
+            ['<C-l>'] = { 'snippet_forward', 'fallback' },
+            ['<C-h>'] = { 'snippet_backward', 'fallback' },
+
+            -- ["<C-x>"] = {'hide', 'fallback'},
+            -- ["<C-x>"] = {'cancel', 'fallback'},
+            -- todo: keybind for enabling only specific providers
+
+            cmdline = {
+                ['<tab>'] = { 'select_and_accept', 'fallback', },
+                ['<S-tab>'] = { 'select_prev', 'fallback', },
+                -- these two technically override builtin bindings, but the arrow version is strictly better as it takes
+                -- into account the typed prefix.
+                ['<C-n>'] = { 'select_next', 'fallback' },
+                ['<C-p>'] = { 'select_prev', 'fallback' },
+            },
+        },
+
+        appearance = {
+            nerd_font_variant = 'mono'
+        },
+
+        snippets = {
+            expand = function (snippet) require('luasnip').lsp_expand(snippet) end,
+            active = function (filter)
+                if filter and filter.direction then
+                    return require('luasnip').jumpable(filter.direction)
+                end
+                return require('luasnip').in_snippet()
+            end,
+            jump = function (direction) require('luasnip').jump(direction) end,
+        },
+
+        sources = {
+            default = { 'lazydev', 'lsp', 'path', 'luasnip', 'buffer', },
+            providers = {
+                lazydev = {
+                    name = "LazyDev",
+                    module = "lazydev.integrations.blink",
+                    -- make lazydev completions top priority (see `:h blink.cmp`)
+                    score_offset = 100,
+                },
+            },
+            -- TODO: use 'saghen/blink.compat' to include missing providers
+            -- TODO: Spell complete only in comments (and maybe strings (and possibly variable names?))
+            -- providers = function(ctx)
+            --   local node = vim.treesitter.get_node()
+            --   if vim.bo.filetype == 'lua' then
+            --     return { 'lsp', 'path' }
+            --   elseif node and vim.tbl_contains({ 'comment', 'line_comment', 'block_comment' }, node:type()) then
+            --     return { 'buffer' }
+            --   else
+            --     return { 'lsp', 'path', 'snippets', 'buffer' }
+            --   end
+            -- end
+        },
+
+        signature = {
+            enabled = true,
+            window = {
+                border = 'double',
+            },
+        },
+
+        completion = {
+            list = {
+                selection = 'preselect',
+            },
+            accept = {
+                create_undo_point = false,
+                auto_brackets = {
+                    enabled = true,
+                },
+            },
+            menu = {
+                border = 'single',
+                draw = {
+                    align_to_component = 'label',
+                    treesitter = { 'lsp' },
+                    columns = { { 'label', 'label_description', gap = 1 }, { 'source_name', }, { 'kind_icon', 'kind', }, },
+                },
+            },
+            documentation = {
+                auto_show = true,
+                auto_show_delay_ms = 1,
+                update_delay_ms = 1,
+                window = {
+                    border = 'single',
+                },
+            },
+            ghost_text = {
+                enabled = false,
+            },
+        },
+    },
+    opts_extend = { "sources.default" }
 })
 
 table.insert(plugs, {

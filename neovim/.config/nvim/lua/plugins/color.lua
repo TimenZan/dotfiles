@@ -23,7 +23,14 @@ table.insert(plugs, {
     name = 'catppuccin',
     lazy = false,
     priority = 1000,
-    config = function() vim.cmd.colorscheme 'catppuccin-mocha' end,
+    config = function ()
+        require 'catppuccin'.setup {
+            integrations = {
+                blink_cmp = true,
+            },
+        }
+        vim.cmd.colorscheme 'catppuccin-mocha'
+    end,
 })
 
 return plugs

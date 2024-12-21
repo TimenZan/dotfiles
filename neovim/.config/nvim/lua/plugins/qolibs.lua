@@ -53,7 +53,7 @@ local plugs = {
         dependencies = { -- ensure tabout is loaded after these
             "nvim-treesitter/nvim-treesitter",
             "L3MON4D3/LuaSnip",
-            "hrsh7th/nvim-cmp"
+            -- "hrsh7th/nvim-cmp"
         },
     },
     {

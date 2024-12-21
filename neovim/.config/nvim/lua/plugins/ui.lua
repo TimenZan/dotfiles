@@ -20,6 +20,9 @@ table.insert(plugs, {
         },
         notification = {
             override_vim_notify = true,
+            window = {
+                winblend = 0,
+            },
             view = {
                 group_separator = ''
             },

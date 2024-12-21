@@ -221,8 +221,9 @@ table.insert(plugs, {
     'saghen/blink.cmp',
     -- allows fetching of pre-built binaries
     version = '*',
+    event = { 'InsertEnter', 'CmdlineEnter', },
     dependencies = {
-        { 'L3MON4D3/LuaSnip',   version = '*' },
+        -- { 'L3MON4D3/LuaSnip',   version = '*' },
         { 'folke/lazydev.nvim', },
     },
     ---@module 'blink.cmp'
@@ -321,13 +322,13 @@ table.insert(plugs, {
                 draw = {
                     align_to_component = 'label',
                     treesitter = { 'lsp' },
-                    columns = { { 'label', 'label_description', gap = 1 }, { 'source_name', }, { 'kind_icon', 'kind', }, },
+                    columns = { { 'label', 'label_description', gap = 1 }, { 'source_name', }, { 'kind_icon', 'kind', gap = 1, }, },
                 },
             },
             documentation = {
                 auto_show = true,
-                auto_show_delay_ms = 1,
-                update_delay_ms = 1,
+                auto_show_delay_ms = 10,
+                update_delay_ms = 10,
                 window = {
                     border = 'single',
                 },

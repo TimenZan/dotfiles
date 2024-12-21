@@ -175,8 +175,6 @@ table.insert(plugs, {
     dependencies = {
         'nvim-telescope/telescope.nvim',
     },
-    event = 'VeryLazy',
-    -- TODO: lazy load plugin on commands and/or keybindings
     -- TODO: add keybindings or telescope/picker menu
     config = function ()
         local perfanno = require 'perfanno'
@@ -210,7 +208,14 @@ table.insert(plugs, {
                 }
             }
         }
-    end
+    end,
+    cmd = {
+        'PerfLoadFlat',
+        'PerfLoadCallGraph',
+        'PerfLoadFlameGraph',
+        'PerfLuaProfileStart',
+        'PerfAnnotate',
+    },
 })
 
 return plugs

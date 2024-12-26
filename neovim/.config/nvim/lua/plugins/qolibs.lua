@@ -22,6 +22,7 @@ local plugs = {
         lazy = false,
         init = function ()
             vim.g.matchup_matchparen_offscreen = {}
+            vim.g.matchup_transmute_enabled = 1
         end,
     },
     { -- move out of encapsulating characters

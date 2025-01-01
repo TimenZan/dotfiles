@@ -252,6 +252,7 @@ table.insert(plugs, {
             -- todo: keybind for enabling only specific providers
 
             cmdline = {
+                ['<C-space>'] = { 'select_and_accept', 'fallback' },
                 ['<tab>'] = { 'select_and_accept', 'fallback', },
                 ['<S-tab>'] = { 'select_prev', 'fallback', },
                 -- these two technically override builtin bindings, but the arrow version is strictly better as it takes
@@ -320,7 +321,7 @@ table.insert(plugs, {
             menu = {
                 border = 'single',
                 draw = {
-                    align_to_component = 'label',
+                    align_to= 'label',
                     treesitter = { 'lsp' },
                     columns = { { 'label', 'label_description', gap = 1 }, { 'source_name', }, { 'kind_icon', 'kind', gap = 1, }, },
                 },

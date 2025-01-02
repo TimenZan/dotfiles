@@ -240,6 +240,7 @@ table.insert(plugs, {
             ['<C-space>'] = { 'select_and_accept', 'fallback' },
             ['<C-n>'] = { 'select_next', 'fallback' },
             ['<C-p>'] = { 'select_prev', 'fallback' },
+            ['<C-c>'] = { 'show', 'fallback' },
 
             ['<A-n>'] = { 'scroll_documentation_down', 'fallback' },
             ['<A-p>'] = { 'scroll_documentation_up', 'fallback' },

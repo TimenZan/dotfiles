@@ -1,4 +1,6 @@
 vim.opt.autowrite = true
+vim.opt.diffopt:append "algorithm:patience"
+vim.opt.diffopt:append "linematch:300"
 vim.opt.fillchars = { fold = "⁑" }
 vim.opt.foldtext = ""
 vim.opt.ignorecase = true

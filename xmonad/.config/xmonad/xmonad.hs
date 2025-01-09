@@ -53,17 +53,14 @@ import XMonad.Layout.BoringWindows (
   focusUp,
  )
 import XMonad.Layout.CenterMainFluid (CenterMainFluid (CenterMainFluid))
-import XMonad.Layout.Decoration (shrinkText)
 import XMonad.Layout.Fullscreen (fullscreenFull)
 import XMonad.Layout.HintedGrid (Grid (Grid))
-import XMonad.Layout.Magnifier (magnifiercz)
 import XMonad.Layout.Minimize (minimize)
-import XMonad.Layout.Mosaic (Aspect (Taller))
 import XMonad.Layout.MultiToggle
+import XMonad.Layout.MultiToggle.Instances
 import XMonad.Layout.NoBorders (noBorders, smartBorders)
 import XMonad.Layout.PerWorkspace (onWorkspace)
 import XMonad.Layout.Reflect
-import XMonad.Layout.MultiToggle.Instances
 import XMonad.Layout.Renamed (Rename (CutWordsLeft), renamed)
 import XMonad.Layout.Roledex (Roledex (Roledex))
 import XMonad.Layout.Simplest
@@ -120,6 +117,7 @@ myLayout =
     $ mkToggle (single REFLECTX)
     $ mkToggle (single REFLECTY)
     $ mkToggle (single MIRROR)
+    $ mkToggle (NOBORDERS ?? FULL ?? EOT)
     $ onWorkspace
       "2"
       ( Accordion
@@ -137,7 +135,7 @@ myLayout =
       ( CenterMainFluid 1 (3 / 100) 0.50
           ||| threeCol
           -- \||| Tall 1 (3 / 100) (1 / 2)
-          ||| Full
+          -- ||| Full
           ||| Grid False
           ||| Roledex
       )
@@ -234,6 +232,7 @@ myKeys conf@XConfig{XMonad.modMask = modMask} =
       , ((modMask .|. controlMask, xK_x), sendMessage $ Toggle REFLECTX)
       , ((modMask .|. shiftMask, xK_x), sendMessage $ Toggle MIRROR)
       , ((modMask .|. controlMask, xK_y), sendMessage $ Toggle REFLECTY)
+      , ((modMask, xK_y), sendMessage $ Toggle FULL)
       , ((modMask .|. shiftMask, xK_q), io exitSuccess)
       , ((modMask, xK_q), restart "xmonad" True)
       , ((modMask, xK_n), nextScreen)

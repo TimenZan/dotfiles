@@ -267,19 +267,21 @@ table.insert(plugs, {
             nerd_font_variant = 'mono'
         },
 
-        snippets = {
-            expand = function (snippet) require('luasnip').lsp_expand(snippet) end,
-            active = function (filter)
-                if filter and filter.direction then
-                    return require('luasnip').jumpable(filter.direction)
-                end
-                return require('luasnip').in_snippet()
-            end,
-            jump = function (direction) require('luasnip').jump(direction) end,
-        },
+        -- snippets = {
+        --     expand = function (snippet) require('luasnip').lsp_expand(snippet) end,
+        --     active = function (filter)
+        --         if filter and filter.direction then
+        --             return require('luasnip').jumpable(filter.direction)
+        --         end
+        --         return require('luasnip').in_snippet()
+        --     end,
+        --     jump = function (direction) require('luasnip').jump(direction) end,
+        -- },
+
+        snippets = { preset = 'luasnip', },
 
         sources = {
-            default = { 'lazydev', 'lsp', 'path', 'luasnip', 'buffer', },
+            default = { 'lazydev', 'lsp', 'path', 'snippets', 'buffer', },
             providers = {
                 lazydev = {
                     name = "LazyDev",
@@ -311,7 +313,11 @@ table.insert(plugs, {
 
         completion = {
             list = {
-                selection = 'preselect',
+                selection = {
+                    preselect = true,
+
+
+                },
             },
             accept = {
                 create_undo_point = false,
@@ -322,7 +328,7 @@ table.insert(plugs, {
             menu = {
                 border = 'single',
                 draw = {
-                    align_to= 'label',
+                    align_to = 'label',
                     treesitter = { 'lsp' },
                     columns = { { 'label', 'label_description', gap = 1 }, { 'source_name', }, { 'kind_icon', 'kind', gap = 1, }, },
                 },

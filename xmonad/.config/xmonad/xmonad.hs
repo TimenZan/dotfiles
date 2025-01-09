@@ -79,6 +79,8 @@ import XMonad.Util.SpawnOnce (spawnOnOnce, spawnOnce)
 import XMonad.Util.Themes
 
 import Graphics.X11.ExtraTypes.XF86
+import XMonad.Actions.CopyWindow (copyToAll)
+import XMonad.Util.WindowProperties (getProp32)
 
 -- The command to lock the screen or show the screensaver.
 myScreensaver :: String
@@ -282,9 +284,21 @@ myManageHook =
     , moveC "discord" "2"
     , moveC "Steam" "9"
     , isFullscreen --> (doF W.focusDown <+> doFullFloat)
+    , hasNetWMState "_NET_WM_STATE_ABOVE" --> doFloat
+    , hasNetWMState "_NET_WM_STATE_STICKY" --> doF copyToAll
     ]
  where
   moveC c w = className =? c --> doShift w
+  getNetWMState :: Window -> X [Atom]
+  getNetWMState w = do
+    atom <- getAtom "_NET_WM_STATE"
+    maybe [] (map fromIntegral) <$> getProp32 atom w
+  hasNetWMState :: String -> Query Bool
+  hasNetWMState state_net = do
+    window <- ask
+    wmstate <- liftX $ getNetWMState window
+    atom <- liftX $ getAtom state_net
+    return $ elem atom wmstate
 
 desktopStartupHook = do
   spawnOnOnce "9" "nice qbittorrent"

@@ -116,6 +116,7 @@ table.insert(plugs, {
     event = { 'WinLeave' },
     opts = {
         smooth = false,
+        only_line_seq = false,
     },
 })
 

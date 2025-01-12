@@ -97,6 +97,7 @@ table.insert(plugs, {
 
 table.insert(plugs, {
     'https://git.sr.ht/~whynothugo/lsp_lines.nvim',
+    enabled = true,
     config = function ()
         vim.diagnostic.config {
             virtual_text = false,
@@ -109,6 +110,29 @@ table.insert(plugs, {
     end,
     -- TODO: add keybinding to disable, maybe with some 'global' zen mode
     -- TODO: filter by language server?
+})
+
+table.insert(plugs, {
+    'rachartier/tiny-inline-diagnostic.nvim',
+    -- event = 'VeryLazy', -- Or `LspAttach`
+    priority = 1000,    -- needs to be loaded in first
+    enabled = false,
+    config = function ()
+        vim.diagnostic.config {
+            virtual_text = false,
+            virtual_lines = { highlight_whole_line = false },
+        }
+        require('tiny-inline-diagnostic').setup{
+            preset = 'simple',
+            multiple_diag_under_cursor = true,
+            options = {
+                multilines = {
+                    enabled = true,
+                    always_show = true,
+                },
+            },
+        }
+    end
 })
 
 table.insert(plugs, {

@@ -58,7 +58,7 @@ table.insert(plugs, {
 table.insert(plugs, {
     'nvim-treesitter/nvim-treesitter-textobjects',
     event = 'VeryLazy',
-    depedencies = {
+    dependencies = {
         { 'nvim-treesitter/nvim-treesitter' },
     },
     config = function ()

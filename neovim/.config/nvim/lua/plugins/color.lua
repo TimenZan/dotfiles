@@ -34,6 +34,9 @@ table.insert(plugs, {
                 neotest = true,
                 lsp_trouble = true,
                 sandwich = true,
+                colorful_winsep = {
+                    enabled = true,
+                },
             },
         }
         vim.cmd.colorscheme 'catppuccin-mocha'

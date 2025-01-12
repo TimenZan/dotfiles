@@ -111,4 +111,12 @@ table.insert(plugs, {
     -- TODO: filter by language server?
 })
 
+table.insert(plugs, {
+    'nvim-zh/colorful-winsep.nvim',
+    event = { 'WinLeave' },
+    opts = {
+        smooth = false,
+    },
+})
+
 return plugs

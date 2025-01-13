@@ -60,6 +60,7 @@ table.insert(plugs, {
             },
             hide = {
                 cursorline = 'focused_win',
+                only_win = true,
             },
             render = function (props)
                 local colors = require 'catppuccin.palettes'.get_palette()
@@ -107,8 +108,6 @@ table.insert(plugs, {
                     end
                     return label
                 end
-
-
 
                 -- 
                 -- 

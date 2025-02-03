@@ -17,9 +17,9 @@ table.insert(plugs, {
             { '\\big',  '\\big' },
         }
 
-        if vim.fn.executable('zathura') then
+        if vim.fn.executable('zathura') == 1 then
             vim.g.vimtex_view_method = 'zathura'
-        elseif vim.fn.executable('skim') then
+        elseif vim.fn.executable('skim') == 1 then
             vim.g.vimtex_view_method = 'skim'
         end
 

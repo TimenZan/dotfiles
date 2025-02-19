@@ -252,7 +252,9 @@ table.insert(plugs, {
             -- ["<C-x>"] = {'cancel', 'fallback'},
             -- todo: keybind for enabling only specific providers
 
-            cmdline = {
+        },
+        cmdline = {
+            keymap = {
                 ['<C-space>'] = { 'select_and_accept', 'fallback' },
                 ['<tab>'] = { 'select_and_accept', 'fallback', },
                 ['<S-tab>'] = { 'select_prev', 'fallback', },

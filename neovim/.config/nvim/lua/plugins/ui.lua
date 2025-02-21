@@ -135,6 +135,8 @@ table.insert(plugs, {
     end
 })
 
+table.insert(plugs, { "tiagovla/scope.nvim", config = true })
+
 table.insert(plugs, {
     'nvim-zh/colorful-winsep.nvim',
     event = { 'WinLeave' },

@@ -26,7 +26,10 @@ set('n', 'gD', vim.lsp.buf.implementation, { silent = true, })
 set('n', 'gW', vim.lsp.buf.workspace_symbol, { silent = true, })
 set('n', 'gd', vim.lsp.buf.declaration, { silent = true, })
 
-set("n", "]g", vim.diagnostic.goto_next)
-set("n", "[g", vim.diagnostic.goto_prev)
+vim.keymap.set("n", "<Leader>e", vim.diagnostic.open_float, { desc = "Show diagnostic error messages" })
+vim.keymap.set("n", "J", function() return "mz" .. vim.v.count .. "J`z" end, {
+    desc = "Join lines, keep cursor position",
+    expr = true,
+})
 
 set('t', '<esc>', '<c-\\><c-n>')

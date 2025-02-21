@@ -2,6 +2,7 @@ local plugs = {}
 
 table.insert(plugs, {
     'Vigemus/iron.nvim',
+    disable = true,
     event = 'VeryLazy',
     config = function ()
         require 'iron.core'.setup {

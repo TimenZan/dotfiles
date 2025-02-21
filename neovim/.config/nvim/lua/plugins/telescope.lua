@@ -10,6 +10,13 @@ table.insert(plugs, {
         { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
         'crispgm/telescope-heading.nvim',
         'folke/trouble.nvim',
+        {
+            'jmbuhr/telescope-zotero.nvim',
+            dependencies = { { 'kkharji/sqlite.lua' }, },
+            config = function ()
+                require 'zotero'.setup {}
+            end,
+        },
     },
     config = function ()
         local telescope = require 'telescope'
@@ -24,6 +31,7 @@ table.insert(plugs, {
         telescope.load_extension 'fzf'
         telescope.load_extension 'heading'
         telescope.load_extension 'bibtex'
+        telescope.load_extension 'zotero'
         telescope.load_extension 'dap'
     end,
 
@@ -39,6 +47,7 @@ table.insert(plugs, {
         { '<leader>fsd', '<cmd>Telescope lsp_document_symbols<cr>', },
         { '<leader>fsw', '<cmd>Telescope lsp_workspace_symbols<cr>', },
         { '<leader>fss', '<cmd>Telescope bibtex<cr>', },
+        { '<leader>fz',  '<cmd>Telescope zotero<cr>',                                                         mode = 'i' },
         { '<leader>fse', "<cmd>lua require('telescope.builtin').symbols{sources = {'emoji', 'kaomoji'}}<cr>", },
         { '<leader>fsg', "<cmd>lua require('telescope.builtin').symbols{sources = {'gitmoji '}}<cr>", },
         { '<leader>fsm', "<cmd>lua require('telescope.builtin').symbols{sources = {'math '}}<cr>", },

@@ -18,6 +18,26 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 
 table.insert(plugs, {
+    'stevearc/conform.nvim',
+    opts = {
+        formatters_by_ft = {
+            python = { "isort", "black" },
+            bibtex = { "bibtex-tidy" },
+            json = { "latexindent" },
+            -- still experimental
+            latex = { "llf" },
+        },
+        default_format_opts = {
+            lsp_format = "fallback",
+        },
+        format_on_save = {
+            lsp_format = "fallback",
+            timeout_ms = 500,
+        },
+    },
+})
+
+table.insert(plugs, {
     "neovim/nvim-lspconfig",
     dependencies = {
         'saghen/blink.cmp',

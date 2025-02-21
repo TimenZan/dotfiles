@@ -115,14 +115,14 @@ table.insert(plugs, {
 table.insert(plugs, {
     'rachartier/tiny-inline-diagnostic.nvim',
     -- event = 'VeryLazy', -- Or `LspAttach`
-    priority = 1000,    -- needs to be loaded in first
+    priority = 1000, -- needs to be loaded in first
     enabled = false,
     config = function ()
         vim.diagnostic.config {
             virtual_text = false,
             virtual_lines = { highlight_whole_line = false },
         }
-        require('tiny-inline-diagnostic').setup{
+        require('tiny-inline-diagnostic').setup {
             preset = 'simple',
             multiple_diag_under_cursor = true,
             options = {
@@ -142,6 +142,16 @@ table.insert(plugs, {
         smooth = false,
         only_line_seq = false,
     },
+})
+
+table.insert(plugs, {
+    'stevearc/oil.nvim',
+    ---@module 'oil'
+    ---@type oil.SetupOpts
+    opts = {},
+    -- Optional dependencies
+    -- dependencies = { { "echasnovski/mini.icons", opts = {} } },
+    dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if prefer nvim-web-devicons
 })
 
 return plugs

@@ -25,6 +25,11 @@ local plugs = {
         end,
         lazy = false, -- Needs to be loaded before UI is drawn
     },
+    {
+        'ruifm/gitlinker.nvim',
+        dependencies = 'nvim-lua/plenary.nvim',
+        config = true,
+    },
 }
 
 return require 'util'.all_verylazy(plugs)

@@ -121,10 +121,10 @@ table.insert(plugs, {
                     enable = true,
                     border = 'none',
                     floating_preview_opts = {},
-                    peek_definition_code = {
-                        ["<leader>pf"] = "@function.outer",
-                        ["<leader>pc"] = "@class.outer",
-                    },
+                    -- peek_definition_code = {
+                    --     ["<leader>pf"] = "@function.outer",
+                    --     ["<leader>pc"] = "@class.outer",
+                    -- },
                 },
             },
         }

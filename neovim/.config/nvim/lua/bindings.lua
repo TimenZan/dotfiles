@@ -4,8 +4,14 @@ set('n', 'n', 'nzzzv', { silent = true, })
 set('n', 'N', 'Nzzzv', { silent = true, })
 set('v', '<', '<gv', { silent = true, })
 set('v', '>', '>gv', { silent = true, })
-set("n", "x", '"_x', { silent = true, })
-set("n", "c", '"_c', { silent = true, })
+set('n', 'x', '"_x', { silent = true, })
+set('n', 'c', '"_c', { silent = true, })
+
+set({ 'n', 'v', 'o' }, '<leader>y', '"+y')
+set({ 'n', 'v', 'o' }, '<leader>Y', '"+Y')
+set({ 'n', 'v', 'o' }, '<leader>p', '"+p')
+set({ 'n', 'v', 'o' }, '<leader>P', '"+P')
+
 
 -- Built in term bindings
 set('n', '<leader>st', function ()

@@ -8,7 +8,7 @@ set('n', 'x', '"_x', { silent = true, })
 set('n', 'c', '"_c', { silent = true, })
 
 set({ 'n', 'v', 'o' }, '<leader>y', '"+y')
-set({ 'n', 'v', 'o' }, '<leader>Y', '"+Y')
+set({ 'n', 'v', 'o' }, '<leader>Y', '"+y$')
 set({ 'n', 'v', 'o' }, '<leader>p', '"+p')
 set({ 'n', 'v', 'o' }, '<leader>P', '"+P')
 

@@ -47,7 +47,7 @@ table.insert(plugs, {
         { '<leader>fsd', '<cmd>Telescope lsp_document_symbols<cr>', },
         { '<leader>fsw', '<cmd>Telescope lsp_workspace_symbols<cr>', },
         { '<leader>fss', '<cmd>Telescope bibtex<cr>', },
-        { '<leader>fz',  '<cmd>Telescope zotero<cr>',                                                         mode = 'i' },
+        { '<a-f>z',      '<cmd>Telescope zotero<cr>',                                                         mode = 'i' },
         { '<leader>fse', "<cmd>lua require('telescope.builtin').symbols{sources = {'emoji', 'kaomoji'}}<cr>", },
         { '<leader>fsg', "<cmd>lua require('telescope.builtin').symbols{sources = {'gitmoji '}}<cr>", },
         { '<leader>fsm', "<cmd>lua require('telescope.builtin').symbols{sources = {'math '}}<cr>", },

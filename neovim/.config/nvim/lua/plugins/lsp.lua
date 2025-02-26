@@ -23,7 +23,6 @@ table.insert(plugs, {
         formatters_by_ft = {
             python = { "isort", "black" },
             bibtex = { "bibtex-tidy" },
-            json = { "latexindent" },
             -- still experimental
             latex = { "llf" },
         },

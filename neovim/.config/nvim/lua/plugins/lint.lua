@@ -8,7 +8,7 @@ table.insert(plugs, {
     config = function ()
         -- For all "english" filetypes, register an autocmd to run proselint
         for _, ft in ipairs(english) do
-            require 'lint'.linters_by_ft[ft] = { 'proselint', }
+            require 'lint'.linters_by_ft[ft] = { 'proselint', 'languagetool', }
             vim.api.nvim_create_autocmd({ 'FileType', }, {
                 callback = function ()
                     vim.api.nvim_create_autocmd({ 'BufWritePost', }, {

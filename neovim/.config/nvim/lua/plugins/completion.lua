@@ -254,6 +254,7 @@ table.insert(plugs, {
 
         },
         cmdline = {
+            completion = { menu = { auto_show = true, }, },
             keymap = {
                 ['<C-space>'] = { 'select_and_accept', 'fallback' },
                 ['<tab>'] = { 'select_and_accept', 'fallback', },
@@ -317,8 +318,6 @@ table.insert(plugs, {
             list = {
                 selection = {
                     preselect = true,
-
-
                 },
             },
             accept = {

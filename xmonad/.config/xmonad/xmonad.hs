@@ -137,8 +137,9 @@ myLayout =
       ( CenterMainFluid 1 (3 / 100) 0.50
           ||| threeCol
           -- \||| Tall 1 (3 / 100) (1 / 2)
-          -- ||| Full
+          -- \||| Full
           ||| Grid False
+          ||| Mirror ( Tall 6 (3 / 100) (8/9) )
           ||| Roledex
       )
  where

@@ -1,1 +1,2 @@
-set textwidth=79
+" Don't autowrap lines, use linebreaks semantically
+set textwidth=0

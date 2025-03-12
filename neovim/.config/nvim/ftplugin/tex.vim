@@ -1,4 +1,5 @@
-set textwidth=95
+" Don't autowrap lines, use linebreaks semantically
+set textwidth=0
 set formatoptions+=t
 set tabstop=4
 set shiftwidth=4

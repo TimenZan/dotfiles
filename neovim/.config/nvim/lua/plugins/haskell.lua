@@ -7,12 +7,21 @@ local plugs = {}
 table.insert(plugs, {
     'mrcjkb/haskell-tools.nvim',
     lazy = false,
+    config = function ()
+        vim.g.haskell_tools = {
+            hls = {
+                settings = {
+                    formattingProvider = "floskell",
+                },
+            },
+        }
+    end,
 })
 
 table.insert(plugs, {
     'mrcjkb/haskell-snippets.nvim',
     ft = { 'haskell' },
-    config = function()
+    config = function ()
         require 'luasnip'.add_snippets('haskell', require 'haskell-snippets'.all, { key = 'haskell' })
     end,
 })

@@ -16,6 +16,14 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end
 })
 
+table.insert(plugs, {
+    'jmbuhr/otter.nvim',
+    dependencies = {
+        'nvim-treesitter/nvim-treesitter',
+    },
+    opts = {},
+})
+
 
 table.insert(plugs, {
     'stevearc/conform.nvim',
@@ -51,7 +59,7 @@ table.insert(plugs, {
         local servers = util.iterate_dir('plugins.lsp_servers', cur_dir .. '/lsp_servers')
         for server, options in pairs(servers) do
             options.capabilities = require 'blink.cmp'.get_lsp_capabilities(options.capabilities)
-            require 'lspconfig'[server].setup { options }
+            require 'lspconfig'[server].setup(options)
         end
     end,
 })

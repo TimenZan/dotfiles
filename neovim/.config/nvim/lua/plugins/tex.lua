@@ -23,9 +23,27 @@ table.insert(plugs, {
             vim.g.vimtex_view_method = 'skim'
         end
 
+        -- the jobname is the root folder name (if found) + username + ISO date
+        -- unfortunately, '%A' cannot be used as it also needs to be passed to the viewer
+        local jobname = (string.match((vim.fs.root(0, { '.git', 'main.tex', 'latexmk_build', 'src', 'README.md' }) or ''),
+            '/%w+$') .. '_' or '') .. (os.getenv('USER') or '') .. os.date('_%F')
+
+        -- TODO: implement `-use-make?`
         vim.g.vimtex_compiler_latexmk = {
             out_dir = 'latexmk_build',
+            aux_dir = 'latexmk_aux',
+            options = {
+                -- defaults
+                '-verbose',
+                '-file-line-error',
+                '-synctex=1',
+                '-interaction=nonstopmode',
+                -- dox yourself in the filename
+                '-jobname=' .. jobname,
+            },
         }
+
+        vim.g.vimtex_view_general_options = jobname .. '.pdf'
     end,
 })
 

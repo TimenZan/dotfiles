@@ -25,8 +25,9 @@ table.insert(plugs, {
 
         -- the jobname is the root folder name (if found) + username + ISO date
         -- unfortunately, '%A' cannot be used as it also needs to be passed to the viewer
-        local jobname = (string.match((vim.fs.root(0, { '.git', 'main.tex', 'latexmk_build', 'src', 'README.md' }) or ''),
-            '/%w+$') .. '_' or '') .. (os.getenv('USER') or '') .. os.date('_%F')
+        local jobname = ((string.match((vim.fs.root(0, { '.git', 'main.tex', 'latexmk_build', 'src', 'README.md' }) or ''), '/%w+$') or 'main') .. '_')
+            .. (os.getenv('USER') or '')
+            .. os.date('_%F')
 
         -- TODO: implement `-use-make?`
         vim.g.vimtex_compiler_latexmk = {

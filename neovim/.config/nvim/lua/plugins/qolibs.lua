@@ -4,7 +4,7 @@ local plugs = {
     { 'tpope/vim-eunuch' },
     { 'tpope/vim-abolish' },
     { 'tpope/vim-characterize' },
-    { 'tpope/vim-sleuth' },
+    { 'tpope/vim-sleuth',      lazy = false, },
     {
         'junegunn/vim-easy-align',
         keys = {

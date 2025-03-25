@@ -29,6 +29,9 @@ table.insert(plugs, {
                 lint.linters[linter] =
                     require("lint.util").wrap(lint.linters[linter], function (diagnostic)
                         diagnostic.severity = vim.diagnostic.severity.HINT
+                        if diagnostic.message == "Possible typo: you repeated a whitespace" then
+                            return nil
+                        end
                         return diagnostic
                     end)
             end

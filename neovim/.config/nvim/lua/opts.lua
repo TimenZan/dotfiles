@@ -15,11 +15,13 @@ vim.opt.signcolumn = "yes"
 vim.opt.smartcase = true
 vim.opt.undofile = true
 vim.opt.updatetime = 100
+vim.opt.winborder = "single"
 vim.opt.wrap = false
 vim.opt_global.formatoptions:append "ro/n1l"
 -- TODO: only set for certain filetypes?
 -- vim.opt_global.formatoptions:append "a"
 vim.opt_global.shortmess:append "c"
+
 
 vim.opt.number = true
 vim.opt.relativenumber = true

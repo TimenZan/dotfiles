@@ -9,6 +9,34 @@ local nat_lsp = {
     },
 }
 
+local ltkey = os.getenv('LANGUAGETOOL_API_KEY')
+local ltusr = os.getenv('LANGUAGETOOL_API_USR')
+if ltkey and ltusr then
+    nat_lsp.ltex_plus = {
+        settings = {
+            ltex = {
+                checkFrequency = "save",
+                language = "en-US",
+                languageToolHttpServerUri = "https://api.languagetoolplus.com",
+                additinonalRules = {
+                    motherTongue = "nl",
+                    enablePickyRules = true,
+                },
+                languageToolOrg = {
+                    username = ltusr,
+                    apiKey = ltkey,
+                },
+                latex = {
+                    commands = {
+                        -- Not how LTeX handles this now, TODO: open PR
+                        ["\\textemdash"] = "—",
+                    },
+                },
+            },
+        },
+    }
+end
+
 vim.api.nvim_create_autocmd("LspAttach", {
     callback = function (ev)
         local client = vim.lsp.get_client_by_id(ev.data.client_id)

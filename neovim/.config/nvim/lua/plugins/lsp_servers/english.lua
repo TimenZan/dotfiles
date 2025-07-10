@@ -22,6 +22,9 @@ if ltkey and ltusr then
                     motherTongue = "nl",
                     enablePickyRules = true,
                 },
+                disabledRules = {
+                    ["en-US"] = { "QB_NEW_EN_OTHER_ERROR_IDS_5", "QB_NEW_EN_MERGED_MATCH" },
+                },
                 languageToolOrg = {
                     username = ltusr,
                     apiKey = ltkey,

@@ -16,8 +16,8 @@ table.insert(plugs, {
         --     "--config", "~/.config/LanguageTool/server.properties"
         -- }
 
-        local nat_linters = { 'proselint', 'languagetool', }
-        -- local nat_linters = { 'proselint', }
+        -- local nat_linters = { 'proselint', 'languagetool', }
+        local nat_linters = { 'proselint', }
 
         -- For all "english" filetypes, register an autocmd to run proselint
         for _, ft in ipairs(english) do

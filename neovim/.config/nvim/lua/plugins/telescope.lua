@@ -14,7 +14,23 @@ table.insert(plugs, {
             'jmbuhr/telescope-zotero.nvim',
             dependencies = { { 'kkharji/sqlite.lua' }, },
             config = function ()
-                require 'zotero'.setup {}
+                require 'zotero'.setup {
+                    ft = {
+                        tex = {
+                            insert_key_formatter = function (citekey)
+                                return '\\autocite{' .. citekey .. '}'
+                            end,
+                            locate_bib = function ()
+                                local rootfolder =
+                                    vim.fs.root(0, { '.git', 'main.tex', 'latexmk_build', 'src', 'README.md' })
+                                if not rootfolder then return nil end
+                                local bibs = vim.fs.find({ 'references.bib', 'bibliography.bib', 'document.bib' },
+                                    { type = "file", path = rootfolder })
+                                return bibs[1]
+                            end,
+                        }
+                    }
+                }
             end,
         },
     },

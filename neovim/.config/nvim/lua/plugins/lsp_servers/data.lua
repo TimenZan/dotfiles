@@ -2,5 +2,6 @@
 return {
     { yamlls = {} },
     { jsonls = {} },
-    { taplo = {} },  -- Toml files
+    { taplo = {} }, -- Toml files
+    { lemminx = { settings = { xml = { catalogs = { vim.fn.expand("$HOME/etc/xml/catalog") } } } } },
 }

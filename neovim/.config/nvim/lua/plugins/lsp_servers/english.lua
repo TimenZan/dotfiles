@@ -18,7 +18,7 @@ if ltkey and ltusr then
                 checkFrequency = "save",
                 language = "en-US",
                 languageToolHttpServerUri = "https://api.languagetoolplus.com",
-                additinonalRules = {
+                additionalRules = {
                     motherTongue = "nl",
                     enablePickyRules = true,
                 },

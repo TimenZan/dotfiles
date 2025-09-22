@@ -64,20 +64,17 @@ table.insert(plugs, {
 
 table.insert(plugs, {
     "neovim/nvim-lspconfig",
-    dependencies = {
-        'saghen/blink.cmp',
-    },
     config = function ()
-        -- local capabilities = vim.tbl_deep_extend("force",
-        --     vim.lsp.protocol.make_client_capabilities(),
-        --     require('cmp_nvim_lsp').default_capabilities()
-        -- )
-        local util = require("util")
+        local util = require 'util'
         local cur_dir = string.match(debug.getinfo(1, 'S').source, '^@(.*)/')
         local servers = util.iterate_dir('plugins.lsp_servers', cur_dir .. '/lsp_servers')
+
         for server, options in pairs(servers) do
-            options.capabilities = require 'blink.cmp'.get_lsp_capabilities(options.capabilities)
-            require 'lspconfig'[server].setup(options)
+            vim.lsp.enable(server)
+            -- Check if `options` is not empty
+            if not next(options) == nil then
+                vim.lsp.config(server, options)
+            end
         end
     end,
 })

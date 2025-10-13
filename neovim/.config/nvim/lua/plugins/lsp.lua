@@ -72,7 +72,7 @@ table.insert(plugs, {
         for server, options in pairs(servers) do
             vim.lsp.enable(server)
             -- Check if `options` is not empty
-            if not next(options) == nil then
+            if not (next(options) == nil) then
                 vim.lsp.config(server, options)
             end
         end

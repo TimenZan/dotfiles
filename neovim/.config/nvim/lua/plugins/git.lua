@@ -20,8 +20,18 @@ local plugs = {
     {
         'rhysd/committia.vim',
         config = function ()
-            vim.keymap.set({ 'n', 'i', 'v', 's' }, '<a-n>', '<Plug>(committia-scroll-diff-down-half)')
-            vim.keymap.set({ 'n', 'i', 'v', 's' }, '<a-p>', '<Plug>(committia-scroll-diff-up-half)')
+            local group = vim.api.nvim_create_augroup('committia-c318babd-6231-4e1f-b969-9c09f0c220d8', { clear = true })
+            vim.api.nvim_create_autocmd('FileType', {
+                group = group,
+                callback = function (ev)
+                    if vim.bo[ev.buf].filetype == 'gitcommit' then
+                        vim.keymap.set({ 'n', 'i', 'v', 's' }, '<a-n>', '<Plug>(committia-scroll-diff-down-half)',
+                            { buffer = true })
+                        vim.keymap.set({ 'n', 'i', 'v', 's' }, '<a-p>', '<Plug>(committia-scroll-diff-up-half)',
+                            { buffer = true })
+                    end
+                end
+            })
         end,
         lazy = false, -- Needs to be loaded before UI is drawn
     },

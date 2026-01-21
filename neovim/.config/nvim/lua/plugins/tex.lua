@@ -25,7 +25,7 @@ table.insert(plugs, {
 
         -- the jobname is the root folder name (if found) + username + ISO date
         local rootname = ((string.match((vim.fs.root(0, { '.git', 'main.tex', 'latexmk_build', 'src', 'README.md' }) or ''), '/([-%w_]+)$') or 'main') .. '_')
-        local jobname = rootname .. (os.getenv('USER') or '') .. os.date('_%F')
+        local jobname = rootname .. (vim.env.USER or '') .. os.date('_%F')
 
         -- TODO: implement `-use-make?`
         vim.g.vimtex_compiler_latexmk = {

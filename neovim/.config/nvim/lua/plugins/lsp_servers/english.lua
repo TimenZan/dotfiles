@@ -9,8 +9,8 @@ local nat_lsp = {
     },
 }
 
-local ltkey = os.getenv('LANGUAGETOOL_API_KEY')
-local ltusr = os.getenv('LANGUAGETOOL_API_USR')
+local ltkey = vim.env.LANGUAGETOOL_API_KEY
+local ltusr = vim.env.LANGUAGETOOL_API_USR
 if ltkey and ltusr then
     nat_lsp.ltex_plus = {
         settings = {

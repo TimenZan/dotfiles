@@ -134,23 +134,6 @@ table.insert(plugs, {
 })
 
 table.insert(plugs, {
-    'https://git.sr.ht/~whynothugo/lsp_lines.nvim',
-    enabled = true,
-    config = function ()
-        vim.diagnostic.config {
-            virtual_text = false,
-            virtual_lines = { highlight_whole_line = false },
-        }
-        require 'lsp_lines'.setup()
-        -- Disable for pseudo-diagnostics created by `lazy.nvim`
-        local lazy_namespace = vim.api.nvim_create_namespace('lazy')
-        vim.diagnostic.config({ virtual_lines = false }, lazy_namespace)
-    end,
-    -- TODO: add keybinding to disable, maybe with some 'global' zen mode
-    -- TODO: filter by language server?
-})
-
-table.insert(plugs, {
     'rachartier/tiny-inline-diagnostic.nvim',
     -- event = 'VeryLazy', -- Or `LspAttach`
     priority = 1000, -- needs to be loaded in first

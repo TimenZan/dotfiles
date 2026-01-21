@@ -68,7 +68,7 @@ table.insert(plugs, {
         require 'nvim-dap-virtual-text'.setup {}
         require 'nvim-dap-repl-highlights'.setup()
         -- vim.cmd 'TSInstall dap_repl'
-        require 'nvim-treesitter.install'.ensure_installed 'dap_repl'
+        -- require 'nvim-treesitter.install'.ensure_installed 'dap_repl'
 
         dap.adapters.lldb = {
             type = 'executable',

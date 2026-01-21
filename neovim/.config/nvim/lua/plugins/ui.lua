@@ -188,4 +188,26 @@ table.insert(plugs, {
         "folke/snacks.nvim", }
 })
 
+table.insert(plugs, {
+    'rachartier/tiny-code-action.nvim',
+    dependencies = {
+        { "nvim-lua/plenary.nvim" },
+        { "nvim-telescope/telescope.nvim" },
+    },
+    event = 'LspAttach',
+    opts = {
+        format_title = function (action, _)
+            if action.kind then
+                return string.format("%s (%s)", action.title, action.kind)
+            end
+            return action.title
+        end,
+    },
+    keys = {
+        { '<leader>a', function () require('tiny-code-action').code_action() end }
+    }
+
+})
+
+
 return plugs

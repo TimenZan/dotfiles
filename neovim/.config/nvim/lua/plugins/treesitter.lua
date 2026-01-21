@@ -52,7 +52,8 @@ table.insert(plugs, {
                 local avail = ts.get_available()
                 if vim.list_contains(avail, lang) then
                     vim.notify('installing parser for ' .. lang, vim.log.levels.INFO)
-                    ts.install(lang):await(start)
+                    ts.install(lang):wait(60000)
+                    start()
                     return
                 end
             end,

@@ -55,7 +55,8 @@ table.insert(plugs, {
 
     keys = {
         { '<leader>ff',  '<cmd>Telescope find_files<cr>', },
-        { '<leader>fg',  '<cmd>Telescope live_grep<cr>', },
+        { '<leader>fg',  '<cmd>Telescope live_grep<cr>',                                                      mode = { 'n', 'v' } },
+        { '<leader>fu',  '<cmd>Telescope grep_string<cr>',                                                    mode = { 'n', 'v' } },
         { '<leader>fb',  '<cmd>Telescope buffers<cr>', },
         { '<leader>fh',  '<cmd>Telescope help_tags<cr>', },
         { '<leader>fu',  '<cmd>Telescope lsp_references<cr>', },

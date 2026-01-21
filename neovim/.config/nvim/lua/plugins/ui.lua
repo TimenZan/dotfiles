@@ -90,9 +90,47 @@ table.insert(plugs, {
 })
 
 table.insert(plugs, {
-    'stevearc/dressing.nvim',
-    opts = {},
+    'folke/snacks.nvim',
+    priority = 1000,
     lazy = false,
+    opts = {
+        bigfile = { enabled = true },
+        -- no desire for a dashboard
+        dashboard = { enabled = false },
+        -- handled by oil.nvim
+        explorer = { enabled = false },
+        -- git is handled elsewhere
+        gh = { enabled = false },
+        git = { enabled = false },
+        gitbrowse = { enabled = false },
+        -- I like images. TODO: add bindings and such
+        image = { enabled = true },
+        -- handled by indent-blankline
+        indent = { enabled = false },
+        -- good input
+        input = {
+            enabled = true,
+            -- TODO: do we want completion?
+            b = { completion = true },
+        },
+        -- I don't (currently) use lazygit
+        lazygit = { enabled = false },
+        -- handled by telescope, for now
+        picker = { enabled = false },
+        -- handled by fidget
+        notifier = { enabled = false },
+        -- Just get a faster init.lua
+        quickfile = { enabled = false },
+        -- library
+        scope = { enabled = true },
+        -- smoothscroll, TODO: do I like this?
+        scroll = { enabled = false },
+        -- handled by specific plugins
+        -- TODO: replace them with this?
+        statuscolumn = { enabled = false },
+        -- handled by RRethy/vim-illuminate
+        words = { enabled = false },
+    },
 })
 
 table.insert(plugs, {
@@ -148,12 +186,23 @@ table.insert(plugs, {
 
 table.insert(plugs, {
     'stevearc/oil.nvim',
-    ---@module 'oil'
-    ---@type oil.SetupOpts
-    opts = {},
-    -- Optional dependencies
-    -- dependencies = { { "echasnovski/mini.icons", opts = {} } },
-    dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if prefer nvim-web-devicons
+    lazy = false,
+    config = function (opts)
+        local snacks = require 'snacks'
+        vim.api.nvim_create_autocmd("User", {
+            pattern = "OilActionsPost",
+            callback = function (event)
+                if event.data.actions[1].type == "move" then
+                    snacks.rename.on_rename_file(event.data.actions[1].src_url, event.data.actions[1].dest_url)
+                end
+            end,
+        })
+
+        require 'oil'.setup(opts)
+    end,
+    dependencies = {
+        "nvim-tree/nvim-web-devicons",
+        "folke/snacks.nvim", }
 })
 
 return plugs

@@ -10,6 +10,7 @@ table.insert(plugs, {
         { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
         'crispgm/telescope-heading.nvim',
         'folke/trouble.nvim',
+        'nvim-telescope/telescope-ui-select.nvim',
         {
             'jmbuhr/telescope-zotero.nvim',
             dependencies = { { 'kkharji/sqlite.lua' }, },
@@ -39,16 +40,22 @@ table.insert(plugs, {
         local actions = require 'telescope.actions'
         local trouble_ts = require 'trouble.sources.telescope'
 
-        telescope.setup { defaults = { mappings = {
-            i = { ["<c-t>"] = trouble_ts.open },
-            n = { ["<c-t>"] = trouble_ts.open },
-        }, }, }
+        telescope.setup { defaults = {
+            extensions = {
+                ["ui-select"] = require 'telescope.themes'.get_dropdown {}
+            },
+            mappings = {
+                i = { ["<c-t>"] = trouble_ts.open },
+                n = { ["<c-t>"] = trouble_ts.open },
+            },
+        }, }
 
         telescope.load_extension 'fzf'
         telescope.load_extension 'heading'
         telescope.load_extension 'bibtex'
         telescope.load_extension 'zotero'
         telescope.load_extension 'dap'
+        telescope.load_extension 'ui-select'
     end,
 
     cmd = 'Telescope',

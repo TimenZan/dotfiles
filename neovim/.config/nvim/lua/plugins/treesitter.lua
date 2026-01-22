@@ -99,15 +99,6 @@ table.insert(plugs, {
                 include_surrounding_whitespace = true,
             },
             move = { set_jumps = true, },
-            -- lsp_interop = {
-            --     enable = true,
-            --     border = 'none',
-            --     floating_preview_opts = {},
-            --     -- peek_definition_code = {
-            --     --     ["<leader>pf"] = "@function.outer",
-            --     --     ["<leader>pc"] = "@class.outer",
-            --     -- },
-            -- },
         }
 
         local select = {
@@ -194,6 +185,35 @@ table.insert(plugs, {
         vim.keymap.set({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t_expr, { expr = true })
         vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T_expr, { expr = true })
     end,
+})
+
+table.insert(plugs, {
+    'https://github.com/Wansmer/sibling-swap.nvim',
+    opts = {
+        -- TODO: make filetype specific?
+        -- TODO: add way of swapping chained streams (self.map(func).filter(func).iter())
+        allowed_separators = {
+            '%',
+            '*',
+            '**',
+            '++',
+            '..',
+            '...',
+            '..=',
+            '/',
+            '<$>',
+            '<*>',
+            '<<',
+            '<>',
+            '><',
+            '>>',
+            '^',
+            '^^',
+            ['*>'] = '<*',
+            ['<*'] = '*>',
+            ['>>='] = '=<<',
+        }
+    }
 })
 
 table.insert(plugs, {

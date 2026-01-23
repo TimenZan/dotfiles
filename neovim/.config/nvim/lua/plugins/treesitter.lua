@@ -70,7 +70,7 @@ table.insert(plugs, {
         vim.cmd "hi TreesitterContextLineNumberBottom gui=underline guisp=Grey"
         vim.keymap.set('n', '[c', function ()
             require 'treesitter-context'.go_to_context(vim.v.count1)
-        end, { silent = true })
+        end, { silent = true, desc = 'Jump up to context' })
         require 'treesitter-context'.setup { multiwindow = true }
     end
 })

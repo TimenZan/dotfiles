@@ -22,6 +22,12 @@ set('n', '<leader>st', function ()
 end)
 vim.cmd([[ tnoremap <expr> <C-R> '<C-\><C-N>"'.nr2char(getchar()).'pi' ]])
 
+--- Toggle inlay hints in the current buffer
+local function toggle_inlay()
+    local enabled = vim.lsp.inlay_hint.is_enabled({ bufnr = 0 })
+    vim.lsp.inlay_hint.enable(not enabled, { bufnr = 0 })
+end
+
 -- LSP related bindings
 set('n', '1gD', vim.lsp.buf.type_definition, { silent = true, })
 set('n', '<c-k>', vim.lsp.buf.signature_help, { silent = true, })
@@ -30,6 +36,9 @@ set('n', '<leader>l', vim.lsp.codelens.run, { silent = true, })
 -- TODO: map to trouble.nvim?
 set('n', '<leader>i', vim.lsp.buf.incoming_calls, { silent = true, })
 set('n', '<leader>rn', vim.lsp.buf.rename, { silent = true, })
+set('n', '<leader>ci', toggle_inlay, { silent = true, desc = 'toggle inlay hints in current buffer', })
+set('n', '<leader>cI', function () vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end,
+    { silent = true, desc = 'toggle inlay hints in all buffers', })
 set('n', 'g0', vim.lsp.buf.document_symbol, { silent = true, })
 set('n', 'g=', function () vim.lsp.buf.format { async = true } end, { silent = true, })
 set('n', 'gD', vim.lsp.buf.implementation, { silent = true, })

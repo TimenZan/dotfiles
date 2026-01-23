@@ -22,8 +22,7 @@ local function scandir(directory, opts)
     opts = opts or {}
     local tmptypes = opts.types or { 'file' }
     local tys = (type(tmptypes) == 'table') and tmptypes or { tmptypes }
-    local types = {}
-    for _, l in ipairs(tys) do types[l] = true end
+    local types = M.to_set(tys)
 
     local filter = opts.filter or function (_) return true end
     local t = {}
@@ -78,6 +77,52 @@ M.all_verylazy = function (plugs)
             return e
         end,
         plugs)
+end
+
+
+--- Convert a list-like table to a set
+---
+--- @generic T
+--- @param t T[]
+--- @return table<T, boolean> set
+function M.to_set(t)
+    local set = {}
+    for _, v in ipairs(t) do
+        set[v] = true
+    end
+    return set
+end
+
+--- Convert a table into a set.
+--- Includes non-integer keys
+---
+--- @generic T
+--- @param t table<any, T>
+--- @return table<T, boolean> set
+function M.to_set_all(t)
+    local set = {}
+    for _, v in pairs(t) do
+        set[v] = true
+    end
+    return set
+end
+
+-- TODO: do we want to return the result?
+-- @return table<T, boolean> set
+
+--- Add all i_elements of a table to a set
+---
+--- @generic T
+--- @param set table<T, boolean>
+--- @param t T|T[]
+function M.set_add(set, t)
+    if type(t) == 'table' then
+        for _, v in ipairs(t) do
+            set[v] = true
+        end
+    else
+        set[t] = true
+    end
 end
 
 return M

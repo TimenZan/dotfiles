@@ -1,6 +1,8 @@
 ---@diagnostic disable: missing-fields
 local plugs = {}
 
+local util = require 'util'
+
 table.insert(plugs, {
     'nvim-treesitter/nvim-treesitter',
     lazy = false,
@@ -28,7 +30,13 @@ table.insert(plugs, {
         -- }
 
 
-        local disable_ft = { 'latex', 'tex', }
+        -- TODO: Should this still be disabled?
+        -- IIRC: this is disabled because of vimtex
+        local disable_ft = util.to_set { 'latex', 'tex', }
+        -- Pre-cache installed and available, avoid disk reads
+        -- converts from a set-like and back, this is stupid.
+        local installed = util.to_set(ts.get_installed())
+        local avail = util.to_set(ts.get_available())
 
         local start = function ()
             vim.treesitter.start()
@@ -39,20 +47,21 @@ table.insert(plugs, {
         vim.api.nvim_create_autocmd('FileType', {
             callback = function (ev)
                 local ft = vim.bo[ev.buf].filetype
-                local lang = vim.treesitter.language.get_lang(ft) or ft
-                if vim.list_contains(disable_ft, lang) then
+                local parser = vim.treesitter.language.get_lang(ft) or ft
+                if disable_ft[parser] then
+                    vim.notify('TreeSitter parser disabled for ' .. parser, vim.log.levels.WARN)
                     return
                 end
-                local installed = ts.get_installed()
-                if vim.list_contains(installed, lang) then
+                if installed[parser] then
                     start()
                     return
                 end
                 -- TODO: only get parsers of good maintenance status
-                local avail = ts.get_available()
-                if vim.list_contains(avail, lang) then
-                    vim.notify('installing parser for ' .. lang, vim.log.levels.INFO)
-                    ts.install(lang):wait(60000)
+                if avail[parser] then
+                    vim.notify('installing parser for ' .. parser, vim.log.levels.INFO)
+                    -- TODO: do async?
+                    ts.install(parser):wait(60000)
+                    util.set_add(installed, parser)
                     start()
                     return
                 end

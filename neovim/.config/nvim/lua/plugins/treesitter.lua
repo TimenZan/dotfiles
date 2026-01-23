@@ -145,28 +145,30 @@ table.insert(plugs, {
         }
 
 
-        local bind = function (kvs, func, modes)
+        local bind = function (kvs, func, modes, description)
             for k, v in pairs(kvs) do
                 local query_string = type(v) == 'string' and v or v.query
                 local query_group = v.query_group or 'textobjects'
 
-                vim.keymap.set(modes, k, function () func(query_string, query_group) end)
+                local desc = (description or "") .. " " .. query_string
+
+                vim.keymap.set(modes, k, function () func(query_string, query_group) end, { desc = desc })
             end
         end
         local tsselect = require 'nvim-treesitter-textobjects.select'.select_textobject
 
-        bind(select, tsselect, { 'x', 'o' })
+        bind(select, tsselect, { 'x', 'o' }, 'select')
 
         local tsswap = require 'nvim-treesitter-textobjects.swap'
         local tsswapnext = tsswap.swap_next
-        bind(swap_next, tsswapnext, { 'n', 'x', 'o' })
+        bind(swap_next, tsswapnext, { 'n', 'x', 'o' }, 'swap next')
         local tsswapprevious = tsswap.swap_previous
-        bind(swap_previous, tsswapprevious, { 'n', 'x', 'o' })
+        bind(swap_previous, tsswapprevious, { 'n', 'x', 'o' }, 'swap previous')
 
         local tsmove = require 'nvim-treesitter-textobjects.move'
         for k, v in pairs(move) do
             local func = tsmove[k]
-            bind(v, func, { 'n', 'x', 'o' })
+            bind(v, func, { 'n', 'x', 'o' }, k)
         end
 
         local ts_repeat_move = require "nvim-treesitter-textobjects.repeatable_move"

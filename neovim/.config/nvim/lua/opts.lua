@@ -54,6 +54,16 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     end
 })
 
+local misc = vim.api.nvim_create_augroup("misc-util-37cfa370-c91d-4ca3-b5ee-66a0a5628eae", { clear = true })
+vim.api.nvim_create_autocmd("BufReadCmd", {
+    pattern = { 'file:///*' },
+    group = misc,
+    callback = function (args)
+        vim.cmd.bdelete({ bang = true })
+        vim.cmd.edit(vim.uri_to_fname(args.file))
+    end
+})
+
 vim.diagnostic.config {
     virtual_text = false,
     virtual_lines = true,

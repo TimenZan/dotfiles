@@ -1,16 +1,37 @@
 local M = {}
 
---- Returns all filenames in a given directory
+--- @class util.scandir.opts
+--- @inlinedoc
+---
+--- What types to return
+--- (default: `'file'`)
+--- @field types? uv.aliases.fs_types | uv.aliases.fs_types[]
+---
+--- Filter the names
+--- (default: `return true`)
+--- @field filter? fun(name: string): boolean
+
+-- TODO: add depth and other options to pass through to `fs.dir`?
+
+--- Returns the contents of a given directory
 --- @param directory string
+--- @param opts? util.scandir.opts
 --- @return table
-local function scandir(directory)
+local function scandir(directory, opts)
+    -- normalize options
+    opts = opts or {}
+    local tmptypes = opts.types or { 'file' }
+    local tys = (type(tmptypes) == 'table') and tmptypes or { tmptypes }
+    local types = {}
+    for _, l in ipairs(tys) do types[l] = true end
+
+    local filter = opts.filter or function (_) return true end
     local t = {}
-    local pfile = io.popen('ls -a "' .. directory .. '"')
-    if not pfile then return {} end
-    for filename in pfile:lines() do
-        table.insert(t, filename)
+    for name, ty in vim.fs.dir(directory, {}) do
+        if types[ty] and filter(name) then
+            table.insert(t, name)
+        end
     end
-    pfile:close()
     return t
 end
 
@@ -31,7 +52,7 @@ end
 --- @return table any combined table of all required files
 M.iterate_dir = function (cur, directory)
     local res = {}
-    local fnames = vim.tbl_filter(is_lua, scandir(directory))
+    local fnames = scandir(directory, { filter = is_lua })
     for _, filename in ipairs(fnames) do
         -- Strip the ".lua" suffix from the filename
         local config_module = string.match(filename, "(.+).lua$")

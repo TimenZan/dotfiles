@@ -196,6 +196,7 @@ table.insert(plugs, {
     },
     event = 'LspAttach',
     opts = {
+        backend = 'vim',
         format_title = function (action, _)
             if action.kind then
                 return string.format("%s (%s)", action.title, action.kind)

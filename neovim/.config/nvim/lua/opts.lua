@@ -30,20 +30,34 @@ local util = require 'util'
 
 local dont_number_ft = util.to_set { 'help', 'lazy', 'neotest-summary', 'DressingInput', }
 
+--- @param ev vim.api.keyset.create_autocmd.callback_args
+--- @return boolean
+local function relnum_should_toggle(ev)
+    return
+        not (
+        -- only toggle relativenumber if `number` is set
+            (not vim.opt.number)
+            -- ignored filetypes
+            or (dont_number_ft[vim.bo[ev.buf].filetype])
+            -- special windows
+            or (vim.list_contains({ 'popup', 'command' }, vim.fn.win_gettype()))
+        )
+end
+
 
 local numbertoggle = vim.api.nvim_create_augroup("numbertoggle-3f649135-8322-4918-a0a1-2083c6527e92", { clear = true })
 vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "InsertLeave" }, {
     group = numbertoggle,
-    callback = function (args)
-        if not dont_number_ft[vim.bo.filetype] then
+    callback = function (ev)
+        if relnum_should_toggle(ev) then
             vim.opt.relativenumber = true
         end
     end
 })
 vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost", "InsertEnter" }, {
     group = numbertoggle,
-    callback = function (args)
-        if not dont_number_ft[vim.bo.filetype] then
+    callback = function (ev)
+        if relnum_should_toggle(ev) then
             vim.opt.relativenumber = false
         end
     end
@@ -52,7 +66,7 @@ vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost", "InsertEnter" }, {
 local highlightYank = vim.api.nvim_create_augroup("highlightYank-c1065828-0dc6-4433-ad56-b479f24ec397", { clear = true })
 vim.api.nvim_create_autocmd("TextYankPost", {
     group = highlightYank,
-    callback = function (args)
+    callback = function (_)
         vim.hl.on_yank { timeout = 500 }
     end
 })

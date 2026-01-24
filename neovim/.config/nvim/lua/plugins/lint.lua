@@ -17,7 +17,6 @@ table.insert(plugs, {
         -- }
 
         lint.linters_by_ft.fish = { 'fish' }
-        lint.linters_by_ft.python = { 'ruff' }
 
         for ft, _ in pairs(lint.linters_by_ft) do
             vim.api.nvim_create_autocmd({ 'FileType', }, {

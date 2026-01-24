@@ -1,4 +1,5 @@
 return {
+    { ruff = {} },
     { pyright = {} },
     {
         pylsp = {

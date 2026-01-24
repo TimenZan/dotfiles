@@ -64,6 +64,7 @@ table.insert(plugs, {
 
 table.insert(plugs, {
     "neovim/nvim-lspconfig",
+    dependencies = { 'b0o/schemastore.nvim' },
     config = function ()
         local util = require 'util'
         local cur_dir = string.match(debug.getinfo(1, 'S').source, '^@(.*)/')

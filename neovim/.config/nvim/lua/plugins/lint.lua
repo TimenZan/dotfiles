@@ -1,6 +1,6 @@
 local plugs = {}
 
-local english = { "text", "tex", "gitcommit", "markdown", "plaintext", "bib", }
+local english = { "text", "tex", "gitcommit", "markdown", "plaintext", "bib", "rst", }
 
 table.insert(plugs, {
     'mfussenegger/nvim-lint',
@@ -15,6 +15,22 @@ table.insert(plugs, {
         --     "--autodetect", "--json",
         --     "--config", "~/.config/LanguageTool/server.properties"
         -- }
+
+        lint.linters_by_ft.fish = { 'fish' }
+        lint.linters_by_ft.python = { 'ruff' }
+
+        for ft, _ in pairs(lint.linters_by_ft) do
+            vim.api.nvim_create_autocmd({ 'FileType', }, {
+                callback = function ()
+                    vim.api.nvim_create_autocmd({ 'BufWritePost', }, {
+                        callback = function ()
+                            require 'lint'.try_lint()
+                        end,
+                    })
+                end,
+                pattern = ft,
+            })
+        end
 
         -- local nat_linters = { 'proselint', 'languagetool', }
         local nat_linters = { 'proselint', }
@@ -50,7 +66,6 @@ table.insert(plugs, {
                 pattern = ft,
             })
         end
-        lint.linters_by_ft.fish = { 'fish' }
     end,
 })
 

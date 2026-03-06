@@ -84,140 +84,6 @@ table.insert(plugs, {
 })
 
 table.insert(plugs, {
-    'hrsh7th/nvim-cmp',
-    enabled = false,
-    name = 'cmp',
-    event = { 'InsertEnter', 'CmdlineEnter', },
-    dependencies = {
-        'JMarkin/cmp-diag-codes',
-        'L3MON4D3/LuaSnip',
-        'f3fora/cmp-spell',
-        'hrsh7th/cmp-buffer',
-        'hrsh7th/cmp-calc',
-        'hrsh7th/cmp-cmdline',
-        'hrsh7th/cmp-nvim-lsp',
-        'hrsh7th/cmp-nvim-lsp-signature-help',
-        'hrsh7th/cmp-nvim-lua',
-        'hrsh7th/cmp-omni',
-        'hrsh7th/cmp-path',
-        'micangl/cmp-vimtex',
-        { 'petertriho/cmp-git', config = true, main = 'cmp_git', },
-        'saadparwaiz1/cmp_luasnip',
-        'windwp/nvim-autopairs',
-    },
-    config = function ()
-        local cmp = require 'cmp'
-        local comparators = require 'cmp.config.compare'
-        local types = require 'cmp.types'
-        local cmp_autopairs = require 'nvim-autopairs.completion.cmp'
-        cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
-        local luasnip = require 'luasnip'
-        local mapping = {
-            ['<c-space>'] = cmp.mapping.confirm({
-                behavior = cmp.ConfirmBehavior.Replace,
-                select = true
-            }),
-
-            ['<C-n>'] = cmp.mapping.select_next_item({ behavior = types.cmp.SelectBehavior.Select }),
-            ['<C-p>'] = cmp.mapping.select_prev_item({ behavior = types.cmp.SelectBehavior.Select }),
-
-            ["<A-n>"] = cmp.mapping.scroll_docs(-4),
-            ["<A-p>"] = cmp.mapping.scroll_docs(4),
-
-            ["<C-l>"] = cmp.mapping(function (fallback)
-                -- if luasnip.expand_or_locally_jumpable() then
-                --     luasnip.expand_or_jump()
-                if luasnip.locally_jumpable() then
-                    luasnip.jump(1)
-                else
-                    fallback()
-                end
-            end, { "i", "s", "n" }),
-
-            ["<C-h>"] = cmp.mapping(function (fallback)
-                if luasnip.jumpable(-1) then
-                    luasnip.jump(-1)
-                else
-                    fallback()
-                end
-            end, { "i", "s", "n" }),
-
-            -- ["<C-x>"] = cmp.mapping.complete({ config = {} }),
-        }
-
-        cmp.setup {
-            preselect = types.cmp.PreselectMode.Item,
-            window = {
-                completion = cmp.config.window.bordered(),
-                documentation = cmp.config.window.bordered(),
-            },
-            snippet = {
-                expand = function (args)
-                    require 'luasnip'.lsp_expand(args.body)
-                end,
-            },
-            sorting = {
-                priority_weight = 2,
-                comparators = {
-                    comparators.offset,
-                    comparators.exact,
-                    require 'clangd_extensions.cmp_scores',
-                    comparators.score,
-                    comparators.kind,
-                    comparators.length,
-                    comparators.order,
-                    comparators.recently_used,
-                    comparators.locality,
-                    comparators.scopes,
-                },
-            },
-            mapping = mapping,
-            sources = cmp.config.sources({
-                { name = 'nvim_lsp_signature_help' },
-                { name = 'vimtex' },
-                { name = 'nvim_lua' },
-                { name = 'omni',                   option = { disable_omnifunc = {} } },
-                { name = 'luasnip' },
-                { name = 'nvim_lsp' },
-                { name = 'crates' },
-                { name = 'diag-codes' },
-            }, {
-                { name = 'path' },
-                { name = 'calc' },
-            }, {
-                { name = 'git' },
-                -- TODO only on "text like" files or in comments
-                { name = 'buffer', keyword_length = 3 },
-                { name = 'spell',  keyword_length = 5 },
-            }),
-        }
-
-        cmp.setup.cmdline({ "/", "?" }, {
-            mapping = cmp.mapping.preset.cmdline(),
-            sources = {
-                { name = "buffer" },
-            },
-        })
-        cmp.setup.cmdline(':', {
-            mapping = cmp.mapping.preset.cmdline(),
-            sources = cmp.config.sources({
-                { name = 'path' },
-            }, {
-                {
-                    name = 'cmdline',
-                    option = {
-                        ignore_cmds = { 'Man', '!' },
-                    },
-                },
-            }, {
-                { name = 'buffer' },
-            }
-            )
-        })
-    end,
-})
-
-table.insert(plugs, {
     'saghen/blink.cmp',
     -- allows fetching of pre-built binaries
     version = '*',
@@ -225,128 +91,155 @@ table.insert(plugs, {
     dependencies = {
         -- { 'L3MON4D3/LuaSnip',   version = '*' },
         { 'folke/lazydev.nvim', },
-    },
-    ---@module 'blink.cmp'
-    ---@type blink.cmp.Config
-    opts = {
-        -- 'default' for mappings similar to built-in completion
-        -- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys to navigate)
-        -- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
-        -- see the "default configuration" section below for full documentation on how to define
-        -- your own keymap.
-        -- TODO make similar to extant cmp.nvim, including default bindings
-        keymap = {
-            preset = 'none',
-            ['<C-space>'] = { 'select_and_accept', 'fallback' },
-            ['<C-n>'] = { 'select_next', 'fallback' },
-            ['<C-p>'] = { 'select_prev', 'fallback' },
-            ['<C-c>'] = { 'show', 'fallback' },
-
-            ['<A-n>'] = { 'scroll_documentation_down', 'fallback' },
-            ['<A-p>'] = { 'scroll_documentation_up', 'fallback' },
-
-            ['<C-l>'] = { 'snippet_forward', 'fallback' },
-            ['<C-h>'] = { 'snippet_backward', 'fallback' },
-
-            -- ["<C-x>"] = {'hide', 'fallback'},
-            -- ["<C-x>"] = {'cancel', 'fallback'},
-            -- todo: keybind for enabling only specific providers
-
+        {
+            'AJamesyD/blink-cmp-rust.nvim',
+            opts = {
+                extra_common_traits = { 'Debug', 'Display', },
+            },
         },
-        cmdline = {
-            completion = { menu = { auto_show = true, }, },
+    },
+    opts = function (_, opts)
+        local rust_cmp = require 'blink-cmp-rust'
+        local ret = vim.tbl_deep_extend('force', opts, {
             keymap = {
+                preset = 'none',
                 ['<C-space>'] = { 'select_and_accept', 'fallback' },
-                ['<tab>'] = { 'select_and_accept', 'fallback', },
-                ['<S-tab>'] = { 'select_prev', 'fallback', },
-                -- these two technically override builtin bindings, but the arrow version is strictly better as it takes
-                -- into account the typed prefix.
                 ['<C-n>'] = { 'select_next', 'fallback' },
                 ['<C-p>'] = { 'select_prev', 'fallback' },
+                ['<C-c>'] = { 'show', 'fallback' },
+
+                ['<A-n>'] = { 'scroll_documentation_down', 'fallback' },
+                ['<A-p>'] = { 'scroll_documentation_up', 'fallback' },
+
+                ['<C-l>'] = { 'snippet_forward', 'fallback' },
+                ['<C-h>'] = { 'snippet_backward', 'fallback' },
+
+                -- ["<C-x>"] = {'hide', 'fallback'},
+                -- ["<C-x>"] = {'cancel', 'fallback'},
+                -- todo: keybind for enabling only specific providers
+
             },
-        },
-
-        appearance = {
-            nerd_font_variant = 'mono'
-        },
-
-        -- snippets = {
-        --     expand = function (snippet) require('luasnip').lsp_expand(snippet) end,
-        --     active = function (filter)
-        --         if filter and filter.direction then
-        --             return require('luasnip').jumpable(filter.direction)
-        --         end
-        --         return require('luasnip').in_snippet()
-        --     end,
-        --     jump = function (direction) require('luasnip').jump(direction) end,
-        -- },
-
-        snippets = { preset = 'luasnip', },
-
-        sources = {
-            default = { 'lazydev', 'lsp', 'path', 'snippets', 'buffer', },
-            providers = {
-                lazydev = {
-                    name = "LazyDev",
-                    module = "lazydev.integrations.blink",
-                    -- make lazydev completions top priority (see `:h blink.cmp`)
-                    score_offset = 100,
+            cmdline = {
+                completion = { menu = { auto_show = true, }, },
+                keymap = {
+                    ['<C-space>'] = { 'select_and_accept', 'fallback' },
+                    ['<tab>'] = { 'select_and_accept', 'fallback', },
+                    ['<S-tab>'] = { 'select_prev', 'fallback', },
+                    -- these two technically override builtin bindings, but the arrow version is strictly better as it takes
+                    -- into account the typed prefix.
+                    ['<C-n>'] = { 'select_next', 'fallback' },
+                    ['<C-p>'] = { 'select_prev', 'fallback' },
                 },
             },
-            -- TODO: use 'saghen/blink.compat' to include missing providers
-            -- TODO: Spell complete only in comments (and maybe strings (and possibly variable names?))
-            -- providers = function(ctx)
-            --   local node = vim.treesitter.get_node()
-            --   if vim.bo.filetype == 'lua' then
-            --     return { 'lsp', 'path' }
-            --   elseif node and vim.tbl_contains({ 'comment', 'line_comment', 'block_comment' }, node:type()) then
-            --     return { 'buffer' }
-            --   else
-            --     return { 'lsp', 'path', 'snippets', 'buffer' }
-            --   end
-            -- end
-        },
 
-        signature = {
-            enabled = true,
-            window = {
-                border = 'double',
+            appearance = {
+                nerd_font_variant = 'mono'
             },
-        },
 
-        completion = {
-            list = {
-                selection = {
-                    preselect = true,
+            -- snippets = {
+            --     expand = function (snippet) require('luasnip').lsp_expand(snippet) end,
+            --     active = function (filter)
+            --         if filter and filter.direction then
+            --             return require('luasnip').jumpable(filter.direction)
+            --         end
+            --         return require('luasnip').in_snippet()
+            --     end,
+            --     jump = function (direction) require('luasnip').jump(direction) end,
+            -- },
+
+            snippets = { preset = 'luasnip', },
+
+            sources = {
+                default = { 'lazydev', 'lsp', 'path', 'snippets', 'buffer', },
+                providers = {
+                    lazydev = {
+                        name = "LazyDev",
+                        module = "lazydev.integrations.blink",
+                        -- make lazydev completions top priority (see `:h blink.cmp`)
+                        score_offset = 100,
+                    },
+                    lsp = {
+                        transform_items = function (ctx, items)
+                            if opts.sources
+                                and opts.sources.providers
+                                and opts.sources.providers.lsp
+                                and opts.sources.providers.lsp.transform_items
+                            then
+                                items = opts.sources.providers.lsp.transform_items(ctx, items)
+                            end
+                            return rust_cmp.transform_items(ctx, items)
+                        end
+                    }
                 },
+                -- TODO: use 'saghen/blink.compat' to include missing providers
+                -- TODO: Spell complete only in comments (and maybe strings (and possibly variable names?))
+                -- providers = function(ctx)
+                --   local node = vim.treesitter.get_node()
+                --   if vim.bo.filetype == 'lua' then
+                --     return { 'lsp', 'path' }
+                --   elseif node and vim.tbl_contains({ 'comment', 'line_comment', 'block_comment' }, node:type()) then
+                --     return { 'buffer' }
+                --   else
+                --     return { 'lsp', 'path', 'snippets', 'buffer' }
+                --   end
+                -- end
             },
-            accept = {
-                create_undo_point = false,
-                auto_brackets = {
-                    enabled = true,
-                },
+
+            fuzzy = {
+                sorts = function ()
+                    local default_sorts = opts.fuzzy and opts.fuzzy.sorts
+                    local base = type(default_sorts) == 'function' and default_sorts()
+                        or default_sorts
+                        or { 'score', 'sort_text' }
+                    if vim.bo.filetype == 'rust' then
+                        return vim.list_extend({ rust_cmp.compare }, base)
+                    end
+                    return base
+                end,
             },
-            menu = {
-                border = 'single',
-                draw = {
-                    align_to = 'label',
-                    treesitter = { 'lsp' },
-                    columns = { { 'label', 'label_description', gap = 1 }, { 'source_name', }, { 'kind_icon', 'kind', gap = 1, }, },
-                },
-            },
-            documentation = {
-                auto_show = true,
-                auto_show_delay_ms = 10,
-                update_delay_ms = 50,
+
+            signature = {
+                enabled = true,
                 window = {
-                    border = 'single',
+                    border = 'double',
                 },
             },
-            ghost_text = {
-                enabled = false,
+
+            completion = {
+                list = {
+                    selection = {
+                        preselect = true,
+                    },
+                },
+                accept = {
+                    create_undo_point = false,
+                    auto_brackets = {
+                        enabled = true,
+                    },
+                },
+                menu = {
+                    border = 'single',
+                    draw = {
+                        align_to = 'label',
+                        treesitter = { 'lsp' },
+                        columns = { { 'label', 'label_description', gap = 1 }, { 'source_name', }, { 'kind_icon', 'kind', gap = 1, }, },
+                    },
+                },
+                documentation = {
+                    auto_show = true,
+                    auto_show_delay_ms = 10,
+                    update_delay_ms = 50,
+                    window = {
+                        border = 'single',
+                    },
+                },
+                ghost_text = {
+                    enabled = false,
+                },
             },
-        },
-    },
+        })
+        return ret
+    end,
     opts_extend = { "sources.default" }
 })
 

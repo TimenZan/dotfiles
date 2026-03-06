@@ -17,8 +17,7 @@ if ! test -x ~/.cargo/bin/lspmux ; then
 	esac
 fi
 
-dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
-
+dir=$(dirname -- "$0")
 
 cp "$dir"/systemd/lspmux.service ~/.config/systemd/user/lspmux.service
 

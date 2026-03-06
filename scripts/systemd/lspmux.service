@@ -1,0 +1,10 @@
+[Unit]
+Description=Language server multiplexer server
+
+[Service]
+Type=simple
+Environment="PATH=/usr/local/bin:/usr/bin:/usr/lib/rustup/bin"
+ExecStart=%h/.cargo/bin/lspmux server
+
+[Install]
+WantedBy=default.target

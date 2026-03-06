@@ -17,6 +17,7 @@ Make sure to install all the needed external programs for neovim.
 ```bash
 # programs
 paru -Syu neovim-git fzf ripgrep bat fd glow
+cargo install lspmux
 # language servers
 paru -Syu bash-language-server clang lua-language-server texlab yaml-language-server shellcheck pyright ltex-ls-plus-bin proselint lemminx typos-lsp
 pip install --user --upgrade pynvim

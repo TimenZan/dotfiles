@@ -43,7 +43,7 @@ table.insert(plugs, {
         vim.keymap.set({ 'i', 's', 'n' }, "<C-l>", function ()
             -- if luasnip.expand_or_locally_jumpable() then
             --     luasnip.expand_or_jump()
-            if luasnip.locally_jumpable() then
+            if luasnip.locally_jumpable(1) then
                 luasnip.jump(1)
             else
                 -- nop

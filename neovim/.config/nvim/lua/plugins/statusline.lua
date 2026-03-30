@@ -12,7 +12,7 @@ table.insert(plugs, {
     opts = {
         options = {
             icons_enabled = true,
-            theme = 'catppuccin',
+            theme = 'catppuccin-nvim',
             component_separators = { '', '' },
             section_separators = { '', '' },
             disabled_filetypes = {}
@@ -93,7 +93,8 @@ table.insert(plugs, {
                 end
 
                 local function get_diagnostic_label()
-                    local icons = { error = '×', warn = '!', info = '?', hint = '' }
+                    -- local icons = { error = '×', warn = '!', info = '?', hint = '' }
+                    local icons = { error = '×', warn = '!', }
                     local label = {}
 
                     for severity, icon in pairs(icons) do

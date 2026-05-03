@@ -1,0 +1,65 @@
+[core]
+	excludesfile = ~/.config/git/ignore
+
+[push]
+	default = upstream
+
+[alias]
+	l = log --pretty=oneline -n 20 --graph --abbrev-commit
+
+	# Show the diff between the latest commit and the current state.
+	d = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
+
+	# `git di $number` shows the diff between the state `$number` revisions ago and the current state.
+	di = !"d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d"
+
+	# Pull in remote changes for the current repository and all its submodules.
+	pl = pull --recurse-submodules
+
+	# Commit all changes.
+	ca = !git add -A && git commit -av
+
+	# Switch to a branch, creating it if necessary.
+	br = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
+
+	# Show verbose output about tags, branches or remotes
+	tags = tag -l
+	branches = branch --all
+	remotes = remote --verbose
+
+	fix='$EDITOR `git diff --name-only | uniq`'
+
+	# List all aliases.  Stolen from here: https://twitter.com/TrevorBramble/status/774292970681937920
+	aliases = "!git config -l | grep ^alias | cut -c 7- | sort"
+
+	fall = fetch --all
+
+	# Remove branches that have already been merged with main.
+	# a.k.a. ‘delete merged’
+	dm = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
+
+	# Show the user email for the current repository.
+	whoami = config user.email
+
+	# Unstage a file
+	unadd = restore --staged
+[branch]
+	# Show most recently changed branches first.
+	sort = -committerdate
+
+[diff]
+	renames = copies # Detect copies as well as renames.
+
+
+[merge]
+	# Include summaries of merged commits in newly created merge commit messages
+	log = true
+
+[status]
+	submoduleSummary = true
+
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f

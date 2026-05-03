@@ -10,7 +10,7 @@ with [GNU Stow](https://www.gnu.org/software/stow/).
 
 ```sh
 cd ~/dotfiles
-stow neovim starship # and any other programs
+stow neovim starship git # and any other programs
 ```
 
 Make sure to install all the needed external programs for neovim.

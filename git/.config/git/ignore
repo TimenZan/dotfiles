@@ -1,0 +1,11 @@
+latexmk_aux/
+latexmk_build/
+.ltex/
+
+# VSCode workspaces
+*.code-workspace
+.vscode
+*.doc#
+:merlin-log:
+.idea
+

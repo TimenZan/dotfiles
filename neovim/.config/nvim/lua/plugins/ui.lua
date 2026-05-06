@@ -68,6 +68,7 @@ table.insert(plugs, {
 
 table.insert(plugs, {
     'tversteeg/registers.nvim',
+    enabled = false,
     cmd = "Registers",
     opts = {
         symbols = {
@@ -129,8 +130,7 @@ table.insert(plugs, {
         notifier = { enabled = false },
         -- Just get a faster init.lua
         quickfile = { enabled = false },
-        -- library
-        scope = { enabled = true },
+        scope = { enabled = false },
         -- smoothscroll, TODO: do I like this?
         scroll = { enabled = false },
         -- handled by specific plugins

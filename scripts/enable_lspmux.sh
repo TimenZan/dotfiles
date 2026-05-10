@@ -3,7 +3,7 @@
 # TODO: generalize to all unit files in `systemd/`
 
 
-if ! test -x ~/.cargo/bin/lspmux ; then
+if ! [ -x "$(command -v lspmux)" ] ; then
 	echo "Lspmux is not installed (or in the wrong path), would you like to install it now? [Y/n]"
 	read -r answer
 	case "$answer" in
@@ -18,8 +18,9 @@ if ! test -x ~/.cargo/bin/lspmux ; then
 fi
 
 dir=$(dirname -- "$0")
-
-cp "$dir"/systemd/lspmux.service ~/.config/systemd/user/lspmux.service
+# cp "$dir"/systemd/lspmux.service ~/.config/systemd/user/lspmux.service
+# TODO: also set PATH through this method?
+sed "s#ExecStart.*\$#ExecStart=$(command -v lspmux)#" "$dir"/systemd/lspmux.service > ~/.config/systemd/user/lspmux.service
 
 systemctl --user daemon-reload
 systemctl --user enable --now lspmux.service

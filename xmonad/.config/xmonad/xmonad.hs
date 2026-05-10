@@ -12,7 +12,8 @@ import           System.Posix.Unistd (SystemID(nodeName), getSystemID)
 import           XMonad.Actions.CycleWS
 import           XMonad.Actions.Minimize (maximizeWindowAndFocus, minimizeWindow
                                         , withLastMinimized)
-import           XMonad.Hooks.EwmhDesktops (ewmh, setEwmhActivateHook)
+import           XMonad.Hooks.EwmhDesktops (ewmh, setEwmhActivateHook
+                                          , ewmhDesktopsManageHook)
 import           XMonad.Hooks.FloatConfigureReq (fixSteamFlickerMMMH
                                                , floatConfReqHook)
 import           XMonad.Hooks.ManageHelpers (doFullFloat, isDialog, isFullscreen
@@ -61,6 +62,7 @@ import           XMonad.Actions.RotSlaves (rotSlavesUp)
 import           XMonad.Layout.TwoPane (TwoPane(TwoPane))
 import           XMonad.Layout.TwoPanePersistent (TwoPanePersistent(TwoPanePersistent))
 import           XMonad.Layout.Maximize (maximizeRestore, maximize)
+import           XMonad.Prompt.Unicode (typeUnicodePrompt)
 
 -- The command to lock the screen or show the screensaver.
 myScreensaver :: String
@@ -89,6 +91,8 @@ myTabTheme =
                            , decoHeight = 15
                            }
 
+delta = (3 / 200)
+
 myLayout = renamed [CutWordsLeft 3]
   $ minimize
   $ maximize
@@ -105,26 +109,26 @@ myLayout = renamed [CutWordsLeft 3]
     "2"
     (Accordion
      -- \||| magnifiercz 1.4 (Mirror $ Tall 1 (3 / 100) (1 / 2))
-     ||| Mirror (Tall 1 (3 / 100) (1 / 2))
+     ||| Mirror (Tall 1 delta (1 / 2))
      ||| Grid False
      ||| Grid True)
   $ onWorkspace
     "4"
-    (Mirror Accordion ||| Tall 1 (3 / 100) (1 / 2) ||| Grid False ||| Grid True)
+    (Mirror Accordion ||| Tall 1 delta (1 / 2) ||| Grid False ||| Grid True)
   $ onWorkspace
     "9"
     (noBorders (fullscreenFull Full))
-    (CenterMainFluid 1 (3 / 100) 0.50
+    (CenterMainFluid 1 delta 0.50
      ||| threeCol
-     -- \||| Tall 1 (3 / 100) (1 / 2)
+     -- \||| Tall 1 delta (1 / 2)
      -- \||| Full
      ||| Grid False
-     ||| Mirror (Tall 6 (3 / 100) (8 / 9))
+     ||| Mirror (Tall 6 delta (8 / 9))
      ||| Roledex
-     ||| TwoPanePersistent Nothing (3 / 100) (1 / 2))
+     ||| TwoPanePersistent Nothing delta (1 / 2))
   where
     -- \||| spiral (16 / 9)
-    threeCol = ThreeCol 1 (3 / 100) (1 / 2)
+    threeCol = ThreeCol 1 delta (1 / 2)
 
 -- magThreeCol =
 --   renamed [Replace "ThreeCol Magnified"] $
@@ -177,6 +181,10 @@ myModMask = mod4Mask
 
 myKeys conf@XConfig { XMonad.modMask = modMask } = M.fromList
   $ [ ((modMask .|. shiftMask, xK_Return), spawn $ terminal conf)
+      -- TODO: font with better coverage
+      -- TODO: better positioning
+    , ( (modMask .|. shiftMask, xK_u)
+      , typeUnicodePrompt "/usr/share/unicode/UnicodeData.txt" def)
     , ((modMask .|. controlMask, xK_l), spawn myScreensaver)
     , ((modMask .|. controlMask, xK_p), spawn "1password")
     , ((modMask, xK_r), namedScratchpadAction scratchpads "term")
@@ -273,7 +281,8 @@ myManageHook = composeAll
   , moveC "Steam" "9"
   , isFullscreen --> (doF W.focusDown <+> doFullFloat)
   , hasNetWMState "_NET_WM_STATE_ABOVE" --> doFloat
-  , hasNetWMState "_NET_WM_STATE_STICKY" --> doF copyToAll]
+  , hasNetWMState "_NET_WM_STATE_STICKY" --> doF copyToAll
+  , stringProperty "WM_WINDOW_ROLE" =? "browser" --> ewmhDesktopsManageHook]
   where
     moveC c w = className =? c --> doShift w
 

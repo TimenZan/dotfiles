@@ -116,8 +116,8 @@ table.insert(plugs, {
             ['ac'] = '@comment.outer',
             ['ic'] = '@comment.inner',
             ["as"] = { query = "@scope", query_group = "locals", desc = "Select language scope" },
-            ["ar"] = '@assignment.lhs',
-            ["al"] = '@assignment.rhs',
+            ["al"] = '@assignment.lhs',
+            ["ar"] = '@assignment.rhs',
             ["aa"] = '@assignment.outer',
         }
         local swap_next = {

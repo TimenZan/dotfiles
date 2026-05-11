@@ -2,6 +2,8 @@ latexmk_aux/
 latexmk_build/
 .ltex/
 
+.jj
+
 # VSCode workspaces
 *.code-workspace
 .vscode
@@ -9,3 +11,5 @@ latexmk_build/
 :merlin-log:
 .idea
 
+
+luacov.stats.out

@@ -59,6 +59,8 @@ local plugs = {
     },
     {
         "pteroctopus/faster.nvim",
+        -- Disabled because it causes recursive macros to hang nvim
+        enabled = false,
         lazy = false,
         opts = {
             -- threshold size, in MB

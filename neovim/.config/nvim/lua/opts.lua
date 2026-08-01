@@ -89,7 +89,7 @@ vim.diagnostic.config {
 
 vim.keymap.set('n', 'gK', function ()
     local new_config = not vim.diagnostic.config().virtual_lines
-    vim.diagnostic.config({ virtual_lines = new_config })
+    vim.diagnostic.config({ virtual_lines = new_config, virtual_text = not new_config })
 end, { desc = 'Toggle diagnostic virtual_lines' })
 
 -- Disable for pseudo-diagnostics created by `lazy.nvim`
